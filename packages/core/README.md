@@ -58,7 +58,7 @@ npm install echarts uni-echarts
     npm install echarts
     ```
 
-2. 前往uni-app插件市场下载 [uni-echarts](https://ext.dcloud.net.cn/search?q=uni-echarts)
+2. 前往uni-app插件市场下载 [uni-echarts](https://ext.dcloud.net.cn/plugin?id=21996)
 
 ### 🛹 使用
 
