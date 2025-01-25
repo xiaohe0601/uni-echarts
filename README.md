@@ -69,7 +69,7 @@ npm install echarts uni-echarts
 
 ```vue
 <template>
-  <uni-echarts class="chart" :option="option"></uni-echarts>
+  <uni-echarts custom-class="chart" :option="option"></uni-echarts>
 </template>
 
 <!-- 支持 TypeScript，也可以是 lang="ts" -->
@@ -154,7 +154,7 @@ uni-echarts 支持 `easycom` 规范，当使用 uni-modules 方式时无需导�
 
 ```vue
 <template>
-  <uni-echarts class="chart" :option="option"></uni-echarts>
+  <uni-echarts custom-class="chart" :option="option"></uni-echarts>
 </template>
 
 <!-- 支持 TypeScript，也可以是 lang="ts" -->
