@@ -1,0 +1,50 @@
+{
+  "name": "uni-echarts",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "🪀 适用于uni-app的Apache ECharts组件（仅支持Vue 3）",
+  "author": "xiaohe0601 <xiaohe0601@outlook.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/xiaohe0601/uni-echarts#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaohe0601/uni-echarts.git"
+  },
+  "bugs": "https://github.com/xiaohe0601/uni-echarts/issues",
+  "keywords": [
+    "echarts",
+    "vue-echarts",
+    "uni-echarts"
+  ],
+  "sideEffects": [
+    "./src/components/**/*.vue"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/components/uni-echarts/uni-echarts.vue.d.ts",
+      "import": "./src/components/uni-echarts/uni-echarts.vue"
+    },
+    "./shared": {
+      "types": "./dist/index.d.ts",
+      "import": "./src/index.js"
+    },
+    "./global": "./src/global.d.ts",
+    "./*": "./src/*"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "unbuild && esno scripts/post-build.ts"
+  },
+  "peerDependencies": {
+    "echarts": ">=5.3.0",
+    "vue": ">=3.3.0"
+  },
+  "devDependencies": {
+    "@vue/runtime-core": "~3.4.38",
+    "echarts": "^5.6.0",
+    "vue": "~3.4.38"
+  }
+}

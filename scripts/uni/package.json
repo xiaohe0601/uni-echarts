@@ -1,0 +1,91 @@
+{
+  "id": "xiaohe01-echarts",
+  "name": "uni-echarts",
+  "displayName": "uni-echarts",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "🪀 适用于uni-app的Apache ECharts组件（仅支持Vue 3）",
+  "author": "xiaohe0601 <xiaohe0601@outlook.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/xiaohe0601/uni-echarts#readme",
+  "repository": "github:xiaohe0601/uni-echarts",
+  "bugs": "https://github.com/xiaohe0601/uni-echarts/issues",
+  "keywords": [
+    "echarts",
+    "vue-echarts",
+    "uni-echarts"
+  ],
+  "engines": {
+    "HBuilderX": "^3.6.4"
+  },
+  "dcloudext": {
+    "category": ["前端组件", "通用组件"],
+    "type": "component-vue",
+    "sale": {
+      "regular": {
+        "price": "0.00"
+      },
+      "sourcecode": {
+        "price": "0.00"
+      }
+    },
+    "contact": {
+      "qq": ""
+    },
+    "declaration": {
+      "ads": "无",
+      "data": "无",
+      "permissions": "无"
+    },
+    "npmurl": "https://www.npmjs.com/package/uni-echarts"
+  },
+  "uni_modules": {
+    "dependencies": [],
+    "encrypt": [],
+    "platforms": {
+      "client": {
+        "App": {
+          "app-vue": "y",
+          "app-uvue": "n",
+          "app-nvue": "n"
+        },
+        "H5-mobile": {
+          "Safari": "y",
+          "Android Browser": "y",
+          "微信浏览器(Android)": "y",
+          "QQ浏览器(Android)": "y"
+        },
+        "H5-pc": {
+          "Chrome": "y",
+          "IE": "n",
+          "Edge": "y",
+          "Firefox": "y",
+          "Safari": "y"
+        },
+        "Vue": {
+          "vue2": "n",
+          "vue3": "y"
+        },
+        "小程序": {
+          "微信": "y",
+          "阿里": "y",
+          "百度": "y",
+          "字节跳动": "y",
+          "QQ": "y",
+          "钉钉": "y",
+          "快手": "y",
+          "飞书": "y",
+          "京东": "y"
+        },
+        "快应用": {
+          "华为": "u",
+          "联盟": "u"
+        }
+      },
+      "cloud": {
+        "aliyun": "y",
+        "tcb": "y"
+      }
+    }
+  }
+}
