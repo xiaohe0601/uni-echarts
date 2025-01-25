@@ -44,7 +44,7 @@ export declare class UniCanvas {
 
   detachEvent(): void;
 
-  toTempFilePath(options?: UniApp.CanvasToTempFilePathOptions): Promise<UniApp.CanvasToTempFilePathRes>;
+  toTempFilePath(options?: Omit<UniApp.CanvasToTempFilePathOptions, "canvasId" | "canvas">): Promise<UniApp.CanvasToTempFilePathRes>;
 
   static parseFontSize(font: string): number;
 

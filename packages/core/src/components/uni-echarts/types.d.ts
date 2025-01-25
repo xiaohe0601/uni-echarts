@@ -210,7 +210,7 @@ export interface UniEchartsInst extends PublicApi, Pick<
   root: NullableValue<HTMLElement>;
   canvasId: string;
   chart: NullableValue<EChartsType>;
-  toTempFilePath: Uni["canvasToTempFilePath"];
+  toTempFilePath: (options?: Omit<UniApp.CanvasToTempFilePathOptions, "canvasId" | "canvas">) => Promise<UniApp.CanvasToTempFilePathRes>;
 }
 
 export interface CanvasRect {
