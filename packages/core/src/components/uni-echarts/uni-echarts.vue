@@ -476,8 +476,6 @@ defineExpose({
 <style scoped>
 .uni-echarts {
   position: relative;
-  width: 100%;
-  height: 100%;
 }
 
 .uni-echarts__canvas {
