@@ -15,9 +15,6 @@
     "vue-echarts",
     "uni-echarts"
   ],
-  "engines": {
-    "HBuilderX": "^3.6.4"
-  },
   "dcloudext": {
     "category": ["前端组件", "通用组件"],
     "type": "component-vue",
@@ -47,7 +44,8 @@
         "App": {
           "app-vue": "y",
           "app-uvue": "n",
-          "app-nvue": "n"
+          "app-nvue": "n",
+          "app-harmony": "y"
         },
         "H5-mobile": {
           "Safari": "y",
@@ -84,7 +82,8 @@
       },
       "cloud": {
         "aliyun": "y",
-        "tcb": "y"
+        "tcb": "y",
+        "alipay": "y"
       }
     }
   }
