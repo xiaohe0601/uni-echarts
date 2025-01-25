@@ -1,7 +1,7 @@
 {
   "id": "xiaohe01-echarts",
   "name": "uni-echarts",
-  "displayName": "uni-echarts",
+  "displayName": "xiaohe-echarts",
   "type": "module",
   "version": "0.0.1",
   "description": "🪀 适用于uni-app的Apache ECharts组件（仅支持Vue 3）",
