@@ -12,7 +12,7 @@
     "play:mp-weixin": "nr -C playground dev:mp-weixin",
     "build": "nr -r --filter=./packages/* build",
     "build:uni": "nr build && esno scripts/uni/build.ts",
-    "release": "bumpp -r",
+    "release": "bumpp package.json packages/core/package.json playground/package.json scripts/uni/package.json",
     "clean": "rimraf **/dist **/uni_modules --glob",
     "lint": "eslint --cache .",
     "lint:fix": "nr lint --fix",
