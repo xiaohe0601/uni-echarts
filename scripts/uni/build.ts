@@ -39,11 +39,6 @@ async function build() {
     consola.info(`Copying LICENSE: \`${licenseDir}\``);
     await copy(licenseDir, r(destDir, "license.md"));
 
-    // TODO
-    // const changelogDir = r("CHANGELOG.md");
-    // consola.info(`Copying CHANGELOG.md: \`${changelogDir}\``);
-    // await copy(changelogDir, r(destDir, "changelog.md"));
-
     consola.success(chalk.green("Build succeeded for uni_modules"));
   } catch (error) {
     consola.error("Build failed for `uni_modules`", error);
