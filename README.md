@@ -30,6 +30,12 @@ xiaohe0601 / [github@xiaohe0601](https://github.com/xiaohe0601) / [gitee@xiaohe0
 
 uni-echarts 提供了 `npm` 和 `uni-modules` 两种使用方式，任选其一即可
 
+> **前置条件**
+>
+> `echarts` >= 5.3.0
+>
+> `vue` >= 3.3.0
+
 #### npm 方式
 
 ```shell
@@ -72,7 +78,6 @@ npm install echarts uni-echarts
   <uni-echarts custom-class="chart" :option="option"></uni-echarts>
 </template>
 
-<!-- 支持 TypeScript，也可以是 lang="ts" -->
 <script setup>
 import { PieChart } from "echarts/charts";
 import { DatasetComponent, LegendComponent, TooltipComponent } from "echarts/components";
@@ -80,6 +85,7 @@ import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import UniEcharts from "uni-echarts";
 import { provideEcharts, provideEchartsTheme } from "uni-echarts/shared";
+import { ref } from "vue";
 
 // 由于目前 uni-app 对于 npm 插件的编译机制问题
 // 小程序端的 npm 插件内部无法正确获取到业务侧的 echarts
@@ -157,12 +163,12 @@ uni-echarts 支持 `easycom` 规范，当使用 uni-modules 方式时无需导�
   <uni-echarts custom-class="chart" :option="option"></uni-echarts>
 </template>
 
-<!-- 支持 TypeScript，也可以是 lang="ts" -->
 <script setup>
 import { PieChart } from "echarts/charts";
 import { DatasetComponent, LegendComponent, TooltipComponent } from "echarts/components";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
+import { ref } from "vue";
 // 🚨 注意导入路径与 npm 方式的区别
 import { provideEchartsTheme } from "@/uni_modules/xiaohe01-echarts";
 
@@ -377,8 +383,9 @@ provideEchartsTheme("dark");
   <uni-echarts></uni-echarts>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { provideEchartsOption } from "uni-echarts/shared";
+import { ref } from "vue";
 
 const option = ref({
   // ...
@@ -419,6 +426,7 @@ provideEchartsOption("chart1", option);
 
 <script lang="ts" setup>
 import type { UniEchartsInst } from "uni-echarts/shared";
+import { ref } from "vue";
 
 const chartEl = ref<UniEchartsInst | null>(null);
 

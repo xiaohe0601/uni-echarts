@@ -44,9 +44,9 @@ async function build() {
     // consola.info(`Copying CHANGELOG.md: \`${changelogDir}\``);
     // await copy(changelogDir, r(destDir, "changelog.md"));
 
-    consola.success(chalk.green("Building succeeded for uni_modules"));
+    consola.success(chalk.green("Build succeeded for uni_modules"));
   } catch (error) {
-    consola.error("Building failed for `uni_modules`", error);
+    consola.error("Build failed for `uni_modules`", error);
   }
 }
 
