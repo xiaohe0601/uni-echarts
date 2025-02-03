@@ -444,7 +444,7 @@ function download() {
 
 #### 静态方法
 
-静态方法请直接通过 [echarts 本身](https://echarts.apache.org/zh/api.html#echarts)进行调用
+静态方法请直接通过 [echarts 本身](https://echarts.apache.org/zh/api.html#echarts) 进行调用
 
 ### 🍬 感谢
 
