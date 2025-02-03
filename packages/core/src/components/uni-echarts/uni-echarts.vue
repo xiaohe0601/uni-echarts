@@ -216,17 +216,17 @@ async function getContext() {
   if (node != null) {
     canvas = new UniCanvas(canvasId, node.getContext("2d"), node);
   } else {
-    // #ifdef MP-TOUTIAO
-    dpr = isPc ? 1 : devicePixelRatio;
-    // #endif
-    // #ifndef MP-ALIPAY || MP-TOUTIAO
-    dpr = isPc ? devicePixelRatio : 1;
+    // #ifdef WEB
+    dpr = 1;
     // #endif
     // #ifdef MP-ALIPAY || MP-LARK
     dpr = devicePixelRatio;
     // #endif
-    // #ifdef WEB
-    dpr = 1;
+    // #ifdef MP-TOUTIAO
+    dpr = isPc ? 1 : devicePixelRatio;
+    // #endif
+    // #ifndef WEB || MP-ALIPAY || MP-LARK || MP-TOUTIAO
+    dpr = isPc ? devicePixelRatio : 1;
     // #endif
 
     canvas = new UniCanvas(canvasId, uni.createCanvasContext(canvasId, vueThis), null);
@@ -287,7 +287,7 @@ async function init(option) {
   }
 
   // #ifdef WEB
-  const resize = () => {
+  const _resize = () => {
     if (instance == null || instance.isDisposed()) {
       return;
     }
@@ -301,7 +301,7 @@ async function init(option) {
   };
   // #endif
 
-  const commit = () => {
+  const _commit = () => {
     const opt = defaultTo(option, innerOption.value);
 
     if (isEmpty(opt)) {
@@ -315,15 +315,15 @@ async function init(option) {
   if (props.autoresize) {
     await nextTick();
 
-    resize();
-    commit();
+    _resize();
+    _commit();
   } else {
-    commit();
+    _commit();
   }
   // #endif
 
   // #ifndef WEB
-  commit();
+  _commit();
   // #endif
 }
 

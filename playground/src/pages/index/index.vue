@@ -38,7 +38,13 @@ const option = ref({
     left: "center"
   },
   tooltip: {
-    trigger: "item"
+    trigger: "item",
+    textStyle: {
+      // #ifdef MP-WEIXIN
+      // 临时解决微信小程序 tooltip 文字阴影问题
+      textShadowBlur: 1
+      // #endif
+    }
   },
   series: [
     {
