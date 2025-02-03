@@ -29,14 +29,14 @@ xiaohe0601 / [github@xiaohe0601](https://github.com/xiaohe0601) / [gitee@xiaohe0
 
 uni-echarts 提供了 `npm` 和 `uni-modules` 两种使用方式，任选其一即可
 
-> 前置条件
->
-> ```json
-> {
->   "echarts": ">=5.3.0",
->   "vue": ">=3.3.0"
-> }
-> ```
+#### 版本要求
+
+```json
+{
+  "echarts": ">=5.3.0",
+  "vue": ">=3.3.0"
+}
+```
 
 #### npm 方式
 
