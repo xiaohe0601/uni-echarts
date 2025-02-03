@@ -20,7 +20,7 @@ export declare class UniCanvas {
 
   constructor(canvasId: string, context: CanvasContext, canvasNode: NullableValue<CanvasNode>);
 
-  private _initStyles(context: CanvasContext, setup: boolean): void;
+  private _setupContext(context: CanvasContext): void;
 
   get width(): number;
   set width(value: number);

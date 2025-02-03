@@ -17,7 +17,7 @@ export class UniCanvas {
     this.canvasNode = canvasNode;
 
     if (canvasNode == null) {
-      this._initStyles(context, true);
+      this._setupContext(context);
     }
 
     this._emitter = mitt();
@@ -55,7 +55,7 @@ export class UniCanvas {
     this.canvasNode.height = value;
   }
 
-  _initStyles(context, setup) {
+  _setupContext(context) {
     const styles = [
       "fillStyle",
       "fontSize",
@@ -122,13 +122,10 @@ export class UniCanvas {
       });
     }
 
-    if (setup) {
-      const _drawImage = context.drawImage;
-
-      context.drawImage = (...args) => {
-        _drawImage(args[0].src, ...args.slice(1));
-      };
-    }
+    const _drawImage = context.drawImage;
+    context.drawImage = (...args) => {
+      _drawImage(args[0].src, ...args.slice(1));
+    };
 
     if (context.strokeText == null) {
       context.strokeText = (...args) => {
