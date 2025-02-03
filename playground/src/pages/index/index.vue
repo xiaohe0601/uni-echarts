@@ -4,8 +4,6 @@
       style="height: 300px"
       :option="option"
       autoresize
-      disable-scroll
-      support-hover
       @click="onEvent('click', $event)"
       @finished.once="onEvent('finished', $event)"
       @zr:click="onEvent('zr:click', $event)"
