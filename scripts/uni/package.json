@@ -4,11 +4,11 @@
   "displayName": "xiaohe-echarts",
   "type": "module",
   "version": "0.0.2",
-  "description": "🪀 适用于uni-app的Apache ECharts组件（仅支持Vue 3）",
+  "description": "适用于uni-app的Apache ECharts组件（仅支持Vue 3）",
   "author": "xiaohe0601 <xiaohe0601@outlook.com>",
   "license": "MIT",
   "homepage": "https://github.com/xiaohe0601/uni-echarts#readme",
-  "repository": "https://github.com/xiaohe0601/uni-echarts",
+  "repository": "https://gitee.com/xiaohe0601/uni-echarts",
   "bugs": "https://github.com/xiaohe0601/uni-echarts/issues",
   "keywords": [
     "echarts",
@@ -76,8 +76,8 @@
           "京东": "y"
         },
         "快应用": {
-          "华为": "u",
-          "联盟": "u"
+          "华为": "y",
+          "联盟": "y"
         }
       },
       "cloud": {
