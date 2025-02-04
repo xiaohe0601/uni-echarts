@@ -6,5 +6,8 @@ export default defineConfig({
     overrides: {
       "vue/custom-event-name-casing": "off"
     }
-  }
+  },
+  ignores: [
+    "**/dist-resolver"
+  ]
 });
