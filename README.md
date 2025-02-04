@@ -175,7 +175,7 @@ import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { ref } from "vue";
 // 🚨 注意导入路径与 npm 方式的区别
-import { provideEchartsTheme } from "@/uni_modules/xiaohe01-echarts";
+import { provideEchartsTheme } from "@/uni_modules/xiaohe-echarts";
 
 // 此处仅用于演示通过 provide 修改图表 theme 的方式，不是必需
 provideEchartsTheme("dark");
