@@ -3,7 +3,7 @@
   "name": "uni-echarts",
   "displayName": "xiaohe-echarts",
   "type": "module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "适用于uni-app的Apache ECharts组件（仅支持Vue 3）",
   "author": "xiaohe0601 <xiaohe0601@outlook.com>",
   "license": "MIT",
