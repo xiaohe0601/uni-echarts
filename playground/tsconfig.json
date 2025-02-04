@@ -10,7 +10,8 @@
       "@dcloudio/types",
       "miniprogram-api-typings",
       "@mini-types/alipay",
-      "@uni-helper/uni-app-types"
+      "@uni-helper/uni-app-types",
+      "uni-echarts/global"
     ]
   },
   "vueCompilerOptions": {

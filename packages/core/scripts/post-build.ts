@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 import { cwd } from "node:process";
 import chalk from "chalk";
 import { consola } from "consola";
-import { copy, remove } from "fs-extra";
+import { copy, move, remove } from "fs-extra";
 
 export function r(...paths: string[]) {
   return resolve(cwd(), ".", ...paths);
@@ -14,7 +14,8 @@ async function main() {
 
     await Promise.all([
       remove(r("dist", "index.mjs")),
-      remove(r("dist", "index.d.mts"))
+      remove(r("dist", "index.d.mts")),
+      move(r("dist", "resolver"), r("dist-resolver"))
     ]);
 
     consola.success(chalk.green("Simplify succeeded for dist"));

@@ -2,6 +2,7 @@ import path from "node:path";
 import process from "node:process";
 import UniApp from "@dcloudio/vite-plugin-uni";
 import UniComponents from "@uni-helper/vite-plugin-uni-components";
+import { UniEchartsResolver } from "uni-echarts/resolver";
 import AutoImport from "unplugin-auto-import/vite";
 import { defineConfig } from "vite";
 
@@ -23,7 +24,10 @@ export default defineConfig({
         "src/components"
       ],
       directoryAsNamespace: true,
-      collapseSamePrefixes: true
+      collapseSamePrefixes: true,
+      resolvers: [
+        UniEchartsResolver()
+      ]
     }),
     AutoImport({
       dts: "types/auto-imports.d.ts",
@@ -31,6 +35,9 @@ export default defineConfig({
         "vue",
         "uni-app",
         "pinia"
+      ],
+      resolvers: [
+        UniEchartsResolver()
       ]
     }),
     // @ts-expect-error whatever

@@ -17,8 +17,6 @@ import { PieChart } from "echarts/charts";
 import { DatasetComponent, LegendComponent, TooltipComponent } from "echarts/components";
 import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import UniEcharts from "uni-echarts";
-import { provideEcharts } from "uni-echarts/shared";
 
 provideEcharts(echarts);
 
