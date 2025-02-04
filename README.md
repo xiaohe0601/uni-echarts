@@ -13,7 +13,7 @@
 
 xiaohe0601 / [github@xiaohe0601](https://github.com/xiaohe0601) / [gitee@xiaohe0601](https://gitee.com/xiaohe0601)
 
-### 🎉 特性
+## 🎉 特性
 
 - 🚀 快速上手，与 [vue-echarts](https://github.com/ecomfe/vue-echarts) 近乎一致的使用体验
 
@@ -25,11 +25,11 @@ xiaohe0601 / [github@xiaohe0601](https://github.com/xiaohe0601) / [gitee@xiaohe0
 
 - 🍳 支持免费商用
 
-### 🚁 安装
+## 🚁 安装
 
 uni-echarts 提供了 `npm` 和 `uni-modules` 两种使用方式，任选其一即可
 
-#### 版本要求
+### 版本要求
 
 ```json
 {
@@ -38,7 +38,7 @@ uni-echarts 提供了 `npm` 和 `uni-modules` 两种使用方式，任选其一�
 }
 ```
 
-#### npm 方式
+### npm 方式
 
 ```shell
 # pnpm
@@ -51,7 +51,7 @@ yarn add echarts uni-echarts
 npm install echarts uni-echarts
 ```
 
-#### uni-modules 方式
+### uni-modules 方式
 
 1. 使用 npm 安装 `echarts`
 
@@ -68,12 +68,11 @@ npm install echarts uni-echarts
 
 2. 前往uni-app插件市场下载 [uni-echarts](https://ext.dcloud.net.cn/plugin?id=21996)
 
-### 🛹 使用
+## 🛹 使用
 
-#### 简单示例
+### 简单示例
 
-<details>
-<summary>npm 方式</summary>
+#### npm 方式
 
 ```vue
 <template>
@@ -159,10 +158,8 @@ const option = ref({
 }
 </style>
 ```
-</details>
 
-<details>
-<summary>uni-modules 方式</summary>
+#### uni-modules 方式
 
 uni-echarts 支持 `easycom` 规范，当使用 uni-modules 方式时无需导入即可直接使用组件
 
@@ -245,7 +242,6 @@ const option = ref({
 }
 </style>
 ```
-</details>
 
 > [!IMPORTANT]
 > 由于小程序对于代码体积的要求非常严苛，所以我们鼓励手动从 `echarts` 中引入组件和图表，以减小打包体积。[vue-echarts](https://github.com/ecomfe/vue-echarts) 团队构建了一个[导入代码生成器](https://vue-echarts.dev/#codegen)，你只需要把 `option` 的代码粘贴进去，就可以得到精确的导入代码。
@@ -260,7 +256,7 @@ const option = ref({
 import "echarts";
 ```
 
-#### 属性
+### 属性
 
 | 参数               | 说明                       | 类型              | 可选值         | 默认值     |
 |------------------|--------------------------|-----------------|-------------|---------|
@@ -281,8 +277,7 @@ import "echarts";
 | support-hover    | PC 端是否支持 hover 行为        | boolean         | -           | `false` |
 | init-delay       | 初始化延迟时间（单位：ms）           | number          | -           | `30`    |
 
-<details>
-<summary>相关类型定义</summary>
+#### 相关类型定义
 
 ```ts
 type AutoResize = boolean | {
@@ -290,9 +285,8 @@ type AutoResize = boolean | {
   onResize?: () => void;
 };
 ```
-</details>
 
-#### 事件
+### 事件
 
 可以使用 Vue 的 `v-on` 指令绑定事件
 
@@ -361,7 +355,7 @@ uni-echarts 支持如下事件：
 
 请参考支持的事件列表。[前往 →](https://echarts.apache.org/zh/api.html#events)
 
-#### 原生 DOM 事件
+### 原生 DOM 事件
 
 由于 uni-echarts 默认将事件绑定到 `echarts` 实例，因此在使用原生 DOM 事件时需要做一些特殊处理，你需要在事件名称前加上 `native:` 前缀来绑定原生 DOM 事件。
 
@@ -372,7 +366,7 @@ uni-echarts 支持如下事件：
 </template>
 ```
 
-#### Provide / Inject
+### Provide / Inject
 
 uni-echarts 为 `option`、 `theme`、`init-options`、`update-options` 和 `loading-options` 提供并导出了 provide 相关的 API，从而可以通过上下文的方式进行配置选项。
 
@@ -410,7 +404,7 @@ provideEchartsOption("chart1", option);
 </script>
 ```
 
-#### 方法
+### 方法
 
 - `setOption` [→](https://echarts.apache.org/zh/api.html#echartsInstance.setOption)
 - `getWidth` [→](https://echarts.apache.org/zh/api.html#echartsInstance.getWidth)
@@ -454,11 +448,11 @@ function download() {
 </script>
 ```
 
-#### 静态方法
+### 静态方法
 
 静态方法请直接通过 [echarts 本身](https://echarts.apache.org/zh/api.html#echarts) 进行调用
 
-### 🍬 感谢
+## 🍬 感谢
 
 - [vue-echarts](https://github.com/ecomfe/vue-echarts)
 
@@ -468,21 +462,19 @@ function download() {
 
 - [mitt](https://github.com/developit/mitt)
 
-### 🐶 讨论交流
+## 🐶 讨论交流
 
 - ❓：若有疑问或BUG反馈，可提交[issues](https://github.com/xiaohe0601/uni-echarts/issues)，也欢迎PR~
 - 📫：[xiaohe0601@outlook.com](mailto:xiaohe0601@outlook.com)
 - 🐧：暂未开通
 
-### 🏆 开源协议
+## 🏆 开源协议
 
 - MIT [LICENSE](./LICENSE)
 
-### 🚓 声明
+## 🚓 声明
 
 The Apache Software Foundation [Apache ECharts, ECharts](https://echarts.apache.org/), Apache, the Apache feather, and the Apache ECharts project logo are either registered trademarks or trademarks of the [Apache Software Foundation](https://www.apache.org/).
-
-<!-- Badges -->
 
 [github-stars-src]: https://img.shields.io/github/stars/xiaohe0601/uni-echarts?style=flat&colorA=080f12&colorB=1fa669&logo=GitHub
 
