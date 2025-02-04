@@ -3,7 +3,7 @@ import { defaultTo } from "../utils/helpers.js";
 
 export const LOADING_OPTIONS_KEY = Symbol("UniEcharts.loadingOptions");
 
-export function provideLoadingOptions(value) {
+export function provideEchartsLoadingOptions(value) {
   provide(LOADING_OPTIONS_KEY, value);
 }
 

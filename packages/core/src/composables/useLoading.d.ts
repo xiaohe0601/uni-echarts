@@ -4,7 +4,7 @@ import type { NullableValue, OptionalValue } from "../types";
 
 export declare const LOADING_OPTIONS_KEY: InjectionKey<LoadingOptionsInjection>;
 
-export declare function provideLoadingOptions(value: LoadingOptionsInjection): void;
+export declare function provideEchartsLoadingOptions(value: LoadingOptionsInjection): void;
 
 export declare function useLoading(chart: Ref<NullableValue<EChartsType>>, options: {
   loading: MaybeRefOrGetter<boolean>;
