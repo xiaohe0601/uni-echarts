@@ -15,8 +15,10 @@ async function main() {
     await Promise.all([
       remove(r("dist", "index.mjs")),
       remove(r("dist", "index.d.mts")),
-      move(r("dist", "resolver"), r("dist-resolver"))
+      remove(r("dist-resolver"))
     ]);
+
+    await move(r("dist", "resolver"), r("dist-resolver"));
 
     consola.success(chalk.green("Simplify succeeded for dist"));
   } catch (error) {
