@@ -368,6 +368,8 @@ uni-echarts 支持如下事件：
 
 ### Provide / Inject
 
+> 🚧 Web 端使用 npm 方式使用组件时暂不支持该用法
+
 uni-echarts 为 `option`、 `theme`、`init-options`、`update-options` 和 `loading-options` 提供并导出了 provide 相关的 API，从而可以通过上下文的方式进行配置选项。
 
 例如，可以通过如下方式来使用 provide API 为 `theme` 提供上下文配置：
