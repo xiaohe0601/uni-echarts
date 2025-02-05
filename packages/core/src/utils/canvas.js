@@ -25,7 +25,7 @@ export class UniCanvas {
 
   get width() {
     if (this.canvasNode == null) {
-      return 0;
+      return this.getAttribute("width");
     }
 
     return this.canvasNode.width;
@@ -33,6 +33,7 @@ export class UniCanvas {
 
   set width(value) {
     if (this.canvasNode == null) {
+      this.setAttribute("width", value);
       return;
     }
 
@@ -41,7 +42,7 @@ export class UniCanvas {
 
   get height() {
     if (this.canvasNode == null) {
-      return 0;
+      return this.getAttribute("height");
     }
 
     return this.canvasNode.height;
@@ -49,6 +50,7 @@ export class UniCanvas {
 
   set height(value) {
     if (this.canvasNode == null) {
+      this.setAttribute("height", value);
       return;
     }
 
