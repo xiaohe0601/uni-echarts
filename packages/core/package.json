@@ -37,6 +37,7 @@
   },
   "files": [
     "dist",
+    "dist-resolver",
     "src"
   ],
   "scripts": {
