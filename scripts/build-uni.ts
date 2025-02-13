@@ -16,7 +16,7 @@ const uniPkg = {
   author: pkg.author,
   license: pkg.license,
   homepage: pkg.homepage,
-  repository: "https://gitee.com/xiaohe0601/uni-echarts",
+  repository: "https://github.com/xiaohe0601/uni-echarts",
   bugs: pkg.bugs,
   keywords: pkg.keywords,
   dcloudext: {
