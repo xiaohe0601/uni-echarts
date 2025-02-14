@@ -5,7 +5,7 @@
   "description": "🪀 适用于uni-app的Apache ECharts组件（仅支持Vue 3）",
   "author": "xiaohe0601 <xiaohe0601@outlook.com>",
   "license": "MIT",
-  "homepage": "https://github.com/xiaohe0601/uni-echarts#readme",
+  "homepage": "https://uni-echarts.xiaohe.ink",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xiaohe0601/uni-echarts.git"
