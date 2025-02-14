@@ -12,6 +12,8 @@
     "play:mp-weixin": "nr -C playground dev:mp-weixin",
     "build": "nr -r --filter=./packages/* build",
     "build:uni": "nr build && esno scripts/build-uni.ts",
+    "docs:dev": "nr -C docs dev",
+    "docs:build": "nr -C docs build",
     "release": "bumpp -r",
     "clean": "rimraf **/dist **/dist-resolver **/uni_modules --glob",
     "lint": "eslint --cache .",

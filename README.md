@@ -18,7 +18,7 @@ xiaohe0601 / [github@xiaohe0601](https://github.com/xiaohe0601) / [gitee@xiaohe0
 
 - 🚀 快速上手，与 [vue-echarts](https://github.com/ecomfe/vue-echarts) 近乎一致的使用体验
 
-- 📱 多端兼容，支持H5、小程序、APP
+- 📱 多端兼容，支持 Web、小程序、APP
 
 - 📦 支持 easycom
 
@@ -467,7 +467,7 @@ function download() {
 
 ## 🐶 讨论交流
 
-- ❓：若有疑问或BUG反馈，可提交[issues](https://github.com/xiaohe0601/uni-echarts/issues)，也欢迎PR~
+- ❓：若有疑问或 BUG 反馈，可提交 [issues](https://github.com/xiaohe0601/uni-echarts/issues)，也欢迎 PR
 - 📫：[xiaohe0601@outlook.com](mailto:xiaohe0601@outlook.com)
 - 🐧：暂未开通
 
@@ -477,7 +477,9 @@ function download() {
 
 ## 🚓 声明
 
-The Apache Software Foundation [Apache ECharts, ECharts](https://echarts.apache.org/), Apache, the Apache feather, and the Apache ECharts project logo are either registered trademarks or trademarks of the [Apache Software Foundation](https://www.apache.org/).
+The Apache Software Foundation [Apache ECharts, ECharts](https://echarts.apache.org/), Apache, the Apache feather,
+and the Apache ECharts project logo are either registered trademarks or trademarks of the
+[Apache Software Foundation](https://www.apache.org/).
 
 [github-stars-src]: https://img.shields.io/github/stars/xiaohe0601/uni-echarts?style=flat&colorA=080f12&colorB=1fa669&logo=GitHub
 
