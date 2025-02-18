@@ -85,7 +85,18 @@ function sidebarExamples(): DefaultTheme.SidebarItem[] {
     {
       base: "/examples",
       items: [
-        { text: "基础用法", link: "/basic" }
+        { text: "基础用法", link: "/basic" },
+        { text: "异步数据", link: "/async-data" },
+        { text: "动作调度", link: "/action-dispatch" },
+        { text: "内置主题", link: "/builtin-theme" },
+        { text: "颜色渐变", link: "/gradient" },
+        { text: "GeoJSON", link: "/geo-json" },
+        { text: "Pinia 集成", link: "/pinia-integration" },
+        { text: "图表联动", link: "/connectable" },
+        { text: "地球仪", link: "/globe" },
+        { text: "手动更新", link: "/manual-update" },
+        { text: "自定义 Tooltip", link: "/custom-tooltip" },
+        { text: "导出图片", link: "/export-image" }
       ]
     }
   ];

@@ -16,3 +16,8 @@ onHide(() => {
   console.log("App Hide");
 });
 </script>
+
+<style lang="scss">
+@import "@/styles/palette.scss";
+@import "@/styles/global.scss";
+</style>

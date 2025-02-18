@@ -1,16 +1,102 @@
 {
+  "globalStyle": {
+    "navigationBarTitleText": "Uni ECharts",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#ffffff"
+  },
   "pages": [
     {
       "path": "pages/index/index",
+      "type": "home",
       "style": {
-        "navigationBarTitleText": "uni-echarts"
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "Uni ECharts"
+      }
+    },
+    {
+      "path": "pages/examples/action-dispatch/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "动作调度"
+      }
+    },
+    {
+      "path": "pages/examples/async-data/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "异步数据"
+      }
+    },
+    {
+      "path": "pages/examples/basic/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "基础用法"
+      }
+    },
+    {
+      "path": "pages/examples/builtin-theme/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "内置主题"
+      }
+    },
+    {
+      "path": "pages/examples/connectable/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "图表联动"
+      }
+    },
+    {
+      "path": "pages/examples/custom-tooltip/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "自定义 Tooltip"
+      }
+    },
+    {
+      "path": "pages/examples/export-image/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "导出图片"
+      }
+    },
+    {
+      "path": "pages/examples/geo-json/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "GeoJSON"
+      }
+    },
+    {
+      "path": "pages/examples/globe/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "地球仪"
+      }
+    },
+    {
+      "path": "pages/examples/gradient/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "颜色渐变"
+      }
+    },
+    {
+      "path": "pages/examples/manual-update/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "手动更新"
+      }
+    },
+    {
+      "path": "pages/examples/pinia-integration/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "Pinia 集成"
       }
     }
   ],
-  "globalStyle": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-echarts",
-    "navigationBarBackgroundColor": "#f8f8f8",
-    "backgroundColor": "#f8f8f8"
-  }
+  "subPackages": []
 }
