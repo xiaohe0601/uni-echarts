@@ -1,6 +1,6 @@
 export type Theme = "light" | "dark";
 
-const theme = ref<Theme>("light");
+const theme = shallowRef<Theme>("light");
 
 export function useTheme() {
   function toggle(value?: Theme) {
