@@ -137,7 +137,7 @@ export class UniCanvas {
 
     if (context.createRadialGradient == null) {
       context.createRadialGradient = (...args) => {
-        return context.createCircularGradient(...args);
+        return context.createCircularGradient(...args.slice(-3));
       };
     }
 
@@ -234,38 +234,14 @@ export class UniCanvas {
   }
 
   static normalizeColor(context, color) {
-    if (typeof color === "object") {
-      if (!isEmpty(color.colorStops)) {
-        if (color.type == null || color.type === "linear") {
-          if (context.createLinearGradient != null) {
-            const value = context.createLinearGradient(color.x, color.y, color.x2, color.y2);
-            for (const item of color.colorStops) {
-              value.addColorStop(item.offset, item.color);
-            }
-            return value;
-          }
-        } else if (color.type === "radial") {
-          if (context.createCircularGradient != null) {
-            const value = context.createCircularGradient(color.x, color.y, color.r);
-            for (const item of color.colorStops) {
-              value.addColorStop(item.offset, item.color);
-            }
-            return value;
-          }
-        }
+    if (typeof color === "string") {
+      // #ifdef MP-TOUTIAO
+      SHORT_HEX_REGEX.lastIndex = 0;
+
+      if (SHORT_HEX_REGEX.test(color)) {
+        return color.replace(SHORT_HEX_REGEX, "#$1$1$2$2$3$3");
       }
-
-      if (!isEmpty(color.repeat) && !isEmpty(color.image)) {
-        if (context.createPattern != null) {
-          return context.createPattern(color.image, color.repeat);
-        }
-      }
-    }
-
-    SHORT_HEX_REGEX.lastIndex = 0;
-
-    if (SHORT_HEX_REGEX.test(color)) {
-      return color.replace(SHORT_HEX_REGEX, "#$1$1$2$2$3$3");
+      // #endif
     }
 
     return color;

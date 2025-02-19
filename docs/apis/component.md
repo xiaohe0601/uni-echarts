@@ -148,9 +148,9 @@ Uni ECharts 支持如下事件：
 
 <script lang="ts" setup>
 import type { UniEchartsInst } from "uni-echarts/shared";
-import { ref } from "vue";
+import { shallowRef } from "vue";
 
-const chartEl = ref<UniEchartsInst | null>(null);
+const chartEl = shallowRef<UniEchartsInst | null>(null);
 
 function download() {
   if (chartEl.value == null) {

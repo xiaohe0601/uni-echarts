@@ -1,4 +1,4 @@
-import { ref, toValue } from "vue";
+import { shallowRef, toValue } from "vue";
 import { UniCanvas } from "../utils/canvas.js";
 import { querySelect } from "../utils/uni.js";
 
@@ -11,7 +11,7 @@ export function useEchartsTouch({
   canvasRect,
   getTouch
 }) {
-  const touching = ref(false);
+  const touching = shallowRef(false);
 
   const state = {
     x: 0,
