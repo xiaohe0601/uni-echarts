@@ -2,7 +2,7 @@
 
 Uni ECharts 提供了 [npm](#npm-方式) 和 [uni-modules](#uni-modules-方式) 两种使用方式，任选其一即可。
 
-::: warning 前置条件
+::: info 前置条件
 
 - **echarts** >=5.3.0
 - **vue** >=3.3.0
@@ -10,6 +10,20 @@ Uni ECharts 提供了 [npm](#npm-方式) 和 [uni-modules](#uni-modules-方式) 
 :::
 
 ## NPM 方式
+
+::: warning 注意
+
+由于 uni-app 编译机制问题，目前 npm 方式尚存在如下已知缺陷待解决：
+
+- WEB 端调用 [registerTheme](https://echarts.apache.org/zh/api.html#echarts.registerTheme) 等 echarts 的 API 无效
+- WEB 端不支持 [依赖注入](./provide) 方式使用组件
+- echarts 的 Tree-Shaking 失效，导致代码体积过大
+
+---
+
+推荐使用 [uni-modules](#uni-modules-方式) 方式，待上诉缺陷解决后再考虑使用 npm 方式。
+
+:::
 
 ### 安装
 

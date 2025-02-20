@@ -47,5 +47,8 @@ const option = ref({
 
 ## 部分小程序平台不支持 option 包含诸如 formatter 的函数字段
 
-这是部分小程序平台原生的限制，他们通过 JSON 序列化参数所以导致函数字段丢失，此时可以使用
-[provideEchartsOption](../apis/function#provideechartsoption) 来设置 option，详细可以参考 [依赖注入](./provide) 部分的说明。
+这是部分小程序平台原生的限制，他们通过 JSON 序列化参数所以导致函数字段丢失，可以通过以下方案解决：
+
+- 启用 [manual-update](../apis/component#attributes) 并使用 [setOption](../apis/component#exposes) 手动设置 option
+
+- 使用 [provideEchartsOption](../apis/function#provideechartsoption) 设置 option，参考 [依赖注入](./provide)
