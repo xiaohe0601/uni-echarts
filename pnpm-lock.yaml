@@ -183,8 +183,8 @@ importers:
         specifier: ~3.4.38
         version: 3.4.38(typescript@5.6.3)
       wot-design-uni:
-        specifier: ^1.7.0
-        version: 1.7.0(vue@3.4.38(typescript@5.6.3))
+        specifier: ^1.7.1
+        version: 1.7.1(vue@3.4.38(typescript@5.6.3))
     devDependencies:
       '@dcloudio/uni-automator':
         specifier: 3.0.0-4040520250104002
@@ -6933,8 +6933,8 @@ packages:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
 
-  wot-design-uni@1.7.0:
-    resolution: {integrity: sha512-uyDDcoOXXGOtxL84++L0iQW8p1MGG9U1iYRRLnCR4hTmTjnYV+VyMoNci+ApgJL3CWh5G4SR1aoFBC884vfMCA==}
+  wot-design-uni@1.7.1:
+    resolution: {integrity: sha512-rEqgkkxhuthip14Y0WocTUFXO0OF5dHGH9BnFuw+FG7JvmcsskfpvKUNioNHr6S4q94Yc1hIc4AZGJPYGwih0A==}
     engines: {HBuilderX: ^3.8.7}
     peerDependencies:
       vue: '>=3.2.47'
@@ -15266,7 +15266,7 @@ snapshots:
 
   word-wrap@1.2.5: {}
 
-  wot-design-uni@1.7.0(vue@3.4.38(typescript@5.6.3)):
+  wot-design-uni@1.7.1(vue@3.4.38(typescript@5.6.3)):
     dependencies:
       vue: 3.4.38(typescript@5.6.3)
 

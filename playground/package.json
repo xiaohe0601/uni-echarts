@@ -67,7 +67,7 @@
     "pinia": "~2.2.4",
     "uni-echarts": "workspace:^",
     "vue": "~3.4.38",
-    "wot-design-uni": "^1.7.0"
+    "wot-design-uni": "^1.7.1"
   },
   "devDependencies": {
     "@dcloudio/uni-automator": "3.0.0-4040520250104002",

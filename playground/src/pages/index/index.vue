@@ -15,7 +15,6 @@
         <wd-cell title="动作调度" is-link to="/pages/examples/action-dispatch/index"></wd-cell>
         <wd-cell title="内置主题" is-link to="/pages/examples/builtin-theme/index"></wd-cell>
         <wd-cell title="颜色渐变" is-link to="/pages/examples/gradient/index"></wd-cell>
-        <wd-cell title="GeoJSON" is-link to="/pages/examples/geo-json/index"></wd-cell>
         <wd-cell title="Pinia 集成" is-link to="/pages/examples/pinia-integration/index"></wd-cell>
         <wd-cell title="图表联动" is-link to="/pages/examples/connectable/index"></wd-cell>
         <wd-cell title="地球仪" is-link to="/pages/examples/globe/index"></wd-cell>

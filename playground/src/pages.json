@@ -63,13 +63,6 @@
       }
     },
     {
-      "path": "pages/examples/geo-json/index",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "GeoJSON"
-      }
-    },
-    {
       "path": "pages/examples/globe/index",
       "type": "page",
       "style": {

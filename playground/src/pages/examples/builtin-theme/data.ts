@@ -1,6 +1,6 @@
 const data: [number, number][] = [];
 
-for (let i = 0; i <= 360; i++) {
+for (let i = 0; i <= 360; i += 1) {
   const t = (i / 180) * Math.PI;
   const r = Math.sin(2 * t) * Math.cos(2 * t);
   data.push([r, i]);
