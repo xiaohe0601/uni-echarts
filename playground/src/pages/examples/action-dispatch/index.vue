@@ -13,10 +13,8 @@ import { PieChart } from "echarts/charts";
 import { DatasetComponent, LegendComponent, TitleComponent, TooltipComponent } from "echarts/components";
 import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import type { UniEchartsInst } from "uni-echarts/shared";
 import { getData } from "./data.ts";
-
-provideEcharts(echarts);
+import type { UniEchartsInst } from "@/uni_modules/xiaohe-echarts";
 
 echarts.use([
   TitleComponent,

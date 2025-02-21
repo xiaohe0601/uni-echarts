@@ -33,8 +33,6 @@ import { CanvasRenderer } from "echarts/renderers";
 import { getData } from "./data.ts";
 import theme from "./theme.json";
 
-provideEcharts(echarts);
-
 echarts.use([
   GridComponent,
   DatasetComponent,

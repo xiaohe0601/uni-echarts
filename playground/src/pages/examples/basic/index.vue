@@ -11,8 +11,6 @@ import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { getData } from "./data.ts";
 
-provideEcharts(echarts);
-
 echarts.use([
   LegendComponent,
   TooltipComponent,

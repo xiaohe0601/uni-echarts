@@ -38,8 +38,6 @@ import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { useScoreStore } from "./data.ts";
 
-provideEcharts(echarts);
-
 echarts.use([
   TitleComponent,
   RadarChart,

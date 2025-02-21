@@ -38,8 +38,6 @@ import { CanvasRenderer } from "echarts/renderers";
 import type { CSSProperties } from "vue";
 import { getData } from "./data.ts";
 
-provideEcharts(echarts);
-
 echarts.use([
   TitleComponent,
   LegendComponent,

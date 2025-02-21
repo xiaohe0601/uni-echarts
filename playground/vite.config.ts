@@ -6,7 +6,6 @@ import UniComponents from "@uni-helper/vite-plugin-uni-components";
 import { WotResolver } from "@uni-helper/vite-plugin-uni-components/resolvers";
 import UniManifest from "@uni-helper/vite-plugin-uni-manifest";
 import UniPages from "@uni-helper/vite-plugin-uni-pages";
-import { UniEchartsResolver } from "uni-echarts/resolver";
 import UnoCSS from "unocss/vite";
 import AutoImport from "unplugin-auto-import/vite";
 import { defineConfig } from "vite";
@@ -35,8 +34,7 @@ export default defineConfig({
       directoryAsNamespace: true,
       collapseSamePrefixes: true,
       resolvers: [
-        WotResolver(),
-        UniEchartsResolver()
+        WotResolver()
       ]
     }),
     AutoImport({
@@ -51,9 +49,6 @@ export default defineConfig({
         "pinia",
         "@vueuse/core",
         uniuseAutoImports()
-      ],
-      resolvers: [
-        UniEchartsResolver()
       ]
     }),
     UnoCSS(),

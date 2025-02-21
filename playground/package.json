@@ -65,7 +65,6 @@
     "echarts": "^5.6.0",
     "lodash-es": "^4.17.21",
     "pinia": "~2.2.4",
-    "uni-echarts": "workspace:^",
     "vue": "~3.4.38",
     "wot-design-uni": "^1.7.1"
   },
