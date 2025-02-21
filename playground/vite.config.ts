@@ -1,7 +1,6 @@
 import path from "node:path";
 import process from "node:process";
 import UniApp from "@dcloudio/vite-plugin-uni";
-import { uniuseAutoImports } from "@uni-helper/uni-use";
 import UniComponents from "@uni-helper/vite-plugin-uni-components";
 import { WotResolver } from "@uni-helper/vite-plugin-uni-components/resolvers";
 import UniManifest from "@uni-helper/vite-plugin-uni-manifest";
@@ -47,8 +46,7 @@ export default defineConfig({
         "vue",
         "uni-app",
         "pinia",
-        "@vueuse/core",
-        uniuseAutoImports()
+        "@vueuse/core"
       ]
     }),
     UnoCSS(),
