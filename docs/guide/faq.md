@@ -2,6 +2,15 @@
 
 列举了一些常见问题和解决方案。
 
+## 不支持的功能清单
+
+受限于 uni-app 的 API，以下功能尚不支持：
+
+- [SVG 渲染器](https://echarts.apache.org/handbook/zh/best-practices/canvas-vs-svg)
+- [toolbox.feature.saveAsImage](https://echarts.apache.org/zh/option.html#toolbox.feature.saveAsImage)
+- [series-map](https://echarts.apache.org/zh/option.html#series-map)
+- [echarts-gl](https://github.com/ecomfe/echarts-gl)
+
 ## 小程序端 class / style 无效
 
 在小程序端 Uni ECharts 通过 [virtualHost](https://uniapp.dcloud.net.cn/tutorial/vue-api.html#其他配置)
