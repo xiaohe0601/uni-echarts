@@ -63,13 +63,6 @@
       }
     },
     {
-      "path": "pages/examples/globe/index",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "地球仪"
-      }
-    },
-    {
       "path": "pages/examples/gradient/index",
       "type": "page",
       "style": {

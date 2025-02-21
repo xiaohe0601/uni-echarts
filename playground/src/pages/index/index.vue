@@ -17,7 +17,6 @@
         <wd-cell title="颜色渐变" is-link to="/pages/examples/gradient/index"></wd-cell>
         <wd-cell title="Pinia 集成" is-link to="/pages/examples/pinia-integration/index"></wd-cell>
         <wd-cell title="图表联动" is-link to="/pages/examples/connectable/index"></wd-cell>
-        <wd-cell title="地球仪" is-link to="/pages/examples/globe/index"></wd-cell>
         <wd-cell title="手动更新" is-link to="/pages/examples/manual-update/index"></wd-cell>
         <wd-cell title="自定义 Tooltip" is-link to="/pages/examples/custom-tooltip/index"></wd-cell>
         <wd-cell title="导出图片" is-link to="/pages/examples/export-image/index"></wd-cell>
