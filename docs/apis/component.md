@@ -101,6 +101,14 @@ Uni ECharts 支持如下事件：
 
 更多信息请参考 [echarts events](https://echarts.apache.org/zh/api.html#events)。
 
+### 其他事件
+
+| 名称      | 说明         | 参数 |
+|---------|------------|----|
+| inited  | 初始化完成      | -  |
+| showtip | 显示 tooltip | -  |
+| hidetip | 隐藏 tooltip | -  |
+
 ### 原生 DOM 事件
 
 由于 Uni ECharts 默认将事件绑定到 `echarts` 实例，因此在使用原生 DOM 事件时需要做一些特殊处理，
