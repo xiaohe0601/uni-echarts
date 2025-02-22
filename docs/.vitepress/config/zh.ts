@@ -94,7 +94,7 @@ function sidebarExamples(): DefaultTheme.SidebarItem[] {
         { text: "图表联动", link: "/connectable" },
         { text: "手动更新", link: "/manual-update" },
         { text: "自定义 Tooltip", link: "/custom-tooltip" },
-        { text: "导出图片", link: "/export-image" }
+        { text: "保存为图片", link: "/export-image" }
       ]
     }
   ];

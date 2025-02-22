@@ -59,7 +59,7 @@
       "path": "pages/examples/export-image/index",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "导出图片"
+        "navigationBarTitleText": "保存为图片"
       }
     },
     {

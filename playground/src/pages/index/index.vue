@@ -19,7 +19,7 @@
         <wd-cell title="图表联动" is-link to="/pages/examples/connectable/index"></wd-cell>
         <wd-cell title="手动更新" is-link to="/pages/examples/manual-update/index"></wd-cell>
         <wd-cell title="自定义 Tooltip" is-link to="/pages/examples/custom-tooltip/index"></wd-cell>
-        <wd-cell title="导出图片" is-link to="/pages/examples/export-image/index"></wd-cell>
+        <wd-cell title="保存为图片" is-link to="/pages/examples/export-image/index"></wd-cell>
       </wd-cell-group>
 
       <wd-gap height="0" safe-area-bottom></wd-gap>
