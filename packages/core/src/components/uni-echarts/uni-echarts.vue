@@ -441,13 +441,13 @@ useAutoresize(chart, {
 // #endif
 
 function toTempFilePath(options) {
-  if (chart.value == null) {
+  if (chart.value == null || chart.value.isDisposed()) {
     return;
   }
 
   const canvas = chart.value.getDom();
 
-  if (canvas == null || canvas.isDisposed()) {
+  if (canvas == null) {
     return;
   }
 
