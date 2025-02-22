@@ -51,7 +51,9 @@ export const OTHER_EVENTS = [
   "brush",
   "brushEnd",
   "brushselected",
-  "globalcursortaken"
+  "globalcursortaken",
+  "showtip",
+  "hidetip"
 ];
 
 export const ECHARTS_EVENTS = [
@@ -82,7 +84,12 @@ export const NATIVE_EVENTS = [
   ...UNI_EVENTS
 ].map((it) => `native:${it}`);
 
+export const COMPONENT_EVENTS = [
+  "inited"
+];
+
 export const EVENTS = [
   ...ECHARTS_EVENTS,
-  ...NATIVE_EVENTS
+  ...NATIVE_EVENTS,
+  ...COMPONENT_EVENTS
 ];

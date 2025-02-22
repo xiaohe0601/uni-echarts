@@ -302,6 +302,8 @@ async function init(option) {
   // #endif
 
   const _commit = () => {
+    emit("inited");
+
     const opt = defaultTo(option, innerOption.value);
 
     if (isEmpty(opt)) {
