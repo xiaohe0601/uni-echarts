@@ -7,11 +7,8 @@
       @showtip="tooltip.visible = true"
       @hidetip="tooltip.visible = false">
       <view v-if="tooltip.visible" class="absolute" :style="tooltipStyles">
-        <view
-          v-for="(item) in tooltip.params"
-          :key="item.seriesId"
-          class="p-2 bg-white rounded-md shadow">
-          <text>{{ `${item.value[0]}：${item.value[1]}` }}</text>
+        <view class="p-2 bg-white rounded-md shadow">
+          <text>{{ `${tooltip.params.value[0]}：${tooltip.params.value[1]}` }}</text>
         </view>
       </view>
     </uni-echarts>
@@ -26,9 +23,8 @@ import { DatasetComponent, TooltipComponent } from "echarts/components";
 import type { ComposeOption } from "echarts/core";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import { castArray, merge } from "lodash-es";
 import type { CSSProperties } from "vue";
-import { GLOBAL_OPTION } from "@/pages/examples/echarts.ts";
+import { GLOBAL_OPTION } from "../echarts.ts";
 
 type EChartsOption = ComposeOption<
   | TooltipComponentOption
@@ -43,10 +39,14 @@ use([
   CanvasRenderer
 ]);
 
-const tooltip = reactive({
+const tooltip = reactive<{
+  visible: boolean;
+  position: [number, number];
+  params: any;
+}>({
   visible: false,
   position: [0, 0],
-  params: [] as any[]
+  params: {}
 });
 
 const tooltipStyles = computed<CSSProperties>(() => {
@@ -58,12 +58,13 @@ const tooltipStyles = computed<CSSProperties>(() => {
   };
 });
 
-const option = shallowRef(merge({}, GLOBAL_OPTION, {
+const option = ref({
+  ...GLOBAL_OPTION,
   tooltip: {
     trigger: "item",
     position(point, params) {
       tooltip.position = point;
-      tooltip.params = castArray(params);
+      tooltip.params = params;
 
       return point;
     },
@@ -102,7 +103,7 @@ const option = shallowRef(merge({}, GLOBAL_OPTION, {
       ["Video Ads", 300]
     ]
   }
-} satisfies EChartsOption));
+} satisfies EChartsOption);
 </script>
 
 <route>

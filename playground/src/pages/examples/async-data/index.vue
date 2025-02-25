@@ -1,7 +1,7 @@
 <template>
   <app-page>
     <uni-echarts
-      class="h-75"
+      class="h-60"
       :option="option"
       theme="ovilia-green"
       autoresize
@@ -26,23 +26,54 @@
 </template>
 
 <script lang="ts" setup>
+import type { BarSeriesOption } from "echarts/charts";
 import { BarChart } from "echarts/charts";
+import type { DatasetComponentOption, GridComponentOption } from "echarts/components";
 import { DatasetComponent, GridComponent } from "echarts/components";
-import * as echarts from "echarts/core";
+import type { ComposeOption } from "echarts/core";
+import { registerTheme, use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import { getData } from "./data.ts";
+import { GLOBAL_OPTION } from "../echarts.ts";
 import theme from "./theme.json";
 
-echarts.use([
+type EChartsOption = ComposeOption<
+  | GridComponentOption
+  | DatasetComponentOption
+  | BarSeriesOption
+>;
+
+use([
   GridComponent,
   DatasetComponent,
   BarChart,
   CanvasRenderer
 ]);
 
-echarts.registerTheme("ovilia-green", theme);
+registerTheme("ovilia-green", theme);
 
-const surplus = shallowRef(0);
+const option = ref({
+  ...GLOBAL_OPTION,
+  grid: {
+    top: 20,
+    right: 10,
+    bottom: 10,
+    left: 10,
+    containLabel: true
+  },
+  xAxis: {
+    type: "category"
+  },
+  yAxis: {},
+  series: [
+    { type: "bar" },
+    { type: "bar" },
+    { type: "bar" }
+  ],
+  dataset: {
+    dimensions: ["Product", "2023", "2024", "2025"],
+    source: getData()
+  }
+} satisfies EChartsOption);
 
 const loading = shallowRef(false);
 
@@ -52,7 +83,40 @@ const loadingOptions = {
   maskColor: "rgba(255, 255, 255, 0.8)"
 };
 
-const option = shallowRef(getData());
+function random() {
+  return Math.round(300 + Math.random() * 700) / 10;
+}
+
+function getData() {
+  return [
+    {
+      Product: "Matcha Latte",
+      2023: random(),
+      2024: random(),
+      2025: random()
+    },
+    {
+      Product: "Milk Tea",
+      2023: random(),
+      2024: random(),
+      2025: random()
+    },
+    {
+      Product: "Cheese Cocoa",
+      2023: random(),
+      2024: random(),
+      2025: random()
+    },
+    {
+      Product: "Walnut Brownie",
+      2023: random(),
+      2024: random(),
+      2025: random()
+    }
+  ];
+}
+
+const surplus = shallowRef(0);
 
 let timer = 0;
 
@@ -71,17 +135,15 @@ function tick() {
   if (surplus.value <= 0) {
     destroyTimer();
 
+    option.value.dataset.source = getData();
     loading.value = false;
-    option.value = getData();
   }
 }
 
 function refresh() {
-  // simulating async data from server
-  surplus.value = 3;
   loading.value = true;
+  surplus.value = 3;
 
-  // @ts-expect-error whatever
   timer = setInterval(tick, 1000);
 }
 

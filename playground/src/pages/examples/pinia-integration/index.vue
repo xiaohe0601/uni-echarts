@@ -33,18 +33,16 @@
 
 <script lang="ts" setup>
 import { RadarChart } from "echarts/charts";
-import { TitleComponent } from "echarts/components";
-import * as echarts from "echarts/core";
+import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import { useScoreStore } from "./data.ts";
+import { useScoreStore } from "./score.ts";
 
-echarts.use([
-  TitleComponent,
+use([
   RadarChart,
   CanvasRenderer
 ]);
 
-const { metrics, getOption, increase, isMax, isMin } = useScoreStore();
+const { metrics, getOption, isMax, isMin, increase } = useScoreStore();
 
 const metricIndex = shallowRef(0);
 </script>

@@ -1,12 +1,10 @@
 import type { RadarSeriesOption } from "echarts/charts";
-import type { TitleComponentOption } from "echarts/components";
 import type { ComposeOption } from "echarts/core";
-import { merge } from "lodash-es";
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { GLOBAL_OPTION } from "../echarts.ts";
 
-type EChartsOption = ComposeOption<TitleComponentOption | RadarSeriesOption>;
+type EChartsOption = ComposeOption<RadarSeriesOption>;
 
 export const useScoreStore = defineStore("score", () => {
   const scores = ref([
@@ -25,56 +23,53 @@ export const useScoreStore = defineStore("score", () => {
     }));
   });
 
-  function getOption(activeIndex: number): EChartsOption {
-    return merge({}, GLOBAL_OPTION, {
-      title: {
-        text: "Player Ability",
-        top: "5%",
-        left: "5%"
-      },
+  function getOption(activeIndex: number) {
+    return {
+      ...GLOBAL_OPTION,
       radar: {
         indicator: scores.value.map(({ name, max }, index) => {
-          if (index === activeIndex) {
-            return { name, max, color: "goldenrod" };
-          }
-
-          return { name, max };
+          return {
+            name,
+            max,
+            color: index === activeIndex ? "goldenrod" : undefined
+          };
         })
       },
       series: [
         {
-          name: "Value",
           type: "radar",
           data: [
             { value: scores.value.map(({ value }) => value) }
           ]
         }
       ]
-    } satisfies EChartsOption);
-  }
-
-  function increase(index: number, amount: number) {
-    const metric = scores.value[index]!;
-
-    metric.value = Math.max(Math.min(metric.value + amount, metric.max), 0);
+    } satisfies EChartsOption;
   }
 
   function isMax(index: number) {
     const { value, max } = scores.value[index]!;
 
-    return value === max;
+    return value >= max;
   }
 
   function isMin(index: number) {
-    return scores.value[index]!.value === 0;
+    const { value } = scores.value[index]!;
+
+    return value <= 0;
+  }
+
+  function increase(index: number, value: number) {
+    const metric = scores.value[index]!;
+
+    metric.value = Math.max(0, Math.min(metric.max, metric.value + value));
   }
 
   return {
     scores,
     metrics,
     getOption,
-    increase,
     isMax,
-    isMin
+    isMin,
+    increase
   };
 });

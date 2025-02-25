@@ -9,15 +9,24 @@
 </template>
 
 <script lang="ts" setup>
+import type { PieSeriesOption } from "echarts/charts";
 import { PieChart } from "echarts/charts";
-import { DatasetComponent, LegendComponent, TitleComponent, TooltipComponent } from "echarts/components";
-import * as echarts from "echarts/core";
+import type { DatasetComponentOption, LegendComponentOption, TooltipComponentOption } from "echarts/components";
+import { DatasetComponent, LegendComponent, TooltipComponent } from "echarts/components";
+import type { ComposeOption } from "echarts/core";
+import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import { getData } from "./data.ts";
+import { GLOBAL_OPTION } from "../echarts.ts";
 import type { UniEchartsInst } from "@/uni_modules/xiaohe-echarts";
 
-echarts.use([
-  TitleComponent,
+type EChartsOption = ComposeOption<
+  | LegendComponentOption
+  | TooltipComponentOption
+  | DatasetComponentOption
+  | PieSeriesOption
+>;
+
+use([
   LegendComponent,
   TooltipComponent,
   DatasetComponent,
@@ -27,7 +36,53 @@ echarts.use([
 
 const chartEl = shallowRef<UniEchartsInst | null>(null);
 
-const option = shallowRef(getData());
+const option = ref({
+  ...GLOBAL_OPTION,
+  legend: {
+    top: 10,
+    left: "center"
+  },
+  tooltip: {
+    trigger: "item",
+    formatter: "{a}\n{b}: {d}%",
+    textStyle: {
+      // #ifdef MP-WEIXIN
+      textShadowBlur: 1
+      // #endif
+    }
+  },
+  series: [
+    {
+      type: "pie",
+      radius: ["30%", "52%"],
+      label: {
+        show: false,
+        position: "center"
+      },
+      itemStyle: {
+        borderWidth: 2,
+        borderColor: "#ffffff",
+        borderRadius: 10
+      },
+      emphasis: {
+        label: {
+          show: true,
+          fontSize: 20
+        }
+      }
+    }
+  ],
+  dataset: {
+    dimensions: ["来源", "数量"],
+    source: [
+      ["Search Engine", 1048],
+      ["Direct", 735],
+      ["Email", 580],
+      ["Union Ads", 484],
+      ["Video Ads", 300]
+    ]
+  }
+} satisfies EChartsOption);
 
 let timer = 0;
 
@@ -41,9 +96,9 @@ function destroyTimer() {
 }
 
 function startActions() {
-  const dataLen = option.value?.dataset?.source?.length || 0;
+  const length = option.value.dataset.source.length;
 
-  if (chartEl.value == null || dataLen === 0) {
+  if (chartEl.value == null || length === 0) {
     return;
   }
 
@@ -51,7 +106,6 @@ function startActions() {
 
   let dataIndex = -1;
 
-  // @ts-expect-error whatever
   timer = setInterval(() => {
     if (chartEl.value == null) {
       destroyTimer();
@@ -63,7 +117,7 @@ function startActions() {
       seriesIndex: 0,
       dataIndex
     });
-    dataIndex = (dataIndex + 1) % dataLen;
+    dataIndex = (dataIndex + 1) % length;
     chartEl.value.dispatchAction({
       type: "highlight",
       seriesIndex: 0,
