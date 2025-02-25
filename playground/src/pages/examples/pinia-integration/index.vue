@@ -1,4 +1,5 @@
 <template>
+  <!-- #region template -->
   <app-page>
     <uni-echarts class="h-75" :option="getOption(metricIndex)" autoresize></uni-echarts>
 
@@ -29,9 +30,11 @@
       </wd-cell>
     </wd-cell-group>
   </app-page>
+  <!-- #endregion template -->
 </template>
 
 <script lang="ts" setup>
+// #region script
 import { RadarChart } from "echarts/charts";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
@@ -45,6 +48,7 @@ use([
 const { metrics, getOption, isMax, isMin, increase } = useScoreStore();
 
 const metricIndex = shallowRef(0);
+// #endregion script
 </script>
 
 <route>

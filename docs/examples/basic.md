@@ -1,78 +1,11 @@
 # 基础用法
 
-```vue
-<template>
-  <uni-echarts custom-class="chart" :option="option"></uni-echarts>
-</template>
+::: code-group
 
-<script setup>
-import { PieChart } from "echarts/charts";
-import { DatasetComponent, LegendComponent, TooltipComponent } from "echarts/components";
-import * as echarts from "echarts/core";
-import { CanvasRenderer } from "echarts/renderers";
-import { ref } from "vue";
+<<< ../../playground/src/pages/examples/basic/index.vue#script{ts}[script setup]
 
-provideEcharts(echarts);
+<<< ../../playground/src/pages/examples/basic/index.vue#template{html}[template]
 
-echarts.use([
-  LegendComponent,
-  TooltipComponent,
-  DatasetComponent,
-  PieChart,
-  CanvasRenderer
-]);
+<<< ../../playground/src/pages/examples/echarts.ts[global]
 
-const option = ref({
-  legend: {
-    top: 10,
-    left: "center"
-  },
-  tooltip: {
-    trigger: "item",
-    textStyle: {
-      // #ifdef MP-WEIXIN
-      // 临时解决微信小程序 tooltip 文字阴影问题
-      textShadowBlur: 1
-      // #endif
-    }
-  },
-  series: [
-    {
-      type: "pie",
-      radius: ["30%", "52%"],
-      label: {
-        show: false,
-        position: "center"
-      },
-      itemStyle: {
-        borderWidth: 2,
-        borderColor: "#ffffff",
-        borderRadius: 10
-      },
-      emphasis: {
-        label: {
-          show: true,
-          fontSize: 20
-        }
-      }
-    }
-  ],
-  dataset: {
-    dimensions: ["来源", "数量"],
-    source: [
-      ["Search Engine", 1048],
-      ["Direct", 735],
-      ["Email", 580],
-      ["Union Ads", 484],
-      ["Video Ads", 300]
-    ]
-  }
-});
-</script>
-
-<style scoped>
-.chart {
-  height: 300px;
-}
-</style>
-```
+:::

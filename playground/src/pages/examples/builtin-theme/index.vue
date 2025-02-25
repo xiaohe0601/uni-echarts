@@ -1,4 +1,5 @@
 <template>
+  <!-- #region template -->
   <app-page>
     <uni-echarts
       class="h-75"
@@ -22,9 +23,11 @@
       </wd-cell>
     </wd-cell-group>
   </app-page>
+  <!-- #endregion template -->
 </template>
 
 <script lang="ts" setup>
+// #region script
 import type { LineSeriesOption } from "echarts/charts";
 import { LineChart } from "echarts/charts";
 import type {
@@ -144,6 +147,7 @@ function getData() {
 
   return data;
 }
+// #endregion script
 </script>
 
 <route>

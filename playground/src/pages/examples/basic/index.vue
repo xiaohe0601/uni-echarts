@@ -1,10 +1,13 @@
 <template>
+  <!-- #region template -->
   <app-page>
     <uni-echarts class="h-75" :option="option" autoresize></uni-echarts>
   </app-page>
+  <!-- #endregion template -->
 </template>
 
 <script lang="ts" setup>
+// #region script
 import type { PieSeriesOption } from "echarts/charts";
 import { PieChart } from "echarts/charts";
 import type { DatasetComponentOption, LegendComponentOption, TooltipComponentOption } from "echarts/components";
@@ -75,6 +78,7 @@ const option = ref({
     ]
   }
 } satisfies EChartsOption);
+// #endregion script
 </script>
 
 <route>

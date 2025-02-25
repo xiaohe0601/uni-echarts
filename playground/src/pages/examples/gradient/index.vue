@@ -1,10 +1,13 @@
 <template>
+  <!-- #region template -->
   <app-page>
     <uni-echarts class="h-60" :option="option" autoresize></uni-echarts>
   </app-page>
+  <!-- #endregion template -->
 </template>
 
 <script lang="ts" setup>
+// #region script
 import type { ScatterSeriesOption } from "echarts/charts";
 import { ScatterChart } from "echarts/charts";
 import type { GridComponentOption, LegendComponentOption } from "echarts/components";
@@ -172,6 +175,7 @@ const option = ref({
     }
   ]
 } satisfies EChartsOption);
+// #endregion script
 </script>
 
 <route>

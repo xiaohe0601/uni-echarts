@@ -1,4 +1,5 @@
 <template>
+  <!-- #region template -->
   <app-page>
     <uni-echarts
       ref="chartEl"
@@ -7,9 +8,11 @@
       autoresize
       @inited="setOption()"></uni-echarts>
   </app-page>
+  <!-- #endregion template -->
 </template>
 
 <script lang="ts" setup>
+// #region script
 import type { LineSeriesOption } from "echarts/charts";
 import { LineChart } from "echarts/charts";
 import type {
@@ -122,6 +125,7 @@ function setOption() {
     ]
   } satisfies EChartsOption);
 }
+// #endregion script
 </script>
 
 <route>

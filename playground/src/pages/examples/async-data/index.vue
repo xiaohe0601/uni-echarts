@@ -1,4 +1,5 @@
 <template>
+  <!-- #region template -->
   <app-page>
     <uni-echarts
       class="h-60"
@@ -23,9 +24,11 @@
       </wd-button>
     </view>
   </app-page>
+  <!-- #endregion template -->
 </template>
 
 <script lang="ts" setup>
+// #region script
 import type { BarSeriesOption } from "echarts/charts";
 import { BarChart } from "echarts/charts";
 import type { DatasetComponentOption, GridComponentOption } from "echarts/components";
@@ -150,6 +153,7 @@ function refresh() {
 onUnload(() => {
   destroyTimer();
 });
+// #endregion script
 </script>
 
 <route>

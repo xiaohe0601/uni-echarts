@@ -1,4 +1,5 @@
 <template>
+  <!-- #region template -->
   <app-page>
     <uni-echarts
       class="h-60"
@@ -18,9 +19,11 @@
       </wd-cell>
     </wd-cell-group>
   </app-page>
+  <!-- #endregion template -->
 </template>
 
 <script lang="ts" setup>
+// #region script
 import type { ScatterSeriesOption } from "echarts/charts";
 import { ScatterChart } from "echarts/charts";
 import type {
@@ -139,6 +142,7 @@ watchEffect(() => {
     disconnect("radiance");
   }
 });
+// #endregion script
 </script>
 
 <route>

@@ -1,4 +1,5 @@
 <template>
+  <!-- #region template -->
   <app-page>
     <uni-echarts
       ref="chartEl"
@@ -14,9 +15,11 @@
       </wd-button>
     </view>
   </app-page>
+  <!-- #endregion template -->
 </template>
 
 <script lang="ts" setup>
+// #region script
 import type { LineSeriesOption } from "echarts/charts";
 import { LineChart } from "echarts/charts";
 import type { PolarComponentOption } from "echarts/components";
@@ -79,6 +82,7 @@ async function saveAsImage() {
     urls: [tempFilePath]
   });
 }
+// #endregion script
 </script>
 
 <route>
