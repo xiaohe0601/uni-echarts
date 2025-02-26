@@ -15,7 +15,7 @@
       "autoclose": true,
       "delay": 0
     },
-    "modules": { },
+    "modules": {},
     "distribute": {
       "android": {
         "permissions": [
@@ -41,8 +41,8 @@
           "x86"
         ]
       },
-      "ios": { },
-      "sdkConfigs": { }
+      "ios": {},
+      "sdkConfigs": {}
     },
     "nvueCompiler": "uni-app",
     "runmode": "liberate",
@@ -53,7 +53,7 @@
       "minUserAgentVersion": "64.0.3282.116"
     }
   },
-  "quickapp": { },
+  "quickapp": {},
   "mp-weixin": {
     "appid": "",
     "setting": {
@@ -87,7 +87,7 @@
   "h5": {
     "router": {
       "mode": "history",
-      "base": "/"
+      "base": "/ui/"
     },
     "optimization": {
       "prefetch": true,

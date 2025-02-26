@@ -42,7 +42,10 @@ provide API 支持传入 字面量、ref、getter 等类型的值，组件内部
 </template>
 
 <script setup>
+// ⬇️ npm 方式
 import { provideEchartsOption } from "uni-echarts/shared";
+// ⬇️ uni-modules 方式
+import { provideEchartsOption } from "@/uni_modules/xiaohe-echarts";
 import { ref } from "vue";
 
 const option = ref({

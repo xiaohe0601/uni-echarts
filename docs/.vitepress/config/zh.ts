@@ -39,7 +39,8 @@ function nav(): DefaultTheme.NavItem[] {
   return [
     { text: "指南", link: "/guide/introduction", activeMatch: "/guide/" },
     { text: "API 参考", link: "/apis/component", activeMatch: "/apis/" },
-    { text: "示例", link: "/examples/basic", activeMatch: "/examples/" },
+    { text: "代码示例", link: "/examples/basic", activeMatch: "/examples/" },
+    { text: "在线演示", link: "https://uni-echarts.xiaohe.ink/ui" },
     { text: "支持我们", link: "/sponsor" }
   ];
 }
@@ -85,7 +86,16 @@ function sidebarExamples(): DefaultTheme.SidebarItem[] {
     {
       base: "/examples",
       items: [
-        { text: "基础用法", link: "/basic" }
+        { text: "基础用法", link: "/basic" },
+        { text: "异步数据", link: "/async-data" },
+        { text: "动作调度", link: "/action-dispatch" },
+        { text: "内置主题", link: "/builtin-theme" },
+        { text: "颜色渐变", link: "/gradient" },
+        { text: "Pinia 集成", link: "/pinia-integration" },
+        { text: "图表联动", link: "/connectable" },
+        { text: "手动更新", link: "/manual-update" },
+        { text: "自定义 Tooltip", link: "/custom-tooltip" },
+        { text: "保存为图片", link: "/export-image" }
       ]
     }
   ];

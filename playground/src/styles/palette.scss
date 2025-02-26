@@ -1,0 +1,36 @@
+:root, page {
+  --color-primary: 41, 151, 100;
+
+  --color-success: 52, 209, 157;
+  --color-warning: 240, 136, 58;
+  --color-danger: 250, 67, 80;
+  --color-error: 250, 67, 80;
+  --color-info: 144, 147, 153;
+
+  --color-t1: 0, 0, 0;
+  --color-t2: 38, 38, 38;
+  --color-t3: 89, 89, 89;
+  --color-t4: 140, 140, 140;
+  --color-t5: 191, 191, 191;
+  --color-b1: 248, 249, 250;
+  --color-d1: 217, 217, 217;
+  --color-d2: 232, 232, 232;
+
+  --font-global: MiSans, Inter, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+
+  --wot-color-theme: rgb(var(--color-primary));
+
+  --wot-color-success: rgb(var(--color-success));
+  --wot-color-warning: rgb(var(--color-warning));
+  --wot-color-danger: rgb(var(--color-danger));
+  --wot-color-info: rgb(var(--color-info));
+
+  --wot-color-title: rgb(var(--color-t1));
+  --wot-color-content: rgb(var(--color-t2));
+  --wot-color-secondary: rgb(var(--color-t3));
+  --wot-color-aid: rgb(var(--color-t4));
+  --wot-color-tip: rgb(var(--color-t5));
+  --wot-color-bg: rgb(var(--color-b1));
+  --wot-color-border: rgb(var(--color-d1));
+  --wot-color-border-light: rgb(var(--color-d2));
+}

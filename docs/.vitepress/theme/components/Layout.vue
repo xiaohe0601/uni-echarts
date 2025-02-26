@@ -1,13 +1,24 @@
 <template>
-  <DefaultTheme.Layout></DefaultTheme.Layout>
+  <DefaultTheme.Layout>
+    <template #aside-top>
+      <VPIframe v-if="iframeVisible"></VPIframe>
+    </template>
+  </DefaultTheme.Layout>
 </template>
 
 <script lang="ts" setup>
-import { useData } from "vitepress";
+import { useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { nextTick, provide } from "vue";
+import { computed, nextTick, provide } from "vue";
+import VPIframe from "./VPIframe.vue";
+
+const route = useRoute();
 
 const { isDark } = useData();
+
+const iframeVisible = computed(() => {
+  return route.path.startsWith("/examples");
+});
 
 function enableTransitions() {
   return "startViewTransition" in document
@@ -62,10 +73,12 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
   z-index: 9999;
 }
 
+/* stylelint-disable-next-line selector-class-pattern */
 .VPSwitchAppearance {
   width: 22px !important;
 }
 
+/* stylelint-disable-next-line selector-class-pattern */
 .VPSwitchAppearance .check {
   transform: none !important;
 }

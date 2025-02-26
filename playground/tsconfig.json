@@ -11,7 +11,7 @@
       "miniprogram-api-typings",
       "@mini-types/alipay",
       "@uni-helper/uni-app-types",
-      "uni-echarts/global"
+      "wot-design-uni/global"
     ]
   },
   "vueCompilerOptions": {

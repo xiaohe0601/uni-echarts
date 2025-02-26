@@ -155,17 +155,22 @@ Uni ECharts 支持如下事件：
 </template>
 
 <script lang="ts" setup>
+// ⬇️ npm 方式
 import type { UniEchartsInst } from "uni-echarts/shared";
+// ⬇️ uni-modules 方式
+import type { UniEchartsInst } from "@/uni_modules/xiaohe-echarts";
 import { shallowRef } from "vue";
 
 const chartEl = shallowRef<UniEchartsInst | null>(null);
 
-function download() {
+async function download() {
   if (chartEl.value == null) {
     return;
   }
 
-  chartEl.value.toTempFilePath();
+  const { tempFilePath } = await chartEl.value.toTempFilePath();
+
+  // ...
 }
 </script>
 ```
