@@ -8,7 +8,8 @@ export default defineConfig({
     }
   },
   ignores: [
-    "**/dist-resolver"
+    "**/dist-resolver",
+    "playground/src/uni_modules/**"
   ]
 }, {
   files: ["docs/**/*.vue"],
