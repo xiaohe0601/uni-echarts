@@ -3,7 +3,16 @@ import { search as zhSearch } from "./zh.ts";
 
 export const shared = defineConfig({
   head: [
-    ["link", { rel: "icon", type: "image/png", href: "https://oss.xiaohe.ink/images/uni-echarts.png" }]
+    ["link", {
+      rel: "icon",
+      type: "image/png",
+      href: "https://oss.xiaohe.ink/images/uni-echarts.png"
+    }],
+    ["script", {
+      defer: "",
+      src: "https://cloud.umami.is/script.js",
+      "data-website-id": "28a6dd1a-4935-4608-9e8f-c08bbfcac563"
+    }]
   ],
   cleanUrls: true,
   metaChunk: true,
