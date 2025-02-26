@@ -10,4 +10,9 @@ export default defineConfig({
   ignores: [
     "**/dist-resolver"
   ]
+}, {
+  files: ["docs/**/*.vue"],
+  rules: {
+    "vue/component-name-in-template-casing": ["error", "PascalCase"]
+  }
 });

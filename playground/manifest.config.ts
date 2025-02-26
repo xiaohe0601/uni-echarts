@@ -62,7 +62,7 @@ export default defineManifestConfig({
   h5: {
     router: {
       mode: "history",
-      base: "/"
+      base: "/ui/"
     },
     optimization: {
       prefetch: true,

@@ -39,7 +39,8 @@ function nav(): DefaultTheme.NavItem[] {
   return [
     { text: "指南", link: "/guide/introduction", activeMatch: "/guide/" },
     { text: "API 参考", link: "/apis/component", activeMatch: "/apis/" },
-    { text: "示例", link: "/examples/basic", activeMatch: "/examples/" },
+    { text: "代码示例", link: "/examples/basic", activeMatch: "/examples/" },
+    { text: "在线演示", link: "https://uni-echarts.xiaohe.ink/ui" },
     { text: "支持我们", link: "/sponsor" }
   ];
 }

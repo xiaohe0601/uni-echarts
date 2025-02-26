@@ -15,6 +15,7 @@ function r(...paths: string[]) {
 
 export default defineConfig({
   root: process.cwd(),
+  base: process.env.UNI_PLATFORM === "h5" ? "/ui/" : "/",
   resolve: {
     alias: {
       "@": r("src")

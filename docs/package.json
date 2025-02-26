@@ -4,7 +4,7 @@
   "version": "0.1.2",
   "private": true,
   "scripts": {
-    "dev": "vitepress dev --host --port 5174",
+    "dev": "vitepress dev --host --port 9862",
     "build": "vitepress build",
     "preview": "vitepress preview",
     "clean": "nr clean:dist && nr clean:cache",

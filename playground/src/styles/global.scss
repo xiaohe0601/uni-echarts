@@ -1,0 +1,9 @@
+/* #ifdef H5 */
+
+html {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* #endif */
