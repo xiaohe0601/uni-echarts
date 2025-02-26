@@ -15,13 +15,13 @@ defineOptions({
 const route = useRoute();
 
 const href = computed(() => {
-  const link = `/pages${route.path}/index`;
+  const link = `/ui/pages${route.path}/index`;
 
   if (import.meta.env.DEV) {
     return `http://localhost:9861${link}`;
   }
 
-  return `/ui${link}`;
+  return link;
 });
 </script>
 
