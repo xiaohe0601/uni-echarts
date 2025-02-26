@@ -58,7 +58,7 @@ function getData() {
 
   for (let i = 1; i < 20000; i += 1) {
     data.push(
-      [new Date((base += day1)).valueOf(), Math.round((Math.random() - 0.5) * 20 + data[i - 1]![1]!)]
+      [new Date((base += day1)).valueOf(), Math.round((Math.random() - 0.5) * 20 + data[i - 1][1])]
     );
   }
 

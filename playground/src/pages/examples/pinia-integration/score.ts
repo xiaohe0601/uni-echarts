@@ -47,19 +47,19 @@ export const useScoreStore = defineStore("score", () => {
   }
 
   function isMax(index: number) {
-    const { value, max } = scores.value[index]!;
+    const { value, max } = scores.value[index];
 
     return value >= max;
   }
 
   function isMin(index: number) {
-    const { value } = scores.value[index]!;
+    const { value } = scores.value[index];
 
     return value <= 0;
   }
 
   function increase(index: number, value: number) {
-    const metric = scores.value[index]!;
+    const metric = scores.value[index];
 
     metric.value = Math.max(0, Math.min(metric.max, metric.value + value));
   }

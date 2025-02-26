@@ -19,7 +19,7 @@
     "clean": "rimraf **/dist **/dist-resolver **/uni_modules --glob",
     "lint": "eslint --cache .",
     "lint:fix": "nr lint --fix",
-    "lint:type": "tsc --noEmit",
+    "lint:type": "tsc --noEmit && nr -C playground type-check",
     "stylelint": "stylelint **/*.{css,scss,html,vue}",
     "stylelint:fix": "nr stylelint --fix",
     "test": "vitest",
