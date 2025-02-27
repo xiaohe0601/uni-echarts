@@ -58,21 +58,12 @@ and the Apache ECharts project logo are either registered trademarks or trademar
 [Apache Software Foundation](https://www.apache.org/).
 
 [github-stars-src]: https://img.shields.io/github/stars/xiaohe0601/uni-echarts?style=flat&colorA=080f12&colorB=1fa669&logo=GitHub
-
 [github-stars-href]: https://github.com/xiaohe0601/uni-echarts
-
 [npm-version-src]: https://img.shields.io/npm/v/uni-echarts?style=flat&colorA=080f12&colorB=1fa669
-
 [npm-version-href]: https://npmjs.com/package/uni-echarts
-
 [npm-downloads-src]: https://img.shields.io/npm/dm/uni-echarts?style=flat&colorA=080f12&colorB=1fa669
-
 [npm-downloads-href]: https://npmjs.com/package/uni-echarts
-
 [jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
-
 [jsdocs-href]: https://www.jsdocs.io/package/uni-echarts
-
 [license-src]: https://img.shields.io/github/license/xiaohe0601/uni-echarts.svg?style=flat&colorA=080f12&colorB=1fa669
-
 [license-href]: https://github.com/xiaohe0601/uni-echarts/blob/main/LICENSE
