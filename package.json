@@ -17,7 +17,7 @@
     "docs:build": "nr -C docs build && nr build:play && esno scripts/compose-docs.ts",
     "release": "bumpp -r",
     "clean": "rimraf **/dist **/dist-resolver **/uni_modules --glob",
-    "lint": "eslint --cache .",
+    "lint": "eslint --cache",
     "lint:fix": "nr lint --fix",
     "lint:type": "tsc --noEmit",
     "stylelint": "stylelint **/*.{css,scss,html,vue}",
