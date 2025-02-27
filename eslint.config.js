@@ -12,6 +12,11 @@ export default defineConfig({
     "playground/src/uni_modules/**"
   ]
 }, {
+  files: ["packages/**/*"],
+  rules: {
+    "import/extensions": ["off"]
+  }
+}, {
   files: ["docs/**/*.vue"],
   rules: {
     "vue/component-name-in-template-casing": ["error", "PascalCase"]
