@@ -30,14 +30,14 @@ importers:
         specifier: ^1.0.0-alpha.6
         version: 1.0.0-alpha.6(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
       '@xiaohe01/eslint-config':
-        specifier: ^1.1.1
-        version: 1.1.1(@typescript-eslint/utils@8.25.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(@vue/compiler-sfc@3.5.13)(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3)(vitest@3.0.7(@types/debug@4.1.12)(@types/node@22.13.5)(jsdom@16.7.0)(terser@5.39.0))
+        specifier: ^1.2.0
+        version: 1.2.0(@typescript-eslint/utils@8.25.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(@vue/compiler-sfc@3.5.13)(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3)(vitest@3.0.7(@types/debug@4.1.12)(@types/node@22.13.5)(jsdom@16.7.0)(terser@5.39.0))
       '@xiaohe01/stylelint-config':
-        specifier: ^0.0.3
-        version: 0.0.3(postcss@8.5.3)(stylelint@16.14.1(typescript@5.7.3))
+        specifier: ^1.0.0
+        version: 1.0.0(postcss@8.5.3)(stylelint@16.14.1(typescript@5.7.3))
       '@xiaohe01/tsconfig':
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^1.0.0
+        version: 1.0.0
       bumpp:
         specifier: ^10.0.3
         version: 10.0.3
@@ -2948,8 +2948,8 @@ packages:
   '@vueuse/shared@12.7.0':
     resolution: {integrity: sha512-coLlUw2HHKsm7rPN6WqHJQr18WymN4wkA/3ThFaJ4v4gWGWAQQGK+MJxLuJTBs4mojQiazlVWAKNJNpUWGRkNw==}
 
-  '@xiaohe01/eslint-config@1.1.1':
-    resolution: {integrity: sha512-q7mNbWnz+N9HZN3LHbzZQeOQMi6xhrxBWNdvDXAhG0KYv41QX92xXxIrdf3P1Vo9z+tYKLzdCqfJhZHIuNoVWA==}
+  '@xiaohe01/eslint-config@1.2.0':
+    resolution: {integrity: sha512-UXelGFDGQDC6u9bdy8ZRoGU8OxixdXt1EtO9XE0L4jMNxQWWd4l1AT3UXZWAr/C6vSNWPNvygxMqTnNOHvZLiQ==}
     hasBin: true
     peerDependencies:
       '@eslint-react/eslint-plugin': ^1.19.0
@@ -2994,11 +2994,11 @@ packages:
       svelte-eslint-parser:
         optional: true
 
-  '@xiaohe01/stylelint-config@0.0.3':
-    resolution: {integrity: sha512-FOQ6QN6xJVDcDc2eOLL9vUwc6q5uwoleEzB6YR2NvO3OaFN0MbjJ2BFNZSMIMmhG0+f0DX9eASKOQ/M8ZXopCw==}
+  '@xiaohe01/stylelint-config@1.0.0':
+    resolution: {integrity: sha512-GwumR0raUj7VCe5INjgFapxVhHnK/B8krWr6B8+kuoGig9Ythh8yMf+uh38g1WIveBvQs0Ss0JS2g4FoE6RUsQ==}
 
-  '@xiaohe01/tsconfig@0.1.0':
-    resolution: {integrity: sha512-NlRzrS8Usu1RAW0v5vPJ4FqI0dqVjqlckpL4ns86pGat+5thP4pVWqQqE0icA48N2hVJ94HVBAPMr49zrkFa2Q==}
+  '@xiaohe01/tsconfig@1.0.0':
+    resolution: {integrity: sha512-CfhDpnceBFlUB/Rj8Vona6DfSDja43YrX+/1Q+2WJB7rwK90risLp3xgHKE6fultqvPeM7rQbAeQhVCGShCTAQ==}
 
   abab@2.0.6:
     resolution: {integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==}
@@ -6293,8 +6293,8 @@ packages:
       postcss-html: ^1.0.0
       stylelint: '>=14.0.0'
 
-  stylelint-config-recess-order@5.1.1:
-    resolution: {integrity: sha512-eDAHWVBelzDbMbdMj15pSw0Ycykv5eLeriJdbGCp0zd44yvhgZLI+wyVHegzXp5NrstxTPSxl0fuOVKdMm0XLA==}
+  stylelint-config-recess-order@6.0.0:
+    resolution: {integrity: sha512-1KqrttqpIrCYFAVQ1/bbgXo7EvvcjmkxxmnzVr+U66Xr2OlrNZqQ5+44Tmct6grCWY6wGTIBh2tSANqcmwIM2g==}
     peerDependencies:
       stylelint: '>=16'
 
@@ -6321,6 +6321,12 @@ packages:
     peerDependencies:
       stylelint: ^16.1.0
 
+  stylelint-config-recommended@15.0.0:
+    resolution: {integrity: sha512-9LejMFsat7L+NXttdHdTq94byn25TD+82bzGRiV1Pgasl99pWnwipXS5DguTpp3nP1XjvLXVnEJIuYBfsRjRkA==}
+    engines: {node: '>=18.12.0'}
+    peerDependencies:
+      stylelint: ^16.13.0
+
   stylelint-config-standard-scss@14.0.0:
     resolution: {integrity: sha512-6Pa26D9mHyi4LauJ83ls3ELqCglU6VfCXchovbEqQUiEkezvKdv6VgsIoMy58i00c854wVmOw0k8W5FTpuaVqg==}
     engines: {node: '>=18.12.0'}
@@ -6336,6 +6342,12 @@ packages:
     engines: {node: '>=18.12.0'}
     peerDependencies:
       stylelint: ^16.1.0
+
+  stylelint-config-standard@37.0.0:
+    resolution: {integrity: sha512-+6eBlbSTrOn/il2RlV0zYGQwRTkr+WtzuVSs1reaWGObxnxLpbcspCUYajVQHonVfxVw2U+h42azGhrBvcg8OA==}
+    engines: {node: '>=18.12.0'}
+    peerDependencies:
+      stylelint: ^16.13.0
 
   stylelint-order@6.0.4:
     resolution: {integrity: sha512-0UuKo4+s1hgQ/uAxlYU4h0o0HS4NiQDud0NAUNI0aa8FJdmYHA5ZZTFHiV5FpmE3071e9pZx5j0QpVJW5zOCUA==}
@@ -10474,7 +10486,7 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@xiaohe01/eslint-config@1.1.1(@typescript-eslint/utils@8.25.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(@vue/compiler-sfc@3.5.13)(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3)(vitest@3.0.7(@types/debug@4.1.12)(@types/node@22.13.5)(jsdom@16.7.0)(terser@5.39.0))':
+  '@xiaohe01/eslint-config@1.2.0(@typescript-eslint/utils@8.25.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(@vue/compiler-sfc@3.5.13)(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3)(vitest@3.0.7(@types/debug@4.1.12)(@types/node@22.13.5)(jsdom@16.7.0)(terser@5.39.0))':
     dependencies:
       '@antfu/install-pkg': 1.0.0
       '@clack/prompts': 0.10.0
@@ -10520,24 +10532,24 @@ snapshots:
       - typescript
       - vitest
 
-  '@xiaohe01/stylelint-config@0.0.3(postcss@8.5.3)(stylelint@16.14.1(typescript@5.7.3))':
+  '@xiaohe01/stylelint-config@1.0.0(postcss@8.5.3)(stylelint@16.14.1(typescript@5.7.3))':
     dependencies:
-      local-pkg: 0.5.1
+      local-pkg: 1.1.0
       lodash-es: 4.17.21
       postcss-html: 1.8.0
       postcss-scss: 4.0.9(postcss@8.5.3)
       stylelint-config-html: 1.1.0(postcss-html@1.8.0)(stylelint@16.14.1(typescript@5.7.3))
-      stylelint-config-recess-order: 5.1.1(stylelint@16.14.1(typescript@5.7.3))
-      stylelint-config-recommended: 14.0.1(stylelint@16.14.1(typescript@5.7.3))
+      stylelint-config-recess-order: 6.0.0(stylelint@16.14.1(typescript@5.7.3))
+      stylelint-config-recommended: 15.0.0(stylelint@16.14.1(typescript@5.7.3))
       stylelint-config-recommended-vue: 1.6.0(postcss-html@1.8.0)(stylelint@16.14.1(typescript@5.7.3))
-      stylelint-config-standard: 36.0.1(stylelint@16.14.1(typescript@5.7.3))
+      stylelint-config-standard: 37.0.0(stylelint@16.14.1(typescript@5.7.3))
       stylelint-config-standard-scss: 14.0.0(postcss@8.5.3)(stylelint@16.14.1(typescript@5.7.3))
       stylelint-order: 6.0.4(stylelint@16.14.1(typescript@5.7.3))
     transitivePeerDependencies:
       - postcss
       - stylelint
 
-  '@xiaohe01/tsconfig@0.1.0': {}
+  '@xiaohe01/tsconfig@1.0.0': {}
 
   abab@2.0.6: {}
 
@@ -14421,7 +14433,7 @@ snapshots:
       postcss-html: 1.8.0
       stylelint: 16.14.1(typescript@5.7.3)
 
-  stylelint-config-recess-order@5.1.1(stylelint@16.14.1(typescript@5.7.3)):
+  stylelint-config-recess-order@6.0.0(stylelint@16.14.1(typescript@5.7.3)):
     dependencies:
       stylelint: 16.14.1(typescript@5.7.3)
       stylelint-order: 6.0.4(stylelint@16.14.1(typescript@5.7.3))
@@ -14441,9 +14453,13 @@ snapshots:
       semver: 7.7.1
       stylelint: 16.14.1(typescript@5.7.3)
       stylelint-config-html: 1.1.0(postcss-html@1.8.0)(stylelint@16.14.1(typescript@5.7.3))
-      stylelint-config-recommended: 14.0.1(stylelint@16.14.1(typescript@5.7.3))
+      stylelint-config-recommended: 15.0.0(stylelint@16.14.1(typescript@5.7.3))
 
   stylelint-config-recommended@14.0.1(stylelint@16.14.1(typescript@5.7.3)):
+    dependencies:
+      stylelint: 16.14.1(typescript@5.7.3)
+
+  stylelint-config-recommended@15.0.0(stylelint@16.14.1(typescript@5.7.3)):
     dependencies:
       stylelint: 16.14.1(typescript@5.7.3)
 
@@ -14459,6 +14475,11 @@ snapshots:
     dependencies:
       stylelint: 16.14.1(typescript@5.7.3)
       stylelint-config-recommended: 14.0.1(stylelint@16.14.1(typescript@5.7.3))
+
+  stylelint-config-standard@37.0.0(stylelint@16.14.1(typescript@5.7.3)):
+    dependencies:
+      stylelint: 16.14.1(typescript@5.7.3)
+      stylelint-config-recommended: 15.0.0(stylelint@16.14.1(typescript@5.7.3))
 
   stylelint-order@6.0.4(stylelint@16.14.1(typescript@5.7.3)):
     dependencies:
