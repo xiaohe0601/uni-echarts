@@ -1,10 +1,10 @@
-export * from "./components/index.js";
+export * from "./components";
 
-export * from "./composables/index.js";
+export * from "./composables";
 
-export * from "./utils/canvas.js";
-export * from "./utils/device.js";
-export * from "./utils/env.js";
-export * from "./utils/helpers.js";
-export * from "./utils/mitt.js";
-export * from "./utils/uni.js";
+export * from "./utils/canvas";
+export * from "./utils/device";
+export * from "./utils/env";
+export * from "./utils/helpers";
+export * from "./utils/mitt";
+export * from "./utils/uni";

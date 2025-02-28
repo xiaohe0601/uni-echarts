@@ -1,5 +1,5 @@
 import { computed, inject, provide, toValue, watchEffect } from "vue";
-import { defaultTo } from "../utils/helpers.js";
+import { defaultTo } from "../utils/helpers";
 
 export const LOADING_OPTIONS_KEY = Symbol("UniEcharts.loadingOptions");
 

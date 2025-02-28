@@ -1,5 +1,5 @@
 import { onBeforeUnmount, onMounted } from "vue";
-import { UniCanvas } from "../utils/canvas.js";
+import { UniCanvas } from "../utils/canvas";
 
 export function useEchartsMouseWheel({
   isPc,

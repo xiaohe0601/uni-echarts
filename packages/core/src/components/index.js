@@ -1,1 +1,1 @@
-export * from "./uni-echarts/types.js";
+export * from "./uni-echarts/types";

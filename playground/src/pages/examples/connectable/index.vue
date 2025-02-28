@@ -37,7 +37,7 @@ import type { ComposeOption } from "echarts/core";
 import { connect, disconnect, use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { cloneDeep } from "lodash-es";
-import { GLOBAL_OPTION } from "../echarts.ts";
+import { GLOBAL_OPTION } from "../echarts";
 
 type EChartsOption = ComposeOption<
   | LegendComponentOption

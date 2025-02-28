@@ -1,5 +1,5 @@
-import { isMpAlipay, isMpToutiao, isMpWeixin } from "./env.js";
-import { getDeviceInfo } from "./uni.js";
+import { isMpAlipay, isMpToutiao, isMpWeixin } from "./env";
+import { getDeviceInfo } from "./uni";
 
 export function getIsPc() {
   // #ifdef WEB

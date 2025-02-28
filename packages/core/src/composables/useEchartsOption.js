@@ -1,5 +1,5 @@
 import { computed, inject, provide, toValue } from "vue";
-import { defaultTo, isEmpty } from "../utils/helpers.js";
+import { defaultTo, isEmpty } from "../utils/helpers";
 
 export const OPTION_KEY = "UniEcharts.option";
 

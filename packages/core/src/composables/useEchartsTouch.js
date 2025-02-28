@@ -1,6 +1,6 @@
 import { shallowRef, toValue } from "vue";
-import { UniCanvas } from "../utils/canvas.js";
-import { querySelect } from "../utils/uni.js";
+import { UniCanvas } from "../utils/canvas";
+import { querySelect } from "../utils/uni";
 
 export function useEchartsTouch({
   vueThis,

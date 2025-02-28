@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
-import { isMpAlipay, isMpToutiao, isMpWeixin } from "./env.js";
-import { defaultTo } from "./helpers.js";
+import { isMpAlipay, isMpToutiao, isMpWeixin } from "./env";
+import { defaultTo } from "./helpers";
 
 export function getDeviceInfo() {
   if (uni.canIUse("getDeviceInfo") || uni.getDeviceInfo) {

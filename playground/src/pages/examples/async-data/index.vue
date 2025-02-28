@@ -36,7 +36,7 @@ import { DatasetComponent, GridComponent } from "echarts/components";
 import type { ComposeOption } from "echarts/core";
 import { registerTheme, use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import { GLOBAL_OPTION } from "../echarts.ts";
+import { GLOBAL_OPTION } from "../echarts";
 import theme from "./theme.json";
 
 type EChartsOption = ComposeOption<

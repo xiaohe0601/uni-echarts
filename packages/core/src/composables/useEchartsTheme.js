@@ -1,5 +1,5 @@
 import { computed, inject, provide, toValue } from "vue";
-import { defaultTo } from "../utils/helpers.js";
+import { defaultTo } from "../utils/helpers";
 
 export const THEME_KEY = Symbol("UniEcharts.theme");
 

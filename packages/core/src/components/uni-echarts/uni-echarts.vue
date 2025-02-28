@@ -81,12 +81,12 @@ import {
   usePublicApi,
   useUid,
   useVueThis
-} from "../../composables/index.js";
-import { setupEchartsCanvas, UniCanvas } from "../../utils/canvas.js";
-import { getIsPc } from "../../utils/device.js";
-import { defaultTo, isEmpty, sleep } from "../../utils/helpers.js";
-import { canIUseCanvas2d, getWindowInfo, querySelect } from "../../utils/uni.js";
-import { ECHARTS_EVENTS, EVENTS } from "./events.js";
+} from "../../composables";
+import { setupEchartsCanvas, UniCanvas } from "../../utils/canvas";
+import { getIsPc } from "../../utils/device";
+import { defaultTo, isEmpty, sleep } from "../../utils/helpers";
+import { canIUseCanvas2d, getWindowInfo, querySelect } from "../../utils/uni";
+import { ECHARTS_EVENTS, EVENTS } from "./events";
 
 defineOptions({
   name: "UniEcharts",

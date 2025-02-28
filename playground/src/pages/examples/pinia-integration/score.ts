@@ -2,7 +2,7 @@ import type { RadarSeriesOption } from "echarts/charts";
 import type { ComposeOption } from "echarts/core";
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
-import { GLOBAL_OPTION } from "../echarts.ts";
+import { GLOBAL_OPTION } from "../echarts";
 
 type EChartsOption = ComposeOption<RadarSeriesOption>;
 

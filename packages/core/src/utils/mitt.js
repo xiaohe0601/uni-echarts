@@ -1,4 +1,4 @@
-import { defaultTo } from "./helpers.js";
+import { defaultTo } from "./helpers";
 
 export function mitt(events) {
   const _events = defaultTo(events, new Map());

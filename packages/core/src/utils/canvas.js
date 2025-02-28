@@ -1,7 +1,7 @@
 /*  eslint-disable no-undef */
-import { defaultTo, isEmpty, lowerFirst, upperFirst } from "./helpers.js";
-import { mitt } from "./mitt.js";
-import { getDeviceInfo } from "./uni.js";
+import { defaultTo, isEmpty, lowerFirst, upperFirst } from "./helpers";
+import { mitt } from "./mitt";
+import { getDeviceInfo } from "./uni";
 
 const SHORT_HEX_REGEX = /#([0-9a-f])([0-9a-f])([0-9a-f])\b/gi;
 

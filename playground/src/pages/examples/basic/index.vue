@@ -15,7 +15,7 @@ import { DatasetComponent, LegendComponent, TooltipComponent } from "echarts/com
 import type { ComposeOption } from "echarts/core";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import { GLOBAL_OPTION } from "../echarts.ts";
+import { GLOBAL_OPTION } from "../echarts";
 
 type EChartsOption = ComposeOption<
   | LegendComponentOption

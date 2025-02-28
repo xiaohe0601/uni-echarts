@@ -38,7 +38,7 @@
 import { RadarChart } from "echarts/charts";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import { useScoreStore } from "./score.ts";
+import { useScoreStore } from "./score";
 
 use([
   RadarChart,
