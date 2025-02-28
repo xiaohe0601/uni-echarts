@@ -4,6 +4,7 @@ export default defineConfig({
   ignoreFiles: [
     "**/node_modules/**",
     "**/uni_modules/**",
+    "**/public/**",
     "**/dist/**"
   ]
 });
