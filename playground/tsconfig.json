@@ -12,8 +12,7 @@
       "@mini-types/alipay",
       "@uni-helper/uni-app-types",
       "wot-design-uni/global"
-    ],
-    "noUncheckedIndexedAccess": false
+    ]
   },
   "vueCompilerOptions": {
     "plugins": [
