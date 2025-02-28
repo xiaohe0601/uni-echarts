@@ -20,7 +20,7 @@
     "lint": "eslint --cache",
     "lint:fix": "nr lint --fix",
     "lint:type": "tsc --noEmit",
-    "stylelint": "stylelint **/*.{css,scss,html,vue}",
+    "stylelint": "stylelint **/*.{css,scss,html,vue} --cache",
     "stylelint:fix": "nr stylelint --fix",
     "test": "vitest",
     "test:ui": "vitest --ui",
