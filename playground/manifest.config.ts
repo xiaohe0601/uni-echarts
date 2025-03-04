@@ -2,7 +2,7 @@ import { defineManifestConfig } from "@uni-helper/vite-plugin-uni-manifest";
 
 export default defineManifestConfig({
   name: "uni-echarts",
-  appid: "",
+  appid: "__UNI__D8AD38E",
   description: "",
   locale: "zh-Hans",
   versionName: "1.0.0",
@@ -87,5 +87,10 @@ export default defineManifestConfig({
     },
     mergeVirtualHostAttributes: true,
     lazyCodeLoading: "requiredComponents"
+  },
+  "app-harmony": {
+    distribute: {
+      bundleName: "ink.xiaohe.uni.echarts"
+    }
   }
 });
