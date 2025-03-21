@@ -199,7 +199,7 @@ type NativeEmits = {
 };
 
 export type UniEchartsEmits = MouseEmits & ZRenderEmits & OtherEmits & NativeEmits & {
-  rendered: (params: { elapsedTime: number; }) => void;
+  rendered: (params: { elapsedTime: number }) => void;
   finished: () => void;
 };
 

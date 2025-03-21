@@ -12,7 +12,7 @@
     "clean:cache": "rimraf .vitepress/cache"
   },
   "devDependencies": {
-    "vitepress": "^1.6.3",
-    "vue": "~3.4.38"
+    "vitepress": "catalog:",
+    "vue": "catalog:"
   }
 }

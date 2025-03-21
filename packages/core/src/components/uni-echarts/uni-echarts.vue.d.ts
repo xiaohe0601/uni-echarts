@@ -4,7 +4,14 @@ import type { AllowedComponentProps } from "../../types";
 import type { UniEchartsEmits, UniEchartsProps } from "./types";
 
 type UniEcharts = DefineComponent<
-  AllowedComponentProps & UniEchartsProps, {}, {}, {}, {}, {}, {}, UniEchartsEmits
+  AllowedComponentProps & UniEchartsProps,
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  UniEchartsEmits
 >;
 
 declare const _default: UniEcharts;
