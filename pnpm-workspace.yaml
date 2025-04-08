@@ -7,7 +7,7 @@ overrides:
   pinia: 2.2.4
 catalog:
   '@antfu/ni': ^24.3.0
-  '@antfu/utils': ^9.1.0
+  '@antfu/utils': ^9.2.0
   '@dcloudio/types': ^3.4.14
   '@dcloudio/uni-app': 3.0.0-4050620250312001
   '@dcloudio/uni-app-harmony': 3.0.0-4050620250312001
@@ -38,14 +38,14 @@ catalog:
   '@uni-helper/vite-plugin-uni-pages': ^0.2.28
   '@vue/runtime-core': ~3.4.38
   '@vueuse/core': ^12.8.2
-  '@xiaohe01/eslint-config': ^1.3.1
-  '@xiaohe01/stylelint-config': ^2.1.0
+  '@xiaohe01/eslint-config': ^1.4.0
+  '@xiaohe01/stylelint-config': ^2.3.1
   '@xiaohe01/tsconfig': ^1.0.4
   bumpp: ^10.1.0
   chalk: ^5.4.1
   consola: ^3.4.2
   echarts: ^5.6.0
-  eslint: ^9.22.0
+  eslint: ^9.24.0
   esno: ^4.8.0
   execa: ^9.5.2
   fs-extra: ^11.3.0
@@ -56,18 +56,18 @@ catalog:
   rimraf: ^6.0.1
   sass: ~1.78.0
   simple-git-hooks: ^2.12.1
-  stylelint: ^16.16.0
+  stylelint: ^16.18.0
   typescript: ~5.7.3
   unbuild: ^3.5.0
   unocss: ^66.0.0
   unocss-applet: ^0.9.0
-  unplugin-auto-import: ^19.1.1
-  vite: ^5.4.14
+  unplugin-auto-import: ^19.1.2
+  vite: ^5.4.17
   vitepress: ^1.6.3
-  vitest: ^3.0.9
+  vitest: ^3.1.1
   vue: ~3.4.38
   vue-tsc: ~2.1.10
-  wot-design-uni: ^1.7.1
+  wot-design-uni: ^1.8.0
 onlyBuiltDependencies:
   - '@uni-helper/unocss-preset-uni'
   - core-js
