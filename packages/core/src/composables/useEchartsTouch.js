@@ -43,7 +43,9 @@ export function useEchartsTouch({
   }
 
   function transformTouchesEvent(event) {
-    for (const item of event.touches) {
+    for (let i = 0; i < event.touches.length; i += 1) {
+      const item = event.touches[i];
+
       item.offsetX = item.x;
       item.offsetY = item.y;
     }
