@@ -43,6 +43,7 @@ export function useEchartsTouch({
   }
 
   function transformTouchesEvent(event) {
+    // event.touches is a TouchList, which isn't iterable, so can't use for...of
     for (let i = 0; i < event.touches.length; i += 1) {
       const item = event.touches[i];
 
