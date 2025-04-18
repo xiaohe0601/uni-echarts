@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Uni ECharts
   text: 适用于 uni-app 的 ECharts 组件
-  tagline: 与 vue-echarts 近乎一致的使用体验
+  tagline: 与 Vue ECharts 近乎一致的使用体验
   image:
     src: https://oss.xiaohe.ink/images/uni-echarts.png
     alt: uni-echarts

@@ -4,7 +4,7 @@ Uni ECharts 是适用于 uni-app 的 Apache ECharts 组件，无需繁琐的步�
 
 ## 🎉 特性
 
-- 🚀 快速上手，与 [vue-echarts](https://github.com/ecomfe/vue-echarts) 近乎一致的使用体验
+- 🚀 快速上手，与 [Vue ECharts](https://github.com/ecomfe/vue-echarts) 近乎一致的使用体验
 - 📱 多端兼容，支持 Web、小程序、APP
 - 📦 支持 easycom
 - ☕ 支持 TypeScript

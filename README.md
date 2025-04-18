@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://oss.xiaohe.ink/images/uni-echarts.png" width="160" alt="logo"/>
-  <h1>uni-echarts</h1>
+  <h1>Uni ECharts</h1>
   <span>🪀 适用于 uni-app 的 Apache ECharts 组件（仅支持Vue 3）</span>
 </div>
 
@@ -16,7 +16,7 @@ xiaohe0601 / [github@xiaohe0601](https://github.com/xiaohe0601) / [gitee@xiaohe0
 
 ## 🎉 特性
 
-- 🚀 快速上手，与 [vue-echarts](https://github.com/ecomfe/vue-echarts) 近乎一致的使用体验
+- 🚀 快速上手，与 [Vue ECharts](https://github.com/ecomfe/vue-echarts) 近乎一致的使用体验
 - 📱 多端兼容，支持 Web、小程序、APP
 - 📦 支持 easycom
 - ☕ 支持 TypeScript
