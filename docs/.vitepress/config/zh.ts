@@ -4,7 +4,7 @@ import { defineConfig } from "vitepress";
 export const zh = defineConfig({
   lang: "zh-Hans",
   title: "Uni ECharts",
-  description: "🪀 适用于uni-app的Apache ECharts组件",
+  description: "🪀 适用于 uni-app 的 Apache ECharts 组件",
   themeConfig: {
     nav: nav(),
     sidebar: sidebar(),

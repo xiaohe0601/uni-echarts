@@ -4,7 +4,7 @@
   "version": "0.1.6",
   "private": true,
   "packageManager": "pnpm@10.7.1",
-  "description": "🪀 适用于uni-app的Apache ECharts组件（仅支持Vue 3）",
+  "description": "🪀 适用于 uni-app 的 Apache ECharts 组件（仅支持Vue 3）",
   "scripts": {
     "prepare": "simple-git-hooks",
     "postinstall": "nr build",
