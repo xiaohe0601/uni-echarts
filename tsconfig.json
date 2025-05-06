@@ -1,10 +1,7 @@
 {
-  "extends": "@xiaohe01/tsconfig/tsconfig.lib-dom.json",
-  "exclude": [
-    "docs/**",
-    "packages/**",
-    "playground/**",
-    "**/node_modules/**",
-    "**/dist/**"
-  ]
+  "references": [
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.test.json" }
+  ],
+  "files": []
 }

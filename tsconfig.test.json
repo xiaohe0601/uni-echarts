@@ -1,0 +1,6 @@
+{
+  "extends": "@xiaohe01/tsconfig/tsconfig.lib-dom.json",
+  "include": [
+    "test/**/*.ts"
+  ]
+}

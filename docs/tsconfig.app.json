@@ -1,0 +1,19 @@
+{
+  "extends": "@xiaohe01/tsconfig/tsconfig.app-vue.json",
+  "compilerOptions": {
+    "types": [
+      "vite/client"
+    ]
+  },
+  "include": [
+    ".vitepress/**/*.ts",
+    ".vitepress/**/*.d.ts",
+    ".vitepress/**/*.tsx",
+    ".vitepress/**/*.vue",
+    "**/*.md"
+  ],
+  "exclude": [
+    ".vitepress/config/**/*.ts",
+    "**/node_modules/**"
+  ]
+}
