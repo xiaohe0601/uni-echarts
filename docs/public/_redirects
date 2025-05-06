@@ -1,1 +1,4 @@
-/ui/*  /ui/index.html  200
+/ui/*           /ui/index.html  200!
+
+/llms-full.md   /llms-full.txt  200!
+/llms-full.txt  /llms-full.txt  200!

@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "vitepress": "catalog:",
+    "vitepress-plugin-llms": "catalog:",
     "vue": "catalog:"
   }
 }
