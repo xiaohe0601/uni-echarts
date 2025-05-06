@@ -1,7 +1,6 @@
 {
   "extends": "@xiaohe01/tsconfig/tsconfig.app-vue.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "types": [
       "@dcloudio/types",
       "miniprogram-api-typings",
