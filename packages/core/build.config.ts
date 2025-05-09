@@ -1,16 +1,34 @@
 import { defineBuildConfig } from "unbuild";
 
-export default defineBuildConfig({
-  entries: [
-    "src/index.js",
-    "resolver/index.ts"
-  ],
-  clean: true,
-  declaration: true,
-  externals: [
-    "@uni-helper/vite-plugin-uni-components",
-    "echarts",
-    "vue"
-  ],
-  failOnWarn: false
-});
+export default defineBuildConfig([
+  {
+    name: "uni-echarts",
+    entries: [
+      "src/index.js"
+    ],
+    outDir: "dist",
+    clean: false,
+    declaration: true,
+    externals: [
+      "echarts",
+      "vue"
+    ],
+    failOnWarn: false
+  },
+  {
+    name: "uni-echarts/resolver",
+    entries: [
+      "resolver/index.ts"
+    ],
+    outDir: "dist-resolver",
+    clean: false,
+    declaration: true,
+    externals: [
+      "@uni-helper/vite-plugin-uni-components"
+    ],
+    failOnWarn: false,
+    rollup: {
+      emitCJS: true
+    }
+  }
+]);

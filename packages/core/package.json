@@ -30,7 +30,8 @@
     },
     "./resolver": {
       "types": "./dist-resolver/index.d.ts",
-      "import": "./dist-resolver/index.mjs"
+      "import": "./dist-resolver/index.mjs",
+      "require": "./dist-resolver/index.cjs"
     },
     "./global": "./src/global.d.ts",
     "./*": "./src/*"
@@ -41,7 +42,8 @@
     "src"
   ],
   "scripts": {
-    "build": "unbuild && esno scripts/post-build.ts"
+    "build": "nr clean:dist && unbuild && esno scripts/post-build.ts",
+    "clean:dist": "rimraf ./dist ./dist-resolver"
   },
   "peerDependencies": {
     "echarts": ">=5.3.0",
