@@ -1,5 +1,6 @@
 import { defineConfig } from "vitepress";
-import llmstxt from "vitepress-plugin-llms";
+import { groupIconMdPlugin as GroupIconMd, groupIconVitePlugin as GroupIconVite } from "vitepress-plugin-group-icons";
+import LlmsTxt from "vitepress-plugin-llms";
 import { shared } from "./shared";
 import { zh } from "./zh";
 
@@ -8,9 +9,15 @@ export default defineConfig({
   locales: {
     root: { label: "简体中文", ...zh }
   },
+  markdown: {
+    config(md) {
+      md.use(GroupIconMd);
+    }
+  },
   vite: {
     plugins: [
-      llmstxt()
+      GroupIconVite(),
+      LlmsTxt()
     ]
   }
 });
