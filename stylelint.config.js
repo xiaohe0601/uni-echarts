@@ -5,6 +5,7 @@ export default defineConfig({
     "**/node_modules/**",
     "**/uni_modules/**",
     "**/public/**",
-    "**/dist/**"
+    "**/dist/**",
+    "docs/.vitepress/theme/style.css"
   ]
 });
