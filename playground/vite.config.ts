@@ -1,16 +1,82 @@
 import path from "node:path";
 import process from "node:process";
-import UniApp from "@dcloudio/vite-plugin-uni";
+import Uni from "@dcloudio/vite-plugin-uni";
 import UniComponents from "@uni-helper/vite-plugin-uni-components";
-import { WotResolver } from "@uni-helper/vite-plugin-uni-components/resolvers";
 import UniManifest from "@uni-helper/vite-plugin-uni-manifest";
 import UniPages from "@uni-helper/vite-plugin-uni-pages";
 import UnoCSS from "unocss/vite";
 import AutoImport from "unplugin-auto-import/vite";
+import type { PluginOption } from "vite";
 import { defineConfig } from "vite";
+import UniPolyfill from "vite-plugin-uni-polyfill";
 
 function r(...paths: string[]) {
   return path.resolve(process.cwd(), ".", ...paths);
+}
+
+function buildTransformAssetUrls() {
+  return {
+    tags: {
+      "wd-img": ["src"]
+    }
+  };
+}
+
+function buildPlugins(): PluginOption[] {
+  return [
+    AutoImport({
+      dts: "types/auto-imports.d.ts",
+      imports: [
+        "vue",
+        "uni-app",
+        "pinia",
+        {
+          "@vueuse/core": [
+            "useEventBus"
+          ]
+        },
+        {
+          "wot-design-uni": [
+            "useToast",
+            "useNotify",
+            "useMessage"
+          ]
+        }
+      ],
+      dirs: [
+        "src/composables",
+        "src/utils"
+      ],
+      vueTemplate: true
+    }),
+    UniComponents({
+      dts: "types/components.d.ts",
+      dirs: [
+        "src/components"
+      ],
+      directoryAsNamespace: true,
+      collapseSamePrefixes: true
+    }),
+    UniManifest(),
+    UniPages({
+      dts: "types/uni-pages.d.ts",
+      dir: "src/pages",
+      subPackages: [],
+      exclude: [
+        "**/components/**/*.*"
+      ]
+    }),
+    UniPolyfill(),
+    // @ts-expect-error uni doesn't support esm
+    Uni.default({
+      vueOptions: {
+        template: {
+          transformAssetUrls: buildTransformAssetUrls()
+        }
+      }
+    }),
+    UnoCSS()
+  ];
 }
 
 export default defineConfig({
@@ -21,44 +87,9 @@ export default defineConfig({
       "@": r("src")
     }
   },
-  plugins: [
-    UniManifest(),
-    UniPages({
-      dts: "types/uni-pages.d.ts"
-    }),
-    UniComponents({
-      dts: "types/components.d.ts",
-      dirs: [
-        "src/components"
-      ],
-      directoryAsNamespace: true,
-      collapseSamePrefixes: true,
-      resolvers: [
-        WotResolver()
-      ]
-    }),
-    AutoImport({
-      dts: "types/auto-imports.d.ts",
-      dirs: [
-        "src/composables",
-        "src/utils"
-      ],
-      imports: [
-        "vue",
-        "uni-app",
-        "pinia",
-        "@vueuse/core"
-      ]
-    }),
-    UnoCSS(),
-    // @ts-expect-error whatever
-    UniApp.default()
-  ],
+  plugins: buildPlugins(),
   build: {
     target: "es6",
     cssTarget: "chrome61"
-  },
-  optimizeDeps: {
-    exclude: ["vue-demi"]
   }
 });

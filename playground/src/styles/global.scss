@@ -1,9 +1,3 @@
-/* #ifdef WEB */
-
-html {
-  &::-webkit-scrollbar {
-    display: none;
-  }
+page {
+  font-family: var(--font-global);
 }
-
-/* #endif */

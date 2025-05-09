@@ -62,6 +62,7 @@
     "@dcloudio/uni-cli-shared": "catalog:",
     "@dcloudio/uni-stacktracey": "catalog:",
     "@dcloudio/vite-plugin-uni": "catalog:",
+    "@iconify-json/carbon": "catalog:",
     "@types/lodash-es": "catalog:",
     "@uni-helper/unocss-preset-uni": "catalog:",
     "@uni-helper/vite-plugin-uni-components": "catalog:",
@@ -71,6 +72,7 @@
     "sass": "catalog:",
     "unocss": "catalog:",
     "unocss-applet": "catalog:",
-    "unplugin-auto-import": "catalog:"
+    "unplugin-auto-import": "catalog:",
+    "vite-plugin-uni-polyfill": "catalog:"
   }
 }

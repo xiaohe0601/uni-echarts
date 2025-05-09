@@ -1,5 +1,5 @@
 {
-  "name": "uni-echarts",
+  "name": "Uni ECharts",
   "appid": "__UNI__D8AD38E",
   "description": "",
   "versionName": "1.0.0",
@@ -48,20 +48,13 @@
     "runmode": "liberate",
     "optimization": {
       "subPackages": true
-    },
-    "webView": {
-      "minUserAgentVersion": "64.0.3282.116"
     }
   },
   "quickapp": {},
   "mp-weixin": {
     "appid": "",
     "setting": {
-      "urlCheck": false,
-      "es6": true,
-      "postcss": true,
-      "minified": true,
-      "bigPackageSizeSupport": true
+      "urlCheck": false
     },
     "usingComponents": true,
     "optimization": {
@@ -83,7 +76,6 @@
     "enable": false
   },
   "vueVersion": "3",
-  "locale": "zh-Hans",
   "h5": {
     "router": {
       "mode": "history",

@@ -1,0 +1,13 @@
+text, view {
+  box-sizing: border-box;
+}
+
+/* #ifdef WEB */
+
+html {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* #endif */

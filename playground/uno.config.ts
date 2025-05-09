@@ -1,5 +1,5 @@
 import { presetUni } from "@uni-helper/unocss-preset-uni";
-import { defineConfig, transformerCompileClass, transformerDirectives, transformerVariantGroup } from "unocss";
+import { defineConfig, presetIcons, transformerVariantGroup } from "unocss";
 
 export default defineConfig({
   theme: {
@@ -16,8 +16,11 @@ export default defineConfig({
       t4: "rgba(var(--color-t4), <alpha-value>)",
       t5: "rgba(var(--color-t5), <alpha-value>)",
       b1: "rgba(var(--color-b1), <alpha-value>)",
+      b2: "rgba(var(--color-b2), <alpha-value>)",
       d1: "rgba(var(--color-d1), <alpha-value>)",
-      d2: "rgba(var(--color-d2), <alpha-value>)"
+      d2: "rgba(var(--color-d2), <alpha-value>)",
+      d3: "rgba(var(--color-d3), <alpha-value>)",
+      d4: "rgba(var(--color-d4), <alpha-value>)"
     },
     fontFamily: {
       global: "var(--font-global)"
@@ -28,11 +31,17 @@ export default defineConfig({
       attributify: {
         prefixedOnly: true
       }
+    }),
+    presetIcons({
+      scale: 1.2,
+      warn: true,
+      extraProperties: {
+        "display": "inline-block",
+        "vertical-align": "middle"
+      }
     })
   ],
   transformers: [
-    transformerVariantGroup(),
-    transformerDirectives(),
-    transformerCompileClass()
+    transformerVariantGroup()
   ]
 });

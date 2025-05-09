@@ -1,23 +1,37 @@
-:root, page {
-  --color-primary: 41, 151, 100;
+// stylelint-disable no-duplicate-selectors
 
-  --color-success: 52, 209, 157;
-  --color-warning: 240, 136, 58;
-  --color-danger: 250, 67, 80;
-  --color-error: 250, 67, 80;
-  --color-info: 144, 147, 153;
+page {
+  --color-primary: 41, 151, 100; // #299764
 
-  --color-t1: 0, 0, 0;
-  --color-t2: 38, 38, 38;
-  --color-t3: 89, 89, 89;
-  --color-t4: 140, 140, 140;
-  --color-t5: 191, 191, 191;
-  --color-b1: 248, 249, 250;
-  --color-d1: 217, 217, 217;
-  --color-d2: 232, 232, 232;
+  --color-success: 103, 194, 58; // #67c23a
+  --color-warning: 230, 162, 60; // #e6a23c
+  --color-danger: 245, 108, 108; // #f56c6c
+  --color-error: 245, 108, 108; // #f56c6c
+  --color-info: 144, 147, 153; // #909399
 
-  --font-global: MiSans, Inter, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  --color-t1: 48, 49, 51; // #303133
+  --color-t2: 96, 98, 102; // #606266
+  --color-t3: 144, 147, 153; // #909399
+  --color-t4: 168, 171, 178; // #a8abb2
+  --color-t5: 192, 196, 204; // #c0c4cc
 
+  --color-b1: 255, 255, 255; // #ffffff
+  --color-b2: 245, 245, 245; // #f5f5f5
+
+  --color-d1: 220, 223, 230; // #dcdfe6
+  --color-d2: 228, 231, 237; // #e4e7ed
+  --color-d3: 235, 238, 245; // #ebeef5
+  --color-d4: 242, 246, 252; // #f2f6fc
+
+  --font-global: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Segoe UI, Arial, Roboto, "PingFang SC", MiSans, "miui", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+}
+
+page {
+  --opacity-active: 0.6;
+  --opacity-disabled: 0.5;
+}
+
+page {
   --wot-color-theme: rgb(var(--color-primary));
 
   --wot-color-success: rgb(var(--color-success));
@@ -30,7 +44,7 @@
   --wot-color-secondary: rgb(var(--color-t3));
   --wot-color-aid: rgb(var(--color-t4));
   --wot-color-tip: rgb(var(--color-t5));
-  --wot-color-bg: rgb(var(--color-b1));
+  --wot-color-bg: rgb(var(--color-b2));
   --wot-color-border: rgb(var(--color-d1));
   --wot-color-border-light: rgb(var(--color-d2));
 }

@@ -18,6 +18,8 @@ onHide(() => {
 </script>
 
 <style lang="scss">
+@import "@/styles/reboot.scss";
 @import "@/styles/palette.scss";
 @import "@/styles/global.scss";
+@import "@/styles/helpers.scss";
 </style>
