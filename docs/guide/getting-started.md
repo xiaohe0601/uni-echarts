@@ -66,7 +66,7 @@ npm install -D @uni-helper/vite-plugin-uni-components unplugin-auto-import
 
 ```js
 // vite.config.js[ts]
-import UniApp from "@dcloudio/vite-plugin-uni";
+import Uni from "@dcloudio/vite-plugin-uni";
 import UniComponents from "@uni-helper/vite-plugin-uni-components";
 import { UniEchartsResolver } from "uni-echarts/resolver";
 import AutoImport from "unplugin-auto-import/vite";
@@ -74,18 +74,18 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [
-    // 确保放在 `UniApp()` 之前
-    UniComponents({
-      resolvers: [
-        UniEchartsResolver() // [!code ++]
-      ]
-    }),
     AutoImport({
       resolvers: [
         UniEchartsResolver() // [!code ++]
       ]
     }),
-    UniApp()
+    // 确保放在 `Uni()` 之前
+    UniComponents({
+      resolvers: [
+        UniEchartsResolver() // [!code ++]
+      ]
+    }),
+    Uni()
   ]
 });
 ```
@@ -220,7 +220,7 @@ npm install echarts
 
 :::
 
-2. 前往 uni-app 插件市场下载 [uni-echarts](https://ext.dcloud.net.cn/plugin?id=22035)
+2. 前往 uni-app 插件市场下载 [Uni Echarts](https://ext.dcloud.net.cn/plugin?id=22035)
 
 ### 配置
 
