@@ -1,13 +1,12 @@
 {
-  "extends": "@xiaohe01/tsconfig/tsconfig.app-vue.json",
+  "extends": "@xiaohe01/tsconfig/tsconfig.lib-vue.json",
   "compilerOptions": {
     "types": [
       "@dcloudio/types",
       "miniprogram-api-typings",
       "@mini-types/alipay",
       "@uni-helper/uni-app-types"
-    ],
-    "skipLibCheck": false
+    ]
   },
   "vueCompilerOptions": {
     "plugins": [
