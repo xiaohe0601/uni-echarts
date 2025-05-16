@@ -9,7 +9,7 @@ export function getIsPc() {
   // #endif
 
   if (isMpWeixin || isMpToutiao || isMpAlipay) {
-    return getDeviceInfo().platform.includes("windows");
+    return /windows/i.test(getDeviceInfo().platform);
   }
 
   return false;
