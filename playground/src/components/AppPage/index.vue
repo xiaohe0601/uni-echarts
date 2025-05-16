@@ -14,7 +14,9 @@ import type { Slots } from "./types";
 defineOptions({
   name: "AppPage",
   options: {
+    // #ifdef MP-WEIXIN || MP-ALIPAY
     virtualHost: true
+    // #endif
   }
 });
 

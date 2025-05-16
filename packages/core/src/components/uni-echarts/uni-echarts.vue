@@ -91,7 +91,9 @@ import { ECHARTS_EVENTS, EVENTS } from "./events";
 defineOptions({
   name: "UniEcharts",
   options: {
+    // #ifdef MP-WEIXIN || MP-ALIPAY
     virtualHost: true
+    // #endif
   }
 });
 
