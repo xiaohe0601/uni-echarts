@@ -1,0 +1,28 @@
+name: Issue Reply
+
+permissions:
+  issues: write
+  pull-requests: write
+
+on:
+  issues:
+    types:
+      - labeled
+
+jobs:
+  issue-reply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Need Reproduce
+        if: github.event.label.name == '🖱️ need reproduce'
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: create-comment
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            你好 @${{ github.event.issue.user.login }}，我们需要你提供一个最小重现实例以便于定位问题，你可以通过以下方式提供：
+
+            - 基于 [xiaohe0601/stackblitz-uniapp](https://github.com/xiaohe0601/stackblitz-uniapp/tree/echarts) 的 echarts 分支的 github 仓库
+
+            - 通过 [StackBlitz](https://stackblitz.com/~/github.com/xiaohe0601/stackblitz-uniapp) 创建一个在线实例（终端执行 `git fetch` 后切换至 echarts 分支）

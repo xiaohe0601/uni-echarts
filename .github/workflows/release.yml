@@ -31,7 +31,7 @@ jobs:
       - name: Changelog
         run: npx changelogithub
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup
         run: npm i -g @antfu/ni
@@ -45,5 +45,5 @@ jobs:
       - name: Publish
         run: pnpm publish --filter ./packages/** --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
