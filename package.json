@@ -1,7 +1,7 @@
 {
   "name": "@uni-echarts/monorepo",
   "type": "module",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "private": true,
   "packageManager": "pnpm@10.12.1",
   "description": "🪀 适用于 uni-app 的 Apache ECharts 组件（仅支持Vue 3）",
