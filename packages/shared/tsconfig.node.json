@@ -1,0 +1,15 @@
+{
+  "extends": "@xiaohe01/tsconfig/tsconfig.basic.json",
+  "compilerOptions": {
+    "lib": [
+      "ES2020"
+    ],
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "plugins/**/*",
+    "build.config.ts"
+  ]
+}
