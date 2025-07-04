@@ -1,5 +1,8 @@
 {
-  "extends": "@xiaohe01/tsconfig/tsconfig.app-vue.json",
+  "extends": [
+    "@xiaohe01/tsconfig/tsconfig.basic.json",
+    "@xiaohe01/tsconfig/tsconfig.vue.json"
+  ],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -12,7 +15,8 @@
       "miniprogram-api-typings",
       "@mini-types/alipay",
       "wot-design-uni/global"
-    ]
+    ],
+    "allowJs": true
   },
   "vueCompilerOptions": {
     "plugins": [
@@ -20,10 +24,7 @@
     ]
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "types/**/*.d.ts"
+    "src/**/*",
+    "types/**/*"
   ]
 }

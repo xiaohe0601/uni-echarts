@@ -1,6 +1,14 @@
 {
-  "extends": "@xiaohe01/tsconfig/tsconfig.lib-dom.json",
+  "extends": "@xiaohe01/tsconfig/tsconfig.basic.json",
+  "compilerOptions": {
+    "lib": [
+      "ES2020"
+    ],
+    "types": [
+      "node"
+    ]
+  },
   "include": [
-    "test/**/*.ts"
+    "test/**/*"
   ]
 }

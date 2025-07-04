@@ -50,9 +50,9 @@
     "vue": ">=3.3.0"
   },
   "devDependencies": {
-    "@uni-helper/vite-plugin-uni-components": "catalog:",
-    "@vue/runtime-core": "catalog:",
-    "echarts": "catalog:",
-    "vue": "catalog:"
+    "@uni-helper/vite-plugin-uni-components": "catalog:build",
+    "@vue/runtime-core": "catalog:dev",
+    "echarts": "catalog:frontend",
+    "vue": "catalog:frontend"
   }
 }
