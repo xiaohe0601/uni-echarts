@@ -69,6 +69,15 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, reactive, shallowRef, watch, watchEffect } from "vue";
 import {
+  canIUseCanvas2d,
+  defaultTo,
+  getIsPc,
+  getWindowInfo,
+  isEmpty,
+  querySelect,
+  setupEchartsCanvas,
+  sleep,
+  UniCanvas,
   useAutoresize,
   useEcharts,
   useEchartsInitOptions,
@@ -81,11 +90,7 @@ import {
   usePublicApi,
   useUid,
   useVueThis
-} from "../../composables";
-import { setupEchartsCanvas, UniCanvas } from "../../utils/canvas";
-import { getIsPc } from "../../utils/device";
-import { defaultTo, isEmpty, sleep } from "../../utils/helpers";
-import { canIUseCanvas2d, getWindowInfo, querySelect } from "../../utils/uni";
+} from "../../shared";
 import { ECHARTS_EVENTS, EVENTS } from "./events";
 
 defineOptions({

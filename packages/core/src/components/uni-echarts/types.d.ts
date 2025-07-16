@@ -1,50 +1,16 @@
-import type { ECElementEvent, ElementEvent, init, SetOptionOpts } from "echarts/core";
+import type { ECElementEvent, ElementEvent } from "echarts/core";
 import type { StyleValue } from "vue";
-import type { PublicApi } from "../../composables/usePublicApi";
-import type { Injection, NullableValue } from "../../types";
-
-type InitType = typeof init;
-export type InitParameters = Parameters<InitType>;
-
-export type ChartTheme = NonNullable<InitParameters[1]>;
-export type ChartThemeInjection = Injection<ChartTheme>;
-
-export type InitOptions = NonNullable<InitParameters[2]>;
-export type InitOptionsInjection = Injection<InitOptions>;
-
-export type UpdateOptions = SetOptionOpts;
-export type UpdateOptionsInjection = Injection<UpdateOptions>;
-
-export type EChartsType = ReturnType<InitType>;
-export type ZRenderType = ReturnType<EChartsType["getZr"]>;
-export type ZRenderHandler = ZRenderType["handler"];
-
-type SetOptionType = EChartsType["setOption"];
-
-export type ChartOption = Parameters<SetOptionType>[0];
-export type ChartOptionInjection = Injection<ChartOption>;
-
-export type AutoResize = boolean | {
-  throttle?: number;
-  onResize?: () => void;
-};
-
-export interface LoadingOptions {
-  text?: string;
-  textColor?: string;
-  fontSize?: number | string;
-  fontWeight?: number | string;
-  fontStyle?: string;
-  fontFamily?: string;
-  maskColor?: string;
-  showSpinner?: boolean;
-  color?: string;
-  spinnerRadius?: number;
-  lineWidth?: number;
-  zlevel?: number;
-}
-
-export type LoadingOptionsInjection = Injection<LoadingOptions>;
+import type {
+  AutoResize,
+  ChartOption,
+  ChartTheme,
+  EChartsType,
+  InitOptions,
+  LoadingOptions,
+  NullableValue,
+  PublicApi,
+  UpdateOptions
+} from "../../shared";
 
 export interface UniEchartsProps {
   /**
@@ -164,7 +130,9 @@ type OtherEventName =
   | "brush"
   | "brushEnd"
   | "brushselected"
-  | "globalcursortaken";
+  | "globalcursortaken"
+  | "showtip"
+  | "hidetip";
 
 type UniEventName =
   | "touchstart"
@@ -201,6 +169,7 @@ type NativeEmits = {
 export type UniEchartsEmits = MouseEmits & ZRenderEmits & OtherEmits & NativeEmits & {
   rendered: (params: { elapsedTime: number }) => void;
   finished: () => void;
+  inited: () => void;
 };
 
 export interface UniEchartsInst extends PublicApi, Pick<
@@ -211,25 +180,4 @@ export interface UniEchartsInst extends PublicApi, Pick<
   canvasId: string;
   chart: NullableValue<EChartsType>;
   toTempFilePath: (options?: Omit<UniApp.CanvasToTempFilePathOptions, "canvasId" | "canvas">) => Promise<UniApp.CanvasToTempFilePathRes>;
-}
-
-export interface CanvasRect {
-  top: number;
-  left: number;
-  width: number;
-  height: number;
-}
-
-export interface NormalizedTouch {
-  x: number;
-  y: number;
-  wheelDelta: number;
-}
-
-export interface GetTouchFuc {
-  (event: TouchEvent, touches: TouchList): NormalizedTouch;
-
-  (event: MouseEvent): NormalizedTouch;
-
-  (event: TouchEvent | MouseEvent, touches?: TouchList): NormalizedTouch;
 }

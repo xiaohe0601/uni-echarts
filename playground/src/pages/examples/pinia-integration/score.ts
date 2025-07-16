@@ -33,7 +33,8 @@ export const useScoreStore = defineStore("score", () => {
             max,
             color: index === activeIndex ? "goldenrod" : undefined
           };
-        })
+        }),
+        splitNumber: 4
       },
       series: [
         {
