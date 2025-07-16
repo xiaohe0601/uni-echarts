@@ -4,7 +4,7 @@ export interface KeepCommentsOptions {
   comments?: string[];
 }
 
-const KEEP_KEY = "__KP__";
+const KEEP_KEY = "!__KP__";
 
 export function keepComments(options: KeepCommentsOptions = {}): Plugin {
   const {
@@ -25,9 +25,9 @@ export function keepComments(options: KeepCommentsOptions = {}): Plugin {
                   continue;
                 }
 
-                // // -> //!__KP__
-                // /* -> /*!__KP__
-                return `${chunk.slice(0, 2)}!${KEEP_KEY}${chunk.slice(2)}`;
+                // // xxx -> //!__KP__ xxx
+                // /* xxx -> /*!__KP__ xxx
+                return `${chunk.slice(0, 2)}${KEEP_KEY}${chunk.slice(2)}`;
               }
 
               return chunk;
@@ -42,9 +42,13 @@ export function keepComments(options: KeepCommentsOptions = {}): Plugin {
           continue;
         }
 
+        if (!chunk.code.includes(KEEP_KEY)) {
+          continue;
+        }
+
         chunk.code = chunk.code
-          .replace(new RegExp(`/\\*!${KEEP_KEY}(.*?)\\*/`, "gs"), "/*$1*/")
-          .replace(new RegExp(`//!${KEEP_KEY}(.*)`, "g"), "//$1");
+          .replace(new RegExp(`/\\*${KEEP_KEY}(.*?)\\*/`, "gs"), "/*$1*/")
+          .replace(new RegExp(`//${KEEP_KEY}(.*)`, "g"), "//$1");
       }
     }
   };
