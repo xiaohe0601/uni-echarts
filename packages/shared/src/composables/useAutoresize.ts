@@ -57,6 +57,11 @@ export function useAutoresize(chart: Ref<NullableValue<EChartsType>>, {
             }
           }
 
+          // skip if container has zero size
+          if (_root.$el.offsetWidth === 0 || _root.$el.offsetHeight === 0) {
+            return;
+          }
+
           resizeCallback();
         });
 
