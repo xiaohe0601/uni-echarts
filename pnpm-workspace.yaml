@@ -7,7 +7,7 @@ overrides:
   pinia: 2.2.4
 catalogs:
   build:
-    '@dcloudio/vite-plugin-uni': 3.0.0-4060420250429001
+    '@dcloudio/vite-plugin-uni': 3.0.0-4060620250520001
     '@uni-helper/vite-plugin-uni-components': ^0.2.0
     '@uni-helper/vite-plugin-uni-manifest': ^0.2.8
     '@uni-helper/vite-plugin-uni-pages': ^0.2.28
@@ -17,22 +17,22 @@ catalogs:
     vite-plugin-uni-polyfill: ^0.1.0
     vitepress: ^1.6.3
     vitepress-plugin-group-icons: ^1.6.1
-    vitepress-plugin-llms: ^1.6.0
+    vitepress-plugin-llms: ^1.7.0
   cli:
     bumpp: ^10.2.0
-    pncat: ^0.2.5
+    pncat: ^0.2.6
   dev:
     '@antfu/ni': ^25.0.0
     '@antfu/utils': ^9.2.0
     '@dcloudio/types': ^3.4.16
-    '@dcloudio/uni-automator': 3.0.0-4060420250429001
-    '@dcloudio/uni-cli-shared': 3.0.0-4060420250429001
-    '@dcloudio/uni-stacktracey': 3.0.0-4060420250429001
+    '@dcloudio/uni-automator': 3.0.0-4060620250520001
+    '@dcloudio/uni-cli-shared': 3.0.0-4060620250520001
+    '@dcloudio/uni-stacktracey': 3.0.0-4060620250520001
     '@mini-types/alipay': ^3.0.14
     '@uni-helper/uni-app-types': ^1.0.0-alpha.6
     '@vue/runtime-core': ~3.4.38
     '@xiaohe01/tsconfig': ^2.0.0
-    miniprogram-api-typings: ^4.0.7
+    miniprogram-api-typings: ^4.1.0
     typescript: ~5.7.3
     vue-tsc: ~2.1.10
   frontend:
@@ -42,9 +42,9 @@ catalogs:
   icons:
     '@iconify-json/carbon': ^1.2.10
   lint:
-    '@xiaohe01/eslint-config': ^1.9.1
+    '@xiaohe01/eslint-config': ^1.10.0
     '@xiaohe01/stylelint-config': ^2.4.0
-    eslint: ^9.30.1
+    eslint: ^9.31.0
     lint-staged: ^16.1.2
     simple-git-hooks: ^2.13.0
     stylelint: ^16.21.1
@@ -55,21 +55,21 @@ catalogs:
     fs-extra: ^11.3.0
     rimraf: ^6.0.1
   prod:
-    '@dcloudio/uni-app': 3.0.0-4060420250429001
-    '@dcloudio/uni-app-harmony': 3.0.0-4060420250429001
-    '@dcloudio/uni-app-plus': 3.0.0-4060420250429001
-    '@dcloudio/uni-components': 3.0.0-4060420250429001
-    '@dcloudio/uni-h5': 3.0.0-4060420250429001
-    '@dcloudio/uni-mp-alipay': 3.0.0-4060420250429001
-    '@dcloudio/uni-mp-baidu': 3.0.0-4060420250429001
-    '@dcloudio/uni-mp-jd': 3.0.0-4060420250429001
-    '@dcloudio/uni-mp-kuaishou': 3.0.0-4060420250429001
-    '@dcloudio/uni-mp-lark': 3.0.0-4060420250429001
-    '@dcloudio/uni-mp-qq': 3.0.0-4060420250429001
-    '@dcloudio/uni-mp-toutiao': 3.0.0-4060420250429001
-    '@dcloudio/uni-mp-weixin': 3.0.0-4060420250429001
-    '@dcloudio/uni-mp-xhs': 3.0.0-4060420250429001
-    '@dcloudio/uni-quickapp-webview': 3.0.0-4060420250429001
+    '@dcloudio/uni-app': 3.0.0-4060620250520001
+    '@dcloudio/uni-app-harmony': 3.0.0-4060620250520001
+    '@dcloudio/uni-app-plus': 3.0.0-4060620250520001
+    '@dcloudio/uni-components': 3.0.0-4060620250520001
+    '@dcloudio/uni-h5': 3.0.0-4060620250520001
+    '@dcloudio/uni-mp-alipay': 3.0.0-4060620250520001
+    '@dcloudio/uni-mp-baidu': 3.0.0-4060620250520001
+    '@dcloudio/uni-mp-jd': 3.0.0-4060620250520001
+    '@dcloudio/uni-mp-kuaishou': 3.0.0-4060620250520001
+    '@dcloudio/uni-mp-lark': 3.0.0-4060620250520001
+    '@dcloudio/uni-mp-qq': 3.0.0-4060620250520001
+    '@dcloudio/uni-mp-toutiao': 3.0.0-4060620250520001
+    '@dcloudio/uni-mp-weixin': 3.0.0-4060620250520001
+    '@dcloudio/uni-mp-xhs': 3.0.0-4060620250520001
+    '@dcloudio/uni-quickapp-webview': 3.0.0-4060620250520001
     wot-design-uni: ^1.10.0
   script:
     esno: ^4.8.0
