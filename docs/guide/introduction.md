@@ -22,6 +22,7 @@ Uni ECharts 是适用于 uni-app 的 Apache ECharts 组件，无需繁琐的步�
 
 得益于以下项目对开源的付出，让 Uni ECharts 能够站在巨人的肩膀上。
 
+- [echarts](https://github.com/apache/echarts)
 - [vue-echarts](https://github.com/ecomfe/vue-echarts)
 - [lime-echart](https://gitee.com/liangei/lime-echart)
 - [echarts-for-weixin](https://github.com/ecomfe/echarts-for-weixin)
