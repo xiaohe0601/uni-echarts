@@ -18,11 +18,11 @@ export interface NormalizedTouch {
 }
 
 export interface GetTouchFuc {
-  (event: TouchEvent, touches: TouchList | Touch[]): NormalizedTouch;
+  (event: TouchEvent, touches: Touch[]): NormalizedTouch;
 
   (event: MouseEvent): NormalizedTouch;
 
-  (event: TouchEvent | MouseEvent, touches?: TouchList | Touch[]): NormalizedTouch;
+  (event: TouchEvent | MouseEvent, touches?: Touch[]): NormalizedTouch;
 }
 
 export function useEchartsTouch({
@@ -67,7 +67,7 @@ export function useEchartsTouch({
 
   function normalizeTouches(touches: TouchList) {
     if (Array.isArray(touches)) {
-      return touches;
+      return touches as Touch[];
     }
 
     if (typeof touches === "object" && touches != null) {
