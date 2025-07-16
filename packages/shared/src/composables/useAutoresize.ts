@@ -17,56 +17,60 @@ export function useAutoresize(chart: Ref<NullableValue<EChartsType>>, {
   autoresize: MaybeRefOrGetter<AutoResize>;
   root: Ref<NullableValue<ComponentPublicInstance>>;
 }): void {
-  watch([chart, autoresize, root], (values, _, onCleanup) => {
-    const _chart = values[0] as NullableValue<EChartsType>;
-    const _autoresize = values[1] as AutoResize;
-    const _root = values[2] as NullableValue<ComponentPublicInstance>;
+  watch(
+    [chart, autoresize, root],
+    (values, _, onCleanup) => {
+      // not sure why, type inference is broken, temp type assertion
+      const _chart = values[0] as NullableValue<EChartsType>;
+      const _autoresize = values[1] as AutoResize;
+      const _root = values[2] as NullableValue<ComponentPublicInstance>;
 
-    let observer: NullableValue<ResizeObserver> = null;
+      let observer: NullableValue<ResizeObserver> = null;
 
-    if (_chart != null && _root != null && _autoresize) {
-      const { offsetWidth, offsetHeight } = _root.$el;
+      if (_chart != null && _root != null && _autoresize) {
+        const { offsetWidth, offsetHeight } = _root.$el;
 
-      const autoresizeOptions = _autoresize === true ? {} : _autoresize;
-      const { throttle: wait = 100, onResize } = autoresizeOptions;
+        const autoresizeOptions = _autoresize === true ? {} : _autoresize;
+        const { throttle: wait = 100, onResize } = autoresizeOptions;
 
-      let triggered = false;
+        let triggered = false;
 
-      const callback = () => {
-        _chart.resize({
-          width: _root.$el.offsetWidth,
-          height: _root.$el.offsetHeight
+        const callback = () => {
+          _chart.resize({
+            width: _root.$el.offsetWidth,
+            height: _root.$el.offsetHeight
+          });
+
+          if (onResize != null) {
+            onResize();
+          }
+        };
+
+        const resizeCallback = wait ? echarts.throttle(callback, wait) : callback;
+
+        observer = new ResizeObserver(() => {
+          if (!triggered) {
+            triggered = true;
+
+            if (_root.$el.offsetWidth === offsetWidth && _root.$el.offsetHeight === offsetHeight) {
+              return;
+            }
+          }
+
+          resizeCallback();
         });
 
-        if (onResize != null) {
-          onResize();
-        }
-      };
-
-      const resizeCallback = wait ? echarts.throttle(callback, wait) : callback;
-
-      observer = new ResizeObserver(() => {
-        if (!triggered) {
-          triggered = true;
-
-          if (_root.$el.offsetWidth === offsetWidth && _root.$el.offsetHeight === offsetHeight) {
-            return;
-          }
-        }
-
-        resizeCallback();
-      });
-
-      observer.observe(_root.$el);
-    }
-
-    onCleanup(() => {
-      if (observer == null) {
-        return;
+        observer.observe(_root.$el);
       }
 
-      observer.disconnect();
-      observer = null;
-    });
-  });
+      onCleanup(() => {
+        if (observer == null) {
+          return;
+        }
+
+        observer.disconnect();
+        observer = null;
+      });
+    }
+  );
 }
