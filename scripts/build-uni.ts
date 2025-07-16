@@ -20,7 +20,6 @@ const uniPkg = {
   bugs: pkg.bugs,
   keywords: pkg.keywords,
   dcloudext: {
-    category: ["前端组件", "通用组件"],
     type: "component-vue",
     sale: {
       regular: {
@@ -38,58 +37,74 @@ const uniPkg = {
       data: "无",
       permissions: "无"
     },
-    npmurl: "https://www.npmjs.com/package/uni-echarts"
+    npmurl: "https://www.npmjs.com/package/uni-echarts",
+    darkmode: "x",
+    i18n: "x",
+    widescreen: "x"
   },
   uni_modules: {
     dependencies: [],
     encrypt: [],
     platforms: {
       client: {
-        "App": {
-          "app-vue": "y",
-          "app-uvue": "n",
-          "app-nvue": "n",
-          "app-harmony": "y"
+        "uni-app": {
+          "vue": {
+            "vue2": "x",
+            "vue3": "√"
+          },
+          "web": {
+            "safari": "√",
+            "chrome": "√"
+          },
+          "app": {
+            "vue": "√",
+            "nvue": "x",
+            "android": "√",
+            "ios": "√",
+            "harmony": "√"
+          },
+          "mp": {
+            "weixin": "√",
+            "alipay": "√",
+            "toutiao": "√",
+            "baidu": "√",
+            "kuaishou": "√",
+            "jd": "√",
+            "harmony": "√",
+            "qq": "√",
+            "lark": "√"
+          },
+          "quickapp": {
+            "huawei": "√",
+            "union": "√"
+          }
         },
-        "H5-mobile": {
-          "Safari": "y",
-          "Android Browser": "y",
-          "微信浏览器(Android)": "y",
-          "QQ浏览器(Android)": "y"
-        },
-        "H5-pc": {
-          "Chrome": "y",
-          "IE": "n",
-          "Edge": "y",
-          "Firefox": "y",
-          "Safari": "y"
-        },
-        "Vue": {
-          "vue2": "n",
-          "vue3": "y"
-        },
-        "小程序": {
-          "微信": "y",
-          "阿里": "y",
-          "百度": "y",
-          "字节跳动": "y",
-          "QQ": "y",
-          "钉钉": "y",
-          "快手": "y",
-          "飞书": "y",
-          "京东": "y"
-        },
-        "快应用": {
-          "华为": "y",
-          "联盟": "y"
+        "uni-app-x": {
+          "web": {
+            "safari": "x",
+            "chrome": "x"
+          },
+          "app": {
+            "android": "x",
+            "ios": "x",
+            "harmony": "x"
+          },
+          "mp": {
+            "weixin": "x"
+          }
         }
       },
       cloud: {
-        "aliyun": "y",
-        "tcb": "y",
-        "alipay": "y"
+        "aliyun": "√",
+        "tcb": "√",
+        "alipay": "√"
       }
     }
+  },
+  engines: {
+    "HBuilderX": "^3.1.0",
+    "uni-app": "^4.06",
+    "uni-app-x": "^4.06"
   }
 };
 
