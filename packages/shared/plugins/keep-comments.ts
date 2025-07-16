@@ -1,45 +1,50 @@
 import type { Plugin } from "rollup";
 
 export interface KeepCommentsOptions {
-  include?: string[];
+  comments?: string[];
 }
 
+const KEEP_KEY = "__KP__";
+
 export function keepComments(options: KeepCommentsOptions = {}): Plugin {
-  const pattern = new RegExp(
-    `(${options.include?.map((s) => s.replace(/([.*+?^=!:${}()|[\]/\\])/g, "\\$1")).join("|")})`
-  );
+  const {
+    comments = []
+  } = options;
+
   return {
     name: "keep-comments",
-
     transform: {
       order: "pre",
-      async handler(code, _) {
-        const lines = code.split("\n");
-        let changed = false;
-        for (let i = 0; i < lines.length; i++) {
-          const ln = lines[i];
-          if (pattern.test(ln) && !ln.trimStart().startsWith("//!")) {
-            lines[i] = ln.replace("//", "//!");
-            changed = true;
-          }
-        }
-        if (changed) {
-          return { code: lines.join("\n"), map: null };
-        }
-        return null;
+      handler(code) {
+        return {
+          code: code.replace(
+            /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)/g,
+            (chunk) => {
+              for (const item of comments) {
+                if (!chunk.startsWith(item)) {
+                  continue;
+                }
+
+                // // -> //!__KP__
+                // /* -> /*!__KP__
+                return `${chunk.slice(0, 2)}!${KEEP_KEY}${chunk.slice(2)}`;
+              }
+
+              return chunk;
+            }
+          )
+        };
       }
     },
-    // 第二阶段：在最终输出 bundle 里还原注释
     generateBundle(_, bundle) {
-      for (const [_, chunk] of Object.entries(bundle)) {
-        if (chunk.type === "chunk" && typeof chunk.code === "string") {
-          if (chunk.code.includes("//!")) {
-            chunk.code = chunk.code.replace(
-              /^([ \t]*)\/\/!(?=[ \t]*#)/gm,
-              (_, indent) => `${indent}// `
-            );
-          }
+      for (const chunk of Object.values(bundle)) {
+        if (chunk.type !== "chunk") {
+          continue;
         }
+
+        chunk.code = chunk.code
+          .replace(new RegExp(`/\\*!${KEEP_KEY}(.*?)\\*/`, "gs"), "/*$1*/")
+          .replace(new RegExp(`//!${KEEP_KEY}(.*)`, "g"), "//$1");
       }
     }
   };

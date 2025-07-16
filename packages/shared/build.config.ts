@@ -15,7 +15,7 @@ export default defineBuildConfig({
     "rollup:options": (_, options) => {
       options.plugins.push(
         keepComments({
-          include: [
+          comments: [
             "// #ifdef",
             "// #ifndef",
             "// #endif"
