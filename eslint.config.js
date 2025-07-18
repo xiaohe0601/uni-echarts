@@ -9,7 +9,7 @@ export default defineConfig({
   },
   ignores: [
     "**/*.md",
-    "packages/core/src/shared.*",
+    "packages/core/src/shared-core.*",
     "packages/core/dist-resolver",
     "playground/src/uni_modules"
   ]

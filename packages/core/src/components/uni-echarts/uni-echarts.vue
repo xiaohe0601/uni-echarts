@@ -90,7 +90,7 @@ import {
   usePublicApi,
   useUid,
   useVueThis
-} from "../../shared";
+} from "../../shared-core";
 import { ECHARTS_EVENTS, EVENTS } from "./events";
 
 defineOptions({

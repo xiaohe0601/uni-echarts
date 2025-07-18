@@ -1,8 +1,8 @@
 README.md
 
 # 生成文件
-shared.js
-shared.d.ts
+shared-core.js
+shared-core.d.ts
 
 # 制品文件
 dist-resolver

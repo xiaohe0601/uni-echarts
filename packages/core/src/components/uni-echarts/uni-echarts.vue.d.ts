@@ -1,6 +1,6 @@
 /* eslint-disable ts/no-empty-object-type */
 import type { DefineComponent } from "vue";
-import type { AllowedComponentProps } from "../../shared";
+import type { AllowedComponentProps } from "../../shared-core";
 import type { UniEchartsEmits, UniEchartsProps } from "./types";
 
 type UniEcharts = DefineComponent<

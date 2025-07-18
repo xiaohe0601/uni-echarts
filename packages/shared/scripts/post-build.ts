@@ -13,8 +13,8 @@ async function main() {
     consola.info(chalk.cyan("Migrating shared"));
 
     await Promise.all([
-      copy(r("dist", "index.mjs"), r("..", "core", "src", "shared.js")),
-      copy(r("dist", "index.d.ts"), r("..", "core", "src", "shared.d.ts"))
+      copy(r("dist", "index.mjs"), r("..", "core", "src", "shared-core.js")),
+      copy(r("dist", "index.d.ts"), r("..", "core", "src", "shared-core.d.ts"))
     ]);
 
     await remove(r("dist"));

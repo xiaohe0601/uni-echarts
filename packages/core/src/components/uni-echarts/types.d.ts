@@ -10,7 +10,7 @@ import type {
   NullableValue,
   PublicApi,
   UpdateOptions
-} from "../../shared";
+} from "../../shared-core";
 
 export interface UniEchartsProps {
   /**
