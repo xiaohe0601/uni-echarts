@@ -38,9 +38,9 @@ const uniPkg = {
       permissions: "无"
     },
     npmurl: "https://www.npmjs.com/package/uni-echarts",
-    darkmode: "x",
-    i18n: "x",
-    widescreen: "x"
+    darkmode: "√",
+    i18n: "√",
+    widescreen: "√"
   },
   uni_modules: {
     dependencies: [],
