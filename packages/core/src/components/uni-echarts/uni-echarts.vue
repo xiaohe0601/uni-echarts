@@ -39,7 +39,7 @@
       type="2d"
       :disable-scroll="props.disableScroll"
       @touchstart="touch.onStart"
-      @touchmove="touch.onMove"
+      @touchmove="throttledMove"
       @touchend="touch.onEnd"></canvas>
 
     <canvas
@@ -49,17 +49,17 @@
       :canvas-id="canvasId"
       :disable-scroll="props.disableScroll"
       @touchstart="touch.onStart"
-      @touchmove="touch.onMove"
+      @touchmove="throttledMove"
       @touchend="touch.onEnd"></canvas>
 
     <view
       v-if="isPc"
       class="uni-echarts__mask"
       @mousedown="touch.onStart"
-      @mousemove="touch.onMove"
+      @mousemove="throttledMove"
       @mouseup="touch.onEnd"
       @touchstart="touch.onStart"
-      @touchmove="touch.onMove"
+      @touchmove="throttledMove"
       @touchend="touch.onEnd"></view>
 
     <slot></slot>
@@ -196,6 +196,30 @@ const touch = useEchartsTouch({
   canvasRect,
   getTouch
 });
+
+const requestFrame = computed(() => chart.value?.getDom()?.canvasNode?.requestAnimationFrame ?? requestAnimationFrame ?? ((fn) => setTimeout(fn, 16)));
+const cancelFrame = computed(() => chart.value?.getDom()?.canvasNode?.cancelAnimationFrame ?? cancelAnimationFrame ?? clearTimeout);
+
+let ticking = false;
+let lastMoveEvent = null;
+let rafToken = null;
+
+function throttledMove(event) {
+  lastMoveEvent = event;
+  if (ticking) {
+    return;
+  }
+
+  ticking = true;
+  rafToken = requestFrame.value(() => {
+    try {
+      touch.onMove(lastMoveEvent);
+    } finally {
+      ticking = false;
+      lastMoveEvent = null;
+    }
+  });
+}
 
 // #ifdef WEB
 
@@ -379,6 +403,13 @@ async function resize(options = {}) {
 }
 
 function cleanup() {
+  if (rafToken !== null) {
+    cancelFrame(rafToken);
+    rafToken = null;
+    lastMoveEvent = null;
+    ticking = false;
+  }
+
   if (chart.value == null) {
     return;
   }
