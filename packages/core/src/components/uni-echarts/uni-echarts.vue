@@ -39,7 +39,7 @@
       type="2d"
       :disable-scroll="props.disableScroll"
       @touchstart="touch.onStart"
-      @touchmove="touch.onMove"
+      @touchmove="throttledMove"
       @touchend="touch.onEnd"></canvas>
 
     <canvas
@@ -49,7 +49,7 @@
       :canvas-id="canvasId"
       :disable-scroll="props.disableScroll"
       @touchstart="touch.onStart"
-      @touchmove="touch.onMove"
+      @touchmove="throttledMove"
       @touchend="touch.onEnd"></canvas>
 
     <view
@@ -59,7 +59,7 @@
       @mousemove="touch.onMove"
       @mouseup="touch.onEnd"
       @touchstart="touch.onStart"
-      @touchmove="touch.onMove"
+      @touchmove="throttledMove"
       @touchend="touch.onEnd"></view>
 
     <slot></slot>
@@ -196,6 +196,22 @@ const touch = useEchartsTouch({
   canvasRect,
   getTouch
 });
+
+const canvasNode = computed(() => chart.value.getDom().canvasNode);
+
+let ticking = false;
+
+function throttledMove(event) {
+  if (ticking) {
+    return;
+  }
+
+  ticking = true;
+  canvasNode.value.requestAnimationFrame(() => {
+    touch.onMove(event);
+    ticking = false;
+  });
+}
 
 // #ifdef WEB
 
