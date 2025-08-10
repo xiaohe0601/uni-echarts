@@ -205,7 +205,7 @@ let lastMoveEvent = null;
 let rafToken = null;
 
 function throttledMove(event) {
-  lastMoveEvent = event;
+  lastMoveEvent = { ...event };
   if (ticking) {
     return;
   }
@@ -404,7 +404,7 @@ async function resize(options = {}) {
 
 function cleanup() {
   if (rafToken !== null) {
-    cancelFrame.value(rafToken);
+    cancelFrame.value?.(rafToken);
     rafToken = null;
     lastMoveEvent = null;
     ticking = false;
