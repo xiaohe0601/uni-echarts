@@ -404,7 +404,7 @@ async function resize(options = {}) {
 
 function cleanup() {
   if (rafToken !== null) {
-    cancelFrame(rafToken);
+    cancelFrame.value(rafToken);
     rafToken = null;
     lastMoveEvent = null;
     ticking = false;
