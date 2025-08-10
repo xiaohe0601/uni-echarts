@@ -56,7 +56,7 @@
       v-if="isPc"
       class="uni-echarts__mask"
       @mousedown="touch.onStart"
-      @mousemove="touch.onMove"
+      @mousemove="throttledMove"
       @mouseup="touch.onEnd"
       @touchstart="touch.onStart"
       @touchmove="throttledMove"
@@ -197,19 +197,27 @@ const touch = useEchartsTouch({
   getTouch
 });
 
-const canvasNode = computed(() => chart.value.getDom().canvasNode);
+const requestFrame = computed(() => chart.value?.getDom()?.canvasNode?.requestAnimationFrame ?? requestAnimationFrame ?? ((fn) => setTimeout(fn, 16)));
+const cancelFrame = computed(() => chart.value?.getDom()?.canvasNode?.cancelAnimationFrame ?? cancelAnimationFrame ?? clearTimeout);
 
 let ticking = false;
+let lastMoveEvent = null;
+let rafToken = null;
 
 function throttledMove(event) {
+  lastMoveEvent = event;
   if (ticking) {
     return;
   }
 
   ticking = true;
-  canvasNode.value.requestAnimationFrame(() => {
-    touch.onMove(event);
-    ticking = false;
+  rafToken = requestFrame.value(() => {
+    try {
+      touch.onMove(lastMoveEvent);
+    } finally {
+      ticking = false;
+      lastMoveEvent = null;
+    }
   });
 }
 
@@ -395,6 +403,13 @@ async function resize(options = {}) {
 }
 
 function cleanup() {
+  if (rafToken !== null) {
+    cancelFrame(rafToken);
+    rafToken = null;
+    lastMoveEvent = null;
+    ticking = false;
+  }
+
   if (chart.value == null) {
     return;
   }
