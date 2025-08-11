@@ -100,11 +100,6 @@ const uniPkg = {
         "alipay": "√"
       }
     }
-  },
-  engines: {
-    "HBuilderX": "^3.1.0",
-    "uni-app": "^4.06",
-    "uni-app-x": "^4.06"
   }
 };
 
