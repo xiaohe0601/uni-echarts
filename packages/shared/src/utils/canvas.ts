@@ -235,6 +235,32 @@ export class UniCanvas {
     // noop
   }
 
+  requestAnimationFrame(callback: () => void): number {
+    if (this.canvasNode != null && typeof this.canvasNode.requestAnimationFrame === "function") {
+      return this.canvasNode.requestAnimationFrame(callback);
+    }
+
+    if (typeof requestAnimationFrame === "function") {
+      return requestAnimationFrame(callback);
+    }
+
+    return setTimeout(callback, 1000 / 60);
+  }
+
+  cancelAnimationFrame(id: number): void {
+    if (this.canvasNode != null && typeof this.canvasNode.cancelAnimationFrame === "function") {
+      this.canvasNode.cancelAnimationFrame(id);
+      return;
+    }
+
+    if (typeof cancelAnimationFrame === "function") {
+      cancelAnimationFrame(id);
+      return;
+    }
+
+    clearTimeout(id);
+  }
+
   toTempFilePath(options: Omit<UniApp.CanvasToTempFilePathOptions, "canvasId" | "canvas"> = {}): Promise<UniApp.CanvasToTempFilePathRes> {
     const opts: Partial<
       Pick<

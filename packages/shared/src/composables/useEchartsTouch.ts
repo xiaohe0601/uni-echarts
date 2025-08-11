@@ -45,6 +45,7 @@ export function useEchartsTouch({
   onStart: (event: TouchEvent) => void;
   onMove: (event: TouchEvent) => void;
   onEnd: (event: TouchEvent) => void;
+  cleanup: () => void;
 } {
   const touching = shallowRef(false);
 
@@ -56,6 +57,10 @@ export function useEchartsTouch({
 
   let timer = 0;
 
+  let ticking = false;
+  let rafId = 0;
+  let lastMoveEvent: NullableValue<TouchEvent> = null;
+
   function destroyTimer() {
     if (timer === 0) {
       return;
@@ -63,6 +68,14 @@ export function useEchartsTouch({
 
     clearTimeout(timer);
     timer = 0;
+  }
+
+  function getCanvas(): NullableValue<UniCanvas> {
+    if (chart.value == null) {
+      return null;
+    }
+
+    return chart.value.getDom() as unknown as UniCanvas;
   }
 
   function normalizeTouches(touches: TouchList) {
@@ -128,7 +141,7 @@ export function useEchartsTouch({
     next();
   }
 
-  function onMove(event: TouchEvent) {
+  function _onMove(event: TouchEvent) {
     if (isPc && toValue(supportHover) && !touching.value) {
       touching.value = true;
     }
@@ -140,6 +153,33 @@ export function useEchartsTouch({
     const { handler } = chart.value.getZr();
     UniCanvas.dispatch(handler, "mousemove", getTouch(event, normalizeTouches(event.touches)));
     handler.processGesture(transformTouchesEvent(event), "change");
+  }
+
+  function onMove(event: TouchEvent) {
+    const canvas = getCanvas();
+
+    if (canvas == null) {
+      return;
+    }
+
+    lastMoveEvent = event;
+
+    if (ticking) {
+      return;
+    }
+
+    ticking = true;
+
+    rafId = canvas.requestAnimationFrame(() => {
+      try {
+        if (lastMoveEvent != null) {
+          _onMove(lastMoveEvent);
+        }
+      } finally {
+        lastMoveEvent = null;
+        ticking = false;
+      }
+    });
   }
 
   function onEnd(event: TouchEvent) {
@@ -172,9 +212,27 @@ export function useEchartsTouch({
     }
   }
 
+  function cleanup() {
+    destroyTimer();
+
+    if (rafId !== 0) {
+      const canvas = getCanvas();
+
+      if (canvas != null) {
+        canvas.cancelAnimationFrame(rafId);
+      }
+
+      rafId = 0;
+    }
+
+    lastMoveEvent = null;
+    ticking = false;
+  }
+
   return {
     onStart,
     onMove,
-    onEnd
+    onEnd,
+    cleanup
   };
 }

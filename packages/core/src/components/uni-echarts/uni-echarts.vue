@@ -383,6 +383,8 @@ function cleanup() {
     return;
   }
 
+  touch.cleanup();
+
   chart.value.dispose();
   chart.value = null;
 }
