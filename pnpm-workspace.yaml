@@ -12,19 +12,19 @@ catalogs:
     '@uni-helper/vite-plugin-uni-manifest': ^0.2.8
     '@uni-helper/vite-plugin-uni-pages': ^0.2.29
     unbuild: ^3.6.0
-    unplugin-auto-import: ^19.3.0
+    unplugin-auto-import: ^20.0.0
     vite: ^5.4.19
     vite-plugin-uni-polyfill: ^0.1.0
-    vitepress: ^1.6.3
-    vitepress-plugin-group-icons: ^1.6.1
-    vitepress-plugin-llms: ^1.7.1
+    vitepress: ^1.6.4
+    vitepress-plugin-group-icons: ^1.6.2
+    vitepress-plugin-llms: ^1.7.2
   cli:
-    bumpp: ^10.2.0
-    pncat: ^0.2.6
+    bumpp: ^10.2.2
+    pncat: ^0.4.1
   dev:
     '@antfu/ni': ^25.0.0
     '@antfu/utils': ^9.2.0
-    '@dcloudio/types': ^3.4.16
+    '@dcloudio/types': ^3.4.19
     '@dcloudio/uni-automator': 3.0.0-4070520250711001
     '@dcloudio/uni-cli-shared': 3.0.0-4070520250711001
     '@dcloudio/uni-stacktracey': 3.0.0-4070520250711001
@@ -42,17 +42,17 @@ catalogs:
   icons:
     '@iconify-json/carbon': ^1.2.11
   lint:
-    '@xiaohe01/eslint-config': ^1.11.0
+    '@xiaohe01/eslint-config': ^2.2.0
     '@xiaohe01/stylelint-config': ^2.4.0
-    eslint: ^9.31.0
-    lint-staged: ^16.1.2
-    simple-git-hooks: ^2.13.0
-    stylelint: ^16.22.0
+    eslint: ^9.33.0
+    lint-staged: ^16.1.5
+    simple-git-hooks: ^2.13.1
+    stylelint: ^16.23.1
   node:
-    chalk: ^5.4.1
+    chalk: ^5.5.0
     consola: ^3.4.2
     execa: ^9.6.0
-    fs-extra: ^11.3.0
+    fs-extra: ^11.3.1
     rimraf: ^6.0.1
   prod:
     '@dcloudio/uni-app': 3.0.0-4070520250711001
@@ -70,7 +70,7 @@ catalogs:
     '@dcloudio/uni-mp-weixin': 3.0.0-4070520250711001
     '@dcloudio/uni-mp-xhs': 3.0.0-4070520250711001
     '@dcloudio/uni-quickapp-webview': 3.0.0-4070520250711001
-    wot-design-uni: ^1.11.0
+    wot-design-uni: ^1.11.1
   script:
     esno: ^4.8.0
   style:
@@ -90,5 +90,6 @@ onlyBuiltDependencies:
   - '@uni-helper/unocss-preset-uni'
   - core-js
   - esbuild
+  - pncat
   - simple-git-hooks
   - vue-demi
