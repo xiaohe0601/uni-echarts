@@ -81,7 +81,6 @@ export class UniCanvas {
               // @ts-expect-error whatever
               shadow[lowerFirst(key.slice(6))] = value;
             } else {
-              // @ts-expect-error whatever
               shadow.color = UniCanvas.normalizeColor(context, value);
 
               context.setShadow(
@@ -286,6 +285,8 @@ export class UniCanvas {
     return Number.parseFloat(defaultTo(font, "").match(/([\d.]+)px/)[1]);
   }
 
+  static normalizeColor(context: CanvasContext, color: string): string;
+  static normalizeColor(context: CanvasContext, color: object): object;
   static normalizeColor(context: CanvasContext, color: string | object): string | object {
     if (typeof color === "string") {
       // #ifdef MP-TOUTIAO
