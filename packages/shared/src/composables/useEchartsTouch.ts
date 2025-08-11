@@ -59,7 +59,7 @@ export function useEchartsTouch({
 
   let ticking = false;
   let rafId = 0;
-  let lastMoveEvent: TouchEvent | null = null;
+  let lastMoveEvent: NullableValue<TouchEvent> = null;
 
   function destroyTimer() {
     if (timer === 0) {
@@ -70,7 +70,7 @@ export function useEchartsTouch({
     timer = 0;
   }
 
-  function getCanvas(): UniCanvas | null {
+  function getCanvas(): NullableValue<UniCanvas> {
     if (chart.value == null) {
       return null;
     }
