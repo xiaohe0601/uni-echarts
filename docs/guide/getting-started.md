@@ -17,7 +17,7 @@ Uni ECharts 提供了 [npm](#npm-方式) 和 [uni-modules](#uni-modules-方式) 
 
 - WEB 端调用 [registerTheme](https://echarts.apache.org/zh/api.html#echarts.registerTheme) 等 echarts 的 API 无效
 - WEB 端不支持 [依赖注入](./provide) 方式使用组件
-- echarts 的 Tree-Shaking 失效，导致代码体积过大
+- ~~echarts 的 Tree-Shaking 失效，导致代码体积过大~~
 
 ---
 
@@ -68,7 +68,7 @@ npm install -D @uni-helper/vite-plugin-uni-components unplugin-auto-import
 // vite.config.js[ts]
 import Uni from "@dcloudio/vite-plugin-uni";
 import UniComponents from "@uni-helper/vite-plugin-uni-components";
-import { UniEchartsResolver } from "uni-echarts/resolver";
+import { UniEchartsResolver } from "uni-echarts/resolver"; // [!code ++]
 import AutoImport from "unplugin-auto-import/vite";
 import { defineConfig } from "vite";
 
