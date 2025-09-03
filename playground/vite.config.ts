@@ -1,6 +1,6 @@
 import path from "node:path";
 import process from "node:process";
-import Uni from "@dcloudio/vite-plugin-uni";
+import Uni from "@uni-helper/plugin-uni";
 import UniComponents from "@uni-helper/vite-plugin-uni-components";
 import UniManifest from "@uni-helper/vite-plugin-uni-manifest";
 import UniPages from "@uni-helper/vite-plugin-uni-pages";
@@ -67,8 +67,7 @@ function buildPlugins(): PluginOption[] {
       ]
     }),
     UniPolyfill(),
-    // @ts-expect-error uni doesn't support esm
-    Uni.default({
+    Uni({
       vueOptions: {
         template: {
           transformAssetUrls: buildTransformAssetUrls()

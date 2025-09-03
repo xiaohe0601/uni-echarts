@@ -3,6 +3,8 @@ packages:
   - playground
   - packages/**
   - examples/**
+overrides:
+  vue: 3.4.38
 catalogs:
   build:
     '@uni-helper/vite-plugin-uni-components': ^0.2.0
@@ -42,6 +44,7 @@ catalogs:
   dev:
     '@antfu/ni': ^25.0.0
     '@mini-types/alipay': ^3.0.14
+    '@uni-helper/plugin-uni': ^0.1.0
     '@uni-helper/uni-app-types': ^1.0.0-alpha.6
     '@xiaohe01/tsconfig': ^2.0.0
     miniprogram-api-typings: ^4.1.0
