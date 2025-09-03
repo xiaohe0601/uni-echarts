@@ -14,7 +14,7 @@
     "build:core": "nr -C packages/core build",
     "build:shared": "nr -C packages/shared build",
     "build:uni": "nr build && esno scripts/build-uni.ts",
-    "build:play": "nr build:uni && nr -C playground build:h5",
+    "build:play": "nr build && nr -C playground build:h5",
     "docs:dev": "nr -C docs dev",
     "docs:build": "nr -C docs build && nr build:play && esno scripts/compose-docs.ts",
     "release": "bumpp -r",
