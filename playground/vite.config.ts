@@ -7,7 +7,7 @@ import UniPages from "@uni-helper/vite-plugin-uni-pages";
 import { UniEchartsResolver } from "uni-echarts/resolver";
 import UnoCSS from "unocss/vite";
 import AutoImport from "unplugin-auto-import/vite";
-import type { DepOptimizationOptions, PluginOption } from "vite";
+import type { PluginOption } from "vite";
 import { defineConfig } from "vite";
 import UniPolyfill from "vite-plugin-uni-polyfill";
 
@@ -85,21 +85,6 @@ function buildPlugins(): PluginOption[] {
   ];
 }
 
-function buildOptimizeDeps(): DepOptimizationOptions {
-  const exclude: string[] = [];
-
-  if (process.env.UNI_PLATFORM === "h5" && process.env.NODE_ENV === "development") {
-    exclude.push(
-      "wot-design-uni",
-      "uni-echarts"
-    );
-  }
-
-  return {
-    exclude
-  };
-}
-
 export default defineConfig({
   root: process.cwd(),
   base: process.env.UNI_PLATFORM === "h5" ? "/ui/" : "/",
@@ -113,5 +98,10 @@ export default defineConfig({
     target: "es6",
     cssTarget: "chrome61"
   },
-  optimizeDeps: buildOptimizeDeps()
+  optimizeDeps: {
+    exclude: [
+      "wot-design-uni",
+      "uni-echarts"
+    ]
+  }
 });

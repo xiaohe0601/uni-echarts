@@ -11,20 +11,6 @@ Uni ECharts 提供了 [npm](#npm-方式) 和 [uni-modules](#uni-modules-方式) 
 
 ## NPM 方式
 
-::: warning 注意
-
-由于尚未明确的原因，目前 npm 方式尚存在如下已知缺陷待解决：
-
-- WEB 端调用 [registerTheme](https://echarts.apache.org/zh/api.html#echarts.registerTheme) 等 echarts 的 API 无效
-- WEB 端不支持 [依赖注入](./provide) 方式使用组件
-- ~~echarts 的 Tree-Shaking 失效，导致代码体积过大~~
-
----
-
-推荐使用 [uni-modules](#uni-modules-方式) 方式，待上诉缺陷解决后再考虑使用 npm 方式。
-
-:::
-
 ### 安装
 
 ::: code-group
@@ -44,6 +30,24 @@ npm install echarts uni-echarts
 :::
 
 ### 配置
+
+由于 Uni ECharts 发布到 npm 上的包是未经编译的 `vue` 文件，为了避免 Vite 对 Uni ECharts
+[依赖预构建](https://cn.vitejs.dev/guide/dep-pre-bundling.html) 导致生成额外的 `echarts` 副本，
+当使用 npm 方式时需要手动配置 Vite 强制排除 `uni-echarts` 的预构建。
+
+```js
+// vite.config.js[ts]
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  // ...
+  optimizeDeps: { // [!code ++]
+    exclude: [ // [!code ++]
+      "uni-echarts" // [!code ++]
+    ] // [!code ++]
+  } // [!code ++]
+});
+```
 
 Uni ECharts 可以配合 [@uni-helper/vite-plugin-uni-components](https://github.com/uni-helper/vite-plugin-uni-components)
 和 [unplugin-auto-import](https://github.com/unplugin/unplugin-auto-import) 实现组件和 API 的自动按需导入。
