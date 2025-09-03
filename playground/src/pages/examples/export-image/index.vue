@@ -32,6 +32,12 @@ import type { UniEchartsInst } from "@/uni_modules/xiaohe-echarts";
 
 type EChartsOption = ComposeOption<PolarComponentOption | LineSeriesOption>;
 
+definePage({
+  style: {
+    navigationBarTitleText: "保存为图片"
+  }
+});
+
 use([
   PolarComponent,
   LineChart,
@@ -84,11 +90,3 @@ async function saveAsImage() {
 }
 // #endregion script
 </script>
-
-<route>
-{
-  "style": {
-    "navigationBarTitleText": "保存为图片"
-  }
-}
-</route>

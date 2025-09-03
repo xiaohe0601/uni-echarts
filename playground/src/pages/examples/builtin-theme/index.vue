@@ -51,6 +51,12 @@ type EChartsOption = ComposeOption<
   | LineSeriesOption
 >;
 
+definePage({
+  style: {
+    navigationBarTitleText: "内置主题"
+  }
+});
+
 use([
   LegendComponent,
   TooltipComponent,
@@ -149,11 +155,3 @@ function getData() {
 }
 // #endregion script
 </script>
-
-<route>
-{
-  "style": {
-    "navigationBarTitleText": "内置主题"
-  }
-}
-</route>

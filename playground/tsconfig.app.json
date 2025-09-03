@@ -12,6 +12,7 @@
       "vite/client",
       "@dcloudio/types",
       "@uni-helper/uni-app-types",
+      "@uni-helper/vite-plugin-uni-pages",
       "miniprogram-api-typings",
       "@mini-types/alipay",
       "wot-design-uni/global"

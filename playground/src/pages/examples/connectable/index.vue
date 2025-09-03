@@ -47,6 +47,12 @@ type EChartsOption = ComposeOption<
   | ScatterSeriesOption
 >;
 
+definePage({
+  style: {
+    navigationBarTitleText: "图表联动"
+  }
+});
+
 use([
   LegendComponent,
   GridComponent,
@@ -144,11 +150,3 @@ watchEffect(() => {
 });
 // #endregion script
 </script>
-
-<route>
-{
-  "style": {
-    "navigationBarTitleText": "图表联动"
-  }
-}
-</route>

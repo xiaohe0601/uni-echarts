@@ -28,14 +28,11 @@
 </template>
 
 <script lang="ts" setup>
-
-</script>
-
-<route type="home">
-{
-  "style": {
-    "navigationStyle": "custom",
-    "navigationBarTitleText": "Uni ECharts"
+definePage({
+  type: "home",
+  style: {
+    navigationStyle: "custom",
+    navigationBarTitleText: "Uni ECharts"
   }
-}
-</route>
+});
+</script>

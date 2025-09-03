@@ -40,6 +40,12 @@ import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { useScoreStore } from "./score";
 
+definePage({
+  style: {
+    navigationBarTitleText: "Pinia 集成"
+  }
+});
+
 use([
   RadarChart,
   CanvasRenderer
@@ -50,11 +56,3 @@ const { metrics, getOption, isMax, isMin, increase } = useScoreStore();
 const metricIndex = shallowRef(0);
 // #endregion script
 </script>
-
-<route>
-{
-  "style": {
-    "navigationBarTitleText": "Pinia 集成"
-  }
-}
-</route>

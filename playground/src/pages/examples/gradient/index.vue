@@ -23,6 +23,12 @@ type EChartsOption = ComposeOption<
   | ScatterSeriesOption
 >;
 
+definePage({
+  style: {
+    navigationBarTitleText: "颜色渐变"
+  }
+});
+
 use([
   LegendComponent,
   GridComponent,
@@ -177,11 +183,3 @@ const option = ref({
 } satisfies EChartsOption);
 // #endregion script
 </script>
-
-<route>
-{
-  "style": {
-    "navigationBarTitleText": "颜色渐变"
-  }
-}
-</route>

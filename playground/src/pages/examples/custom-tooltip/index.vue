@@ -35,6 +35,12 @@ type EChartsOption = ComposeOption<
   | PieSeriesOption
 >;
 
+definePage({
+  style: {
+    navigationBarTitleText: "自定义 Tooltip"
+  }
+});
+
 use([
   TooltipComponent,
   DatasetComponent,
@@ -109,11 +115,3 @@ const option = ref({
 } satisfies EChartsOption);
 // #endregion script
 </script>
-
-<route>
-{
-  "style": {
-    "navigationBarTitleText": "自定义 Tooltip"
-  }
-}
-</route>

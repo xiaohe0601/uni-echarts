@@ -45,6 +45,12 @@ type EChartsOption = ComposeOption<
   | BarSeriesOption
 >;
 
+definePage({
+  style: {
+    navigationBarTitleText: "异步数据"
+  }
+});
+
 use([
   GridComponent,
   DatasetComponent,
@@ -147,6 +153,7 @@ function refresh() {
   loading.value = true;
   surplus.value = 3;
 
+  // @ts-expect-error whatever
   timer = setInterval(tick, 1000);
 }
 
@@ -155,11 +162,3 @@ onUnload(() => {
 });
 // #endregion script
 </script>
-
-<route>
-{
-  "style": {
-    "navigationBarTitleText": "异步数据"
-  }
-}
-</route>

@@ -29,6 +29,12 @@ type EChartsOption = ComposeOption<
   | PieSeriesOption
 >;
 
+definePage({
+  style: {
+    navigationBarTitleText: "动作调度"
+  }
+});
+
 use([
   LegendComponent,
   TooltipComponent,
@@ -109,6 +115,7 @@ function startActions() {
 
   let dataIndex = -1;
 
+  // @ts-expect-error whatever
   timer = setInterval(() => {
     if (chartEl.value == null) {
       destroyTimer();
@@ -147,11 +154,3 @@ onUnload(() => {
 });
 // #endregion script
 </script>
-
-<route>
-{
-  "style": {
-    "navigationBarTitleText": "动作调度"
-  }
-}
-</route>

@@ -24,6 +24,12 @@ type EChartsOption = ComposeOption<
   | PieSeriesOption
 >;
 
+definePage({
+  style: {
+    navigationBarTitleText: "基础用法"
+  }
+});
+
 use([
   LegendComponent,
   TooltipComponent,
@@ -80,11 +86,3 @@ const option = ref({
 } satisfies EChartsOption);
 // #endregion script
 </script>
-
-<route>
-{
-  "style": {
-    "navigationBarTitleText": "基础用法"
-  }
-}
-</route>

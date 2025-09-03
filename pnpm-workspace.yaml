@@ -3,81 +3,79 @@ packages:
   - playground
   - packages/**
   - examples/**
-overrides:
-  pinia: 2.2.4
 catalogs:
   build:
-    '@dcloudio/vite-plugin-uni': 3.0.0-4070520250711001
+    '@dcloudio/vite-plugin-uni': 3.0.0-4070620250821001
     '@uni-helper/vite-plugin-uni-components': ^0.2.0
     '@uni-helper/vite-plugin-uni-manifest': ^0.2.8
-    '@uni-helper/vite-plugin-uni-pages': ^0.2.29
-    unbuild: ^3.6.0
-    unplugin-auto-import: ^20.0.0
+    '@uni-helper/vite-plugin-uni-pages': ^0.3.9
+    unbuild: ~3.5.0
+    unplugin-auto-import: ^20.1.0
     vite: ^5.4.19
     vite-plugin-uni-polyfill: ^0.1.0
     vitepress: ^1.6.4
-    vitepress-plugin-group-icons: ^1.6.2
-    vitepress-plugin-llms: ^1.7.2
+    vitepress-plugin-group-icons: ^1.6.3
+    vitepress-plugin-llms: ^1.7.3
   cli:
-    bumpp: ^10.2.2
-    pncat: ^0.4.1
+    bumpp: ^10.2.3
+    pncat: ^0.5.3
   dev:
     '@antfu/ni': ^25.0.0
     '@antfu/utils': ^9.2.0
     '@dcloudio/types': ^3.4.19
-    '@dcloudio/uni-automator': 3.0.0-4070520250711001
-    '@dcloudio/uni-cli-shared': 3.0.0-4070520250711001
-    '@dcloudio/uni-stacktracey': 3.0.0-4070520250711001
+    '@dcloudio/uni-automator': 3.0.0-4070620250821001
+    '@dcloudio/uni-cli-shared': 3.0.0-4070620250821001
+    '@dcloudio/uni-stacktracey': 3.0.0-4070620250821001
     '@mini-types/alipay': ^3.0.14
     '@uni-helper/uni-app-types': ^1.0.0-alpha.6
     '@vue/runtime-core': ~3.4.38
     '@xiaohe01/tsconfig': ^2.0.0
     miniprogram-api-typings: ^4.1.0
-    typescript: ~5.7.3
+    typescript: ~5.8.3
     vue-tsc: ~2.1.10
   frontend:
     echarts: ^5.6.0
-    pinia: ~2.2.4
+    pinia: 2.2.4
     vue: ~3.4.38
   icons:
-    '@iconify-json/carbon': ^1.2.11
+    '@iconify-json/carbon': ^1.2.13
   lint:
-    '@xiaohe01/eslint-config': ^2.2.0
+    '@xiaohe01/eslint-config': ^2.2.2
     '@xiaohe01/stylelint-config': ^2.4.0
-    eslint: ^9.33.0
-    lint-staged: ^16.1.5
+    eslint: ^9.34.0
+    lint-staged: ^16.1.6
     simple-git-hooks: ^2.13.1
     stylelint: ^16.23.1
   node:
-    chalk: ^5.5.0
+    chalk: ^5.6.0
     consola: ^3.4.2
     execa: ^9.6.0
     fs-extra: ^11.3.1
     rimraf: ^6.0.1
   prod:
-    '@dcloudio/uni-app': 3.0.0-4070520250711001
-    '@dcloudio/uni-app-harmony': 3.0.0-4070520250711001
-    '@dcloudio/uni-app-plus': 3.0.0-4070520250711001
-    '@dcloudio/uni-components': 3.0.0-4070520250711001
-    '@dcloudio/uni-h5': 3.0.0-4070520250711001
-    '@dcloudio/uni-mp-alipay': 3.0.0-4070520250711001
-    '@dcloudio/uni-mp-baidu': 3.0.0-4070520250711001
-    '@dcloudio/uni-mp-jd': 3.0.0-4070520250711001
-    '@dcloudio/uni-mp-kuaishou': 3.0.0-4070520250711001
-    '@dcloudio/uni-mp-lark': 3.0.0-4070520250711001
-    '@dcloudio/uni-mp-qq': 3.0.0-4070520250711001
-    '@dcloudio/uni-mp-toutiao': 3.0.0-4070520250711001
-    '@dcloudio/uni-mp-weixin': 3.0.0-4070520250711001
-    '@dcloudio/uni-mp-xhs': 3.0.0-4070520250711001
-    '@dcloudio/uni-quickapp-webview': 3.0.0-4070520250711001
-    wot-design-uni: ^1.11.1
+    '@dcloudio/uni-app': 3.0.0-4070620250821001
+    '@dcloudio/uni-app-harmony': 3.0.0-4070620250821001
+    '@dcloudio/uni-app-plus': 3.0.0-4070620250821001
+    '@dcloudio/uni-components': 3.0.0-4070620250821001
+    '@dcloudio/uni-h5': 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-alipay': 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-baidu': 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-jd': 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-kuaishou': 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-lark': 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-qq': 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-toutiao': 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-weixin': 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-xhs': 3.0.0-4070620250821001
+    '@dcloudio/uni-quickapp-webview': 3.0.0-4070620250821001
+    wot-design-uni: ^1.12.4
   script:
     esno: ^4.8.0
   style:
     '@uni-helper/unocss-preset-uni': ^0.2.11
     sass: ~1.78.0
     unocss: ~66.0.0
-    unocss-applet: ^0.10.0
+    unocss-applet: ^0.11.0
   test:
     vitest: ^3.2.4
   types:

@@ -36,6 +36,12 @@ type EChartsOption = ComposeOption<
   | LineSeriesOption
 >;
 
+definePage({
+  style: {
+    navigationBarTitleText: "手动更新"
+  }
+});
+
 use([
   TooltipComponent,
   ToolboxComponent,
@@ -127,11 +133,3 @@ function setOption() {
 }
 // #endregion script
 </script>
-
-<route>
-{
-  "style": {
-    "navigationBarTitleText": "手动更新"
-  }
-}
-</route>
