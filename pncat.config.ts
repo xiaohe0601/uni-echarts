@@ -7,7 +7,7 @@ export default defineConfig({
       match: [
         /@dcloudio/
       ],
-      priority: 60
+      priority: 0
     }
   ])
 });

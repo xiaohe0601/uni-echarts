@@ -30,8 +30,8 @@
   },
   "devDependencies": {
     "@antfu/ni": "catalog:dev",
-    "@antfu/utils": "catalog:dev",
-    "@dcloudio/types": "catalog:dev",
+    "@antfu/utils": "catalog:utils",
+    "@dcloudio/types": "catalog:dcloudio",
     "@mini-types/alipay": "catalog:dev",
     "@types/fs-extra": "catalog:types",
     "@uni-helper/uni-app-types": "catalog:dev",
@@ -55,7 +55,7 @@
     "unbuild": "catalog:build",
     "vite": "catalog:build",
     "vitest": "catalog:test",
-    "vue-tsc": "catalog:dev"
+    "vue-tsc": "catalog:frontend"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"

@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@uni-helper/vite-plugin-uni-components": "catalog:build",
-    "@vue/runtime-core": "catalog:dev",
+    "@vue/runtime-core": "catalog:frontend",
     "echarts": "catalog:frontend",
     "vue": "catalog:frontend"
   }

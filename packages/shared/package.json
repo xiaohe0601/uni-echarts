@@ -21,7 +21,7 @@
     "build": "unbuild && esno scripts/post-build.ts"
   },
   "devDependencies": {
-    "@vue/runtime-core": "catalog:dev",
+    "@vue/runtime-core": "catalog:frontend",
     "echarts": "catalog:frontend",
     "vue": "catalog:frontend"
   }

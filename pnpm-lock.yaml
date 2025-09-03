@@ -6,9 +6,6 @@ settings:
 
 catalogs:
   build:
-    '@dcloudio/vite-plugin-uni':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
     '@uni-helper/vite-plugin-uni-components':
       specifier: ^0.2.0
       version: 0.2.0
@@ -46,34 +43,77 @@ catalogs:
     pncat:
       specifier: ^0.5.3
       version: 0.5.3
-  dev:
-    '@antfu/ni':
-      specifier: ^25.0.0
-      version: 25.0.0
-    '@antfu/utils':
-      specifier: ^9.2.0
-      version: 9.2.0
+  dcloudio:
     '@dcloudio/types':
       specifier: ^3.4.19
       version: 3.4.19
+    '@dcloudio/uni-app':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
+    '@dcloudio/uni-app-harmony':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
+    '@dcloudio/uni-app-plus':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
     '@dcloudio/uni-automator':
       specifier: 3.0.0-4070620250821001
       version: 3.0.0-4070620250821001
     '@dcloudio/uni-cli-shared':
       specifier: 3.0.0-4070620250821001
       version: 3.0.0-4070620250821001
+    '@dcloudio/uni-components':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
+    '@dcloudio/uni-h5':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-alipay':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-baidu':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-jd':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-kuaishou':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-lark':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-qq':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-toutiao':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-weixin':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
+    '@dcloudio/uni-mp-xhs':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
+    '@dcloudio/uni-quickapp-webview':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
     '@dcloudio/uni-stacktracey':
       specifier: 3.0.0-4070620250821001
       version: 3.0.0-4070620250821001
+    '@dcloudio/vite-plugin-uni':
+      specifier: 3.0.0-4070620250821001
+      version: 3.0.0-4070620250821001
+  dev:
+    '@antfu/ni':
+      specifier: ^25.0.0
+      version: 25.0.0
     '@mini-types/alipay':
       specifier: ^3.0.14
       version: 3.0.14
     '@uni-helper/uni-app-types':
       specifier: ^1.0.0-alpha.6
       version: 1.0.0-alpha.6
-    '@vue/runtime-core':
-      specifier: ~3.4.38
-      version: 3.4.38
     '@xiaohe01/tsconfig':
       specifier: ^2.0.0
       version: 2.0.0
@@ -83,10 +123,10 @@ catalogs:
     typescript:
       specifier: ~5.8.3
       version: 5.8.3
-    vue-tsc:
-      specifier: ~2.1.10
-      version: 2.1.10
   frontend:
+    '@vue/runtime-core':
+      specifier: ~3.4.38
+      version: 3.4.38
     echarts:
       specifier: ^5.6.0
       version: 5.6.0
@@ -96,6 +136,12 @@ catalogs:
     vue:
       specifier: ~3.4.38
       version: 3.4.38
+    vue-tsc:
+      specifier: ~2.1.10
+      version: 2.1.10
+    wot-design-uni:
+      specifier: ^1.12.4
+      version: 1.12.4
   icons:
     '@iconify-json/carbon':
       specifier: ^1.2.13
@@ -135,55 +181,6 @@ catalogs:
     rimraf:
       specifier: ^6.0.1
       version: 6.0.1
-  prod:
-    '@dcloudio/uni-app':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-app-harmony':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-app-plus':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-components':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-h5':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-alipay':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-baidu':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-jd':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-kuaishou':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-lark':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-qq':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-toutiao':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-weixin':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-xhs':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-quickapp-webview':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    wot-design-uni:
-      specifier: ^1.12.4
-      version: 1.12.4
   script:
     esno:
       specifier: ^4.8.0
@@ -213,6 +210,9 @@ catalogs:
       specifier: ^4.17.12
       version: 4.17.12
   utils:
+    '@antfu/utils':
+      specifier: ^9.2.0
+      version: 9.2.0
     '@vueuse/core':
       specifier: ^12.8.2
       version: 12.8.2
@@ -228,10 +228,10 @@ importers:
         specifier: catalog:dev
         version: 25.0.0
       '@antfu/utils':
-        specifier: catalog:dev
+        specifier: catalog:utils
         version: 9.2.0
       '@dcloudio/types':
-        specifier: catalog:dev
+        specifier: catalog:dcloudio
         version: 3.4.19
       '@mini-types/alipay':
         specifier: catalog:dev
@@ -303,7 +303,7 @@ importers:
         specifier: catalog:test
         version: 3.2.4(@types/debug@4.1.12)(@types/node@24.3.0)(jsdom@16.7.0)(terser@5.44.0)
       vue-tsc:
-        specifier: catalog:dev
+        specifier: catalog:frontend
         version: 2.1.10(typescript@5.8.3)
 
   docs:
@@ -327,7 +327,7 @@ importers:
         specifier: catalog:build
         version: 0.2.0(rollup@4.50.0)
       '@vue/runtime-core':
-        specifier: catalog:dev
+        specifier: catalog:frontend
         version: 3.4.38
       echarts:
         specifier: catalog:frontend
@@ -339,7 +339,7 @@ importers:
   packages/shared:
     devDependencies:
       '@vue/runtime-core':
-        specifier: catalog:dev
+        specifier: catalog:frontend
         version: 3.4.38
       echarts:
         specifier: catalog:frontend
@@ -351,49 +351,49 @@ importers:
   playground:
     dependencies:
       '@dcloudio/uni-app':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@dcloudio/types@3.4.19)(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-app-harmony':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vite@5.4.19(@types/node@24.3.0)(sass@1.78.0)(terser@5.44.0))(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-app-plus':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vite@5.4.19(@types/node@24.3.0)(sass@1.78.0)(terser@5.44.0))(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-components':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-h5':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-mp-alipay':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-mp-baidu':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@dcloudio/types@3.4.19)(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-mp-jd':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-mp-kuaishou':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-mp-lark':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-mp-qq':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-mp-toutiao':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-mp-weixin':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-mp-xhs':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-quickapp-webview':
-        specifier: catalog:prod
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@vueuse/core':
         specifier: catalog:utils
@@ -411,20 +411,20 @@ importers:
         specifier: catalog:frontend
         version: 3.4.38(typescript@5.9.2)
       wot-design-uni:
-        specifier: catalog:prod
+        specifier: catalog:frontend
         version: 1.12.4(vue@3.4.38(typescript@5.9.2))
     devDependencies:
       '@dcloudio/uni-automator':
-        specifier: catalog:dev
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(jest-environment-node@27.5.1)(jest@27.0.4)(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-cli-shared':
-        specifier: catalog:dev
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vue@3.4.38(typescript@5.9.2))
       '@dcloudio/uni-stacktracey':
-        specifier: catalog:dev
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001
       '@dcloudio/vite-plugin-uni':
-        specifier: catalog:build
+        specifier: catalog:dcloudio
         version: 3.0.0-4070620250821001(@vueuse/core@12.8.2(typescript@5.9.2))(postcss@8.5.6)(rollup@4.50.0)(vite@5.4.19(@types/node@24.3.0)(sass@1.78.0)(terser@5.44.0))(vue@3.4.38(typescript@5.9.2))
       '@iconify-json/carbon':
         specifier: catalog:icons
@@ -445,7 +445,7 @@ importers:
         specifier: catalog:build
         version: 0.3.9(vite@5.4.19(@types/node@24.3.0)(sass@1.78.0)(terser@5.44.0))
       '@vue/runtime-core':
-        specifier: catalog:dev
+        specifier: catalog:frontend
         version: 3.4.38
       sass:
         specifier: catalog:style
