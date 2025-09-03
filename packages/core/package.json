@@ -1,7 +1,7 @@
 {
   "name": "uni-echarts",
   "type": "module",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "🪀 适用于 uni-app 的 Apache ECharts 组件（仅支持Vue 3）",
   "author": "xiaohe0601 <xiaohe0601@outlook.com>",
   "license": "MIT",
