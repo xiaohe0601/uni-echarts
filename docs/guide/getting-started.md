@@ -13,7 +13,7 @@ Uni ECharts 提供了 [npm](#npm-方式) 和 [uni-modules](#uni-modules-方式) 
 
 ::: warning 注意
 
-由于 uni-app 编译机制问题，目前 npm 方式尚存在如下已知缺陷待解决：
+由于尚未明确的原因，目前 npm 方式尚存在如下已知缺陷待解决：
 
 - WEB 端调用 [registerTheme](https://echarts.apache.org/zh/api.html#echarts.registerTheme) 等 echarts 的 API 无效
 - WEB 端不支持 [依赖注入](./provide) 方式使用组件
@@ -127,7 +127,7 @@ import UniEcharts from "uni-echarts"; // [!code --]
 import { provideEcharts, provideEchartsTheme } from "uni-echarts/shared"; // [!code --]
 import { ref } from "vue";
 
-// 由于目前 uni-app 对于 npm 插件的编译机制问题
+// 由于尚未明确的原因，目前 npm 插件的编译机制存在问题
 // 小程序端的 npm 插件内部无法正确获取到业务侧的 echarts
 // 所以需要手动将 echarts 提供给插件用于构建图表
 provideEcharts(echarts); // 🚨 注意：npm 方式需要添加这一行代码
