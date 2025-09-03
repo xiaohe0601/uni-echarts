@@ -18,9 +18,7 @@ export default defineConfig({
       b1: "rgba(var(--color-b1), <alpha-value>)",
       b2: "rgba(var(--color-b2), <alpha-value>)",
       d1: "rgba(var(--color-d1), <alpha-value>)",
-      d2: "rgba(var(--color-d2), <alpha-value>)",
-      d3: "rgba(var(--color-d3), <alpha-value>)",
-      d4: "rgba(var(--color-d4), <alpha-value>)"
+      d2: "rgba(var(--color-d2), <alpha-value>)"
     },
     fontFamily: {
       global: "var(--font-global)"
@@ -28,9 +26,7 @@ export default defineConfig({
   },
   presets: [
     presetUni({
-      attributify: {
-        prefixedOnly: true
-      }
+      attributify: false
     }),
     presetIcons({
       scale: 1.2,
