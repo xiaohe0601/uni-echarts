@@ -36,7 +36,7 @@
 <script lang="ts" setup>
 // #region script
 import { RadarChart } from "echarts/charts";
-import { use } from "echarts/core";
+import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { useScoreStore } from "./score";
 
@@ -46,7 +46,9 @@ definePage({
   }
 });
 
-use([
+provideEcharts(echarts);
+
+echarts.use([
   RadarChart,
   CanvasRenderer
 ]);

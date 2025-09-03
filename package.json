@@ -34,7 +34,6 @@
     "@dcloudio/types": "catalog:dcloudio",
     "@mini-types/alipay": "catalog:dev",
     "@types/fs-extra": "catalog:types",
-    "@uni-helper/plugin-uni": "catalog:dev",
     "@uni-helper/uni-app-types": "catalog:dev",
     "@xiaohe01/eslint-config": "catalog:lint",
     "@xiaohe01/stylelint-config": "catalog:lint",

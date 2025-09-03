@@ -23,10 +23,10 @@ import type {
 } from "echarts/components";
 import { DataZoomComponent, GridComponent, ToolboxComponent, TooltipComponent } from "echarts/components";
 import type { ComposeOption } from "echarts/core";
-import { use } from "echarts/core";
+import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
+import type { UniEchartsInst } from "uni-echarts/shared";
 import { GLOBAL_OPTION } from "../echarts";
-import type { UniEchartsInst } from "@/uni_modules/xiaohe-echarts";
 
 type EChartsOption = ComposeOption<
   | TooltipComponentOption
@@ -42,7 +42,9 @@ definePage({
   }
 });
 
-use([
+provideEcharts(echarts);
+
+echarts.use([
   TooltipComponent,
   ToolboxComponent,
   GridComponent,

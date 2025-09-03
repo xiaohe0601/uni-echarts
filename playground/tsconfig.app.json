@@ -15,7 +15,8 @@
       "@uni-helper/vite-plugin-uni-pages",
       "miniprogram-api-typings",
       "@mini-types/alipay",
-      "wot-design-uni/global"
+      "wot-design-uni/global",
+      "uni-echarts/global"
     ],
     "allowJs": true
   },

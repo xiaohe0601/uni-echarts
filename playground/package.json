@@ -54,6 +54,7 @@
     "echarts": "catalog:frontend",
     "lodash-es": "catalog:utils",
     "pinia": "catalog:frontend",
+    "uni-echarts": "workspace:^",
     "vue": "catalog:frontend",
     "wot-design-uni": "catalog:frontend"
   },
@@ -64,6 +65,7 @@
     "@dcloudio/vite-plugin-uni": "catalog:dcloudio",
     "@iconify-json/carbon": "catalog:icons",
     "@types/lodash-es": "catalog:types",
+    "@uni-helper/plugin-uni": "catalog:dev",
     "@uni-helper/unocss-preset-uni": "catalog:style",
     "@uni-helper/vite-plugin-uni-components": "catalog:build",
     "@uni-helper/vite-plugin-uni-manifest": "catalog:build",

@@ -17,10 +17,10 @@ import { PieChart } from "echarts/charts";
 import type { DatasetComponentOption, LegendComponentOption, TooltipComponentOption } from "echarts/components";
 import { DatasetComponent, LegendComponent, TooltipComponent } from "echarts/components";
 import type { ComposeOption } from "echarts/core";
-import { use } from "echarts/core";
+import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
+import type { UniEchartsInst } from "uni-echarts/shared";
 import { GLOBAL_OPTION } from "../echarts";
-import type { UniEchartsInst } from "@/uni_modules/xiaohe-echarts";
 
 type EChartsOption = ComposeOption<
   | LegendComponentOption
@@ -35,7 +35,9 @@ definePage({
   }
 });
 
-use([
+provideEcharts(echarts);
+
+echarts.use([
   LegendComponent,
   TooltipComponent,
   DatasetComponent,

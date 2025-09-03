@@ -34,7 +34,7 @@ import type {
 } from "echarts/components";
 import { GridComponent, LegendComponent, TooltipComponent, VisualMapComponent } from "echarts/components";
 import type { ComposeOption } from "echarts/core";
-import { connect, disconnect, use } from "echarts/core";
+import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { cloneDeep } from "lodash-es";
 import { GLOBAL_OPTION } from "../echarts";
@@ -53,7 +53,9 @@ definePage({
   }
 });
 
-use([
+provideEcharts(echarts);
+
+echarts.use([
   LegendComponent,
   GridComponent,
   TooltipComponent,
@@ -143,9 +145,9 @@ const connected = shallowRef(true);
 
 watchEffect(() => {
   if (connected.value) {
-    connect("radiance");
+    echarts.connect("radiance");
   } else {
-    disconnect("radiance");
+    echarts.disconnect("radiance");
   }
 });
 // #endregion script

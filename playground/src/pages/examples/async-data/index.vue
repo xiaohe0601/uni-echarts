@@ -34,7 +34,7 @@ import { BarChart } from "echarts/charts";
 import type { DatasetComponentOption, GridComponentOption } from "echarts/components";
 import { DatasetComponent, GridComponent } from "echarts/components";
 import type { ComposeOption } from "echarts/core";
-import { registerTheme, use } from "echarts/core";
+import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { GLOBAL_OPTION } from "../echarts";
 import theme from "./theme.json";
@@ -51,14 +51,16 @@ definePage({
   }
 });
 
-use([
+provideEcharts(echarts);
+
+echarts.use([
   GridComponent,
   DatasetComponent,
   BarChart,
   CanvasRenderer
 ]);
 
-registerTheme("ovilia-green", theme);
+echarts.registerTheme("ovilia-green", theme);
 
 const option = ref({
   ...GLOBAL_OPTION,

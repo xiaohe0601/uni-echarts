@@ -4,9 +4,10 @@ import Uni from "@uni-helper/plugin-uni";
 import UniComponents from "@uni-helper/vite-plugin-uni-components";
 import UniManifest from "@uni-helper/vite-plugin-uni-manifest";
 import UniPages from "@uni-helper/vite-plugin-uni-pages";
+import { UniEchartsResolver } from "uni-echarts/resolver";
 import UnoCSS from "unocss/vite";
 import AutoImport from "unplugin-auto-import/vite";
-import type { PluginOption } from "vite";
+import type { DepOptimizationOptions, PluginOption } from "vite";
 import { defineConfig } from "vite";
 import UniPolyfill from "vite-plugin-uni-polyfill";
 
@@ -43,6 +44,9 @@ function buildPlugins(): PluginOption[] {
           ]
         }
       ],
+      resolvers: [
+        UniEchartsResolver()
+      ],
       dirs: [
         "src/composables",
         "src/utils"
@@ -51,6 +55,9 @@ function buildPlugins(): PluginOption[] {
     }),
     UniComponents({
       dts: "types/components.d.ts",
+      resolvers: [
+        UniEchartsResolver()
+      ],
       dirs: [
         "src/components"
       ],
@@ -78,6 +85,21 @@ function buildPlugins(): PluginOption[] {
   ];
 }
 
+function buildOptimizeDeps(): DepOptimizationOptions {
+  const exclude: string[] = [];
+
+  if (process.env.UNI_PLATFORM === "h5" && process.env.NODE_ENV === "development") {
+    exclude.push(
+      "wot-design-uni",
+      "uni-echarts"
+    );
+  }
+
+  return {
+    exclude
+  };
+}
+
 export default defineConfig({
   root: process.cwd(),
   base: process.env.UNI_PLATFORM === "h5" ? "/ui/" : "/",
@@ -90,5 +112,6 @@ export default defineConfig({
   build: {
     target: "es6",
     cssTarget: "chrome61"
-  }
+  },
+  optimizeDeps: buildOptimizeDeps()
 });
