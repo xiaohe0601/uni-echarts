@@ -85,8 +85,6 @@ pnpm lint:fix
 pnpm lint:type
 ```
 
-注意，修改代码后，需要手动执行 `pnpm build:uni` 才能应用到 `playground`。
-
 ## 许可协议
 
 提交代码即表示你同意该代码遵循本项目的 [MIT](./LICENSE) 协议。
