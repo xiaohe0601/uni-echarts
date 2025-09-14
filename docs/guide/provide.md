@@ -3,12 +3,6 @@
 Uni ECharts 为 `option`、 `theme`、`init-options`、`update-options` 和 `loading-options` 提供并导出了 provide 相关的 API，
 从而可以通过 [依赖注入](https://cn.vuejs.org/guide/components/provide-inject.html) 的方式进行配置。
 
-::: warning 注意
-
-🚧 Web 端使用 npm 方式使用组件时，暂不支持该用法。
-
-:::
-
 ---
 
 例如，可以通过如下方式使用 provide API 修改 `theme`，这将会对 provide 作用域下所有的 Uni ECharts 组件有效：

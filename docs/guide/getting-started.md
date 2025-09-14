@@ -4,8 +4,8 @@ Uni ECharts 提供了 [npm](#npm-方式) 和 [uni-modules](#uni-modules-方式) 
 
 ::: info 前置条件
 
-- **echarts** >=5.3.0
-- **vue** >=3.3.0
+- echarts >=5.3.0
+- vue >=3.3.0
 
 :::
 
@@ -48,6 +48,8 @@ export default defineConfig({
   } // [!code ++]
 });
 ```
+
+#### 自动导入（可选）
 
 Uni ECharts 可以配合 [@uni-helper/vite-plugin-uni-components](https://github.com/uni-helper/vite-plugin-uni-components)
 和 [unplugin-auto-import](https://github.com/unplugin/unplugin-auto-import) 实现组件和 API 的自动按需导入。
