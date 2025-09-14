@@ -5,10 +5,12 @@ import UniComponents from "@uni-helper/vite-plugin-uni-components";
 import UniManifest from "@uni-helper/vite-plugin-uni-manifest";
 import UniPages from "@uni-helper/vite-plugin-uni-pages";
 import { UniEchartsResolver } from "uni-echarts/resolver";
+import { UniEcharts } from "uni-echarts/vite";
 import UnoCSS from "unocss/vite";
 import AutoImport from "unplugin-auto-import/vite";
 import type { PluginOption } from "vite";
 import { defineConfig } from "vite";
+import Inspect from "vite-plugin-inspect";
 import UniPolyfill from "vite-plugin-uni-polyfill";
 
 function r(...paths: string[]) {
@@ -73,6 +75,7 @@ function buildPlugins(): PluginOption[] {
         "**/components/**/*.*"
       ]
     }),
+    UniEcharts(),
     UniPolyfill(),
     Uni({
       vueOptions: {
@@ -81,7 +84,8 @@ function buildPlugins(): PluginOption[] {
         }
       }
     }),
-    UnoCSS()
+    UnoCSS(),
+    Inspect()
   ];
 }
 

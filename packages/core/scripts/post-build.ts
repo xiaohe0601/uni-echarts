@@ -20,6 +20,9 @@ async function main() {
     await copy(r("dist-resolver", "resolver"), r("dist-resolver"));
     await remove(r("dist-resolver", "resolver"));
 
+    await copy(r("dist-vite", "vite"), r("dist-vite"));
+    await remove(r("dist-vite", "vite"));
+
     consola.success(chalk.green("Simplify succeeded for dist"));
   } catch (error) {
     consola.error("Simplify failed for `dist`", error);

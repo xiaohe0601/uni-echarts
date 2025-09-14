@@ -75,6 +75,7 @@
     "unocss": "catalog:style",
     "unocss-applet": "catalog:style",
     "unplugin-auto-import": "catalog:build",
+    "vite-plugin-inspect": "catalog:build",
     "vite-plugin-uni-polyfill": "catalog:build"
   }
 }

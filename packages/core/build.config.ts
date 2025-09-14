@@ -30,5 +30,22 @@ export default defineBuildConfig([
     rollup: {
       emitCJS: true
     }
+  },
+  {
+    name: "uni-echarts/vite",
+    entries: [
+      "vite/index.ts"
+    ],
+    outDir: "dist-vite",
+    clean: false,
+    declaration: true,
+    externals: [
+      "@vue/compiler-sfc",
+      "vite"
+    ],
+    failOnWarn: false,
+    rollup: {
+      emitCJS: true
+    }
   }
 ]);
