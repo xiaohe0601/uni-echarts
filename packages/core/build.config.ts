@@ -40,8 +40,8 @@ export default defineBuildConfig([
     clean: false,
     declaration: true,
     externals: [
-      "@vue/compiler-sfc",
-      "vite"
+      "vite",
+      "vue"
     ],
     failOnWarn: false,
     rollup: {

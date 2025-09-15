@@ -1,4 +1,4 @@
-import { MagicString } from "@vue/compiler-sfc";
+import { MagicString } from "vue/compiler-sfc";
 import { parseVueSFC } from "./helpers";
 
 export interface TransformOptions {
