@@ -59,6 +59,8 @@
     "@uni-helper/vite-plugin-uni-components": "catalog:build",
     "@vue/runtime-core": "catalog:frontend",
     "echarts": "catalog:frontend",
+    "oxc-parser": "catalog:dev",
+    "oxc-walker": "catalog:dev",
     "vue": "catalog:frontend"
   }
 }
