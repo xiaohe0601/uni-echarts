@@ -1,16 +1,15 @@
 import type { FilterPattern, Plugin } from "vite";
 import { createFilter } from "vite";
+import type { TransformOptions } from "./transform";
 import { transform } from "./transform";
 
-export interface Options {
-  provideECharts?: boolean;
+export interface Options extends TransformOptions {
   include?: FilterPattern;
   exclude?: FilterPattern;
 }
 
 export function UniEcharts(options: Options = {}): Plugin {
   const {
-    provideECharts = true,
     include = "./src/**/*.vue"
   } = options;
 
@@ -21,15 +20,13 @@ export function UniEcharts(options: Options = {}): Plugin {
     enforce: "pre",
     async transform(code, id) {
       if (!filter(id)) {
-        return null;
+        return;
       }
 
-      const ms = await transform(code, {
-        provideECharts
-      });
+      const ms = await transform(code, options);
 
-      if (!ms.hasChanged()) {
-        return null;
+      if (ms == null || !ms.hasChanged()) {
+        return;
       }
 
       return {

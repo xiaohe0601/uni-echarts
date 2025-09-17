@@ -2,20 +2,36 @@ import { MagicString } from "vue/compiler-sfc";
 import { parseVueSFC } from "./helpers";
 
 export interface TransformOptions {
-  provideECharts: boolean;
+  provideECharts?: boolean | string;
 }
 
 export async function transform(code: string, options: TransformOptions) {
+  const {
+    provideECharts = true
+  } = options;
+
+  if (!provideECharts) {
+    return null;
+  }
+
   const ms = new MagicString(code);
 
-  if (options.provideECharts) {
-    await injectEChartsProvide(code, ms);
+  if (provideECharts) {
+    await injectEChartsProvide(
+      code,
+      ms,
+      provideECharts === true ? "echarts/core" : provideECharts
+    );
   }
 
   return ms;
 }
 
-async function injectEChartsProvide(code: string, ms: MagicString) {
+async function injectEChartsProvide(
+  code: string,
+  ms: MagicString,
+  echarts: string
+) {
   const sfc = await parseVueSFC(code);
 
   if (sfc.template == null) {
@@ -38,7 +54,7 @@ async function injectEChartsProvide(code: string, ms: MagicString) {
     const prependImports: string[] = [];
 
     if (!hasImportEcharts) {
-      prependImports.push(`import * as echarts from "echarts/core";`);
+      prependImports.push(`import * as echarts from "${echarts}";`);
     }
     if (!hasImportProvide) {
       prependImports.push(`import { provideEcharts } from "uni-echarts/shared";`);
@@ -59,7 +75,7 @@ async function injectEChartsProvide(code: string, ms: MagicString) {
 
     const prependImports: string[] = [];
     if (!hasImportEcharts) {
-      prependImports.push(`import * as echarts from "echarts/core";`);
+      prependImports.push(`import * as echarts from "${echarts}";`);
     }
     if (!hasImportProvideKey) {
       prependImports.push(`import { ECHARTS_KEY } from "uni-echarts/shared";`);
