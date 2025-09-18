@@ -38,8 +38,6 @@ definePage({
   }
 });
 
-provideEcharts(echarts);
-
 echarts.use([
   PolarComponent,
   LineChart,

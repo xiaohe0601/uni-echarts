@@ -51,8 +51,6 @@ definePage({
   }
 });
 
-provideEcharts(echarts);
-
 echarts.use([
   GridComponent,
   DatasetComponent,

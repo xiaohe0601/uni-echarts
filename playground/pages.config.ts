@@ -6,7 +6,6 @@ export default defineUniPages({
       "^wd-(.*)": "wot-design-uni/components/wd-$1/wd-$1.vue"
     }
   },
-  tabBar: {},
   globalStyle: {
     navigationBarTitleText: "Uni ECharts",
     navigationBarTextStyle: "black",

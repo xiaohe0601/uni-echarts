@@ -41,8 +41,6 @@ definePage({
   }
 });
 
-provideEcharts(echarts);
-
 echarts.use([
   TooltipComponent,
   DatasetComponent,
