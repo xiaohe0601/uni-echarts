@@ -51,8 +51,7 @@ export default defineConfig({
 
 #### Vite 插件（可选）
 
-自 `1.2.0` 开始，Uni ECharts 提供了 Vite 插件用于自动化处理一些繁琐、重复的工作，
-例如自动补充 [provideEcharts(echarts)](../apis/function#provideecharts) 的调用。
+自 `1.2.0` 开始，Uni ECharts 提供了 Vite 插件用于自动化处理一些繁琐、重复的工作，也为将来更多的高级功能提供了可能性。
 
 ```js
 // vite.config.js[ts]
