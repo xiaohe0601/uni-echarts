@@ -9,132 +9,10 @@ catalogs:
     '@uni-helper/vite-plugin-uni-components':
       specifier: ^0.2.0
       version: 0.2.0
-    '@uni-helper/vite-plugin-uni-manifest':
-      specifier: ^0.2.8
-      version: 0.2.8
-    '@uni-helper/vite-plugin-uni-pages':
-      specifier: ^0.3.14
-      version: 0.3.14
-    unbuild:
-      specifier: ~3.5.0
-      version: 3.5.0
-    unplugin-auto-import:
-      specifier: ^20.1.0
-      version: 20.1.0
-    vite:
-      specifier: ^5.4.20
-      version: 5.4.20
-    vite-plugin-inspect:
-      specifier: ~0.8.9
-      version: 0.8.9
-    vite-plugin-uni-polyfill:
-      specifier: ^0.1.0
-      version: 0.1.0
-    vitepress:
-      specifier: ^1.6.4
-      version: 1.6.4
-    vitepress-plugin-group-icons:
-      specifier: ^1.6.3
-      version: 1.6.3
-    vitepress-plugin-llms:
-      specifier: ^1.7.5
-      version: 1.7.5
-  cli:
-    bumpp:
-      specifier: ^10.2.3
-      version: 10.2.3
-    pncat:
-      specifier: ^0.5.4
-      version: 0.5.4
-  dcloudio:
-    '@dcloudio/types':
-      specifier: ^3.4.21
-      version: 3.4.21
-    '@dcloudio/uni-app':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-app-harmony':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-app-plus':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-automator':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-cli-shared':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-components':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-h5':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-alipay':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-baidu':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-jd':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-kuaishou':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-lark':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-qq':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-toutiao':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-weixin':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-mp-xhs':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-quickapp-webview':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/uni-stacktracey':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
-    '@dcloudio/vite-plugin-uni':
-      specifier: 3.0.0-4070620250821001
-      version: 3.0.0-4070620250821001
   dev:
-    '@antfu/ni':
-      specifier: ^25.0.0
-      version: 25.0.0
-    '@mini-types/alipay':
-      specifier: ^3.0.14
-      version: 3.0.14
-    '@uni-helper/plugin-uni':
-      specifier: ^0.1.0
-      version: 0.1.0
-    '@uni-helper/uni-app-types':
-      specifier: ^1.0.0-alpha.6
-      version: 1.0.0-alpha.6
-    '@xiaohe01/tsconfig':
-      specifier: ^2.0.0
-      version: 2.0.0
-    miniprogram-api-typings:
-      specifier: ^4.1.0
-      version: 4.1.0
     oxc-parser:
       specifier: ^0.89.0
       version: 0.89.0
-    oxc-walker:
-      specifier: ^0.5.2
-      version: 0.5.2
-    typescript:
-      specifier: ~5.8.3
-      version: 5.8.3
   frontend:
     '@vue/runtime-core':
       specifier: ~3.4.38
@@ -142,92 +20,6 @@ catalogs:
     echarts:
       specifier: ^5.6.0
       version: 5.6.0
-    pinia:
-      specifier: 2.2.4
-      version: 2.2.4
-    vue-tsc:
-      specifier: ~2.1.10
-      version: 2.1.10
-    wot-design-uni:
-      specifier: ^1.12.4
-      version: 1.12.4
-  icons:
-    '@iconify-json/carbon':
-      specifier: ^1.2.13
-      version: 1.2.13
-  lint:
-    '@xiaohe01/eslint-config':
-      specifier: ^2.3.0
-      version: 2.3.0
-    '@xiaohe01/stylelint-config':
-      specifier: ^2.4.0
-      version: 2.4.0
-    eslint:
-      specifier: ^9.35.0
-      version: 9.35.0
-    lint-staged:
-      specifier: ^16.1.6
-      version: 16.1.6
-    simple-git-hooks:
-      specifier: ^2.13.1
-      version: 2.13.1
-    stylelint:
-      specifier: ^16.24.0
-      version: 16.24.0
-  node:
-    chalk:
-      specifier: ^5.6.2
-      version: 5.6.2
-    consola:
-      specifier: ^3.4.2
-      version: 3.4.2
-    execa:
-      specifier: ^9.6.0
-      version: 9.6.0
-    fs-extra:
-      specifier: ^11.3.2
-      version: 11.3.2
-    rimraf:
-      specifier: ^6.0.1
-      version: 6.0.1
-  script:
-    esno:
-      specifier: ^4.8.0
-      version: 4.8.0
-  style:
-    '@uni-helper/unocss-preset-uni':
-      specifier: ^0.2.11
-      version: 0.2.11
-    sass:
-      specifier: ~1.78.0
-      version: 1.78.0
-    unocss:
-      specifier: ~66.0.0
-      version: 66.0.0
-    unocss-applet:
-      specifier: ^0.11.0
-      version: 0.11.0
-  test:
-    vitest:
-      specifier: ^3.2.4
-      version: 3.2.4
-  types:
-    '@types/fs-extra':
-      specifier: ^11.0.4
-      version: 11.0.4
-    '@types/lodash-es':
-      specifier: ^4.17.12
-      version: 4.17.12
-  utils:
-    '@antfu/utils':
-      specifier: ^9.2.0
-      version: 9.2.0
-    '@vueuse/core':
-      specifier: ^12.8.2
-      version: 12.8.2
-    lodash-es:
-      specifier: ^4.17.21
-      version: 4.17.21
 
 overrides:
   mkdist: 2.3.0
@@ -348,9 +140,6 @@ importers:
       oxc-parser:
         specifier: catalog:dev
         version: 0.89.0
-      oxc-walker:
-        specifier: catalog:dev
-        version: 0.5.2(oxc-parser@0.89.0)
       vue:
         specifier: 3.4.38
         version: 3.4.38(typescript@5.9.2)
@@ -5182,9 +4971,6 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
-  magic-regexp@0.10.0:
-    resolution: {integrity: sha512-Uly1Bu4lO1hwHUW0CQeSWuRtzCMNO00CmXtS8N6fyvB3B979GOEEeAkiTUDsmbYLAbvpUS/Kt5c4ibosAzVyVg==}
-
   magic-string@0.30.19:
     resolution: {integrity: sha512-2N21sPY9Ws53PZvsEpVtNuSW+ScYbQdp4b9qUaL+9QkHUrGFKo56Lg9Emg5s9V/qrtNBmiR01sYhUOwu3H+VOw==}
 
@@ -5615,11 +5401,6 @@ packages:
   oxc-parser@0.89.0:
     resolution: {integrity: sha512-BO/RxfooJxuoofjC1USPmZ9a32pzjwXFAM1MHO2zPSij9fkgngHMzAu4t8XY1zrXMmoLBv13fh6LUZ906Rjx+g==}
     engines: {node: '>=20.0.0'}
-
-  oxc-walker@0.5.2:
-    resolution: {integrity: sha512-XYoZqWwApSKUmSDEFeOKdy3Cdh95cOcSU8f7yskFWE4Rl3cfL5uwyY+EV7Brk9mdNLy+t5SseJajd6g7KncvlA==}
-    peerDependencies:
-      oxc-parser: '>=0.72.0'
 
   p-limit@2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
@@ -6755,9 +6536,6 @@ packages:
   type-is@1.6.18:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
     engines: {node: '>= 0.6'}
-
-  type-level-regexp@0.1.17:
-    resolution: {integrity: sha512-wTk4DH3cxwk196uGLK/E9pE45aLfeKJacKmcEgEOA/q5dnPGNxXt0cfYdFxb57L+sEpf1oJH4Dnx/pnRcku9jg==}
 
   typedarray-to-buffer@3.1.5:
     resolution: {integrity: sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==}
@@ -13295,16 +13073,6 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
-  magic-regexp@0.10.0:
-    dependencies:
-      estree-walker: 3.0.3
-      magic-string: 0.30.19
-      mlly: 1.8.0
-      regexp-tree: 0.1.27
-      type-level-regexp: 0.1.17
-      ufo: 1.6.1
-      unplugin: 2.3.10
-
   magic-string@0.30.19:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -13913,11 +13681,6 @@ snapshots:
       '@oxc-parser/binding-wasm32-wasi': 0.89.0
       '@oxc-parser/binding-win32-arm64-msvc': 0.89.0
       '@oxc-parser/binding-win32-x64-msvc': 0.89.0
-
-  oxc-walker@0.5.2(oxc-parser@0.89.0):
-    dependencies:
-      magic-regexp: 0.10.0
-      oxc-parser: 0.89.0
 
   p-limit@2.3.0:
     dependencies:
@@ -15073,8 +14836,6 @@ snapshots:
     dependencies:
       media-typer: 0.3.0
       mime-types: 2.1.35
-
-  type-level-regexp@0.1.17: {}
 
   typedarray-to-buffer@3.1.5:
     dependencies:

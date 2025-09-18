@@ -51,7 +51,6 @@ catalogs:
     '@xiaohe01/tsconfig': ^2.0.0
     miniprogram-api-typings: ^4.1.0
     oxc-parser: ^0.89.0
-    oxc-walker: ^0.5.2
     typescript: ~5.8.3
   frontend:
     '@vue/runtime-core': ~3.4.38

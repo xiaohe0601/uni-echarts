@@ -40,6 +40,8 @@ export default defineBuildConfig([
     clean: false,
     declaration: true,
     externals: [
+      "@oxc-project/types",
+      "oxc-parser",
       "vite",
       "vue"
     ],
