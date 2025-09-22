@@ -12,8 +12,8 @@ import { MagicString } from "vue/compiler-sfc";
 import { parseVueSFC } from "./helpers";
 
 interface Asts {
-  scriptSetup: ParseResult | null;
   script: ParseResult | null;
+  scriptSetup: ParseResult | null;
 }
 
 export interface TransformOptions {
@@ -28,16 +28,14 @@ export async function transform(code: string, options: Required<TransformOptions
   const sfc = await parseVueSFC(code);
 
   const asts: Asts = {
-    scriptSetup: null,
-    script: null
+    script: null,
+    scriptSetup: null
   };
 
-  if (sfc.scriptSetup != null) {
-    asts.scriptSetup = await parseAsync(`script.${sfc.scriptSetup.lang || "js"}`, sfc.scriptSetup.content);
-  }
-  if (sfc.script != null) {
-    asts.script = await parseAsync(`script.${sfc.script.lang || "js"}`, sfc.script.content);
-  }
+  await Promise.all([
+    parseScript(sfc, asts, "script"),
+    parseScript(sfc, asts, "scriptSetup")
+  ]);
 
   const ms = new MagicString(code);
 
@@ -51,6 +49,16 @@ export async function transform(code: string, options: Required<TransformOptions
   }
 
   return ms;
+}
+
+async function parseScript(sfc: SFCDescriptor, asts: Asts, block: "script" | "scriptSetup") {
+  const script = sfc[block];
+
+  if (script == null) {
+    return;
+  }
+
+  asts[block] = await parseAsync(`script.${script.lang || "js"}`, script.content);
 }
 
 async function injectEChartsProvide(options: {
