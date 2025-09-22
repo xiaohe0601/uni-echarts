@@ -9,7 +9,7 @@ Uni ECharts 提供了 [npm](#npm-方式) 和 [uni-modules](#uni-modules-方式) 
 
 :::
 
-## NPM 方式
+## NPM 方式 <Badge text="推荐" />
 
 ### 安装
 
@@ -49,9 +49,9 @@ export default defineConfig({
 });
 ```
 
-#### Vite 插件（可选）
+#### Vite 插件
 
-自 `1.2.0` 开始，Uni ECharts 提供了 Vite 插件用于自动化处理一些繁琐、重复的工作，也为将来更多的高级功能提供了可能性。
+自 `2.0.0` 开始，Uni ECharts 提供了 Vite 插件用于自动化处理一些繁琐、重复的工作，也为将来更多的高级功能提供了可能性。
 
 ```js
 // vite.config.js[ts]
@@ -154,7 +154,7 @@ import { ref } from "vue";
 // 小程序端的 npm 插件内部无法正确获取到业务侧的 echarts
 // 所以需要手动将 echarts 提供给插件用于构建图表
 provideEcharts(echarts); // 🚨 注意：npm 方式需要添加这一行代码
-// 🤩 自 1.2.0 开始，通过配置 Vite 插件可以省略上述 provideEcharts 的调用
+// 🤩 自 2.0.0 开始，通过配置 Vite 插件可以省略上述 provideEcharts 的调用
 
 // 此处仅用于演示通过 provide 修改图表 theme 的方式，不是必需
 provideEchartsTheme("dark");
