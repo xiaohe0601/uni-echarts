@@ -20,12 +20,8 @@ export interface TransformOptions {
   provideECharts?: boolean | string;
 }
 
-export async function transform(code: string, options: TransformOptions) {
-  const {
-    provideECharts = true
-  } = options;
-
-  if (!provideECharts) {
+export async function transform(code: string, options: Required<TransformOptions>) {
+  if (!options.provideECharts) {
     return null;
   }
 
@@ -45,12 +41,12 @@ export async function transform(code: string, options: TransformOptions) {
 
   const ms = new MagicString(code);
 
-  if (provideECharts) {
+  if (options.provideECharts) {
     await injectEChartsProvide({
       sfc,
       ms,
       asts,
-      echarts: provideECharts === true ? "echarts/core" : provideECharts
+      echarts: options.provideECharts === true ? "echarts/core" : options.provideECharts
     });
   }
 

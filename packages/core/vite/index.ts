@@ -9,11 +9,13 @@ export interface Options extends TransformOptions {
 }
 
 export function UniEcharts(options: Options = {}): Plugin {
-  const {
-    include = "./src/**/*.vue"
-  } = options;
+  const opts = {
+    provideECharts: true,
+    include: "./src/**/*.vue",
+    ...options
+  };
 
-  const filter = createFilter(include, options.exclude);
+  const filter = createFilter(opts.include, opts.exclude);
 
   return {
     name: "uni-echarts",
@@ -23,7 +25,7 @@ export function UniEcharts(options: Options = {}): Plugin {
         return;
       }
 
-      const ms = await transform(code, options);
+      const ms = await transform(code, opts);
 
       if (ms == null || !ms.hasChanged()) {
         return;
