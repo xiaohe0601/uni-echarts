@@ -173,23 +173,19 @@ function findEChartsProvideImports(imports: StaticImport[], options: {
   let hasImportEcharts = false;
   let hasImportProvide = false;
 
-  for (const item of imports) {
-    if (item.moduleRequest.value === options.echarts) {
-      if (hasImportEcharts) {
-        continue;
+  // eslint-disable-next-line no-labels
+  outer: for (const item of imports) {
+    for (const it of item.entries) {
+      if (!hasImportEcharts && it.localName.value === "echarts") {
+        hasImportEcharts = true;
+      } else if (!hasImportProvide && it.localName.value === options.provide) {
+        hasImportProvide = true;
       }
 
-      hasImportEcharts = item.entries.some((it) => it.localName.value === "echarts");
-    } else if (item.moduleRequest.value === "uni-echarts/shared") {
-      if (hasImportProvide) {
-        continue;
+      if (hasImportEcharts && hasImportProvide) {
+        // eslint-disable-next-line no-labels
+        break outer;
       }
-
-      hasImportProvide = item.entries.some((it) => it.localName.value === options.provide);
-    }
-
-    if (hasImportEcharts && hasImportProvide) {
-      break;
     }
   }
 

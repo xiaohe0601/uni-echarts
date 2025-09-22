@@ -49,7 +49,7 @@ export default defineConfig({
 ```js
 import * as echarts from "echarts/core";// [!code --]
 import { provideEcharts } from "uni-echarts/shared";
-import echarts from "/path/to/echarts.min.js";// [!code ++]
+import * as echarts from "/path/to/echarts.min.js";// [!code ++]
 
 provideEcharts(echarts);
 ```
@@ -61,7 +61,7 @@ provideEcharts(echarts);
 ```js
 import * as echarts from "echarts/core";// [!code --]
 import { provideEcharts } from "@/uni_modules/xiaohe-echarts";
-import echarts from "/path/to/echarts.min.js";// [!code ++]
+import * as echarts from "/path/to/echarts.min.js";// [!code ++]
 
 provideEcharts(echarts);
 ```
