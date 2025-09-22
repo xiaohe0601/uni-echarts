@@ -1,29 +1,15 @@
 import type * as Echarts from "echarts/core";
-import { init, registerPreprocessor, setPlatformAPI, throttle, use } from "echarts/core";
 import type { InjectionKey } from "vue";
 import { inject, provide } from "vue";
 
-export type MinifyEcharts = Pick<
-  typeof Echarts,
-  | "init"
-  | "registerPreprocessor"
-  | "setPlatformAPI"
-  | "throttle"
-  | "use"
->;
+export type CoreEcharts = typeof Echarts;
 
-export const ECHARTS_KEY: InjectionKey<MinifyEcharts> = Symbol("UniEcharts.echarts");
+export const ECHARTS_KEY: InjectionKey<CoreEcharts> = Symbol("UniEcharts.echarts");
 
-export function provideEcharts(echarts: MinifyEcharts): void {
+export function provideEcharts(echarts: CoreEcharts): void {
   provide(ECHARTS_KEY, echarts);
 }
 
-export function useEcharts(): MinifyEcharts {
-  return inject(ECHARTS_KEY, {
-    init,
-    registerPreprocessor,
-    setPlatformAPI,
-    use,
-    throttle
-  });
+export function useEcharts(): CoreEcharts {
+  return inject(ECHARTS_KEY)!;
 }
