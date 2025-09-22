@@ -15,3 +15,53 @@
 ```js
 import "echarts";
 ```
+
+## 定制 ECharts
+
+通常情况，使用 [按需导入](#按需导入) 就能有效减小打包体积，但是在某些场景如果需要使用定制的 ECharts，
+在 Uni ECharts 中可以配合 [provideEcharts](../apis/function#provideecharts) 实现。
+
+首先到 ECharts 官网 [在线定制](https://echarts.apache.org/zh/builder.html) 并打包下载 `echarts` 到项目中
+（建议放到主包或分包的 `static` 目录下），然后参考下述方案实现。
+
+### NPM 方式
+
+自 `2.0.0` 开始，npm 方式可以通过修改 Vite 插件配置轻松实现。
+
+```js
+// vite.config.js[ts]
+import { UniEcharts } from "uni-echarts/vite";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  // ...
+  plugins: [
+    UniEcharts({
+      // 传实际的 echarts 路径，例如："@/static/echarts.min.js"
+      provideECharts: "/path/to/echarts.min.js" // [!code ++]
+    })
+  ]
+});
+```
+
+当然，也可以手动调用，示例如下：
+
+```js
+import * as echarts from "echarts/core";// [!code --]
+import { provideEcharts } from "uni-echarts/shared";
+import echarts from "/path/to/echarts.min.js";// [!code ++]
+
+provideEcharts(echarts);
+```
+
+### Uni Modules 方式
+
+使用 uni-modules 方式需要手动调用，示例如下：
+
+```js
+import * as echarts from "echarts/core";// [!code --]
+import { provideEcharts } from "@/uni_modules/xiaohe-echarts";
+import echarts from "/path/to/echarts.min.js";// [!code ++]
+
+provideEcharts(echarts);
+```
