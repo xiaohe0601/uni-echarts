@@ -173,19 +173,17 @@ function findEChartsProvideImports(imports: StaticImport[], options: {
   let hasImportEcharts = false;
   let hasImportProvide = false;
 
-  // eslint-disable-next-line no-labels
-  outer: for (const item of imports) {
+  for (const item of imports) {
     for (const it of item.entries) {
       if (!hasImportEcharts && it.localName.value === "echarts") {
         hasImportEcharts = true;
       } else if (!hasImportProvide && it.localName.value === options.provide) {
         hasImportProvide = true;
       }
+    }
 
-      if (hasImportEcharts && hasImportProvide) {
-        // eslint-disable-next-line no-labels
-        break outer;
-      }
+    if (hasImportEcharts && hasImportProvide) {
+      break;
     }
   }
 
