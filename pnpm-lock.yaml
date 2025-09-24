@@ -6,6 +6,15 @@ settings:
 
 catalogs:
   build:
+    '@rollup/plugin-commonjs':
+      specifier: ^28.0.6
+      version: 28.0.6
+    '@rollup/plugin-node-resolve':
+      specifier: ^16.0.1
+      version: 16.0.1
+    '@rollup/plugin-terser':
+      specifier: ^0.4.4
+      version: 0.4.4
     '@uni-helper/vite-plugin-uni-components':
       specifier: ^0.2.1
       version: 0.2.1
@@ -123,6 +132,9 @@ catalogs:
     '@xiaohe01/tsconfig':
       specifier: ^2.0.0
       version: 2.0.0
+    minimist:
+      specifier: ^1.2.8
+      version: 1.2.8
     miniprogram-api-typings:
       specifier: ^4.1.0
       version: 4.1.0
@@ -172,6 +184,9 @@ catalogs:
       specifier: ^16.24.0
       version: 16.24.0
   node:
+    '@clack/prompts':
+      specifier: ^0.11.0
+      version: 0.11.0
     chalk:
       specifier: ^5.6.2
       version: 5.6.2
@@ -215,6 +230,9 @@ catalogs:
     '@types/lodash-es':
       specifier: ^4.17.12
       version: 4.17.12
+    '@types/minimist':
+      specifier: ^1.2.5
+      version: 1.2.5
   utils:
     '@antfu/utils':
       specifier: ^9.2.1
@@ -334,6 +352,31 @@ importers:
       vue:
         specifier: 3.4.38
         version: 3.4.38(typescript@5.9.2)
+
+  packages/c2e:
+    dependencies:
+      '@rollup/plugin-terser':
+        specifier: catalog:build
+        version: 0.4.4(rollup@4.52.0)
+    devDependencies:
+      '@clack/prompts':
+        specifier: catalog:node
+        version: 0.11.0
+      '@rollup/plugin-commonjs':
+        specifier: catalog:build
+        version: 28.0.6(rollup@4.52.0)
+      '@rollup/plugin-node-resolve':
+        specifier: catalog:build
+        version: 16.0.1(rollup@4.52.0)
+      '@types/minimist':
+        specifier: catalog:types
+        version: 1.2.5
+      chalk:
+        specifier: catalog:node
+        version: 5.6.2
+      minimist:
+        specifier: catalog:dev
+        version: 1.2.8
 
   packages/core:
     devDependencies:
@@ -2363,6 +2406,15 @@ packages:
       rollup:
         optional: true
 
+  '@rollup/plugin-terser@0.4.4':
+    resolution: {integrity: sha512-XHeJC5Bgvs8LfukDwWZp7yeqin6ns8RTl2B9avbejt6tZqsqvVoWI7ZTQrcNsfKEDWBTnTxM8nMDkO2IFFbd0A==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+
   '@rollup/pluginutils@5.3.0':
     resolution: {integrity: sha512-5EdhGZtnu3V88ces7s53hhfK5KSASnJZv8Lulpc04cWO3REESroJXg73DFsOmgbU2BhwV0E20bu2IDZb3VKW4Q==}
     engines: {node: '>=14.0.0'}
@@ -2597,6 +2649,9 @@ packages:
 
   '@types/mdurl@2.0.0':
     resolution: {integrity: sha512-RGdgjQUZba5p6QEFAVx2OGb8rQDL/cPRG7GiedRzMcJ1tYnUANBncjbSB1NRGwbvjcPeikRABz2nshyPk1bhWg==}
+
+  '@types/minimist@1.2.5':
+    resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
 
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
@@ -6142,6 +6197,9 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
+  randombytes@2.1.0:
+    resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
+
   range-parser@1.2.1:
     resolution: {integrity: sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==}
     engines: {node: '>= 0.6'}
@@ -6351,6 +6409,9 @@ packages:
     resolution: {integrity: sha512-dW41u5VfLXu8SJh5bwRmyYUbAoSB3c9uQh6L8h/KtsFREPWpbX1lrljJo186Jc4nmci/sGUZ9a0a0J2zgfq2hw==}
     engines: {node: '>= 0.8.0'}
 
+  serialize-javascript@6.0.2:
+    resolution: {integrity: sha512-Saa1xPByTTq2gdeFZYLLo+RFE35NHZkAbqZeWNd3BpzppeVisAqpDjcp8dyf6uIvEqJRd46jemmyA4iFIeVk8g==}
+
   serve-static@1.16.2:
     resolution: {integrity: sha512-VqpjJZKadQB/PEbEwvFdO43Ax5dFBZ2UECszz8bQ7pi7wt//PWe1P6MN7eCnjsatYtBT6EuiClbjSWP2WrIoTw==}
     engines: {node: '>= 0.8.0'}
@@ -6417,6 +6478,9 @@ packages:
   slice-ansi@7.1.2:
     resolution: {integrity: sha512-iOBWFgUX7caIZiuutICxVgX1SdxwAVFFKwt1EvMYYec/NWO5meOJ6K5uQxhrYBdQJne4KxiqZc+KptFOWFSI9w==}
     engines: {node: '>=18'}
+
+  smob@1.5.0:
+    resolution: {integrity: sha512-g6T+p7QO8npa+/hNx9ohv1E5pVCmWrVCUzUXJyLdMmftX6ER0oiWY/w9knEonLpnOp6b6FenKnMfR8gqwWdwig==}
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
@@ -9857,6 +9921,14 @@ snapshots:
     optionalDependencies:
       rollup: 4.52.0
 
+  '@rollup/plugin-terser@0.4.4(rollup@4.52.0)':
+    dependencies:
+      serialize-javascript: 6.0.2
+      smob: 1.5.0
+      terser: 5.44.0
+    optionalDependencies:
+      rollup: 4.52.0
+
   '@rollup/pluginutils@5.3.0(rollup@4.52.0)':
     dependencies:
       '@types/estree': 1.0.8
@@ -10080,6 +10152,8 @@ snapshots:
       '@types/unist': 3.0.3
 
   '@types/mdurl@2.0.0': {}
+
+  '@types/minimist@1.2.5': {}
 
   '@types/ms@2.1.0': {}
 
@@ -10422,7 +10496,7 @@ snapshots:
 
   '@unocss/rule-utils@66.0.0':
     dependencies:
-      '@unocss/core': 66.0.0
+      '@unocss/core': 66.5.1
       magic-string: 0.30.19
 
   '@unocss/rule-utils@66.5.1':
@@ -14367,6 +14441,10 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
+  randombytes@2.1.0:
+    dependencies:
+      safe-buffer: 5.2.1
+
   range-parser@1.2.1: {}
 
   raw-body@2.5.2:
@@ -14613,6 +14691,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  serialize-javascript@6.0.2:
+    dependencies:
+      randombytes: 2.1.0
+
   serve-static@1.16.2:
     dependencies:
       encodeurl: 2.0.0
@@ -14697,6 +14779,8 @@ snapshots:
     dependencies:
       ansi-styles: 6.2.3
       is-fullwidth-code-point: 5.1.0
+
+  smob@1.5.0: {}
 
   source-map-js@1.2.1: {}
 

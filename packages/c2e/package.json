@@ -1,0 +1,35 @@
+{
+  "name": "@uni-echarts/c2e",
+  "type": "module",
+  "version": "1.1.2",
+  "description": "🪀 Transform CJS to ESM for Uni ECharts.",
+  "author": "xiaohe0601 <xiaohe0601@outlook.com>",
+  "license": "MIT",
+  "homepage": "https://uni-echarts.xiaohe.ink",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaohe0601/uni-echarts.git"
+  },
+  "bugs": "https://github.com/xiaohe0601/uni-echarts/issues",
+  "sideEffects": false,
+  "bin": {
+    "uni-echarts-c2e": "./dist/index.cjs"
+  },
+  "files": [
+    "dist/index.cjs"
+  ],
+  "scripts": {
+    "build": "unbuild"
+  },
+  "dependencies": {
+    "@rollup/plugin-terser": "catalog:build"
+  },
+  "devDependencies": {
+    "@clack/prompts": "catalog:node",
+    "@rollup/plugin-commonjs": "catalog:build",
+    "@rollup/plugin-node-resolve": "catalog:build",
+    "@types/minimist": "catalog:types",
+    "chalk": "catalog:node",
+    "minimist": "catalog:dev"
+  }
+}
