@@ -66,6 +66,13 @@ export default defineManifestConfig({
   "mp-weixin": {
     appid: "",
     setting: {
+      es6: false,
+      swc: true,
+      postcss: true,
+      minified: true,
+      minifyWXSS: true,
+      minifyWXML: true,
+      ignoreUploadUnusedFiles: true,
       urlCheck: false
     },
     optimization: {
