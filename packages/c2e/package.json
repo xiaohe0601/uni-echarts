@@ -12,11 +12,22 @@
   },
   "bugs": "https://github.com/xiaohe0601/uni-echarts/issues",
   "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./*": "./*"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "bin": {
-    "uni-echarts-c2e": "./dist/index.cjs"
+    "uni-echarts-c2e": "./dist/cli.cjs"
   },
   "files": [
-    "dist/index.cjs"
+    "dist"
   ],
   "scripts": {
     "build": "unbuild"

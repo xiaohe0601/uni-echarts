@@ -2,9 +2,11 @@ import { defineBuildConfig } from "unbuild";
 
 export default defineBuildConfig({
   entries: [
-    "src/index.ts"
+    "src/index.ts",
+    "src/cli.ts"
   ],
   clean: true,
+  declaration: true,
   externals: [
     "@clack/prompts",
     "@rollup/plugin-commonjs",
