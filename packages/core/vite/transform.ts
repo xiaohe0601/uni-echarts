@@ -16,12 +16,25 @@ interface Asts {
   scriptSetup: ParseResult | null;
 }
 
+export type ImportType = "default" | "namespace";
+
 export interface TransformOptions {
-  provideECharts?: boolean | string;
+  echarts?: {
+    provide?: boolean | string;
+    importType?: ImportType;
+  };
 }
 
-export async function transform(code: string, options: Required<TransformOptions>) {
-  if (!options.provideECharts) {
+export async function transform(code: string, options: TransformOptions) {
+  const opts = {
+    echarts: {
+      provide: true,
+      importType: "namespace",
+      ...options.echarts
+    }
+  } satisfies TransformOptions;
+
+  if (!opts.echarts.provide) {
     return null;
   }
 
@@ -39,12 +52,15 @@ export async function transform(code: string, options: Required<TransformOptions
 
   const ms = new MagicString(code);
 
-  if (options.provideECharts) {
+  if (opts.echarts.provide) {
     await injectEChartsProvide({
       sfc,
       ms,
       asts,
-      echarts: options.provideECharts === true ? "echarts/core" : options.provideECharts
+      echarts: {
+        provide: opts.echarts.provide === true ? "echarts/core" : opts.echarts.provide,
+        importType: opts.echarts.importType
+      }
     });
   }
 
@@ -65,7 +81,10 @@ async function injectEChartsProvide(options: {
   sfc: SFCDescriptor;
   ms: MagicString;
   asts: Asts;
-  echarts: string;
+  echarts: {
+    provide: string;
+    importType: ImportType;
+  };
 }) {
   const { sfc, ms } = options;
 
@@ -82,7 +101,7 @@ async function injectEChartsProvide(options: {
       hasImportEcharts,
       hasImportProvide
     } = findEChartsProvideImports(staticImports, {
-      echarts: options.echarts,
+      echarts: options.echarts.provide,
       provide: "provideEcharts"
     });
 
@@ -96,7 +115,11 @@ async function injectEChartsProvide(options: {
     const imports: string[] = [];
 
     if (!hasImportEcharts) {
-      imports.push(`import * as echarts from "${options.echarts}";`);
+      if (options.echarts.importType === "default") {
+        imports.push(`import echarts from "${options.echarts}";`);
+      } else {
+        imports.push(`import * as echarts from "${options.echarts}";`);
+      }
     }
     if (!hasImportProvide) {
       imports.push(`import { provideEcharts } from "uni-echarts/shared";`);
@@ -122,7 +145,7 @@ async function injectEChartsProvide(options: {
       hasImportEcharts,
       hasImportProvide
     } = findEChartsProvideImports(staticImports, {
-      echarts: options.echarts,
+      echarts: options.echarts.provide,
       provide: "ECHARTS_KEY"
     });
 
@@ -136,7 +159,11 @@ async function injectEChartsProvide(options: {
     const imports: string[] = [];
 
     if (!hasImportEcharts) {
-      imports.push(`import * as echarts from "${options.echarts}";`);
+      if (options.echarts.importType === "default") {
+        imports.push(`import echarts from "${options.echarts}";`);
+      } else {
+        imports.push(`import * as echarts from "${options.echarts}";`);
+      }
     }
     if (!hasImportProvide) {
       imports.push(`import { ECHARTS_KEY } from "uni-echarts/shared";`);

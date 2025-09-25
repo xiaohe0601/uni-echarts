@@ -10,10 +10,9 @@ export interface Options extends TransformOptions {
 
 export function UniEcharts(options: Options = {}): Plugin {
   const opts = {
-    provideECharts: true,
     include: "./src/**/*.vue",
     ...options
-  };
+  } satisfies Options;
 
   const filter = createFilter(opts.include, opts.exclude);
 
