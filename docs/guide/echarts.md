@@ -19,10 +19,53 @@ import "echarts";
 ## 定制 ECharts
 
 通常情况，使用 [按需导入](#按需导入) 就能有效减小打包体积，但是在某些场景如果需要使用定制的 ECharts，
-在 Uni ECharts 中可以配合 [provideEcharts](../apis/function#provideecharts) 实现。
+在 Uni ECharts 中可以配合 [provideEcharts](../apis/function#provideecharts) 实现，具体参考以下步骤：
 
-首先到 ECharts 官网 [在线定制](https://echarts.apache.org/zh/builder.html) 并打包下载 `echarts` 到项目中
-（建议放到主包或分包的 `static` 目录下），然后参考下述方案实现。
+1. 使用 ECharts 官网的 [在线定制](https://echarts.apache.org/zh/builder.html)
+   功能根据需求选择需要使用的模块构建并下载 `echarts.min.js` 到本地；
+
+2. 由于 Vite 默认仅支持 ESM 模块，但是 ECharts 官网的在线定制功能并不支持下载 ESM 格式的产物，
+   所以 Uni ECharts 提供了一个 CLI 工具可以轻松将其转换为 ESM 格式，使用示例如下：
+
+   ::: code-group
+
+    ```shell [pnpm]
+    pnpm dlx @uni-echarts/c2e uni-echarts-c2e ./echarts.min.js ./echarts.esm.js
+    ```
+
+    ```shell [npm]
+    npx @uni-echarts/c2e uni-echarts-c2e ./echarts.min.js ./echarts.esm.js
+    ```
+
+   :::
+
+    ```shell
+    ┌  Uni ECharts Transform CLI
+    │
+    ●  Transform input echarts.min.js to ESM
+    │
+    ◇  Input file
+    │  ./echarts.min.js
+    │
+    ◇  Output file
+    │  ./echarts.esm.js
+    │
+    ◇  Transform completed!
+    │
+    └  Output: /path/to/echarts.esm.js
+    ```
+
+   ::: warning 提示
+
+   受限于 `echarts.min.js` 的内容，转换后的 ESM 产物并不支持 Tree-Shaking，并且需要使用默认导入，示例如下：
+
+   ```javascript
+   import echarts from "/path/to/echarts.esm.js";
+   ```
+
+   :::
+
+3. 将转换后的 `echarts.esm.js` 放入项目中，注意**不要**放到 `static` 目录。
 
 ### NPM 方式
 
@@ -37,8 +80,11 @@ export default defineConfig({
   // ...
   plugins: [
     UniEcharts({
-      // 传实际的 echarts 路径，例如："@/static/echarts.min.js"
-      provideECharts: "/path/to/echarts.min.js" // [!code ++]
+      echarts: { // [!code ++]
+        // 传实际的 echarts 文件路径，例如："@/plugins/echarts.esm.js" // [!code ++]
+        provide: "/path/to/echarts.esm.js", // [!code ++]
+        importType: "default" // [!code ++]
+      } // [!code ++]
     })
   ]
 });
@@ -49,7 +95,7 @@ export default defineConfig({
 ```js
 import * as echarts from "echarts/core";// [!code --]
 import { provideEcharts } from "uni-echarts/shared";
-import * as echarts from "/path/to/echarts.min.js";// [!code ++]
+import echarts from "/path/to/echarts.esm.js";// [!code ++]
 
 provideEcharts(echarts);
 ```
@@ -61,7 +107,7 @@ provideEcharts(echarts);
 ```js
 import * as echarts from "echarts/core";// [!code --]
 import { provideEcharts } from "@/uni_modules/xiaohe-echarts";
-import * as echarts from "/path/to/echarts.min.js";// [!code ++]
+import echarts from "/path/to/echarts.esm.js";// [!code ++]
 
 provideEcharts(echarts);
 ```
