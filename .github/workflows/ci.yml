@@ -11,6 +11,7 @@ on:
 
 jobs:
   lint:
+    if: "!startsWith(github.event.head_commit.message, 'chore: release')"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -37,6 +38,7 @@ jobs:
         run: nr lint:type
 
   test:
+    if: "!startsWith(github.event.head_commit.message, 'chore: release')"
     runs-on: ${{ matrix.os }}
 
     strategy:
