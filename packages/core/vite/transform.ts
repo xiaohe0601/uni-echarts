@@ -116,9 +116,9 @@ async function injectEChartsProvide(options: {
 
     if (!hasImportEcharts) {
       if (options.echarts.importType === "default") {
-        imports.push(`import echarts from "${options.echarts}";`);
+        imports.push(`import echarts from "${options.echarts.provide}";`);
       } else {
-        imports.push(`import * as echarts from "${options.echarts}";`);
+        imports.push(`import * as echarts from "${options.echarts.provide}";`);
       }
     }
     if (!hasImportProvide) {
@@ -160,9 +160,9 @@ async function injectEChartsProvide(options: {
 
     if (!hasImportEcharts) {
       if (options.echarts.importType === "default") {
-        imports.push(`import echarts from "${options.echarts}";`);
+        imports.push(`import echarts from "${options.echarts.provide}";`);
       } else {
-        imports.push(`import * as echarts from "${options.echarts}";`);
+        imports.push(`import * as echarts from "${options.echarts.provide}";`);
       }
     }
     if (!hasImportProvide) {
