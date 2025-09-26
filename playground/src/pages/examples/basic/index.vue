@@ -30,8 +30,6 @@ definePage({
   }
 });
 
-provideEcharts(echarts);
-
 echarts.use([
   LegendComponent,
   TooltipComponent,

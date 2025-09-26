@@ -46,8 +46,6 @@ definePage({
   }
 });
 
-provideEcharts(echarts);
-
 echarts.use([
   RadarChart,
   CanvasRenderer

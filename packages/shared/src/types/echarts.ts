@@ -1,7 +1,7 @@
-import type { init, SetOptionOpts } from "echarts/core";
+import type * as Echarts from "echarts/core";
 import type { Injection } from "./vue";
 
-type InitType = typeof init;
+type InitType = typeof Echarts["init"];
 export type InitParameters = Parameters<InitType>;
 
 export type ChartTheme = NonNullable<InitParameters[1]>;
@@ -10,7 +10,7 @@ export type ChartThemeInjection = Injection<ChartTheme>;
 export type InitOptions = NonNullable<InitParameters[2]>;
 export type InitOptionsInjection = Injection<InitOptions>;
 
-export type UpdateOptions = SetOptionOpts;
+export type UpdateOptions = Echarts.SetOptionOpts;
 export type UpdateOptionsInjection = Injection<UpdateOptions>;
 
 export type EChartsType = ReturnType<InitType>;

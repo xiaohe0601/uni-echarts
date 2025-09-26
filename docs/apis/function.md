@@ -3,12 +3,11 @@
 ## provideEcharts
 
 ```ts
-type MinifyEcharts = Pick<
-  typeof Echarts,
-  "init" | "registerPreprocessor" | "setPlatformAPI" | "use" | "throttle"
->;
+import type * as Echarts from "echarts/core";
 
-declare function provideEcharts(echarts: MinifyEcharts): void;
+export type CoreEcharts = typeof Echarts;
+
+declare function provideEcharts(echarts: CoreEcharts): void;
 ```
 
 ## provideEchartsTheme

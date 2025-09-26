@@ -6,3 +6,4 @@ shared-core.d.ts
 
 # 制品文件
 dist-resolver
+dist-vite

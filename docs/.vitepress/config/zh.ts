@@ -63,7 +63,13 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: "关于 ECharts", link: "/echarts" },
         { text: "依赖注入", link: "/provide" },
         { text: "常见问题", link: "/faq" },
-        { text: "更新日志", link: "/changelog" }
+        { text: "更新日志", link: "/changelog" },
+        {
+          text: "迁移指南",
+          items: [
+            { text: "从 1.x 迁移到 2.x", link: "/migration-v1" }
+          ]
+        }
       ]
     }
   ];

@@ -1,4 +1,4 @@
-import type { MinifyEcharts } from "../composables";
+import type { CoreEcharts } from "../composables";
 import type { NullableValue, OptionalValue, ZRenderHandler } from "../types";
 import { defaultTo, isEmpty, lowerFirst, upperFirst } from "./helpers";
 import type { Emitter, EventType } from "./mitt";
@@ -363,7 +363,7 @@ export class UniImage {
 
 }
 
-export function setupEchartsCanvas(echarts: MinifyEcharts, {
+export function setupEchartsCanvas(echarts: CoreEcharts, {
   canvas,
   node
 }: {

@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, MaybeRefOrGetter, Ref } from "vue";
 import { watch } from "vue";
 import type { EChartsType, NullableValue } from "../types";
-import type { MinifyEcharts } from "./useEcharts";
+import type { CoreEcharts } from "./useEcharts";
 
 export type AutoResize = boolean | {
   throttle?: number;
@@ -13,7 +13,7 @@ export function useAutoresize(chart: Ref<NullableValue<EChartsType>>, {
   autoresize,
   root
 }: {
-  echarts: MinifyEcharts;
+  echarts: CoreEcharts;
   autoresize: MaybeRefOrGetter<AutoResize>;
   root: Ref<NullableValue<ComponentPublicInstance>>;
 }): void {

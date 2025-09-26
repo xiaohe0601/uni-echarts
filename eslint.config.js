@@ -11,6 +11,7 @@ export default defineConfig({
     "**/*.md",
     "packages/core/src/shared-core.*",
     "packages/core/dist-resolver",
+    "packages/core/dist-vite",
     "playground/src/uni_modules"
   ]
 }, {

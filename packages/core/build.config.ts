@@ -30,5 +30,24 @@ export default defineBuildConfig([
     rollup: {
       emitCJS: true
     }
+  },
+  {
+    name: "uni-echarts/vite",
+    entries: [
+      "vite/index.ts"
+    ],
+    outDir: "dist-vite",
+    clean: false,
+    declaration: true,
+    externals: [
+      "@oxc-project/types",
+      "oxc-parser",
+      "vite",
+      "vue"
+    ],
+    failOnWarn: false,
+    rollup: {
+      emitCJS: true
+    }
   }
 ]);

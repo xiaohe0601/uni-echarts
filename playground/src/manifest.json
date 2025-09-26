@@ -54,7 +54,14 @@
   "mp-weixin": {
     "appid": "",
     "setting": {
-      "urlCheck": false
+      "urlCheck": false,
+      "es6": false,
+      "swc": true,
+      "postcss": true,
+      "minified": true,
+      "minifyWXSS": true,
+      "minifyWXML": true,
+      "ignoreUploadUnusedFiles": true
     },
     "usingComponents": true,
     "optimization": {

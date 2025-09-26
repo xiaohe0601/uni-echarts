@@ -8,7 +8,7 @@ export default defineBuildConfig({
   clean: true,
   declaration: true,
   externals: [
-    "echarts/core",
+    "echarts",
     "vue"
   ],
   hooks: {

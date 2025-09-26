@@ -33,17 +33,23 @@
       "import": "./dist-resolver/index.mjs",
       "require": "./dist-resolver/index.cjs"
     },
+    "./vite": {
+      "types": "./dist-vite/index.d.ts",
+      "import": "./dist-vite/index.mjs",
+      "require": "./dist-vite/index.cjs"
+    },
     "./global": "./src/global.d.ts",
     "./*": "./src/*"
   },
   "files": [
     "dist",
     "dist-resolver",
+    "dist-vite",
     "src"
   ],
   "scripts": {
     "build": "nr clean:dist && unbuild && esno scripts/post-build.ts",
-    "clean:dist": "rimraf ./dist ./dist-resolver"
+    "clean:dist": "rimraf ./dist ./dist-resolver ./dist-vite"
   },
   "peerDependencies": {
     "echarts": ">=5.3.0",
@@ -53,6 +59,7 @@
     "@uni-helper/vite-plugin-uni-components": "catalog:build",
     "@vue/runtime-core": "catalog:frontend",
     "echarts": "catalog:frontend",
+    "oxc-parser": "catalog:dev",
     "vue": "catalog:frontend"
   }
 }

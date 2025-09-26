@@ -9,7 +9,7 @@ Uni ECharts 提供了 [npm](#npm-方式) 和 [uni-modules](#uni-modules-方式) 
 
 :::
 
-## NPM 方式
+## NPM 方式 <Badge text="推荐" />
 
 ### 安装
 
@@ -26,6 +26,10 @@ yarn add echarts uni-echarts
 ```shell [npm]
 npm install echarts uni-echarts
 ```
+
+::: info 提示
+
+如果需要使用定制 ECharts 请参考 [定制 ECharts](./echarts#定制-echarts) 部分的说明。
 
 :::
 
@@ -46,6 +50,23 @@ export default defineConfig({
       "uni-echarts" // [!code ++]
     ] // [!code ++]
   } // [!code ++]
+});
+```
+
+#### Vite 插件
+
+自 `2.0.0` 开始，Uni ECharts 提供了 Vite 插件用于自动化处理一些繁琐、重复的工作，也为将来更多的高级功能提供了可能性。
+
+```js
+// vite.config.js[ts]
+import { UniEcharts } from "uni-echarts/vite"; // [!code ++]
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  // ...
+  plugins: [
+    UniEcharts() // [!code ++]
+  ]
 });
 ```
 
@@ -133,12 +154,11 @@ import UniEcharts from "uni-echarts"; // [!code --]
 import { provideEcharts, provideEchartsTheme } from "uni-echarts/shared"; // [!code --]
 import { ref } from "vue";
 
-// 由于尚未明确的原因，目前 npm 插件的编译机制存在问题
-// 小程序端的 npm 插件内部无法正确获取到业务侧的 echarts
-// 所以需要手动将 echarts 提供给插件用于构建图表
-provideEcharts(echarts); // 🚨 注意：npm 方式需要添加这一行代码
+// 🚨 注意：必须调用 provideEcharts 才能正常运行
+provideEcharts(echarts);
+// 🤩 自 2.0.0 开始，通过配置 Vite 插件可以省略上述 provideEcharts 的调用
 
-// 此处仅用于演示通过 provide 修改图表 theme 的方式，不是必需
+// 此处仅用于演示通过 provide 修改图表 theme 的方式，不是必须的
 provideEchartsTheme("dark");
 
 echarts.use([
@@ -204,27 +224,127 @@ const option = ref({
 </style>
 ```
 
+::: details Options API 示例
+
+```vue
+<template>
+  <uni-echarts custom-class="chart" :option="option"></uni-echarts>
+</template>
+
+<script>
+import { PieChart } from "echarts/charts";
+import { DatasetComponent, LegendComponent, TooltipComponent } from "echarts/components";
+import * as echarts from "echarts/core";
+import { CanvasRenderer } from "echarts/renderers";
+import UniEcharts from "uni-echarts";
+import { ECHARTS_KEY, THEME_KEY } from "uni-echarts/shared";
+import { defineComponent } from "vue";
+
+echarts.use([
+  LegendComponent,
+  TooltipComponent,
+  DatasetComponent,
+  PieChart,
+  CanvasRenderer
+]);
+
+export default defineComponent({
+  components: {
+    UniEcharts
+  },
+  provide: {
+    [ECHARTS_KEY]: echarts,
+    [THEME_KEY]: "dark"
+  },
+  data() {
+    return {
+      option: {
+        legend: {
+          top: 10,
+          left: "center"
+        },
+        tooltip: {
+          trigger: "item",
+          textStyle: {
+            // #ifdef MP-WEIXIN
+            // 临时解决微信小程序 tooltip 文字阴影问题
+            textShadowBlur: 1
+            // #endif
+          }
+        },
+        series: [
+          {
+            type: "pie",
+            radius: ["30%", "52%"],
+            label: {
+              show: false,
+              position: "center"
+            },
+            itemStyle: {
+              borderWidth: 2,
+              borderColor: "#ffffff",
+              borderRadius: 10
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: 20
+              }
+            }
+          }
+        ],
+        dataset: {
+          dimensions: ["来源", "数量"],
+          source: [
+            ["Search Engine", 1048],
+            ["Direct", 735],
+            ["Email", 580],
+            ["Union Ads", 484],
+            ["Video Ads", 300]
+          ]
+        }
+      }
+    };
+  }
+});
+</script>
+
+<style scoped>
+.chart {
+  height: 300px;
+}
+</style>
+```
+
+:::
+
 ## Uni Modules 方式
 
 ### 安装
 
 1. 使用 npm 安装 `echarts`
 
-::: code-group
+    ::: code-group
 
-```shell [pnpm]
-pnpm add echarts
-```
+    ```shell [pnpm]
+    pnpm add echarts
+    ```
 
-```shell [yarn]
-yarn add echarts
-```
+    ```shell [yarn]
+    yarn add echarts
+    ```
 
-```shell [npm]
-npm install echarts
-```
+    ```shell [npm]
+    npm install echarts
+    ```
 
-:::
+    :::
+
+    ::: info 提示
+
+    如果需要使用定制 ECharts 请参考 [定制 ECharts](./echarts#定制-echarts) 部分的说明。
+
+    :::
 
 2. 前往 uni-app 插件市场下载 [Uni Echarts](https://ext.dcloud.net.cn/plugin?id=22035)
 
@@ -253,16 +373,19 @@ Uni ECharts 支持 [easycom](https://uniapp.dcloud.net.cn/component/#easycom) �
 <script setup>
 import { PieChart } from "echarts/charts";
 import { DatasetComponent, LegendComponent, TooltipComponent } from "echarts/components";
-import { use } from "echarts/core";
+import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { ref } from "vue";
 // 🚨 注意导入路径与 npm 方式的区别
-import { provideEchartsTheme } from "@/uni_modules/xiaohe-echarts";
+import { provideEcharts, provideEchartsTheme } from "@/uni_modules/xiaohe-echarts";
 
-// 此处仅用于演示通过 provide 修改图表 theme 的方式，不是必需
+// 🚨 注意：自 2.0.0 开始，uni-modules 方式也必须调用 provideEcharts 才能正常运行
+provideEcharts(echarts);
+
+// 此处仅用于演示通过 provide 修改图表 theme 的方式，不是必须的
 provideEchartsTheme("dark");
 
-use([
+echarts.use([
   LegendComponent,
   TooltipComponent,
   DatasetComponent,
@@ -324,3 +447,93 @@ const option = ref({
 }
 </style>
 ```
+
+::: details Options API 示例
+
+```vue
+<template>
+  <uni-echarts custom-class="chart" :option="option"></uni-echarts>
+</template>
+
+<script>
+import { PieChart } from "echarts/charts";
+import { DatasetComponent, LegendComponent, TooltipComponent } from "echarts/components";
+import * as echarts from "echarts/core";
+import { CanvasRenderer } from "echarts/renderers";
+import { defineComponent } from "vue";
+import { ECHARTS_KEY, THEME_KEY } from "@/uni_modules/xiaohe-echarts";
+
+echarts.use([
+  LegendComponent,
+  TooltipComponent,
+  DatasetComponent,
+  PieChart,
+  CanvasRenderer
+]);
+
+export default defineComponent({
+  provide: {
+    [ECHARTS_KEY]: echarts,
+    [THEME_KEY]: "dark"
+  },
+  data() {
+    return {
+      option: {
+        legend: {
+          top: 10,
+          left: "center"
+        },
+        tooltip: {
+          trigger: "item",
+          textStyle: {
+            // #ifdef MP-WEIXIN
+            // 临时解决微信小程序 tooltip 文字阴影问题
+            textShadowBlur: 1
+            // #endif
+          }
+        },
+        series: [
+          {
+            type: "pie",
+            radius: ["30%", "52%"],
+            label: {
+              show: false,
+              position: "center"
+            },
+            itemStyle: {
+              borderWidth: 2,
+              borderColor: "#ffffff",
+              borderRadius: 10
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: 20
+              }
+            }
+          }
+        ],
+        dataset: {
+          dimensions: ["来源", "数量"],
+          source: [
+            ["Search Engine", 1048],
+            ["Direct", 735],
+            ["Email", 580],
+            ["Union Ads", 484],
+            ["Video Ads", 300]
+          ]
+        }
+      }
+    };
+  }
+});
+</script>
+
+<style scoped>
+.chart {
+  height: 300px;
+}
+</style>
+```
+
+:::
