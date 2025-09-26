@@ -107,14 +107,15 @@ Usage:
   $ uni-echarts-c2e [input] [output] [options]
 
 Arguments:
-  input     Input file path (e.g., ${chalk.cyan("./echarts.min.js")})
-  output    Output file path (e.g., ${chalk.cyan("./echarts.esm.js")})
+  input     Input file path (e.g., ./echarts.min.js)
+  output    Output file path (e.g., ./echarts.esm.js)
 
 Options:
   -f, --force   Overwrite output if it exists
   -h, --help    Display this message
 
 Examples:
+  $ uni-echarts-c2e
   $ uni-echarts-c2e ./echarts.min.js ./echarts.esm.js
   $ uni-echarts-c2e ./echarts.min.js ./echarts.esm.js -f
   $ uni-echarts-c2e --help
