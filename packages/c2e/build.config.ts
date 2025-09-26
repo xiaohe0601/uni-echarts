@@ -13,6 +13,7 @@ export default defineBuildConfig({
     "@rollup/plugin-node-resolve",
     "@rollup/plugin-terser",
     "chalk",
+    "magic-string",
     "minimist",
     "rollup"
   ],

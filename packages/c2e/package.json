@@ -32,15 +32,14 @@
   "scripts": {
     "build": "unbuild"
   },
-  "dependencies": {
-    "@rollup/plugin-terser": "catalog:build"
-  },
   "devDependencies": {
     "@clack/prompts": "catalog:node",
     "@rollup/plugin-commonjs": "catalog:build",
     "@rollup/plugin-node-resolve": "catalog:build",
+    "@rollup/plugin-terser": "catalog:build",
     "@types/minimist": "catalog:types",
     "chalk": "catalog:node",
+    "magic-string": "catalog:utils",
     "minimist": "catalog:dev"
   }
 }

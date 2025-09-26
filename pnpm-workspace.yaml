@@ -98,6 +98,7 @@ catalogs:
     '@antfu/utils': ^9.2.1
     '@vueuse/core': ^12.8.2
     lodash-es: ^4.17.21
+    magic-string: ^0.30.19
 onlyBuiltDependencies:
   - '@uni-helper/unocss-preset-uni'
   - core-js
