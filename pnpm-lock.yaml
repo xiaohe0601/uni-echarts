@@ -24,6 +24,9 @@ catalogs:
     '@uni-helper/vite-plugin-uni-pages':
       specifier: ^0.3.17
       version: 0.3.17
+    rollup:
+      specifier: ^4.52.2
+      version: 4.52.2
     unbuild:
       specifier: ~3.5.0
       version: 3.5.0
@@ -382,6 +385,9 @@ importers:
       minimist:
         specifier: catalog:dev
         version: 1.2.8
+      rollup:
+        specifier: catalog:build
+        version: 4.52.2
 
   packages/core:
     devDependencies:
