@@ -9,12 +9,13 @@
 - Vite 插件
 
   Uni ECharts 在 npm 版本中提供了一个 Vite 插件用于自动化处理一些繁琐、重复的工作。
-  由于插件可以自动完成 `provideEcharts` 的调用，所以组件内部将不再填充 `echarts/core` 作为默认的 `echarts` 插件，
+
+  插件可以自动完成 `provideEcharts` 的调用，所以组件内部将不再填充 `echarts/core` 作为默认的 `echarts` 插件，
   同时也间接支持了定制 `echarts` 的使用（还解决了小程序端 `echarts/core` 生成重复问题，进一步节省了小程序宝贵的空间）。
 
 - CLI 工具
 
-  Uni ECharts 提供了一个 CLI 工具，可以轻松将 `echarts.min.js` 转换为 ESM 格式。
+  Uni ECharts 提供了一个 CLI 工具，可以轻松将在线定制的 `echarts.min.js` 转换为 ESM 格式。
 
 ## Uni Modules 方式
 

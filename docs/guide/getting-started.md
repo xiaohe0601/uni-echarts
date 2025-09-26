@@ -27,6 +27,10 @@ yarn add echarts uni-echarts
 npm install echarts uni-echarts
 ```
 
+::: info 提示
+
+如果需要使用定制 ECharts 请参考 [定制 ECharts](./echarts#定制-echarts) 部分的说明。
+
 :::
 
 ### 配置
@@ -320,21 +324,27 @@ export default defineComponent({
 
 1. 使用 npm 安装 `echarts`
 
-::: code-group
+    ::: code-group
 
-```shell [pnpm]
-pnpm add echarts
-```
+    ```shell [pnpm]
+    pnpm add echarts
+    ```
 
-```shell [yarn]
-yarn add echarts
-```
+    ```shell [yarn]
+    yarn add echarts
+    ```
 
-```shell [npm]
-npm install echarts
-```
+    ```shell [npm]
+    npm install echarts
+    ```
 
-:::
+    :::
+
+    ::: info 提示
+
+    如果需要使用定制 ECharts 请参考 [定制 ECharts](./echarts#定制-echarts) 部分的说明。
+
+    :::
 
 2. 前往 uni-app 插件市场下载 [Uni Echarts](https://ext.dcloud.net.cn/plugin?id=22035)
 
