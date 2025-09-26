@@ -30,11 +30,11 @@ import "echarts";
    ::: code-group
 
     ```shell [pnpm]
-    pnpm dlx @uni-echarts/c2e@latest uni-echarts-c2e
+    pnpm dlx @uni-echarts/c2e@latest
     ```
 
     ```shell [npm]
-    npx @uni-echarts/c2e@latest uni-echarts-c2e
+    npx @uni-echarts/c2e@latest
     ```
 
    :::
