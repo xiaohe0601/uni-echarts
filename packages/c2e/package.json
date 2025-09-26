@@ -32,7 +32,7 @@
   "scripts": {
     "build": "unbuild"
   },
-  "devDependencies": {
+  "dependencies": {
     "@clack/prompts": "catalog:node",
     "@rollup/plugin-commonjs": "catalog:build",
     "@rollup/plugin-node-resolve": "catalog:build",
