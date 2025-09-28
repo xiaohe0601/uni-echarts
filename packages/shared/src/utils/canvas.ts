@@ -103,7 +103,7 @@ export class UniCanvas {
       });
     }
 
-    const _drawImage = context.drawImage;
+    const _drawImage = context.drawImage.bind(context);
     context.drawImage = (...args) => {
       // @ts-expect-error whatever
       _drawImage(args[0].src, ...args.slice(1));
@@ -341,11 +341,11 @@ export class UniImage {
   }
 
   set src(value: string) {
-    this._src = value;
-
     uni.getImageInfo({
       src: value,
       success: (res) => {
+        this._src = res.path;
+
         this.width = res.width;
         this.height = res.height;
 
@@ -389,30 +389,28 @@ export function setupEchartsCanvas(echarts: CoreEcharts, {
     }
   });
 
-  const loadImage = (
-    src: string,
-    onload: () => void,
-    onerror: () => void
-  ) => {
-    if (node != null && node.createImage) {
-      const image = node.createImage();
+  echarts.setPlatformAPI({
+    createCanvas() {
+      return canvas as unknown as HTMLCanvasElement;
+    },
+    loadImage(
+      src: string,
+      onload: () => void,
+      onerror: () => void
+    ) {
+      if (node != null && node.createImage) {
+        const image = node.createImage();
+        image.onload = onload;
+        image.onerror = onerror;
+        image.src = src;
+        return image;
+      }
+
+      const image = new UniImage();
       image.onload = onload;
       image.onerror = onerror;
       image.src = src;
       return image;
-    }
-
-    const image = new UniImage();
-    image.onload = onload;
-    image.onerror = onerror;
-    image.src = src;
-    return image;
-  };
-
-  echarts.setPlatformAPI({
-    loadImage: node != null ? loadImage : undefined,
-    createCanvas() {
-      return canvas as unknown as HTMLCanvasElement;
     }
   });
 }
