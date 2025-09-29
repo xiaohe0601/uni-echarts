@@ -318,6 +318,12 @@ export default defineComponent({
 
 :::
 
+::: warning 小程序端图表不显示？
+
+请参考常见问题中 [小程序端 class / style 无效](./faq#小程序端-class-style-无效) 部分的说明。
+
+:::
+
 ## Uni Modules 方式
 
 ### 安装
@@ -535,5 +541,11 @@ export default defineComponent({
 }
 </style>
 ```
+
+:::
+
+::: warning 小程序端图表不显示？
+
+请参考常见问题中 [小程序端 class / style 无效](./faq#小程序端-class-style-无效) 部分的说明。
 
 :::

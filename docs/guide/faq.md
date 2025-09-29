@@ -19,13 +19,48 @@
 使其更加接近 Vue 组件的表现。但是这将导致组件的 class / style 属性失效，所以组件提供了 custom-class / custom-style
 属性来弥补这一缺陷。
 
-::: tip 提示
-
-另外，也可以在 manifest.json 的 mp-weixin 字段下添加
+- 可以在 manifest.json 的 `mp-weixin` / `mp-alipay` 字段下添加
 [mergeVirtualHostAttributes](https://uniapp.dcloud.net.cn/collocation/manifest.html#mp-weixin) 配置，
 用于合并小程序组件虚拟节点外层属性，这样就可以正常使用 class / style 等属性。
 
-:::
+  ```json5
+  {
+    "mp-weixin": {
+      // ...
+      "mergeVirtualHostAttributes": true
+    },
+    "mp-alipay": {
+      // ...
+      "mergeVirtualHostAttributes": true
+    }
+  }
+  ```
+
+- 也可以将相关样式转移到一个单独不带 `scoped` 标识的 style 块中，使 Uni ECharts 可以共享样式。
+
+  ```vue
+  <style>
+  .chart {
+    height: 300px;
+  }
+  </style>
+
+  <style scoped>
+  /* ... */
+  </style>
+  ```
+
+- 在自定义组件中如果需要覆盖 Uni ECharts 的内部样式，需要添加 `styleIsolation: "shared"` 选项。
+
+  ```vue
+  <script setup>
+  defineOptions({
+    options: {
+      styleIsolation: "shared"
+    }
+  });
+  </script>
+  ```
 
 ## 小程序端 tooltip 文字阴影问题
 
