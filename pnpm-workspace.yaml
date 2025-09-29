@@ -15,7 +15,7 @@ catalogs:
     '@uni-helper/vite-plugin-uni-components': ^0.2.3
     '@uni-helper/vite-plugin-uni-manifest': ^0.2.8
     '@uni-helper/vite-plugin-uni-pages': ^0.3.17
-    rollup: ^4.52.2
+    rollup: ^4.52.3
     unbuild: ~3.5.0
     unplugin-auto-import: ^20.2.0
     vite: ^5.4.20
@@ -63,14 +63,14 @@ catalogs:
     pinia: 2.2.4
     vue: ~3.4.38
     vue-tsc: ~2.1.10
-    wot-design-uni: ^1.12.4
+    wot-design-uni: ^1.13.0
   icons:
     '@iconify-json/carbon': ^1.2.13
   lint:
     '@xiaohe01/eslint-config': ^2.4.0
     '@xiaohe01/stylelint-config': ^2.4.0
     eslint: ^9.36.0
-    lint-staged: ^16.2.1
+    lint-staged: ^16.2.3
     simple-git-hooks: ^2.13.1
     stylelint: ^16.24.0
   node:
