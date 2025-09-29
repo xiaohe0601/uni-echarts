@@ -56,7 +56,6 @@ catalogs:
     '@xiaohe01/tsconfig': ^2.0.0
     minimist: ^1.2.8
     miniprogram-api-typings: ^4.1.0
-    oxc-parser: ^0.92.0
     typescript: ~5.8.3
   frontend:
     '@vue/runtime-core': ~3.4.38
@@ -100,6 +99,7 @@ catalogs:
     '@vueuse/core': ^12.8.2
     lodash-es: ^4.17.21
     magic-string: ^0.30.19
+    oxc-parser: ^0.93.0
 onlyBuiltDependencies:
   - '@uni-helper/unocss-preset-uni'
   - core-js

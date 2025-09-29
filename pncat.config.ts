@@ -8,6 +8,13 @@ export default defineConfig({
         /@dcloudio/
       ],
       priority: 0
+    },
+    {
+      name: "utils",
+      match: [
+        /oxc/
+      ],
+      priority: 0
     }
   ])
 });

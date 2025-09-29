@@ -55,11 +55,13 @@
     "echarts": ">=5.3.0",
     "vue": ">=3.3.0"
   },
+  "dependencies": {
+    "oxc-parser": "catalog:utils"
+  },
   "devDependencies": {
     "@uni-helper/vite-plugin-uni-components": "catalog:build",
     "@vue/runtime-core": "catalog:frontend",
     "echarts": "catalog:frontend",
-    "oxc-parser": "catalog:dev",
     "vue": "catalog:frontend"
   }
 }
