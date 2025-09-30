@@ -1,5 +1,9 @@
 <template>
   <DefaultTheme.Layout>
+    <template #home-features-after>
+      <VPFriendly></VPFriendly>
+    </template>
+
     <template #aside-top>
       <VPIframe v-if="iframeVisible"></VPIframe>
     </template>
@@ -10,6 +14,7 @@
 import { useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { computed, nextTick, provide } from "vue";
+import VPFriendly from "./VPFriendly.vue";
 import VPIframe from "./VPIframe.vue";
 
 const route = useRoute();
@@ -73,12 +78,10 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
   z-index: 9999;
 }
 
-/* stylelint-disable-next-line selector-class-pattern */
 .VPSwitchAppearance {
   width: 22px !important;
 }
 
-/* stylelint-disable-next-line selector-class-pattern */
 .VPSwitchAppearance .check {
   transform: none !important;
 }
