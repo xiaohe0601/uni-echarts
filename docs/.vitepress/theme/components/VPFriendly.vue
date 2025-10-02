@@ -1,7 +1,7 @@
 <template>
   <div v-if="list.length > 0" class="VPFeatures">
     <div class="container">
-      <h1 class="friendly-title">友情链接</h1>
+      <h1 class="title">友情链接</h1>
 
       <div class="items">
         <div
@@ -82,7 +82,7 @@ const itemClasses = computed(() => {
   margin: 0 auto;
 }
 
-.friendly-title {
+.title {
   margin-top: 50px;
   margin-bottom: 50px;
   font-size: 24px;

@@ -26,4 +26,6 @@ features:
   - icon: ☕
     title: TypeScript
     details: 友好的类型支持
+
+footer: false
 ---

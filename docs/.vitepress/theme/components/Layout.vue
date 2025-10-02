@@ -7,6 +7,10 @@
     <template #aside-top>
       <VPIframe v-if="iframeVisible"></VPIframe>
     </template>
+
+    <template #layout-bottom>
+      <VPFooter></VPFooter>
+    </template>
   </DefaultTheme.Layout>
 </template>
 
@@ -14,6 +18,7 @@
 import { useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { computed, nextTick, provide } from "vue";
+import VPFooter from "./VPFooter.vue";
 import VPFriendly from "./VPFriendly.vue";
 import VPIframe from "./VPIframe.vue";
 
