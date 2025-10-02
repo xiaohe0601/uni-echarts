@@ -1,5 +1,5 @@
 <template>
-  <div v-if="list.length > 0" class="VPFeatures">
+  <div v-if="list.length > 0" class="VPFriendly VPFeatures">
     <div class="container">
       <h1 class="title">友情链接</h1>
 

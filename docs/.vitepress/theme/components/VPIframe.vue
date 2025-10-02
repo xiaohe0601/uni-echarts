@@ -1,16 +1,12 @@
 <template>
-  <div class="vp-iframe">
-    <iframe class="vp-iframe__inner" :src="href"></iframe>
+  <div class="VPIframe">
+    <iframe class="iframe" :src="href"></iframe>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useRoute } from "vitepress";
 import { computed } from "vue";
-
-defineOptions({
-  name: "VPIframe"
-});
 
 const route = useRoute();
 
@@ -26,7 +22,7 @@ const href = computed(() => {
 </script>
 
 <style scoped>
-.vp-iframe {
+.VPIframe {
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -38,12 +34,12 @@ const href = computed(() => {
 }
 
 @media (width <= 1390px) {
-  .vp-iframe {
+  .VPIframe {
     display: none;
   }
 }
 
-.vp-iframe__inner {
+.iframe {
   width: 330px;
   height: 586px;
   border-width: 0;
