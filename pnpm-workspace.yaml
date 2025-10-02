@@ -60,6 +60,7 @@ catalogs:
   frontend:
     '@vue/runtime-core': ~3.4.38
     echarts: ^6.0.0
+    monaco-editor: ^0.53.0
     pinia: 2.2.4
     vue: ~3.4.38
     vue-tsc: ~2.1.10

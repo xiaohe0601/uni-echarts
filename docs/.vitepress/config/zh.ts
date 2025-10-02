@@ -40,6 +40,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: "指南", link: "/guide/introduction", activeMatch: "/guide/" },
     { text: "API 参考", link: "/apis/component", activeMatch: "/apis/" },
     { text: "代码示例", link: "/examples/basic", activeMatch: "/examples/" },
+    { text: "实用工具", link: "/helpers/codegen", activeMatch: "/helpers/" },
     { text: "在线演示", link: "https://uni-echarts.xiaohe.ink/ui" },
     { text: "支持我们", link: "/sponsor" }
   ];
@@ -49,7 +50,8 @@ function sidebar(): DefaultTheme.Sidebar {
   return {
     "/guide/": sidebarGuide(),
     "/apis/": sidebarApis(),
-    "/examples/": sidebarExamples()
+    "/examples/": sidebarExamples(),
+    "/helpers/": sidebarHelpers()
   };
 }
 
@@ -102,6 +104,17 @@ function sidebarExamples(): DefaultTheme.SidebarItem[] {
         { text: "手动更新", link: "/manual-update" },
         { text: "自定义 Tooltip", link: "/custom-tooltip" },
         { text: "保存为图片", link: "/export-image" }
+      ]
+    }
+  ];
+}
+
+function sidebarHelpers(): DefaultTheme.SidebarItem[] {
+  return [
+    {
+      base: "/helpers",
+      items: [
+        { text: "导入代码生成器", link: "/codegen" }
       ]
     }
   ];

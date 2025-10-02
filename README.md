@@ -28,9 +28,10 @@ xiaohe0601 / [github@xiaohe0601](https://github.com/xiaohe0601) / [gitee@xiaohe0
 - [快速开始](https://uni-echarts.xiaohe.ink/guide/getting-started)
 - [API 参考](https://uni-echarts.xiaohe.ink/apis/component)
 - [常见问题](https://uni-echarts.xiaohe.ink/guide/faq)
+- [导入代码生成器](https://uni-echarts.xiaohe.ink/helpers/codegen)
+- [在线演示](https://uni-echarts.xiaohe.ink/ui)
 - [更新日志](https://uni-echarts.xiaohe.ink/guide/changelog)
 - [支持我们](https://uni-echarts.xiaohe.ink/sponsor)
-- [在线演示](https://uni-echarts.xiaohe.ink/ui)
 
 ## 🍬 鸣谢
 

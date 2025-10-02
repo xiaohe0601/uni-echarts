@@ -12,6 +12,8 @@
     "clean:cache": "rimraf .vitepress/cache"
   },
   "devDependencies": {
+    "@vueuse/core": "catalog:utils",
+    "monaco-editor": "catalog:frontend",
     "vitepress": "catalog:build",
     "vitepress-plugin-group-icons": "catalog:build",
     "vitepress-plugin-llms": "catalog:build",

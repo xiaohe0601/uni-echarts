@@ -15,6 +15,9 @@ hero:
     - theme: alt
       text: API参考
       link: /apis/component
+    - theme: alt
+      text: 实用工具
+      link: /helpers/codegen
 
 features:
   - icon: 📦
