@@ -18,6 +18,11 @@ export default defineConfig({
     plugins: [
       GroupIconVite(),
       LlmsTxt()
-    ]
+    ],
+    ssr: {
+      noExternal: [
+        "monaco-editor"
+      ]
+    }
   }
 });
