@@ -24,7 +24,8 @@ export default defineBuildConfig([
     clean: false,
     declaration: true,
     externals: [
-      "@uni-helper/vite-plugin-uni-components"
+      "@uni-helper/vite-plugin-uni-components",
+      "vite"
     ],
     failOnWarn: false,
     rollup: {

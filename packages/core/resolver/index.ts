@@ -1,4 +1,6 @@
 import type { ComponentResolver } from "@uni-helper/vite-plugin-uni-components";
+import type { FilterPattern } from "vite";
+import { createFilter } from "vite";
 
 const INDEX = "uni-echarts";
 const SHARED = `${INDEX}/shared`;
@@ -14,14 +16,16 @@ const importsMap: Record<string, string> = {
 };
 
 export interface UniEchartsResolverOptions {
-  exclude?: RegExp;
+  exclude?: FilterPattern;
 }
 
 export function UniEchartsResolver(options: UniEchartsResolverOptions = {}): ComponentResolver {
+  const filter = createFilter(undefined, options.exclude, { resolve: false });
+
   return {
     type: "component",
     resolve(name) {
-      if (options.exclude && name.match(options.exclude)) {
+      if (!filter(name)) {
         return;
       }
 
