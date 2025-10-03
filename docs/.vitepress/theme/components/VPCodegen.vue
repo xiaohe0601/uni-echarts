@@ -72,7 +72,7 @@
   </section>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useLocalStorage, useTimeoutFn } from "@vueuse/core";
 import { useData } from "vitepress";
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";

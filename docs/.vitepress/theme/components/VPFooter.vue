@@ -16,7 +16,7 @@
   </footer>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useData } from "vitepress";
 import { useSidebar } from "vitepress/theme";
 import { computed } from "vue";

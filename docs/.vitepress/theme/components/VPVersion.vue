@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import VPBadge from "vitepress/dist/client/theme-default/components/VPBadge.vue";
 import pkg from "../../../../package.json";
 </script>
