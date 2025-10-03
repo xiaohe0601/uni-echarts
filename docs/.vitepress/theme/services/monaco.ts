@@ -118,6 +118,10 @@ const EDITOR_OPTIONS: Parameters<typeof monaco.editor.create>[1] = {
     verticalSliderSize: 6
   },
   smoothScrolling: true,
+  padding: {
+    top: 12,
+    bottom: 12
+  },
   fontSize: 14,
   lineHeight: 20,
   tabSize: 2,
