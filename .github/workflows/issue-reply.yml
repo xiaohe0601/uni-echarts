@@ -21,7 +21,7 @@ jobs:
 
               ```shell
               # 直接创建项目
-              pnpm create uni@latest uni-echarts-repro -m uniEcharts
+              pnpm create uni@latest uni-echarts-repro --ts -p import -m uniEcharts --eslint
 
               # 或者手动选择需要的模块
               pnpm create uni@latest
