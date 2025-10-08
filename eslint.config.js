@@ -9,9 +9,11 @@ export default defineConfig({
   },
   ignores: [
     "**/*.md",
+    "**/*.min.js",
     "packages/core/src/shared-core.*",
     "packages/core/dist-resolver",
     "packages/core/dist-vite",
+    "packages/server/.nitro",
     "playground/src/uni_modules"
   ]
 }, {

@@ -1,0 +1,15 @@
+{
+  "name": "@uni-echarts/server",
+  "type": "module",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nitro dev --port 9863",
+    "build": "nitro build",
+    "preview": "node .output/server/index.mjs"
+  },
+  "devDependencies": {
+    "@uni-echarts/c2e": "workspace:^",
+    "nitropack": "catalog:server"
+  }
+}

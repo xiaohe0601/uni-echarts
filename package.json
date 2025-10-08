@@ -29,16 +29,16 @@
     "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
-    "@antfu/ni": "catalog:dev",
+    "@antfu/ni": "catalog:cli",
     "@antfu/utils": "catalog:utils",
     "@dcloudio/types": "catalog:dcloudio",
-    "@mini-types/alipay": "catalog:dev",
+    "@mini-types/alipay": "catalog:types",
     "@types/fs-extra": "catalog:types",
     "@types/node": "catalog:types",
-    "@uni-helper/uni-app-types": "catalog:dev",
-    "@xiaohe01/eslint-config": "catalog:lint",
-    "@xiaohe01/stylelint-config": "catalog:lint",
-    "@xiaohe01/tsconfig": "catalog:dev",
+    "@uni-helper/uni-app-types": "catalog:types",
+    "@xiaohe01/eslint-config": "catalog:xiaohe",
+    "@xiaohe01/stylelint-config": "catalog:xiaohe",
+    "@xiaohe01/tsconfig": "catalog:xiaohe",
     "bumpp": "catalog:cli",
     "chalk": "catalog:node",
     "consola": "catalog:node",
@@ -47,16 +47,16 @@
     "execa": "catalog:node",
     "fs-extra": "catalog:node",
     "lint-staged": "catalog:lint",
-    "miniprogram-api-typings": "catalog:dev",
+    "miniprogram-api-typings": "catalog:types",
     "pncat": "catalog:cli",
     "rimraf": "catalog:node",
     "simple-git-hooks": "catalog:lint",
     "stylelint": "catalog:lint",
-    "typescript": "catalog:dev",
+    "typescript": "catalog:tsc",
     "unbuild": "catalog:build",
     "vite": "catalog:build",
     "vitest": "catalog:test",
-    "vue-tsc": "catalog:frontend"
+    "vue-tsc": "catalog:tsc"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
