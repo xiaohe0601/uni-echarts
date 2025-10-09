@@ -28,6 +28,18 @@ async function transform() {
     extensions: [".js"]
   });
 
+  if (file.type !== "text/javascript") {
+    state.error = true;
+    state.message = "Invalid file.";
+    return;
+  }
+
+  if (file.size > 10 * 1024 * 1024) {
+    state.error = true;
+    state.message = "File size must not exceed 10 MB.";
+    return;
+  }
+
   state.loading = true;
   state.error = false;
   state.message = "";
