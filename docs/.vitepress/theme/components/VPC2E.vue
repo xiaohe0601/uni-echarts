@@ -91,6 +91,7 @@ function onTransformClick() {
   align-items: center;
   justify-content: center;
   height: 520px;
+  overflow: hidden;
   font-size: 14px;
   color: var(--vp-c-text-1);
   border: 1px solid var(--vp-c-divider);
@@ -142,5 +143,25 @@ function onTransformClick() {
 .message {
   margin-top: 20px;
   color: var(--vp-c-danger-1);
+}
+
+.VPC2E::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  content: "暂未开放";
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+}
+
+html.dark .VPC2E::after {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 </style>
