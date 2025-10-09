@@ -10,7 +10,15 @@ export default eventHandler(async (event) => {
     throw createError({
       status: 400,
       statusMessage: "Bad Request",
-      message: "Invalid file"
+      message: "Invalid file."
+    });
+  }
+
+  if (file.size > 10 * 1024 * 1024) {
+    throw createError({
+      status: 400,
+      statusMessage: "Bad Request",
+      message: "File size must not exceed 10 MB."
     });
   }
 
