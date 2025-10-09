@@ -17,6 +17,8 @@
     "build:play": "nr build && nr -C playground build:h5",
     "docs:dev": "nr -C docs dev",
     "docs:build": "nr -C docs build && nr build:play && esno scripts/compose-docs.ts",
+    "server:dev": "nr -C packages/server dev",
+    "server:build": "nr -C packages/server build",
     "release": "bumpp -r",
     "clean": "rimraf **/dist **/dist-resolver **/dist-vite **/uni_modules --glob",
     "lint": "eslint --cache",
