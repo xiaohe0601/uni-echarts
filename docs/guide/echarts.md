@@ -57,6 +57,12 @@ import "echarts";
     └  Output: /path/to/echarts.esm.js
     ```
 
+   ::: info 在线工具
+
+   如果你不习惯使用 CLI，也可以选择使用我们提供的 [在线工具](../helpers/c2e) 一键转换产物。
+
+   :::
+
    ::: warning 提示
 
    受限于 `echarts.min.js` 的内容，目前转换后的 ESM 产物不支持 Tree-Shaking，无法剔除未使用的代码，并且需要使用默认导入，示例如下：

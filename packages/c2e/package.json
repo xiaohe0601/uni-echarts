@@ -40,7 +40,7 @@
     "@types/minimist": "catalog:types",
     "chalk": "catalog:node",
     "magic-string": "catalog:utils",
-    "minimist": "catalog:dev",
+    "minimist": "catalog:node",
     "rollup": "catalog:build"
   }
 }

@@ -114,7 +114,8 @@ function sidebarHelpers(): DefaultTheme.SidebarItem[] {
     {
       base: "/helpers",
       items: [
-        { text: "导入代码生成器", link: "/codegen" }
+        { text: "导入代码生成器", link: "/codegen" },
+        { text: "CJS To ESM", link: "/c2e" }
       ]
     }
   ];

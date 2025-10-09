@@ -11,13 +11,7 @@ import { computed } from "vue";
 const route = useRoute();
 
 const href = computed(() => {
-  const link = `/ui/pages${route.path}/index`;
-
-  if (import.meta.env.DEV) {
-    return `http://localhost:9861${link}`;
-  }
-
-  return link;
+  return `${import.meta.env.VITE_UI_URL}/ui/pages${route.path}/index`;
 });
 </script>
 
