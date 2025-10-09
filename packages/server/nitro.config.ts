@@ -1,3 +1,5 @@
+import process from "node:process";
+
 export default defineNitroConfig({
   compatibilityDate: "2025-03-01",
   srcDir: "src",
@@ -5,8 +7,7 @@ export default defineNitroConfig({
     "/**": {
       cors: true,
       headers: {
-        "Access-Control-Allow-Origin": "http://localhost:9862"
-        // "Access-Control-Allow-Origin": "https://uni-echarts.xiaohe.ink"
+        "Access-Control-Allow-Origin": process.env.NITRO_WEB_URL || "http://localhost:9862"
       }
     }
   }

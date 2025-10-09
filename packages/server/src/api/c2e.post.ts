@@ -7,7 +7,11 @@ export default eventHandler(async (event) => {
   const file = data.get("file");
 
   if (!(file instanceof File) || file.type !== "text/javascript") {
-    throw new TypeError("Invalid file");
+    throw createError({
+      status: 400,
+      statusMessage: "Bad Request",
+      message: "Invalid file"
+    });
   }
 
   const code = await file.text();
@@ -17,11 +21,14 @@ export default eventHandler(async (event) => {
     code
   });
 
-  event.node.res.setHeader("Content-Type", "text/javascript");
-  event.node.res.setHeader(
+  setResponseHeader(event, "Content-Type", "text/javascript");
+  setResponseHeader(event, "Cache-Control", "no-cache");
+  setResponseHeader(event, "Transfer-Encoding", "chunked");
+  setResponseHeader(
+    event,
     "Content-Disposition",
     `attachment; filename="${encodeURIComponent("echarts.esm.js")}"`
   );
 
-  return Readable.from(chunk.code);
+  return sendStream(event, Readable.from(chunk.code));
 });

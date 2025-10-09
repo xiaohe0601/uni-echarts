@@ -1,3 +1,7 @@
+---
+aside: false
+---
+
 <VPC2E></VPC2E>
 
 <script setup>

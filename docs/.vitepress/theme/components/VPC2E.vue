@@ -1,26 +1,52 @@
 <template>
   <div class="VPC2E">
-    <button @click="transform()">转换</button>
+    <button
+      class="button"
+      :class="{ 'is-loading': state.loading }"
+      :disabled="state.loading"
+      @click="onTransformClick()">
+      <span v-if="!state.loading">转换 echarts.min.js</span>
+      <span v-else class="spinner"></span>
+    </button>
+
+    <span v-if="state.error" class="message">{{ state.message }}</span>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { fileOpen } from "browser-fs-access";
+import { reactive } from "vue";
+
+const state = reactive({
+  loading: false,
+  error: false,
+  message: ""
+});
 
 async function transform() {
   const file = await fileOpen({
     extensions: [".js"]
   });
 
+  state.loading = true;
+  state.error = false;
+  state.message = "";
+
   const data = new FormData();
   data.set("file", file);
 
-  const res = await fetch("http://localhost:9863/api/c2e", {
+  const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/c2e`, {
     method: "POST",
     body: data
   });
 
+  state.loading = false;
+
   if (!res.ok) {
+    state.error = true;
+
+    const json = await res.json();
+    state.message = json.message;
     return;
   }
 
@@ -33,8 +59,76 @@ async function transform() {
   a.click();
   URL.revokeObjectURL(url);
 }
+
+function onTransformClick() {
+  transform();
+}
 </script>
 
 <style scoped>
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
+.VPC2E {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 520px;
+  font-size: 14px;
+  color: var(--vp-c-text-1);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 10px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 20px;
+  font-size: 16px;
+  line-height: 1;
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+  background-color: var(--vp-c-brand-2);
+  border-radius: 6px;
+  transition: transform 300ms ease-out;
+}
+
+.button.is-loading {
+  background-color: transparent;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.button:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.button:not(:disabled):active {
+  background-color: var(--vp-c-brand-1);
+  transform: translateY(0);
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--vp-c-brand-soft);
+  border-top-color: var(--vp-c-brand-1);
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+.message {
+  margin-top: 20px;
+  color: var(--vp-c-danger-1);
+}
 </style>
