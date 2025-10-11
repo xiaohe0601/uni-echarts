@@ -63,7 +63,7 @@ catalogs:
     '@iconify-json/carbon': ^1.2.14
   lint:
     eslint: ^9.37.0
-    lint-staged: ^16.2.3
+    lint-staged: ^16.2.4
     simple-git-hooks: ^2.13.1
     stylelint: ^16.25.0
   node:
@@ -103,7 +103,7 @@ catalogs:
     magic-string: ^0.30.19
     oxc-parser: ^0.94.0
   xiaohe:
-    '@xiaohe01/eslint-config': ^2.4.0
+    '@xiaohe01/eslint-config': ^2.5.0
     '@xiaohe01/stylelint-config': ^2.4.0
     '@xiaohe01/tsconfig': ^2.0.0
 onlyBuiltDependencies:

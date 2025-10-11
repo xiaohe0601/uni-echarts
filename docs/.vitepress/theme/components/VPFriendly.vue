@@ -8,12 +8,14 @@
           v-for="(item) in list"
           :key="item.id"
           class="item"
-          :class="itemClasses">
+          :class="itemClasses"
+        >
           <VPFeature
             :icon="item.icon"
             :title="item.title"
             :details="item.details"
-            :link="item.link"></VPFeature>
+            :link="item.link"
+          ></VPFeature>
         </div>
       </div>
     </div>

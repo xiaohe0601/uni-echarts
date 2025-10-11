@@ -8,7 +8,8 @@
       :theme="theme"
       autoresize
       :loading="loading"
-      :loading-options="loadingOptions"></uni-echarts>
+      :loading-options="loadingOptions"
+    ></uni-echarts>
 
     <wd-cell-group class="mt-2">
       <wd-cell title="主题" title-width="80px" center>

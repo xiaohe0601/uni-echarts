@@ -5,7 +5,8 @@
         <img class="netlify-icon" :src="netlifyIcon" alt="netlify">
         <span class="netlify-link">This site is powered by <a
           href="https://netlify.com"
-          target="_blank">Netlify</a></span>
+          target="_blank"
+        >Netlify</a></span>
       </div>
 
       <div class="metadata">

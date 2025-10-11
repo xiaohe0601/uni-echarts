@@ -31,7 +31,8 @@
     @animationstart="emit('native:animationstart', $event)"
     @animationiteration="emit('native:animationiteration', $event)"
     @animationend="emit('native:animationend', $event)"
-    @touchforcechange="emit('native:touchforcechange', $event)">
+    @touchforcechange="emit('native:touchforcechange', $event)"
+  >
     <canvas
       v-if="useCanvas2D"
       :id="canvasId"
@@ -40,7 +41,8 @@
       :disable-scroll="props.disableScroll"
       @touchstart="touch.onStart"
       @touchmove="touch.onMove"
-      @touchend="touch.onEnd"></canvas>
+      @touchend="touch.onEnd"
+    ></canvas>
 
     <canvas
       v-else
@@ -50,7 +52,8 @@
       :disable-scroll="props.disableScroll"
       @touchstart="touch.onStart"
       @touchmove="touch.onMove"
-      @touchend="touch.onEnd"></canvas>
+      @touchend="touch.onEnd"
+    ></canvas>
 
     <view
       v-if="isPc"
@@ -60,7 +63,8 @@
       @mouseup="touch.onEnd"
       @touchstart="touch.onStart"
       @touchmove="touch.onMove"
-      @touchend="touch.onEnd"></view>
+      @touchend="touch.onEnd"
+    ></view>
 
     <slot></slot>
   </view>

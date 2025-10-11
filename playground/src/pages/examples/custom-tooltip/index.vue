@@ -6,7 +6,8 @@
       :option="option"
       autoresize
       @showtip="tooltip.visible = true"
-      @hidetip="tooltip.visible = false">
+      @hidetip="tooltip.visible = false"
+    >
       <view v-if="tooltip.visible" class="absolute" :style="tooltipStyles">
         <view class="p-2 bg-white rounded-md shadow">
           <text>{{ `${tooltip.params.value[0]}：${tooltip.params.value[1]}` }}</text>

@@ -5,13 +5,15 @@
       class="h-60"
       :option="option1"
       group="radiance"
-      autoresize></uni-echarts>
+      autoresize
+    ></uni-echarts>
 
     <uni-echarts
       class="h-60"
       :option="option2"
       group="radiance"
-      autoresize></uni-echarts>
+      autoresize
+    ></uni-echarts>
 
     <wd-cell-group class="mt-2">
       <wd-cell title="联动" center>

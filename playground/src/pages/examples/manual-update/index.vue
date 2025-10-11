@@ -6,7 +6,8 @@
       class="h-75"
       manual-update
       autoresize
-      @inited="setOption()"></uni-echarts>
+      @inited="setOption()"
+    ></uni-echarts>
   </app-page>
   <!-- #endregion template -->
 </template>

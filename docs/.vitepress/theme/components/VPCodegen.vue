@@ -47,7 +47,8 @@
         <input
           v-model.number="codegenOptions.maxLen"
           type="number"
-          step="10" />
+          step="10"
+        />
       </label>
     </section>
 
@@ -56,14 +57,16 @@
         ref="editorEl"
         class="option-code"
         aria-label="ECharts option (TS/JS literal)"
-        :aria-busy="isBusy"></div>
+        :aria-busy="isBusy"
+      ></div>
 
       <div
         ref="outputEl"
         class="import-code"
         role="textbox"
         aria-label="Generated import code"
-        aria-readonly="true"></div>
+        aria-readonly="true"
+      ></div>
     </section>
 
     <section class="footer">

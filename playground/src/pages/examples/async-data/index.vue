@@ -7,7 +7,8 @@
       theme="ovilia-green"
       autoresize
       :loading="loading"
-      :loading-options="loadingOptions"></uni-echarts>
+      :loading-options="loadingOptions"
+    ></uni-echarts>
 
     <view class="flex flex-col items-center mt-2">
       <text v-if="surplus > 0" class="text-base text-t3">
@@ -20,7 +21,8 @@
         v-else
         size="small"
         plain
-        @click="refresh()">更新数据
+        @click="refresh()"
+      >更新数据
       </wd-button>
     </view>
   </app-page>

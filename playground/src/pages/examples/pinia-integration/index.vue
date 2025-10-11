@@ -8,7 +8,8 @@
         v-model="metricIndex"
         label="对象"
         :columns="metrics"
-        align-right></wd-picker>
+        align-right
+      ></wd-picker>
 
       <wd-cell title="控制" center>
         <wd-button
@@ -17,7 +18,8 @@
           size="small"
           plain
           :disabled="isMin(metricIndex)"
-          @click="increase(metricIndex, -1)">减少
+          @click="increase(metricIndex, -1)"
+        >减少
         </wd-button>
 
         <wd-button
@@ -25,7 +27,8 @@
           size="small"
           plain
           :disabled="isMax(metricIndex)"
-          @click="increase(metricIndex, 1)">增加
+          @click="increase(metricIndex, 1)"
+        >增加
         </wd-button>
       </wd-cell>
     </wd-cell-group>

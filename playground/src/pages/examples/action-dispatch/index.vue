@@ -5,7 +5,8 @@
       ref="chartEl"
       class="h-75"
       :option="option"
-      autoresize></uni-echarts>
+      autoresize
+    ></uni-echarts>
   </app-page>
   <!-- #endregion template -->
 </template>

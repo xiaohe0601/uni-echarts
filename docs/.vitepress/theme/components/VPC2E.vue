@@ -4,7 +4,8 @@
       class="button"
       :class="{ 'is-loading': state.loading }"
       :disabled="state.loading"
-      @click="onTransformClick()">
+      @click="onTransformClick()"
+    >
       <span v-if="!state.loading">转换 echarts.min.js</span>
       <span v-else class="spinner"></span>
     </button>

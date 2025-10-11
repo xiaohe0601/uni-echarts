@@ -152,8 +152,8 @@ catalogs:
       specifier: ^9.37.0
       version: 9.37.0
     lint-staged:
-      specifier: ^16.2.3
-      version: 16.2.3
+      specifier: ^16.2.4
+      version: 16.2.4
     simple-git-hooks:
       specifier: ^2.13.1
       version: 2.13.1
@@ -251,8 +251,8 @@ catalogs:
       version: 0.94.0
   xiaohe:
     '@xiaohe01/eslint-config':
-      specifier: ^2.4.0
-      version: 2.4.0
+      specifier: ^2.5.0
+      version: 2.5.0
     '@xiaohe01/stylelint-config':
       specifier: ^2.4.0
       version: 2.4.0
@@ -292,7 +292,7 @@ importers:
         version: 1.0.0-alpha.6(typescript@5.8.3)(vue@3.4.38(typescript@5.8.3))
       '@xiaohe01/eslint-config':
         specifier: catalog:xiaohe
-        version: 2.4.0(@vue/compiler-sfc@3.5.22)(eslint@9.37.0(jiti@2.6.1))(typescript@5.8.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.18.6)(jsdom@16.7.0)(terser@5.44.0))
+        version: 2.5.0(@vue/compiler-sfc@3.5.22)(eslint@9.37.0(jiti@2.6.1))(typescript@5.8.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.18.6)(jsdom@16.7.0)(terser@5.44.0))
       '@xiaohe01/stylelint-config':
         specifier: catalog:xiaohe
         version: 2.4.0(postcss@8.5.6)(stylelint@16.25.0(typescript@5.8.3))
@@ -322,7 +322,7 @@ importers:
         version: 11.3.2
       lint-staged:
         specifier: catalog:lint
-        version: 16.2.3
+        version: 16.2.4
       miniprogram-api-typings:
         specifier: catalog:types
         version: 4.1.0
@@ -3317,8 +3317,8 @@ packages:
   '@vueuse/shared@12.8.2':
     resolution: {integrity: sha512-dznP38YzxZoNloI0qpEfpkms8knDtaoQ6Y/sfS0L7Yki4zh40LFHEhur0odJC6xTHG5dxWVPiUWBXn+wCG2s5w==}
 
-  '@xiaohe01/eslint-config@2.4.0':
-    resolution: {integrity: sha512-px6XcSESpRUktUnOkBT+Ln1JEmkGNJis63EkXUjnFfuc8mWV0VVSEx6RvUsZwIMkhxamVXZhwJc4hZ0s+0SxIQ==}
+  '@xiaohe01/eslint-config@2.5.0':
+    resolution: {integrity: sha512-ECO+cRDyFlVvhOhJlRShJVA028sqLhOouJS8hynacH3IRFQS/95Kis/3hbzM/MNkCAMTgEm7+pAv5ViCvbcPgw==}
     peerDependencies:
       '@eslint-react/eslint-plugin': ^1.38.4
       '@next/eslint-plugin-next': ^15.4.0-canary.115
@@ -5584,8 +5584,8 @@ packages:
   linkify-it@5.0.0:
     resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
 
-  lint-staged@16.2.3:
-    resolution: {integrity: sha512-1OnJEESB9zZqsp61XHH2fvpS1es3hRCxMplF/AJUDa8Ho8VrscYDIuxGrj3m8KPXbcWZ8fT9XTMUhEQmOVKpKw==}
+  lint-staged@16.2.4:
+    resolution: {integrity: sha512-Pkyr/wd90oAyXk98i/2KwfkIhoYQUMtss769FIT9hFM5ogYZwrk+GRE46yKXSg2ZGhcJ1p38Gf5gmI5Ohjg2yg==}
     engines: {node: '>=20.17'}
     hasBin: true
 
@@ -6037,8 +6037,8 @@ packages:
   muggle-string@0.4.1:
     resolution: {integrity: sha512-VNTrAak/KhO2i8dqqnqnAHOa3cYBwXEZe9h+D5h/1ZqFSTEFHdM65lR7RoIqq3tBBYavsOXV84NoHXZ0AkPyqQ==}
 
-  nano-spawn@1.0.3:
-    resolution: {integrity: sha512-jtpsQDetTnvS2Ts1fiRdci5rx0VYws5jGyC+4IYOTnIQ/wwdf6JdomlHBwqC3bJYOvaKu0C2GSZ1A60anrYpaA==}
+  nano-spawn@2.0.0:
+    resolution: {integrity: sha512-tacvGzUY5o2D8CBh2rrwxyNojUsZNU2zjNTzKQrkgGJQTbGAfArVWXSKMBokBeeg6C7OLRGUEyoFlYbfeWQIqw==}
     engines: {node: '>=20.17'}
 
   nanoid@3.3.11:
@@ -11781,7 +11781,7 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@xiaohe01/eslint-config@2.4.0(@vue/compiler-sfc@3.5.22)(eslint@9.37.0(jiti@2.6.1))(typescript@5.8.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.18.6)(jsdom@16.7.0)(terser@5.44.0))':
+  '@xiaohe01/eslint-config@2.5.0(@vue/compiler-sfc@3.5.22)(eslint@9.37.0(jiti@2.6.1))(typescript@5.8.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.18.6)(jsdom@16.7.0)(terser@5.44.0))':
     dependencies:
       '@antfu/install-pkg': 1.1.0
       '@clack/prompts': 0.11.0
@@ -14415,12 +14415,12 @@ snapshots:
     dependencies:
       uc.micro: 2.1.0
 
-  lint-staged@16.2.3:
+  lint-staged@16.2.4:
     dependencies:
       commander: 14.0.1
       listr2: 9.0.4
       micromatch: 4.0.8
-      nano-spawn: 1.0.3
+      nano-spawn: 2.0.0
       pidtree: 0.6.0
       string-argv: 0.3.2
       yaml: 2.8.1
@@ -15046,7 +15046,7 @@ snapshots:
 
   muggle-string@0.4.1: {}
 
-  nano-spawn@1.0.3: {}
+  nano-spawn@2.0.0: {}
 
   nanoid@3.3.11: {}
 

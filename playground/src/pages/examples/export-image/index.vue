@@ -5,13 +5,15 @@
       ref="chartEl"
       class="h-75"
       :option="option"
-      autoresize></uni-echarts>
+      autoresize
+    ></uni-echarts>
 
     <view class="flex flex-col items-center mt-2">
       <wd-button
         size="small"
         plain
-        @click="saveAsImage()">保存为图片
+        @click="saveAsImage()"
+      >保存为图片
       </wd-button>
     </view>
   </app-page>
