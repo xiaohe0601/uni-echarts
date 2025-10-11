@@ -1,12 +1,18 @@
 import type { ExtractValue } from "../types";
 
-export const Platform = {
+export const PlatformGroup = {
+  WEB: "WEB",
   APP: "APP",
+  MP: "MP",
+  QUICKAPP_WEBVIEW: "QUICKAPP-WEBVIEW"
+} as const;
+
+export type PlatformGroupType = ExtractValue<typeof PlatformGroup>;
+
+export const Platform = {
   APP_ANDROID: "APP-ANDROID",
   APP_IOS: "APP-IOS",
   APP_HARMONY: "APP-HARMONY",
-  WEB: "WEB",
-  MP: "MP",
   MP_WEIXIN: "MP-WEIXIN",
   MP_ALIPAY: "MP-ALIPAY",
   MP_BAIDU: "MP-BAIDU",
@@ -18,95 +24,106 @@ export const Platform = {
   MP_360: "MP-360",
   MP_XHS: "MP-XHS",
   MP_HARMONY: "MP-HARMONY",
-  QUICKAPP_WEBVIEW: "QUICKAPP-WEBVIEW",
   QUICKAPP_WEBVIEW_UNION: "QUICKAPP-WEBVIEW-UNION",
   QUICKAPP_WEBVIEW_HUAWEI: "QUICKAPP-WEBVIEW-HUAWEI",
-  OTHER: "OTHER"
+  UNKNOWN: "UNKNOWN"
 } as const;
 
 export type PlatformType = ExtractValue<typeof Platform>;
 
-export function getPlatform(): PlatformType {
-  let platform: PlatformType = Platform.OTHER;
+export function getPlatformGroup(): PlatformGroupType {
+  let plat: PlatformGroupType = PlatformGroup.WEB;
 
+  // #ifdef WEB || H5
+  plat = PlatformGroup.WEB;
+  // #endif
   // #ifdef APP
-  platform = Platform.APP;
-  // #endif
-  // #ifdef APP-ANDROID
-  platform = Platform.APP_ANDROID;
-  // #endif
-  // #ifdef APP-IOS
-  platform = Platform.APP_IOS;
-  // #endif
-  // #ifdef APP-HARMONY
-  platform = Platform.APP_HARMONY;
-  // #endif
-  // #ifdef WEB
-  platform = Platform.WEB;
+  plat = PlatformGroup.APP;
   // #endif
   // #ifdef MP
-  platform = Platform.MP;
-  // #endif
-  // #ifdef MP-WEIXIN
-  platform = Platform.MP_WEIXIN;
-  // #endif
-  // #ifdef MP-ALIPAY
-  platform = Platform.MP_ALIPAY;
-  // #endif
-  // #ifdef MP-BAIDU
-  platform = Platform.MP_BAIDU;
-  // #endif
-  // #ifdef MP-TOUTIAO
-  platform = Platform.MP_TOUTIAO;
-  // #endif
-  // #ifdef MP-LARK
-  platform = Platform.MP_LARK;
-  // #endif
-  // #ifdef MP-QQ
-  platform = Platform.MP_QQ;
-  // #endif
-  // #ifdef MP-KUAISHOU
-  platform = Platform.MP_KUAISHOU;
-  // #endif
-  // #ifdef MP-JD
-  platform = Platform.MP_JD;
-  // #endif
-  // #ifdef MP-360
-  platform = Platform.MP_360;
-  // #endif
-  // #ifdef MP-XHS
-  platform = Platform.MP_XHS;
-  // #endif
-  // #ifdef MP-HARMONY
-  platform = Platform.MP_HARMONY;
+  plat = PlatformGroup.MP;
   // #endif
   // #ifdef QUICKAPP-WEBVIEW
-  platform = Platform.QUICKAPP_WEBVIEW;
-  // #endif
-  // #ifdef QUICKAPP-WEBVIEW-UNION
-  platform = Platform.QUICKAPP_WEBVIEW_UNION;
-  // #endif
-  // #ifdef QUICKAPP-WEBVIEW-HUAWEI
-  platform = Platform.QUICKAPP_WEBVIEW_HUAWEI;
+  plat = PlatformGroup.QUICKAPP_WEBVIEW;
   // #endif
 
-  return platform;
+  return plat;
+}
+
+export const platformGroup = getPlatformGroup();
+
+export function getPlatform(): PlatformType {
+  let plat: PlatformType = Platform.UNKNOWN;
+
+  // #ifdef APP-ANDROID
+  plat = Platform.APP_ANDROID;
+  // #endif
+  // #ifdef APP-IOS
+  plat = Platform.APP_IOS;
+  // #endif
+  // #ifdef APP-HARMONY
+  plat = Platform.APP_HARMONY;
+  // #endif
+  // #ifdef MP-WEIXIN
+  plat = Platform.MP_WEIXIN;
+  // #endif
+  // #ifdef MP-ALIPAY
+  plat = Platform.MP_ALIPAY;
+  // #endif
+  // #ifdef MP-BAIDU
+  plat = Platform.MP_BAIDU;
+  // #endif
+  // #ifdef MP-TOUTIAO
+  plat = Platform.MP_TOUTIAO;
+  // #endif
+  // #ifdef MP-LARK
+  plat = Platform.MP_LARK;
+  // #endif
+  // #ifdef MP-QQ
+  plat = Platform.MP_QQ;
+  // #endif
+  // #ifdef MP-KUAISHOU
+  plat = Platform.MP_KUAISHOU;
+  // #endif
+  // #ifdef MP-JD
+  plat = Platform.MP_JD;
+  // #endif
+  // #ifdef MP-360
+  plat = Platform.MP_360;
+  // #endif
+  // #ifdef MP-XHS
+  plat = Platform.MP_XHS;
+  // #endif
+  // #ifdef MP-HARMONY
+  plat = Platform.MP_HARMONY;
+  // #endif
+  // #ifdef QUICKAPP-WEBVIEW-UNION
+  plat = Platform.QUICKAPP_WEBVIEW_UNION;
+  // #endif
+  // #ifdef QUICKAPP-WEBVIEW-HUAWEI
+  plat = Platform.QUICKAPP_WEBVIEW_HUAWEI;
+  // #endif
+
+  return plat;
 }
 
 export const platform = getPlatform();
 
+/** Web */
+export const isWeb = platformGroup === PlatformGroup.WEB;
 /** App */
-export const isApp = platform === Platform.APP;
+export const isApp = platformGroup === PlatformGroup.APP;
+/** 小程序 */
+export const isMp = platformGroup === PlatformGroup.MP;
+/** 快应用 */
+export const isQuickappWebview = platformGroup === PlatformGroup.QUICKAPP_WEBVIEW;
+
 /** App Android */
 export const isAppAndroid = platform === Platform.APP_ANDROID;
 /** App iOS */
 export const isAppIos = platform === Platform.APP_IOS;
 /** App HarmonyOS Next */
 export const isAppHarmony = platform === Platform.APP_HARMONY;
-/** Web */
-export const isWeb = platform === Platform.WEB;
-/** 小程序 */
-export const isMp = platform === Platform.MP;
 /** 微信小程序 */
 export const isMpWeixin = platform === Platform.MP_WEIXIN;
 /** 支付宝小程序 */
@@ -117,23 +134,21 @@ export const isMpBaidu = platform === Platform.MP_BAIDU;
 export const isMpToutiao = platform === Platform.MP_TOUTIAO;
 /** 飞书小程序 */
 export const isMpLark = platform === Platform.MP_LARK;
-/** QQ小程序 */
+/** QQ 小程序 */
 export const isMpQq = platform === Platform.MP_QQ;
 /** 快手小程序 */
 export const isMpKuaishou = platform === Platform.MP_KUAISHOU;
 /** 京东小程序 */
 export const isMpJd = platform === Platform.MP_JD;
-/** 360小程序 */
+/** 360 小程序 */
 export const isMp360 = platform === Platform.MP_360;
 /** 小红书小程序 */
 export const isMpXhs = platform === Platform.MP_XHS;
 /** 鸿蒙元服务 */
 export const isMpHarmony = platform === Platform.MP_HARMONY;
-/** 快应用 */
-export const isQuickappWebview = platform === Platform.QUICKAPP_WEBVIEW;
 /** 快应用联盟 */
 export const isQuickappWebviewUnion = platform === Platform.QUICKAPP_WEBVIEW_UNION;
-/** 快应用华为 */
+/** 华为快应用 */
 export const isQuickappWebviewHuawei = platform === Platform.QUICKAPP_WEBVIEW_HUAWEI;
-/** 其他平台 */
-export const isOtherPlatform = platform === Platform.OTHER;
+/** 未知平台 */
+export const isUnknownPlatform = platform === Platform.UNKNOWN;
