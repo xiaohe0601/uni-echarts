@@ -70,8 +70,9 @@ export default defineConfig({
     {
       name: "utils",
       match: [
-        /\boxc\b/,
-        /^browser-fs-access$/
+        /^browser-fs-access$/,
+        /^es-toolkit$/,
+        /\boxc\b/
       ],
       priority: 1
     },

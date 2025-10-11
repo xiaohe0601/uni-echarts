@@ -15,7 +15,7 @@ catalogs:
     '@uni-helper/plugin-uni': ^0.1.0
     '@uni-helper/vite-plugin-uni-components': ^0.2.3
     '@uni-helper/vite-plugin-uni-manifest': ^0.2.8
-    '@uni-helper/vite-plugin-uni-pages': ^0.3.17
+    '@uni-helper/vite-plugin-uni-pages': ^0.3.19
     rollup: ^4.52.4
     unbuild: ~3.5.0
     unplugin-auto-import: ^20.2.0
@@ -27,7 +27,7 @@ catalogs:
     bumpp: ^10.3.1
     pncat: ^0.6.1
   dcloudio:
-    '@dcloudio/types': ^3.4.22
+    '@dcloudio/types': ^3.4.24
     '@dcloudio/uni-app': 3.0.0-4070620250821001
     '@dcloudio/uni-app-harmony': 3.0.0-4070620250821001
     '@dcloudio/uni-app-plus': 3.0.0-4070620250821001
@@ -60,7 +60,7 @@ catalogs:
     vue: ~3.4.38
     wot-design-uni: ^1.13.0
   icons:
-    '@iconify-json/carbon': ^1.2.13
+    '@iconify-json/carbon': ^1.2.14
   lint:
     eslint: ^9.37.0
     lint-staged: ^16.2.3
@@ -82,7 +82,7 @@ catalogs:
     '@uni-helper/unocss-preset-uni': ^0.2.11
     sass: ~1.78.0
     unocss: ~66.0.0
-    unocss-applet: ^0.11.0
+    unocss-applet: ^0.12.2
   test:
     vitest: ^3.2.4
   tsc:
@@ -91,16 +91,15 @@ catalogs:
   types:
     '@mini-types/alipay': ^3.0.14
     '@types/fs-extra': ^11.0.4
-    '@types/lodash-es': ^4.17.12
     '@types/minimist': ^1.2.5
-    '@types/node': ^22.18.8
+    '@types/node': ^22.18.9
     '@uni-helper/uni-app-types': ^1.0.0-alpha.6
     miniprogram-api-typings: ^4.1.0
   utils:
     '@antfu/utils': ^9.3.0
     '@vueuse/core': ^12.8.2
     browser-fs-access: ^0.38.0
-    lodash-es: ^4.17.21
+    es-toolkit: ^1.40.0
     magic-string: ^0.30.19
     oxc-parser: ^0.94.0
   xiaohe:

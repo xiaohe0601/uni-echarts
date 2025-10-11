@@ -36,7 +36,7 @@ import { GridComponent, LegendComponent, TooltipComponent, VisualMapComponent } 
 import type { ComposeOption } from "echarts/core";
 import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import { cloneDeep } from "lodash-es";
+import { cloneDeep } from "es-toolkit";
 import { GLOBAL_OPTION } from "../echarts";
 
 type EChartsOption = ComposeOption<

@@ -1,4 +1,5 @@
-import { isEmpty as isEmptyCore, isObjectLike, isString } from "lodash";
+import { isString } from "es-toolkit";
+import { isEmpty as isEmptyCore, isObjectLike } from "es-toolkit/compat";
 
 export function sleep(timeout?: number) {
   return new Promise((resolve) => {
