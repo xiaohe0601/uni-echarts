@@ -5,7 +5,7 @@ Uni ECharts 提供了 [npm](#npm-方式) 和 [uni-modules](#uni-modules-方式) 
 ::: info 前置条件
 
 - echarts >=5.3.0
-- vue >=3.3.0
+- vue >=3.3.0（目前 uni-app 尚未适配 Vue 3.5，推荐使用 `3.4.x` 与 uni-app 保持一致）
 
 :::
 
