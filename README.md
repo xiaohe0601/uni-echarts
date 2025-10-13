@@ -57,13 +57,13 @@ The Apache Software Foundation [Apache ECharts, ECharts](https://echarts.apache.
 and the Apache ECharts project logo are either registered trademarks or trademarks of the
 [Apache Software Foundation](https://www.apache.org/).
 
-[github-stars-src]: https://img.shields.io/github/stars/xiaohe0601/uni-echarts?style=flat&color=1fa669&labelColor=18181b&logo=github
+[github-stars-src]: https://img.shields.io/github/stars/xiaohe0601/uni-echarts?style=flat&color=4ec452&labelColor=18181b&logo=github
 [github-stars-href]: https://github.com/xiaohe0601/uni-echarts
-[npm-version-src]: https://img.shields.io/npm/v/uni-echarts?style=flat&color=1fa669&labelColor=18181b&logo=npm
+[npm-version-src]: https://img.shields.io/npm/v/uni-echarts?style=flat&color=4ec452&labelColor=18181b&logo=npm
 [npm-version-href]: https://npmjs.com/package/uni-echarts
-[npm-downloads-src]: https://img.shields.io/npm/dm/uni-echarts?style=flat&color=1fa669&labelColor=18181b
+[npm-downloads-src]: https://img.shields.io/npm/dm/uni-echarts?style=flat&color=4ec452&labelColor=18181b
 [npm-downloads-href]: https://npmjs.com/package/uni-echarts
-[jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-1fa669?style=flat&labelColor=18181b
+[jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-4ec452?style=flat&labelColor=18181b
 [jsdocs-href]: https://www.jsdocs.io/package/uni-echarts
-[license-src]: https://img.shields.io/github/license/xiaohe0601/uni-echarts.svg?style=flat&color=1fa669&labelColor=18181b
+[license-src]: https://img.shields.io/github/license/xiaohe0601/uni-echarts.svg?style=flat&color=4ec452&labelColor=18181b
 [license-href]: https://github.com/xiaohe0601/uni-echarts/blob/main/LICENSE
