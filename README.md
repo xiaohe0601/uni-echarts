@@ -12,8 +12,6 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
-xiaohe0601 / [github@xiaohe0601](https://github.com/xiaohe0601) / [gitee@xiaohe0601](https://gitee.com/xiaohe0601)
-
 ## 🎉 特性
 
 - 🚀 快速上手，与 [Vue ECharts](https://github.com/ecomfe/vue-echarts) 近乎一致的使用体验
