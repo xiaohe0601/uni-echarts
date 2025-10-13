@@ -1,154 +1,86 @@
-import type { ExtractValue } from "../types";
+export type BuiltInPlatform =
+  | "app"
+  | "app-harmony"
+  | "app-plus"
+  | "h5"
+  | "web"
+  | "mp-360"
+  | "mp-alipay"
+  | "mp-baidu"
+  | "mp-harmony"
+  | "mp-jd"
+  | "mp-kuaishou"
+  | "mp-lark"
+  | "mp-qq"
+  | "mp-toutiao"
+  | "mp-weixin"
+  | "mp-xhs"
+  | "quickapp-webview"
+  | "quickapp-webview-huawei"
+  | "quickapp-webview-union";
 
-export const PlatformGroup = {
-  WEB: "WEB",
-  APP: "APP",
-  MP: "MP",
-  QUICKAPP_WEBVIEW: "QUICKAPP-WEBVIEW"
-} as const;
+export type AppPlatform = "android" | "ios" | "harmony" | undefined;
 
-export type PlatformGroupType = ExtractValue<typeof PlatformGroup>;
+// @ts-expect-error whatever
+// eslint-disable-next-line node/prefer-global/process
+export const platform = process.env.UNI_PLATFORM as BuiltInPlatform;
 
-export const Platform = {
-  APP_ANDROID: "APP-ANDROID",
-  APP_IOS: "APP-IOS",
-  APP_HARMONY: "APP-HARMONY",
-  MP_WEIXIN: "MP-WEIXIN",
-  MP_ALIPAY: "MP-ALIPAY",
-  MP_BAIDU: "MP-BAIDU",
-  MP_TOUTIAO: "MP-TOUTIAO",
-  MP_LARK: "MP-LARK",
-  MP_QQ: "MP-QQ",
-  MP_KUAISHOU: "MP-KUAISHOU",
-  MP_JD: "MP-JD",
-  MP_360: "MP-360",
-  MP_XHS: "MP-XHS",
-  MP_HARMONY: "MP-HARMONY",
-  QUICKAPP_WEBVIEW_UNION: "QUICKAPP-WEBVIEW-UNION",
-  QUICKAPP_WEBVIEW_HUAWEI: "QUICKAPP-WEBVIEW-HUAWEI",
-  UNKNOWN: "UNKNOWN"
-} as const;
-
-export type PlatformType = ExtractValue<typeof Platform>;
-
-export function getPlatformGroup(): PlatformGroupType {
-  let plat: PlatformGroupType = PlatformGroup.WEB;
-
-  // #ifdef WEB || H5
-  plat = PlatformGroup.WEB;
-  // #endif
-  // #ifdef APP
-  plat = PlatformGroup.APP;
-  // #endif
-  // #ifdef MP
-  plat = PlatformGroup.MP;
-  // #endif
-  // #ifdef QUICKAPP-WEBVIEW
-  plat = PlatformGroup.QUICKAPP_WEBVIEW;
-  // #endif
-
-  return plat;
-}
-
-export const platformGroup = getPlatformGroup();
-
-export function getPlatform(): PlatformType {
-  let plat: PlatformType = Platform.UNKNOWN;
+export const appPlatform = (function (): AppPlatform {
+  let plat: AppPlatform;
 
   // #ifdef APP-ANDROID
-  plat = Platform.APP_ANDROID;
+  plat = "android";
   // #endif
   // #ifdef APP-IOS
-  plat = Platform.APP_IOS;
+  plat = "ios";
   // #endif
   // #ifdef APP-HARMONY
-  plat = Platform.APP_HARMONY;
-  // #endif
-  // #ifdef MP-WEIXIN
-  plat = Platform.MP_WEIXIN;
-  // #endif
-  // #ifdef MP-ALIPAY
-  plat = Platform.MP_ALIPAY;
-  // #endif
-  // #ifdef MP-BAIDU
-  plat = Platform.MP_BAIDU;
-  // #endif
-  // #ifdef MP-TOUTIAO
-  plat = Platform.MP_TOUTIAO;
-  // #endif
-  // #ifdef MP-LARK
-  plat = Platform.MP_LARK;
-  // #endif
-  // #ifdef MP-QQ
-  plat = Platform.MP_QQ;
-  // #endif
-  // #ifdef MP-KUAISHOU
-  plat = Platform.MP_KUAISHOU;
-  // #endif
-  // #ifdef MP-JD
-  plat = Platform.MP_JD;
-  // #endif
-  // #ifdef MP-360
-  plat = Platform.MP_360;
-  // #endif
-  // #ifdef MP-XHS
-  plat = Platform.MP_XHS;
-  // #endif
-  // #ifdef MP-HARMONY
-  plat = Platform.MP_HARMONY;
-  // #endif
-  // #ifdef QUICKAPP-WEBVIEW-UNION
-  plat = Platform.QUICKAPP_WEBVIEW_UNION;
-  // #endif
-  // #ifdef QUICKAPP-WEBVIEW-HUAWEI
-  plat = Platform.QUICKAPP_WEBVIEW_HUAWEI;
+  plat = "harmony";
   // #endif
 
   return plat;
-}
+})();
 
-export const platform = getPlatform();
-
-/** Web */
-export const isWeb = platformGroup === PlatformGroup.WEB;
 /** App */
-export const isApp = platformGroup === PlatformGroup.APP;
+export const isApp = platform === "app";
+/** Web */
+export const isWeb = platform === "web" || platform === "h5";
 /** 小程序 */
-export const isMp = platformGroup === PlatformGroup.MP;
+export const isMp = /^mp-/i.test(platform);
 /** 快应用 */
-export const isQuickappWebview = platformGroup === PlatformGroup.QUICKAPP_WEBVIEW;
+export const isQuickapp = /^quickapp-webview/i.test(platform);
 
 /** App Android */
-export const isAppAndroid = platform === Platform.APP_ANDROID;
+export const isAppAndroid = appPlatform === "android";
 /** App iOS */
-export const isAppIos = platform === Platform.APP_IOS;
+export const isAppIos = appPlatform === "ios";
 /** App HarmonyOS Next */
-export const isAppHarmony = platform === Platform.APP_HARMONY;
-/** 微信小程序 */
-export const isMpWeixin = platform === Platform.MP_WEIXIN;
-/** 支付宝小程序 */
-export const isMpAlipay = platform === Platform.MP_ALIPAY;
-/** 百度小程序 */
-export const isMpBaidu = platform === Platform.MP_BAIDU;
-/** 头条小程序 */
-export const isMpToutiao = platform === Platform.MP_TOUTIAO;
-/** 飞书小程序 */
-export const isMpLark = platform === Platform.MP_LARK;
-/** QQ 小程序 */
-export const isMpQq = platform === Platform.MP_QQ;
-/** 快手小程序 */
-export const isMpKuaishou = platform === Platform.MP_KUAISHOU;
-/** 京东小程序 */
-export const isMpJd = platform === Platform.MP_JD;
+export const isAppHarmony = appPlatform === "harmony";
+
 /** 360 小程序 */
-export const isMp360 = platform === Platform.MP_360;
-/** 小红书小程序 */
-export const isMpXhs = platform === Platform.MP_XHS;
+export const isMp360 = platform === "mp-360";
+/** 支付宝小程序 */
+export const isMpAlipay = platform === "mp-alipay";
+/** 百度小程序 */
+export const isMpBaidu = platform === "mp-baidu";
 /** 鸿蒙元服务 */
-export const isMpHarmony = platform === Platform.MP_HARMONY;
-/** 快应用联盟 */
-export const isQuickappWebviewUnion = platform === Platform.QUICKAPP_WEBVIEW_UNION;
+export const isMpHarmony = platform === "mp-harmony";
+/** 京东小程序 */
+export const isMpJd = platform === "mp-jd";
+/** 快手小程序 */
+export const isMpKuaishou = platform === "mp-kuaishou";
+/** 飞书小程序 */
+export const isMpLark = platform === "mp-lark";
+/** QQ 小程序 */
+export const isMpQq = platform === "mp-qq";
+/** 头条小程序 */
+export const isMpToutiao = platform === "mp-toutiao";
+/** 微信小程序 */
+export const isMpWeixin = platform === "mp-weixin";
+/** 小红书小程序 */
+export const isMpXhs = platform === "mp-xhs";
+
 /** 华为快应用 */
-export const isQuickappWebviewHuawei = platform === Platform.QUICKAPP_WEBVIEW_HUAWEI;
-/** 未知平台 */
-export const isUnknownPlatform = platform === Platform.UNKNOWN;
+export const isQuickappHuawei = platform === "quickapp-webview-huawei";
+/** 快应用联盟 */
+export const isQuickappUnion = platform === "quickapp-webview-union";
