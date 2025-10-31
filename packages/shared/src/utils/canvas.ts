@@ -72,7 +72,10 @@ export class UniCanvas {
           }
 
           if (key === "font") {
-            context.setFontSize(UniCanvas.parseFontSize(value));
+            const fontSize = UniCanvas.parseFontSize(value);
+            if (fontSize) {
+              context.setFontSize(fontSize);
+            }
             return;
           }
 
@@ -147,8 +150,7 @@ export class UniCanvas {
         const fontSize = defaultTo(
           // @ts-expect-error whatever
           context.state && context.state.fontSize,
-          UniCanvas.parseFontSize(font),
-          12
+          UniCanvas.parseFontSize(font) || 12
         ) / 2;
 
         const factor = fontSize >= 16 ? 1.3 : 1;
@@ -281,8 +283,18 @@ export class UniCanvas {
     });
   }
 
-  static parseFontSize(font: string): number {
-    return Number.parseFloat(defaultTo(font, "").match(/([\d.]+)px/)[1]);
+  static parseFontSize(font: OptionalValue<string>): number {
+    if (!font) {
+      return 0;
+    }
+
+    const match = font.match(/([\d.]+)px/);
+
+    if (match == null) {
+      return 0;
+    }
+
+    return Number.parseFloat(match[1]);
   }
 
   static normalizeColor(context: CanvasContext, color: string): string;
