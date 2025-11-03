@@ -12,6 +12,7 @@
   "include": [
     "scripts/**/*",
     "eslint.config.js",
+    "pncat.config.ts",
     "stylelint.config.js"
   ]
 }
