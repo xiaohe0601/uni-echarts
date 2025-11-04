@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://oss.xiaohe.ink/images/uni-echarts.png" width="160" alt="logo"/>
   <h1>Uni ECharts</h1>
-  <span>🪀 适用于 uni-app 的 Apache ECharts 组件（仅支持Vue 3）</span>
+  <span>🪀 适用于 uni-app 的 Apache ECharts 组件（仅支持 Vue 3）</span>
 </div>
 
 <br>
