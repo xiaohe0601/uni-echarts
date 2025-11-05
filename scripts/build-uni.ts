@@ -12,7 +12,7 @@ const uniPkg = {
   displayName: "xiaohe-echarts",
   type: pkg.type,
   version: pkg.version,
-  description: "适用于 uni-app 的 Apache ECharts 组件（仅支持 Vue 3）",
+  description: "适用于 uni-app 的 ECharts 组件，支持 Web、小程序、APP，支持鸿蒙，支持 TypeScript。与 Vue ECharts 近乎一致的使用体验！",
   author: pkg.author,
   license: pkg.license,
   homepage: pkg.homepage,
