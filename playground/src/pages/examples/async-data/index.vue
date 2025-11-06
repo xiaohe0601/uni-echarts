@@ -69,7 +69,8 @@ const option = ref({
     right: 10,
     bottom: 10,
     left: 10,
-    containLabel: true
+    outerBoundsMode: "same",
+    outerBoundsContain: "axisLabel"
   },
   xAxis: {
     type: "category"

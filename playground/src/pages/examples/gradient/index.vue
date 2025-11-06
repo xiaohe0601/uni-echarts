@@ -93,7 +93,8 @@ const option = ref({
     right: 30,
     bottom: 10,
     left: 10,
-    containLabel: true
+    outerBoundsMode: "same",
+    outerBoundsContain: "axisLabel"
   },
   xAxis: {
     splitLine: {

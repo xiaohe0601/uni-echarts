@@ -80,5 +80,8 @@ export default defineManifestConfig({
     },
     mergeVirtualHostAttributes: true,
     lazyCodeLoading: "requiredComponents"
+  },
+  "mp-alipay": {
+    mergeVirtualHostAttributes: true
   }
 });

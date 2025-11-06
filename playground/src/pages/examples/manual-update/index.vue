@@ -86,7 +86,8 @@ function setOption() {
       right: 16,
       bottom: 56,
       left: 10,
-      containLabel: true
+      outerBoundsMode: "same",
+      outerBoundsContain: "axisLabel"
     },
     tooltip: {
       trigger: "axis",

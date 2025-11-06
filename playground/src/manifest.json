@@ -71,7 +71,8 @@
     "lazyCodeLoading": "requiredComponents"
   },
   "mp-alipay": {
-    "usingComponents": true
+    "usingComponents": true,
+    "mergeVirtualHostAttributes": true
   },
   "mp-baidu": {
     "usingComponents": true
