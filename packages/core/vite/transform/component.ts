@@ -9,32 +9,16 @@ import type { ParseResult, StaticImport } from "oxc-parser";
 import { parseAsync } from "oxc-parser";
 import type { SFCDescriptor } from "vue/compiler-sfc";
 import { MagicString } from "vue/compiler-sfc";
-import { parseVueSFC } from "./helpers";
+import { parseVueSFC } from "../helpers";
+import type { ImportType, ResolvedOptions } from "../options";
 
 interface Asts {
   script: ParseResult | null;
   scriptSetup: ParseResult | null;
 }
 
-export type ImportType = "default" | "namespace";
-
-export interface TransformOptions {
-  echarts?: {
-    provide?: boolean | string;
-    importType?: ImportType;
-  };
-}
-
-export async function transform(code: string, options: TransformOptions) {
-  const opts = {
-    echarts: {
-      provide: true,
-      importType: "namespace",
-      ...options.echarts
-    }
-  } satisfies TransformOptions;
-
-  if (!opts.echarts.provide) {
+export async function transformComponent(code: string, options: ResolvedOptions) {
+  if (!options.echarts.provide) {
     return null;
   }
 
@@ -52,14 +36,14 @@ export async function transform(code: string, options: TransformOptions) {
 
   const ms = new MagicString(code);
 
-  if (opts.echarts.provide) {
+  if (options.echarts.provide) {
     await injectEChartsProvide({
       sfc,
       ms,
       asts,
       echarts: {
-        provide: opts.echarts.provide === true ? "echarts/core" : opts.echarts.provide,
-        importType: opts.echarts.importType
+        provide: options.echarts.provide === true ? "echarts/core" : options.echarts.provide,
+        importType: options.echarts.importType
       }
     });
   }

@@ -1,18 +1,14 @@
-import type { FilterPattern, Plugin } from "vite";
+import type { Plugin } from "vite";
 import { createFilter } from "vite";
-import type { TransformOptions } from "./transform";
-import { transform } from "./transform";
+import type { MagicString } from "vue/compiler-sfc";
+import type { Options } from "./options";
+import { resolveOptions } from "./options";
+import { transformComponent } from "./transform/component";
 
-export interface Options extends TransformOptions {
-  include?: FilterPattern;
-  exclude?: FilterPattern;
-}
+export type { Options } from "./options";
 
 export function UniEcharts(options: Options = {}): Plugin {
-  const opts = {
-    include: "./src/**/*.vue",
-    ...options
-  } satisfies Options;
+  const opts = resolveOptions(options);
 
   const filter = createFilter(opts.include, opts.exclude);
 
@@ -20,11 +16,11 @@ export function UniEcharts(options: Options = {}): Plugin {
     name: "uni-echarts",
     enforce: "pre",
     async transform(code, id) {
-      if (!filter(id)) {
-        return;
-      }
+      let ms: MagicString | null = null;
 
-      const ms = await transform(code, opts);
+      if (filter(id)) {
+        ms = await transformComponent(code, opts);
+      }
 
       if (ms == null || !ms.hasChanged()) {
         return;
