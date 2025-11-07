@@ -3,7 +3,7 @@
   <app-page>
     <uni-echarts
       ref="chartEl"
-      class="h-75"
+      custom-class="h-75"
       :option="option"
       autoresize
     ></uni-echarts>

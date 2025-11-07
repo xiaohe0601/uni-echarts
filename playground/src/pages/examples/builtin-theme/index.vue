@@ -2,7 +2,7 @@
   <!-- #region template -->
   <app-page>
     <uni-echarts
-      class="h-75"
+      custom-class="h-75"
       :style="styles"
       :option="option"
       :theme="theme"

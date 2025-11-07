@@ -1,7 +1,7 @@
 <template>
   <!-- #region template -->
   <app-page>
-    <uni-echarts class="h-60" :option="option" autoresize></uni-echarts>
+    <uni-echarts custom-class="h-60" :option="option" autoresize></uni-echarts>
   </app-page>
   <!-- #endregion template -->
 </template>

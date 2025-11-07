@@ -3,7 +3,7 @@
   <app-page>
     <uni-echarts
       ref="chartEl"
-      class="h-75"
+      custom-class="h-75"
       manual-update
       autoresize
       @inited="setOption()"

@@ -2,14 +2,14 @@
   <!-- #region template -->
   <app-page>
     <uni-echarts
-      class="h-60"
+      custom-class="h-60"
       :option="option1"
       group="radiance"
       autoresize
     ></uni-echarts>
 
     <uni-echarts
-      class="h-60"
+      custom-class="h-60"
       :option="option2"
       group="radiance"
       autoresize

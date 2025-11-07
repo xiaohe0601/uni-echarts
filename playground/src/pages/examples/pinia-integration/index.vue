@@ -1,7 +1,7 @@
 <template>
   <!-- #region template -->
   <app-page>
-    <uni-echarts class="h-75" :option="getOption(metricIndex)" autoresize></uni-echarts>
+    <uni-echarts custom-class="h-75" :option="getOption(metricIndex)" autoresize></uni-echarts>
 
     <wd-cell-group class="mt-2">
       <wd-picker

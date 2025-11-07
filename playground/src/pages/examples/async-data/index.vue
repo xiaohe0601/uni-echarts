@@ -2,7 +2,7 @@
   <!-- #region template -->
   <app-page>
     <uni-echarts
-      class="h-60"
+      custom-class="h-60"
       :option="option"
       theme="ovilia-green"
       autoresize
