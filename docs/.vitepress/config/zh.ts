@@ -99,6 +99,7 @@ function sidebarExamples(): DefaultTheme.SidebarItem[] {
         { text: "动作调度", link: "/action-dispatch" },
         { text: "内置主题", link: "/builtin-theme" },
         { text: "颜色渐变", link: "/gradient" },
+        { text: "弹窗内使用", link: "/popup" },
         { text: "Pinia 集成", link: "/pinia-integration" },
         { text: "图表联动", link: "/connectable" },
         { text: "手动更新", link: "/manual-update" },

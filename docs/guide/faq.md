@@ -96,3 +96,28 @@ const option = ref({
 - 启用 [manual-update](../apis/component#attributes) 并使用 [setOption](../apis/component#exposes) 手动设置 option
 
 - 使用 [provideEchartsOption](../apis/function#provideechartsoption) 设置 option，参考 [依赖注入](./provide)
+
+## 在弹窗组件内使用时无法正常展示
+
+一般弹窗组件都会添加入场动画，导致 Uni ECharts 刚渲染时无法正常获取到画布大小，所以需要将 Uni ECharts 的渲染时机延迟到弹窗动画完成后。
+
+下面以 Wot UI 的 [Popup 弹出层](https://wot-ui.cn/component/popup.html) 为例：
+
+```html
+<template>
+  <wd-popup
+    v-model="visible"
+    @after-enter="render = true"
+    @after-leave="render = false"
+  >
+    <uni-echarts v-if="render" :option="option"></uni-echarts>
+  </wd-popup>
+</template>
+```
+
+```ts
+const visible = ref(false);
+const render = ref(false);
+```
+
+以上示例仅展示关键代码，详细可以参考 [弹窗内使用](../examples/popup) 部分的代码示例。

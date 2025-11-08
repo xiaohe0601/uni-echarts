@@ -15,6 +15,7 @@
         <wd-cell title="动作调度" is-link to="/pages/examples/action-dispatch/index"></wd-cell>
         <wd-cell title="内置主题" is-link to="/pages/examples/builtin-theme/index"></wd-cell>
         <wd-cell title="颜色渐变" is-link to="/pages/examples/gradient/index"></wd-cell>
+        <wd-cell title="弹窗内使用" is-link to="/pages/examples/popup/index"></wd-cell>
         <wd-cell title="Pinia 集成" is-link to="/pages/examples/pinia-integration/index"></wd-cell>
         <wd-cell title="图表联动" is-link to="/pages/examples/connectable/index"></wd-cell>
         <wd-cell title="手动更新" is-link to="/pages/examples/manual-update/index"></wd-cell>

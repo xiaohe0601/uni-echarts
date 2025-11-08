@@ -91,6 +91,13 @@
       "style": {
         "navigationBarTitleText": "Pinia 集成"
       }
+    },
+    {
+      "path": "pages/examples/popup/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "弹窗内使用"
+      }
     }
   ],
   "subPackages": []
