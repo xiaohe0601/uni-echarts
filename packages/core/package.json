@@ -56,7 +56,7 @@
     "vue": ">=3.3.0"
   },
   "dependencies": {
-    "oxc-parser": "catalog:utils"
+    "oxc-parser": "catalog:ast"
   },
   "devDependencies": {
     "@uni-helper/vite-plugin-uni-components": "catalog:build",

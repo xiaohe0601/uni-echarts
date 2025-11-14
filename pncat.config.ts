@@ -48,7 +48,8 @@ export default defineConfig({
     {
       name: "cli",
       match: [
-        "@antfu/ni"
+        "@antfu/ni",
+        "@uni-helper/unh"
       ],
       priority: 20
     },
@@ -70,8 +71,7 @@ export default defineConfig({
       name: "utils",
       match: [
         "browser-fs-access",
-        "es-toolkit",
-        /\boxc\b/
+        "es-toolkit"
       ],
       priority: 60
     }
