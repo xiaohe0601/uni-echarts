@@ -9,32 +9,16 @@ import type { ParseResult, StaticImport } from "oxc-parser";
 import { parseAsync } from "oxc-parser";
 import type { SFCDescriptor } from "vue/compiler-sfc";
 import { MagicString } from "vue/compiler-sfc";
-import { parseVueSFC } from "./helpers";
+import { parseVueSFC } from "../helpers";
+import type { ImportType, ResolvedOptions } from "../options";
 
 interface Asts {
   script: ParseResult | null;
   scriptSetup: ParseResult | null;
 }
 
-export type ImportType = "default" | "namespace";
-
-export interface TransformOptions {
-  echarts?: {
-    provide?: boolean | string;
-    importType?: ImportType;
-  };
-}
-
-export async function transform(code: string, options: TransformOptions) {
-  const opts = {
-    echarts: {
-      provide: true,
-      importType: "namespace",
-      ...options.echarts
-    }
-  } satisfies TransformOptions;
-
-  if (!opts.echarts.provide) {
+export async function transformComponent(code: string, options: ResolvedOptions) {
+  if (!options.echarts.provide) {
     return null;
   }
 
@@ -52,14 +36,11 @@ export async function transform(code: string, options: TransformOptions) {
 
   const ms = new MagicString(code);
 
-  if (opts.echarts.provide) {
-    await injectEChartsProvide({
-      sfc,
-      ms,
-      asts,
+  if (options.echarts.provide) {
+    injectEChartsProvide(sfc, asts, ms, {
       echarts: {
-        provide: opts.echarts.provide === true ? "echarts/core" : opts.echarts.provide,
-        importType: opts.echarts.importType
+        provide: options.echarts.provide === true ? "echarts/core" : options.echarts.provide,
+        importType: options.echarts.importType
       }
     });
   }
@@ -77,23 +58,18 @@ async function parseScript(sfc: SFCDescriptor, asts: Asts, block: "script" | "sc
   asts[block] = await parseAsync(`script.${script.lang || "js"}`, script.content);
 }
 
-async function injectEChartsProvide(options: {
-  sfc: SFCDescriptor;
-  ms: MagicString;
-  asts: Asts;
+function injectEChartsProvide(sfc: SFCDescriptor, asts: Asts, ms: MagicString, options: {
   echarts: {
     provide: string;
     importType: ImportType;
   };
 }) {
-  const { sfc, ms } = options;
-
   if (sfc.template == null || !/<(?:UniEcharts|uni-echarts)/.test(sfc.template.content)) {
     return;
   }
 
   if (sfc.scriptSetup != null) {
-    const ast = options.asts.scriptSetup!;
+    const ast = asts.scriptSetup!;
 
     const { staticImports } = ast.module;
 
@@ -137,7 +113,7 @@ async function injectEChartsProvide(options: {
       ms.appendLeft(appendImportsIndex, `\nprovideEcharts(echarts);`);
     }
   } else if (sfc.script != null) {
-    const ast = options.asts.script!;
+    const ast = asts.script!;
 
     const { staticImports } = ast.module;
 
