@@ -89,16 +89,6 @@ function buildPlugins(): PluginOption[] {
   ];
 }
 
-function buildDefine() {
-  const define: Record<string, any> = {};
-
-  if (!["web", "h5", "mp-weixin"].includes(process.env.UNI_PLATFORM!)) {
-    define.wx = "uni";
-  }
-
-  return define;
-}
-
 export default defineConfig({
   root: process.cwd(),
   base: process.env.UNI_PLATFORM === "h5" ? "/ui/" : "/",
@@ -108,7 +98,6 @@ export default defineConfig({
     }
   },
   plugins: buildPlugins(),
-  define: buildDefine(),
   build: {
     target: "es6",
     cssTarget: "chrome61"

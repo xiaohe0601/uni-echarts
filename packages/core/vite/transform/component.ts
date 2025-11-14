@@ -37,10 +37,7 @@ export async function transformComponent(code: string, options: ResolvedOptions)
   const ms = new MagicString(code);
 
   if (options.echarts.provide) {
-    await injectEChartsProvide({
-      sfc,
-      ms,
-      asts,
+    injectEChartsProvide(sfc, asts, ms, {
       echarts: {
         provide: options.echarts.provide === true ? "echarts/core" : options.echarts.provide,
         importType: options.echarts.importType
@@ -61,23 +58,18 @@ async function parseScript(sfc: SFCDescriptor, asts: Asts, block: "script" | "sc
   asts[block] = await parseAsync(`script.${script.lang || "js"}`, script.content);
 }
 
-async function injectEChartsProvide(options: {
-  sfc: SFCDescriptor;
-  ms: MagicString;
-  asts: Asts;
+function injectEChartsProvide(sfc: SFCDescriptor, asts: Asts, ms: MagicString, options: {
   echarts: {
     provide: string;
     importType: ImportType;
   };
 }) {
-  const { sfc, ms } = options;
-
   if (sfc.template == null || !/<(?:UniEcharts|uni-echarts)/.test(sfc.template.content)) {
     return;
   }
 
   if (sfc.scriptSetup != null) {
-    const ast = options.asts.scriptSetup!;
+    const ast = asts.scriptSetup!;
 
     const { staticImports } = ast.module;
 
@@ -121,7 +113,7 @@ async function injectEChartsProvide(options: {
       ms.appendLeft(appendImportsIndex, `\nprovideEcharts(echarts);`);
     }
   } else if (sfc.script != null) {
-    const ast = options.asts.script!;
+    const ast = asts.script!;
 
     const { staticImports } = ast.module;
 
