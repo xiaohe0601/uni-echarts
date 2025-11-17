@@ -353,7 +353,7 @@ export default defineComponent({
 
     :::
 
-2. 前往 uni-app 插件市场下载 [Uni Echarts](https://ext.dcloud.net.cn/plugin?id=22035)
+2. 前往 uni-app 插件市场下载 [Uni ECharts](https://ext.dcloud.net.cn/plugin?id=22035)
 
 ### 配置
 
