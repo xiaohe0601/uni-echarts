@@ -1,0 +1,111 @@
+name: 🐞 错误报告
+description: 报告发现的错误，帮助我们改进组件。
+labels: ['🐞 bug: need confirm']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **在开始之前……**
+
+        请优先尝试以下方式解决问题：
+
+        - 查看 [快速开始](https://uni-echarts.xiaohe.ink/guide/getting-started) 相关的文档说明，确认组件的基本使用方式是否正确
+        - 查阅 [常见问题](https://uni-echarts.xiaohe.ink/guide/faq) 中是否有相关的问题描述和解决方案
+        - 搜索 [Issues](https://github.com/xiaohe0601/uni-echarts/issues?q=is%3Aissue) 中是否有与你类似的问题
+
+  - type: input
+    id: version
+    attributes:
+      label: Uni ECharts 版本号
+      placeholder: 例如：2.0.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: project-type
+    attributes:
+      label: 项目类型
+      multiple: true
+      options:
+        - CLI
+        - HBuilder
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install-type
+    attributes:
+      label: 安装类型
+      multiple: true
+      options:
+        - NPM
+        - Uni Modules
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 运行平台
+      multiple: true
+      options:
+        - app-android
+        - app-ios
+        - app-harmony
+        - web
+        - mp-360
+        - mp-alipay
+        - mp-baidu
+        - mp-harmony
+        - mp-jd
+        - mp-kuaishou
+        - mp-lark
+        - mp-qq
+        - mp-toutiao
+        - mp-weixin
+        - mp-xhs
+        - quickapp-webview
+        - quickapp-webview-huawei
+        - quickapp-webview-union
+    validations:
+      required: true
+
+  - type: input
+    id: reproduce
+    attributes:
+      label: 最小重现
+      description: |
+        请尽可能提供一个最小重现实例以便于我们帮你排查问题，可以通过 [create-uni](https://uni-helper.js.org/create-uni) 快速创建项目，示例如下：
+
+        ```shell
+        # 直接创建项目
+        pnpm create uni@latest uni-echarts-repro --ts -p import -m uniEcharts --eslint
+
+        # 或者手动选择需要的模块
+        pnpm create uni@latest
+        ```
+
+        注意，请确保 `uni-echarts` 为最新版本。
+
+  - type: textarea
+    id: reproduce-steps
+    attributes:
+      label: 重现步骤
+      description: 请提供一个最简洁清晰的重现步骤，方便我们快速重现问题。
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 描述问题
+      description: 请详细描述遇到的问题，包括组件的实际行为和预期的结果等内容。
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: 补充信息
+      description: |
+        可以补充说明 NodeJS、echarts、vue、uni-app 等相关的版本信息，以及根据你的分析，出现这个问题的原因可能在哪里？

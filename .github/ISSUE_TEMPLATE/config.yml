@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 🤖 常见问题
+    url: https://uni-echarts.xiaohe.ink/guide/faq
+    about: 收录高频问题及对应的解决方案，帮助你快速定位和解决问题。
+  - name: 📋 已解答问题
+    url: https://github.com/xiaohe0601/uni-echarts/issues?q=is%3Aissue%20label%3A%22%F0%9F%98%80%20answer%22
+    about: 查看社区已解答的问题，获取实用参考和技巧。
+  - name: 💬 讨论区
+    url: https://github.com/xiaohe0601/uni-echarts/discussions
+    about: 欢迎在讨论区与我们互动，分享经验和建议。
