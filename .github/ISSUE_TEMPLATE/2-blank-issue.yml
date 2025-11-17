@@ -1,10 +1,10 @@
 name: 🤔 其他问题
-description: 没有符合要求的模板，从零开始创建。
+description: 没有符合要求的问题模板，从零开始创建一个新的问题。
 body:
   - type: textarea
     id: description
     attributes:
-      label: Add a description
-      placeholder: Type your description here ...
+      label: 问题描述
+      placeholder: 详细描述你遇到的问题……
     validations:
       required: true
