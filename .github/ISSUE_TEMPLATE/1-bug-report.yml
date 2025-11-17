@@ -17,6 +17,7 @@ body:
     id: version
     attributes:
       label: Uni ECharts 版本号
+      description: 正在使用的 Uni ECharts 版本号
       placeholder: 例如：2.0.0
     validations:
       required: true
@@ -25,6 +26,7 @@ body:
     id: project-type
     attributes:
       label: 项目类型
+      description: 项目的类型（可多选）
       multiple: true
       options:
         - CLI
@@ -35,7 +37,8 @@ body:
   - type: dropdown
     id: install-type
     attributes:
-      label: 安装类型
+      label: 安装方式
+      description: Uni ECharts 的安装方式（可多选）
       multiple: true
       options:
         - NPM
@@ -47,6 +50,7 @@ body:
     id: platform
     attributes:
       label: 运行平台
+      description: 组件运行的平台（可多选）
       multiple: true
       options:
         - app-android

@@ -1,0 +1,10 @@
+name: 🤔 其他问题
+description: 没有符合要求的模板，从零开始创建。
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Add a description
+      placeholder: Type your description here ...
+    validations:
+      required: true
