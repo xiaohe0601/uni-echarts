@@ -28,12 +28,6 @@ Uni ECharts 是适用于 uni-app 的 Apache ECharts 组件，无需繁琐的步�
 - [echarts-for-weixin](https://github.com/ecomfe/echarts-for-weixin)
 - [mitt](https://github.com/developit/mitt)
 
-## 🐶 讨论交流
-
-- ❓：若有疑问或 BUG 反馈，可提交 [issues](https://github.com/xiaohe0601/uni-echarts/issues)，也欢迎 PR
-- 📫：[xiaohe0601@outlook.com](mailto:xiaohe0601@outlook.com)
-- 🐧：暂未开通
-
 ## 🏆 开源协议
 
 Uni ECharts 基于 [MIT](https://github.com/xiaohe0601/uni-echarts/blob/main/LICENSE) 许可发布，请自由地享受和参与开源。
