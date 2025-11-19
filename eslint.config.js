@@ -1,14 +1,8 @@
-import defineConfig from "@xiaohe01/eslint-config";
+import { defineConfig } from "@xiaohe01/eslint-config";
 
 export default defineConfig({
   pnpm: true,
-  vue: {
-    overrides: {
-      "vue/custom-event-name-casing": "off"
-    }
-  },
   ignores: [
-    "**/*.md",
     "**/*.min.js",
     "packages/core/src/shared-core.*",
     "packages/core/dist-resolver",
