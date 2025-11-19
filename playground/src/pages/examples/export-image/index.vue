@@ -13,7 +13,8 @@
         size="small"
         plain
         @click="saveAsImage()"
-      >保存为图片
+      >
+        保存为图片
       </wd-button>
     </view>
   </app-page>

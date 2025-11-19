@@ -1,7 +1,9 @@
 <template>
   <div v-if="list.length > 0" class="VPFriendly VPFeatures">
     <div class="container">
-      <h1 class="title">友情链接</h1>
+      <h1 class="title">
+        友情链接
+      </h1>
 
       <div class="items">
         <div

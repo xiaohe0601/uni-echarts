@@ -14,8 +14,12 @@
     <wd-cell-group class="mt-2">
       <wd-cell title="主题" title-width="80px" center>
         <wd-radio-group v-model="theme" class="leading-none" shape="button">
-          <wd-radio value="light">Light</wd-radio>
-          <wd-radio class="!mr-0" value="dark">Dark</wd-radio>
+          <wd-radio value="light">
+            Light
+          </wd-radio>
+          <wd-radio class="!mr-0" value="dark">
+            Dark
+          </wd-radio>
         </wd-radio-group>
       </wd-cell>
 

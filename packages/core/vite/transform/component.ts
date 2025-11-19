@@ -5,17 +5,12 @@ import type {
   ObjectPropertyKind,
   Statement
 } from "@oxc-project/types";
-import type { ParseResult, StaticImport } from "oxc-parser";
-import { parseAsync } from "oxc-parser";
+import type { StaticImport } from "oxc-parser";
+import { parseSync } from "oxc-parser";
 import type { SFCDescriptor } from "vue/compiler-sfc";
 import { MagicString } from "vue/compiler-sfc";
 import { parseVueSFC } from "../helpers";
 import type { ImportType, ResolvedOptions } from "../options";
-
-interface Asts {
-  script: ParseResult | null;
-  scriptSetup: ParseResult | null;
-}
 
 export async function transformComponent(code: string, options: ResolvedOptions) {
   if (!options.echarts.provide) {
@@ -24,20 +19,10 @@ export async function transformComponent(code: string, options: ResolvedOptions)
 
   const sfc = await parseVueSFC(code);
 
-  const asts: Asts = {
-    script: null,
-    scriptSetup: null
-  };
-
-  await Promise.all([
-    parseScript(sfc, asts, "script"),
-    parseScript(sfc, asts, "scriptSetup")
-  ]);
-
   const ms = new MagicString(code);
 
   if (options.echarts.provide) {
-    injectEChartsProvide(sfc, asts, ms, {
+    injectEChartsProvide(sfc, ms, {
       echarts: {
         provide: options.echarts.provide === true ? "echarts/core" : options.echarts.provide,
         importType: options.echarts.importType
@@ -48,17 +33,7 @@ export async function transformComponent(code: string, options: ResolvedOptions)
   return ms;
 }
 
-async function parseScript(sfc: SFCDescriptor, asts: Asts, block: "script" | "scriptSetup") {
-  const script = sfc[block];
-
-  if (script == null) {
-    return;
-  }
-
-  asts[block] = await parseAsync(`script.${script.lang || "js"}`, script.content);
-}
-
-function injectEChartsProvide(sfc: SFCDescriptor, asts: Asts, ms: MagicString, options: {
+function injectEChartsProvide(sfc: SFCDescriptor, ms: MagicString, options: {
   echarts: {
     provide: string;
     importType: ImportType;
@@ -69,7 +44,7 @@ function injectEChartsProvide(sfc: SFCDescriptor, asts: Asts, ms: MagicString, o
   }
 
   if (sfc.scriptSetup != null) {
-    const ast = asts.scriptSetup!;
+    const ast = parseSync(`script.${sfc.scriptSetup.lang || "js"}`, sfc.scriptSetup.content);
 
     const { staticImports } = ast.module;
 
@@ -113,7 +88,7 @@ function injectEChartsProvide(sfc: SFCDescriptor, asts: Asts, ms: MagicString, o
       ms.appendLeft(appendImportsIndex, `\nprovideEcharts(echarts);`);
     }
   } else if (sfc.script != null) {
-    const ast = asts.script!;
+    const ast = parseSync(`script.${sfc.script.lang || "js"}`, sfc.script.content);
 
     const { staticImports } = ast.module;
 

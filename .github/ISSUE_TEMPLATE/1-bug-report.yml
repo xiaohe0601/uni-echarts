@@ -1,6 +1,6 @@
 name: 🐞 错误报告
 description: 报告发现的错误，帮助我们改进组件。
-labels: ['🐞 bug: need confirm']
+labels: ["🐞 bug: need confirm"]
 body:
   - type: markdown
     attributes:

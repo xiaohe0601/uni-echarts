@@ -4,8 +4,12 @@
 
     <view class="flex flex-col items-center justify-center px-4 py-8">
       <wd-img class="w-20 h-20" src="https://oss.xiaohe.ink/images/uni-echarts.png"></wd-img>
-      <text class="mt-5 text-2xl text-t1">Uni ECharts</text>
-      <text class="mt-3 text-base text-t3">适用于 uni-app 的 Apache ECharts 组件</text>
+      <text class="mt-5 text-2xl text-t1">
+        Uni ECharts
+      </text>
+      <text class="mt-3 text-base text-t3">
+        适用于 uni-app 的 Apache ECharts 组件
+      </text>
     </view>
 
     <view class="px-4 py-6 bg-b1 rounded-t-3xl">

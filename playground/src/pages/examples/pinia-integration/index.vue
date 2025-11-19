@@ -19,7 +19,8 @@
           plain
           :disabled="isMin(metricIndex)"
           @click="increase(metricIndex, -1)"
-        >减少
+        >
+          减少
         </wd-button>
 
         <wd-button
@@ -28,7 +29,8 @@
           plain
           :disabled="isMax(metricIndex)"
           @click="increase(metricIndex, 1)"
-        >增加
+        >
+          增加
         </wd-button>
       </wd-cell>
     </wd-cell-group>

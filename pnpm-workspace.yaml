@@ -4,57 +4,57 @@ packages:
   - packages/**
   - examples/**
 overrides:
-  '@types/node': 22.19.1
+  "@types/node": 22.19.1
   vue: 3.4.38
 catalogs:
   ast:
-    oxc-parser: ^0.97.0
+    oxc-parser: ~0.98.0
   build:
-    '@rollup/plugin-commonjs': ^29.0.0
-    '@rollup/plugin-node-resolve': ^16.0.3
-    '@rollup/plugin-terser': ^0.4.4
-    '@uni-helper/plugin-uni': ^0.1.0
-    '@uni-helper/vite-plugin-uni-components': ^0.2.3
-    '@uni-helper/vite-plugin-uni-manifest': ^0.2.10
-    '@uni-helper/vite-plugin-uni-pages': ^0.3.22
-    rollup: ^4.53.2
+    "@rollup/plugin-commonjs": ^29.0.0
+    "@rollup/plugin-node-resolve": ^16.0.3
+    "@rollup/plugin-terser": ^0.4.4
+    "@uni-helper/plugin-uni": ^0.1.0
+    "@uni-helper/vite-plugin-uni-components": ^0.2.3
+    "@uni-helper/vite-plugin-uni-manifest": ^0.2.11
+    "@uni-helper/vite-plugin-uni-pages": ^0.3.22
+    rollup: ^4.53.3
     unbuild: ^3.6.1
     unplugin-auto-import: ^20.2.0
     vite: ^5.4.21
     vite-plugin-inspect: ~0.8.9
     vite-plugin-uni-polyfill: ^0.1.0
   cli:
-    '@antfu/ni': ^27.0.1
-    '@uni-helper/unh': ^0.2.5
+    "@antfu/ni": ^27.0.1
+    "@uni-helper/unh": ^0.2.7
     bumpp: ^10.3.1
     pncat: ^0.7.6
   dcloudio:
-    '@dcloudio/types': ^3.4.28
-    '@dcloudio/uni-app': 3.0.0-4080520251106001
-    '@dcloudio/uni-app-harmony': 3.0.0-4080520251106001
-    '@dcloudio/uni-app-plus': 3.0.0-4080520251106001
-    '@dcloudio/uni-automator': 3.0.0-4080520251106001
-    '@dcloudio/uni-cli-shared': 3.0.0-4080520251106001
-    '@dcloudio/uni-components': 3.0.0-4080520251106001
-    '@dcloudio/uni-h5': 3.0.0-4080520251106001
-    '@dcloudio/uni-mp-alipay': 3.0.0-4080520251106001
-    '@dcloudio/uni-mp-baidu': 3.0.0-4080520251106001
-    '@dcloudio/uni-mp-jd': 3.0.0-4080520251106001
-    '@dcloudio/uni-mp-kuaishou': 3.0.0-4080520251106001
-    '@dcloudio/uni-mp-lark': 3.0.0-4080520251106001
-    '@dcloudio/uni-mp-qq': 3.0.0-4080520251106001
-    '@dcloudio/uni-mp-toutiao': 3.0.0-4080520251106001
-    '@dcloudio/uni-mp-weixin': 3.0.0-4080520251106001
-    '@dcloudio/uni-mp-xhs': 3.0.0-4080520251106001
-    '@dcloudio/uni-quickapp-webview': 3.0.0-4080520251106001
-    '@dcloudio/uni-stacktracey': 3.0.0-4080520251106001
-    '@dcloudio/vite-plugin-uni': 3.0.0-4080520251106001
+    "@dcloudio/types": ^3.4.28
+    "@dcloudio/uni-app": 3.0.0-4080520251106001
+    "@dcloudio/uni-app-harmony": 3.0.0-4080520251106001
+    "@dcloudio/uni-app-plus": 3.0.0-4080520251106001
+    "@dcloudio/uni-automator": 3.0.0-4080520251106001
+    "@dcloudio/uni-cli-shared": 3.0.0-4080520251106001
+    "@dcloudio/uni-components": 3.0.0-4080520251106001
+    "@dcloudio/uni-h5": 3.0.0-4080520251106001
+    "@dcloudio/uni-mp-alipay": 3.0.0-4080520251106001
+    "@dcloudio/uni-mp-baidu": 3.0.0-4080520251106001
+    "@dcloudio/uni-mp-jd": 3.0.0-4080520251106001
+    "@dcloudio/uni-mp-kuaishou": 3.0.0-4080520251106001
+    "@dcloudio/uni-mp-lark": 3.0.0-4080520251106001
+    "@dcloudio/uni-mp-qq": 3.0.0-4080520251106001
+    "@dcloudio/uni-mp-toutiao": 3.0.0-4080520251106001
+    "@dcloudio/uni-mp-weixin": 3.0.0-4080520251106001
+    "@dcloudio/uni-mp-xhs": 3.0.0-4080520251106001
+    "@dcloudio/uni-quickapp-webview": 3.0.0-4080520251106001
+    "@dcloudio/uni-stacktracey": 3.0.0-4080520251106001
+    "@dcloudio/vite-plugin-uni": 3.0.0-4080520251106001
   dev:
-    '@vue/runtime-core': ~3.4.38
+    "@vue/runtime-core": ~3.4.38
   docs:
     vitepress: ^1.6.4
     vitepress-plugin-group-icons: ^1.6.5
-    vitepress-plugin-llms: ^1.9.1
+    vitepress-plugin-llms: ^1.9.3
   frontend:
     echarts: ^6.0.0
     monaco-editor: ^0.54.0
@@ -62,14 +62,14 @@ catalogs:
     vue: ~3.4.38
     wot-design-uni: ^1.13.0
   icons:
-    '@iconify-json/carbon': ^1.2.14
+    "@iconify-json/carbon": ^1.2.14
   lint:
     eslint: ^9.39.1
     lint-staged: ^16.2.6
     simple-git-hooks: ^2.13.1
     stylelint: ^16.25.0
   node:
-    '@clack/prompts': ^0.11.0
+    "@clack/prompts": ^0.11.0
     chalk: ^5.6.2
     consola: ^3.4.2
     execa: ^9.6.0
@@ -81,35 +81,35 @@ catalogs:
   server:
     nitropack: ^2.12.9
   style:
-    '@uni-helper/unocss-preset-uni': ^0.2.11
+    "@uni-helper/unocss-preset-uni": ^0.2.11
     sass: ~1.78.0
     unocss: ~66.0.0
     unocss-applet: ^0.12.2
   test:
-    vitest: ^4.0.9
+    vitest: ^4.0.10
   tsc:
     typescript: ~5.9.3
     vue-tsc: ~2.1.10
   types:
-    '@mini-types/alipay': ^3.0.14
-    '@types/fs-extra': ^11.0.4
-    '@types/minimist': ^1.2.5
-    '@types/node': ^22.19.1
-    '@uni-helper/uni-app-types': ^1.0.0-alpha.6
+    "@mini-types/alipay": ^3.0.14
+    "@types/fs-extra": ^11.0.4
+    "@types/minimist": ^1.2.5
+    "@types/node": ^22.19.1
+    "@uni-helper/uni-app-types": ^1.0.0-alpha.6
     miniprogram-api-typings: ^4.1.0
   utils:
-    '@antfu/utils': ^9.3.0
-    '@vueuse/core': ^12.8.2
+    "@antfu/utils": ^9.3.0
+    "@vueuse/core": ^12.8.2
     browser-fs-access: ^0.38.0
-    es-toolkit: ^1.41.0
+    es-toolkit: ^1.42.0
     magic-string: ^0.30.21
   xiaohe:
-    '@xiaohe01/eslint-config': ^3.1.0
-    '@xiaohe01/stylelint-config': ^2.4.0
-    '@xiaohe01/tsconfig': ^2.0.0
+    "@xiaohe01/eslint-config": ^4.0.0
+    "@xiaohe01/stylelint-config": ^3.0.0
+    "@xiaohe01/tsconfig": ^3.0.0
 onlyBuiltDependencies:
-  - '@parcel/watcher'
-  - '@uni-helper/unocss-preset-uni'
+  - "@parcel/watcher"
+  - "@uni-helper/unocss-preset-uni"
   - core-js
   - esbuild
   - pncat
