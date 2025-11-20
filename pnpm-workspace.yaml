@@ -27,6 +27,7 @@ catalogs:
     "@antfu/ni": ^27.0.1
     "@uni-helper/unh": ^0.2.7
     bumpp: ^10.3.1
+    minimist: ^1.2.8
     pncat: ^0.7.6
   dcloudio:
     "@dcloudio/types": ^3.4.28
@@ -65,7 +66,7 @@ catalogs:
     "@iconify-json/carbon": ^1.2.14
   lint:
     eslint: ^9.39.1
-    lint-staged: ^16.2.6
+    lint-staged: ^16.2.7
     simple-git-hooks: ^2.13.1
     stylelint: ^16.25.0
   node:
@@ -74,8 +75,7 @@ catalogs:
     consola: ^3.4.2
     execa: ^9.6.0
     fs-extra: ^11.3.2
-    minimist: ^1.2.8
-    rimraf: ^6.1.0
+    rimraf: ^6.1.2
   script:
     esno: ^4.8.0
   server:

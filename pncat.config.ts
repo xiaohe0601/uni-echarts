@@ -49,7 +49,8 @@ export default defineConfig({
       name: "cli",
       match: [
         "@antfu/ni",
-        "@uni-helper/unh"
+        "@uni-helper/unh",
+        "minimist"
       ],
       priority: 20
     },
@@ -59,13 +60,6 @@ export default defineConfig({
         "@uni-helper/plugin-uni"
       ],
       priority: 40
-    },
-    {
-      name: "node",
-      match: [
-        "minimist"
-      ],
-      priority: 60
     },
     {
       name: "utils",
