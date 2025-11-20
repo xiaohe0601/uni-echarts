@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 import { cwd } from "node:process";
 import chalk from "chalk";
 import { consola } from "consola";
-import { copy, remove } from "fs-extra";
+import { copy, remove } from "fs-extra/esm";
 
 export function r(...paths: string[]) {
   return resolve(cwd(), ".", ...paths);

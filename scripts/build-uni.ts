@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 import { cwd } from "node:process";
 import chalk from "chalk";
 import { consola } from "consola";
-import { copy, emptyDir, outputFile } from "fs-extra";
+import { copy, emptyDir, outputFile } from "fs-extra/esm";
 import pkg from "../packages/core/package.json";
 
 // noinspection JSNonASCIINames
