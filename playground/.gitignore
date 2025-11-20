@@ -1,12 +1,9 @@
-# 生成文件
+# Generated
 src/manifest.json
 src/pages.json
 types/auto-imports.d.ts
 types/components.d.ts
 types/uni-pages.d.ts
 
-# 私有文件
-project.private.config.json
-
-# 制品文件
+# Bundle
 uni_modules

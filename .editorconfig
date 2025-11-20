@@ -1,19 +1,11 @@
 root = true
 
 [*]
-# 字符编码
 charset = utf-8
-# 结尾换行符 (lf, cr, crlf)
 end_of_line = lf
-# 去除行尾空格
 trim_trailing_whitespace = true
-# 在文件结尾插入新行
 insert_final_newline = false
-# 单行最大长度
 max_line_length = 120
-# 缩进风格 (space, tab)
 indent_style = space
-# 缩进大小
 indent_size = 2
-# 单个tab大小
 tab_width = 2

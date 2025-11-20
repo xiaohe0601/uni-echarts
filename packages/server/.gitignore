@@ -1,5 +1,6 @@
+# Generated
 .data
 .nitro
-.cache
-.output
+
+# Local
 .env
