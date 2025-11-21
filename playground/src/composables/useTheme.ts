@@ -3,8 +3,8 @@ export type Theme = "light" | "dark";
 const theme = shallowRef<Theme>("light");
 
 function toggle(value?: Theme) {
-  if (!isEmpty(value)) {
-    theme.value = value!;
+  if (value != null) {
+    theme.value = value;
     return;
   }
 
