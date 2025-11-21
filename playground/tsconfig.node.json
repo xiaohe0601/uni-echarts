@@ -11,6 +11,7 @@
   "include": [
     "manifest.config.ts",
     "pages.config.ts",
+    "unh.config.ts",
     "uno.config.ts",
     "vite.config.ts"
   ]
