@@ -13,7 +13,6 @@
   },
   "devDependencies": {
     "@vueuse/core": "catalog:utils",
-    "browser-fs-access": "catalog:utils",
     "monaco-editor": "catalog:frontend",
     "vitepress": "catalog:docs",
     "vitepress-plugin-group-icons": "catalog:docs",

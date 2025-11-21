@@ -64,7 +64,6 @@ export default defineConfig({
     {
       name: "utils",
       match: [
-        "browser-fs-access",
         "es-toolkit"
       ],
       priority: 60

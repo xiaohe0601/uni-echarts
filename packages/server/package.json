@@ -10,7 +10,6 @@
     "preview": "node .output/server/index.mjs"
   },
   "devDependencies": {
-    "@uni-echarts/c2e": "workspace:^",
     "nitropack": "catalog:server"
   }
 }
