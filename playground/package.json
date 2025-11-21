@@ -10,6 +10,8 @@
     "build:h5": "unh build h5",
     "build:mp-weixin": "unh build mp-weixin",
     "build:mp-alipay": "unh build mp-alipay",
+    "clean": "nr clean:dist",
+    "clean:dist": "rimraf ./dist",
     "lint:type": "vue-tsc --noEmit"
   },
   "dependencies": {

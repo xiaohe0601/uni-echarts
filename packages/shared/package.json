@@ -18,7 +18,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild && esno scripts/post-build.ts"
+    "build": "nr clean:dist && unbuild && esno scripts/post-build.ts",
+    "clean": "nr clean:dist",
+    "clean:dist": "rimraf ./dist ../core/src/shared-core.* --glob"
   },
   "devDependencies": {
     "@vue/runtime-core": "catalog:dev",

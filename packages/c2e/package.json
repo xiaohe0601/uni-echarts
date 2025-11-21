@@ -30,7 +30,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild"
+    "build": "unbuild",
+    "clean": "nr clean:dist",
+    "clean:dist": "rimraf ./dist"
   },
   "dependencies": {
     "@clack/prompts": "catalog:node",

@@ -7,7 +7,10 @@
     "prepare": "nitro prepare",
     "dev": "nitro dev --port 9863",
     "build": "nitro build",
-    "preview": "node .output/server/index.mjs"
+    "preview": "node .output/server/index.mjs",
+    "clean": "nr clean:dist && nr clean:cache",
+    "clean:dist": "rimraf ./.output",
+    "clean:cache": "rimraf ./.nitro"
   },
   "devDependencies": {
     "nitropack": "catalog:server"

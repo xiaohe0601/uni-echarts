@@ -5,7 +5,7 @@ export default defineBuildConfig({
   entries: [
     "src/index.ts"
   ],
-  clean: true,
+  clean: false,
   declaration: true,
   externals: [
     "echarts",

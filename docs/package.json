@@ -8,8 +8,8 @@
     "build": "vitepress build",
     "preview": "vitepress preview",
     "clean": "nr clean:dist && nr clean:cache",
-    "clean:dist": "rimraf .vitepress/dist",
-    "clean:cache": "rimraf .vitepress/cache"
+    "clean:dist": "rimraf ./.vitepress/dist",
+    "clean:cache": "rimraf ./.vitepress/cache"
   },
   "devDependencies": {
     "@vueuse/core": "catalog:utils",
