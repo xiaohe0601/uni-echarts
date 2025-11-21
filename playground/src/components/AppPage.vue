@@ -9,10 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Slots } from "./types";
-
 defineOptions({
-  name: "AppPage",
   options: {
     // #ifdef MP-WEIXIN || MP-ALIPAY
     virtualHost: true
@@ -20,7 +17,9 @@ defineOptions({
   }
 });
 
-defineSlots<Slots>();
+defineSlots<{
+  default?: () => any;
+}>();
 
 const { theme } = useTheme();
 </script>
