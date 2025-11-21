@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import fs from "node:fs";
-import * as process from "node:process";
+import process from "node:process";
 import { cancel, confirm, intro, isCancel, log, outro, spinner, text } from "@clack/prompts";
 import chalk from "chalk";
 import minimist from "minimist";
