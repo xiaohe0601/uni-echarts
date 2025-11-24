@@ -94,7 +94,7 @@ catalogs:
     "@types/fs-extra": ^11.0.4
     "@types/minimist": ^1.2.5
     "@types/node": ^22.19.1
-    "@uni-helper/uni-app-types": ^1.0.0-alpha.7
+    "@uni-helper/uni-app-types": ~1.0.0-alpha.7
     miniprogram-api-typings: ^4.1.0
   utils:
     "@vueuse/core": ^12.8.2

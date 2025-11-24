@@ -229,7 +229,7 @@ catalogs:
       specifier: ^1.2.5
       version: 1.2.5
     '@uni-helper/uni-app-types':
-      specifier: ^1.0.0-alpha.7
+      specifier: ~1.0.0-alpha.7
       version: 1.0.0-alpha.7
     miniprogram-api-typings:
       specifier: ^4.1.0
