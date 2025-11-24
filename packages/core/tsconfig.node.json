@@ -10,8 +10,8 @@
   },
   "include": [
     "resolver/**/*",
-    "vite/**/*",
     "scripts/**/*",
+    "vite/**/*",
     "build.config.ts"
   ]
 }

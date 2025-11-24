@@ -23,7 +23,6 @@
     "clean:dist": "rimraf ./dist ../core/src/shared-core.* --glob"
   },
   "devDependencies": {
-    "@vue/runtime-core": "catalog:dev",
     "echarts": "catalog:frontend",
     "vue": "catalog:frontend"
   }

@@ -11,12 +11,14 @@
     "clean:dist": "rimraf ./.vitepress/dist",
     "clean:cache": "rimraf ./.vitepress/cache"
   },
-  "devDependencies": {
+  "dependencies": {
     "@vueuse/core": "catalog:utils",
     "monaco-editor": "catalog:frontend",
+    "vue": "catalog:frontend"
+  },
+  "devDependencies": {
     "vitepress": "catalog:docs",
     "vitepress-plugin-group-icons": "catalog:docs",
-    "vitepress-plugin-llms": "catalog:docs",
-    "vue": "catalog:frontend"
+    "vitepress-plugin-llms": "catalog:docs"
   }
 }

@@ -68,12 +68,11 @@ catalogs:
     eslint: ^9.39.1
     lint-staged: ^16.2.7
     simple-git-hooks: ^2.13.1
-    stylelint: ^16.25.0
+    stylelint: ^16.26.0
   node:
     "@clack/prompts": ^0.11.0
     chalk: ^5.6.2
     consola: ^3.4.2
-    execa: ^9.6.0
     fs-extra: ^11.3.2
     rimraf: ^6.1.2
   script:
@@ -86,19 +85,18 @@ catalogs:
     unocss: ~66.0.0
     unocss-applet: ^0.12.2
   test:
-    vitest: ^4.0.12
+    vitest: ^4.0.13
   tsc:
     typescript: ~5.9.3
-    vue-tsc: ~2.1.10
+    vue-tsc: ~3.1.5
   types:
     "@mini-types/alipay": ^3.0.14
     "@types/fs-extra": ^11.0.4
     "@types/minimist": ^1.2.5
     "@types/node": ^22.19.1
-    "@uni-helper/uni-app-types": ^1.0.0-alpha.6
+    "@uni-helper/uni-app-types": ^1.0.0-alpha.7
     miniprogram-api-typings: ^4.1.0
   utils:
-    "@antfu/utils": ^9.3.0
     "@vueuse/core": ^12.8.2
     es-toolkit: ^1.42.0
     magic-string: ^0.30.21

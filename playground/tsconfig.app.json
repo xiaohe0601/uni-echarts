@@ -20,11 +20,6 @@
     ],
     "allowJs": true
   },
-  "vueCompilerOptions": {
-    "plugins": [
-      "@uni-helper/uni-app-types/volar-plugin"
-    ]
-  },
   "include": [
     "src/**/*",
     "types/**/*"

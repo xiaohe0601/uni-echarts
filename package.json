@@ -37,12 +37,8 @@
   },
   "devDependencies": {
     "@antfu/ni": "catalog:cli",
-    "@antfu/utils": "catalog:utils",
-    "@dcloudio/types": "catalog:dcloudio",
-    "@mini-types/alipay": "catalog:types",
     "@types/fs-extra": "catalog:types",
     "@types/node": "catalog:types",
-    "@uni-helper/uni-app-types": "catalog:types",
     "@xiaohe01/eslint-config": "catalog:xiaohe",
     "@xiaohe01/stylelint-config": "catalog:xiaohe",
     "@xiaohe01/tsconfig": "catalog:xiaohe",
@@ -51,19 +47,15 @@
     "consola": "catalog:node",
     "eslint": "catalog:lint",
     "esno": "catalog:script",
-    "execa": "catalog:node",
     "fs-extra": "catalog:node",
     "lint-staged": "catalog:lint",
-    "miniprogram-api-typings": "catalog:types",
     "pncat": "catalog:cli",
     "rimraf": "catalog:node",
     "simple-git-hooks": "catalog:lint",
     "stylelint": "catalog:lint",
     "typescript": "catalog:tsc",
     "unbuild": "catalog:build",
-    "vite": "catalog:build",
-    "vitest": "catalog:test",
-    "vue-tsc": "catalog:tsc"
+    "vitest": "catalog:test"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
