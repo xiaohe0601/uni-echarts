@@ -58,7 +58,7 @@ catalogs:
     vitepress-plugin-llms: ^1.9.3
   frontend:
     echarts: ^6.0.0
-    monaco-editor: ^0.55.1
+    monaco-editor: ~0.54.0
     pinia: 2.2.4
     vue: ~3.4.38
     wot-design-uni: ^1.13.0
