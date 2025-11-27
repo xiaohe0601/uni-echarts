@@ -1,7 +1,7 @@
 {
   "name": "@uni-echarts/c2e",
   "type": "module",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "🪀 Transform CJS to ESM for Uni ECharts.",
   "author": "xiaohe0601 <xiaohe0601@outlook.com>",
   "license": "MIT",

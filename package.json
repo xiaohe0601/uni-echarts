@@ -1,7 +1,7 @@
 {
   "name": "@uni-echarts/monorepo",
   "type": "module",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "private": true,
   "packageManager": "pnpm@10.23.0",
   "scripts": {
