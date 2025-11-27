@@ -18,23 +18,6 @@ export interface C2eGenOptions {
 
 export type C2eOptions = C2eWriteOptions | C2eGenOptions;
 
-const PLATFORM_POLYFILL_CODE = `
-var wx = (function () {
-  if(typeof wx !== "undefined") return wx;
-  if(typeof qh !== "undefined") return qh;
-  if(typeof my !== "undefined") return my;
-  if(typeof swan !== "undefined") return swan;
-  if(typeof dd !== "undefined") return dd;
-  if(typeof jd !== "undefined") return jd;
-  if(typeof ks !== "undefined") return ks;
-  if(typeof tt !== "undefined") return tt;
-  if(typeof qq !== "undefined") return qq;
-  if(typeof xhs !== "undefined") return xhs;
-  if(typeof qa !== "undefined") return qa;
-  if(typeof uni !== "undefined") return uni;
-  return null;
-})();`.trim();
-
 export function c2e(options: C2eWriteOptions): Promise<undefined>;
 export function c2e(options: C2eGenOptions): Promise<RollupOutput>;
 export async function c2e(options: C2eOptions) {
@@ -43,44 +26,38 @@ export async function c2e(options: C2eOptions) {
   try {
     const input = options.write ? options.input : "virtual-input.js";
 
-    const context: {
-      id: string | null;
-    } = {
-      id: null
-    };
-
     const plugins: Plugin[] = [
+      resolve(),
+      commonjs(),
+      terser(),
       {
-        name: "wx-to-xx",
-        resolveId(source) {
-          context.id = source;
-          return null;
-        },
-        transform(code, id) {
-          if (id !== input && id !== context.id) {
+        name: "wx-to-uni",
+        renderChunk(code) {
+          const match = code.match(
+            /"object"==typeof wx&&"function"==typeof wx\.getSystemInfoSync/
+          );
+
+          if (match == null || match.index == null) {
             return;
           }
 
           const ms = new MagicString(code);
 
-          const match = code.match(/(["'])use strict\1;/);
+          const start = match.index;
+          const end = start + match[0].length;
 
-          if (match != null && match.index != null) {
-            ms.appendRight(
-              match.index + match[0].length,
-              PLATFORM_POLYFILL_CODE
-            );
-          }
+          ms.update(
+            start,
+            end,
+            `"object"==typeof uni&&"function"==typeof uni.getSystemInfoSync`
+          );
 
           return {
             code: ms.toString(),
             map: ms.generateMap()
           };
         }
-      },
-      resolve(),
-      commonjs(),
-      terser()
+      }
     ];
 
     if (!options.write) {
