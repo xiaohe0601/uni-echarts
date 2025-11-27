@@ -8,7 +8,7 @@ overrides:
   vue: 3.4.38
 catalogs:
   ast:
-    oxc-parser: ~0.98.0
+    oxc-parser: ~0.99.0
   build:
     "@rollup/plugin-commonjs": ^29.0.0
     "@rollup/plugin-node-resolve": ^16.0.3
@@ -85,7 +85,7 @@ catalogs:
     unocss: ~66.0.0
     unocss-applet: ^0.12.2
   test:
-    vitest: ^4.0.13
+    vitest: ^4.0.14
   tsc:
     typescript: ~5.9.3
     vue-tsc: ~3.1.5
