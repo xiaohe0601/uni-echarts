@@ -173,7 +173,7 @@ const canvasRect = reactive({
 function getRelativeTouch(event, touches) {
   let { clientX, clientY } = event;
 
-  if (!(clientX && clientY) && touches && touches[0]) {
+  if (!(clientX && clientY) && touches != null && touches[0] != null) {
     clientX = touches[0].clientX;
     clientY = touches[0].clientY;
   }
@@ -186,7 +186,7 @@ function getRelativeTouch(event, touches) {
 }
 
 function getTouch(event, touches) {
-  const { x } = defaultTo(touches && touches[0], {});
+  const { x } = defaultTo(touches != null ? touches[0] : {}, {});
 
   return x ? touches[0] : getRelativeTouch(event, touches);
 }
