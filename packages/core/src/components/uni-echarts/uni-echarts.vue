@@ -56,7 +56,7 @@
     ></canvas>
 
     <view
-      v-if="isPc"
+      v-if="isPc || isMpAlipay"
       class="uni-echarts__mask"
       @mousedown="touch.onStart"
       @mousemove="touch.onMove"
@@ -78,6 +78,7 @@ import {
   getIsPc,
   getWindowInfo,
   isEmpty,
+  isMpAlipay,
   querySelect,
   setupEchartsCanvas,
   sleep,
@@ -170,25 +171,36 @@ const canvasRect = reactive({
   height: 0
 });
 
-function getRelativeTouch(event, touches) {
-  let { clientX, clientY } = event;
+function getFirstTouch(touches) {
+  if (isEmpty(touches)) {
+    return null;
+  }
 
-  if (!(clientX && clientY) && touches != null && touches[0] != null) {
-    clientX = touches[0].clientX;
-    clientY = touches[0].clientY;
+  return touches[0];
+}
+
+function getRelativeTouch(event, touches) {
+  let pageX = 0;
+  let pageY = 0;
+
+  const touch = getFirstTouch(touches);
+
+  if (touch != null) {
+    pageX = touch.pageX;
+    pageY = touch.pageY;
   }
 
   return {
-    x: clientX - canvasRect.left,
-    y: clientY - canvasRect.top,
+    x: Math.max(0, pageX - canvasRect.left),
+    y: Math.max(0, pageY - canvasRect.top),
     wheelDelta: defaultTo(event.wheelDelta, 0)
   };
 }
 
 function getTouch(event, touches) {
-  const { x } = defaultTo(touches != null ? touches[0] : {}, {});
+  const touch = defaultTo(getFirstTouch(touches), {});
 
-  return x ? touches[0] : getRelativeTouch(event, touches);
+  return touch.x != null ? touch : getRelativeTouch(event, touches);
 }
 
 const touch = useEchartsTouch({
