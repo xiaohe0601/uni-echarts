@@ -20,7 +20,7 @@
   "scripts": {
     "build": "nr clean:dist && unbuild && esno scripts/post-build.ts",
     "clean": "nr clean:dist",
-    "clean:dist": "rimraf ./dist ../core/src/shared-core.* --glob"
+    "clean:dist": "rimraf ./dist '../core/src/shared-core.*' --glob"
   },
   "devDependencies": {
     "echarts": "catalog:frontend",

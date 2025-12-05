@@ -1,14 +1,21 @@
+catalogMode: prefer
+cleanupUnusedCatalogs: true
+shellEmulator: true
+
 packages:
   - docs
   - playground
   - packages/**
   - examples/**
+
 overrides:
   "@types/node": 22.19.1
+  rollup-plugin-dts: 6.2.3
   vue: 3.4.38
+
 catalogs:
   ast:
-    oxc-parser: ~0.99.0
+    oxc-parser: ~0.101.0
   build:
     "@rollup/plugin-commonjs": ^29.0.0
     "@rollup/plugin-node-resolve": ^16.0.3
@@ -19,16 +26,16 @@ catalogs:
     "@uni-helper/vite-plugin-uni-pages": ^0.3.22
     rollup: ^4.53.3
     unbuild: ^3.6.1
-    unplugin-auto-import: ^20.2.0
+    unplugin-auto-import: ^20.3.0
     vite: ^5.4.21
     vite-plugin-inspect: ~0.8.9
     vite-plugin-uni-polyfill: ^0.1.0
   cli:
-    "@antfu/ni": ^27.0.1
+    "@antfu/ni": ^28.0.0
     "@uni-helper/unh": ^0.2.7
-    bumpp: ^10.3.1
+    bumpp: ^10.3.2
     minimist: ^1.2.8
-    pncat: ^0.7.6
+    pncat: ^0.7.7
   dcloudio:
     "@dcloudio/types": ^3.4.28
     "@dcloudio/uni-app": 3.0.0-4080520251106001
@@ -63,12 +70,12 @@ catalogs:
     vue: ~3.4.38
     wot-design-uni: ^1.13.0
   icons:
-    "@iconify-json/carbon": ^1.2.14
+    "@iconify-json/carbon": ^1.2.15
   lint:
     eslint: ^9.39.1
     lint-staged: ^16.2.7
     simple-git-hooks: ^2.13.1
-    stylelint: ^16.26.0
+    stylelint: ^16.26.1
   node:
     "@clack/prompts": ^0.11.0
     chalk: ^5.6.2
@@ -85,7 +92,7 @@ catalogs:
     unocss: ~66.0.0
     unocss-applet: ^0.12.2
   test:
-    vitest: ^4.0.14
+    vitest: ^4.0.15
   tsc:
     typescript: ~5.9.3
     vue-tsc: ~3.1.5
@@ -95,7 +102,7 @@ catalogs:
     "@types/minimist": ^1.2.5
     "@types/node": ^22.19.1
     "@uni-helper/uni-app-types": ~1.0.0-alpha.7
-    miniprogram-api-typings: ^4.1.0
+    miniprogram-api-typings: ^4.1.1
   utils:
     "@vueuse/core": ^12.8.2
     es-toolkit: ^1.42.0
@@ -104,6 +111,7 @@ catalogs:
     "@xiaohe01/eslint-config": ^4.0.0
     "@xiaohe01/stylelint-config": ^3.0.0
     "@xiaohe01/tsconfig": ^3.0.0
+
 onlyBuiltDependencies:
   - "@parcel/watcher"
   - "@uni-helper/unocss-preset-uni"

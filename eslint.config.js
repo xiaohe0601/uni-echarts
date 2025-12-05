@@ -11,6 +11,17 @@ export default defineConfig({
     "playground/src/uni_modules"
   ]
 }, {
+  files: ["pnpm-workspace.yaml"],
+  rules: {
+    "pnpm/yaml-enforce-settings": ["error", {
+      settings: {
+        catalogMode: "prefer",
+        cleanupUnusedCatalogs: true,
+        shellEmulator: true
+      }
+    }]
+  }
+}, {
   files: ["docs/**/*.vue"],
   rules: {
     "vue/component-name-in-template-casing": ["error", "PascalCase"]
