@@ -14,8 +14,6 @@ overrides:
   vue: 3.4.38
 
 catalogs:
-  ast:
-    oxc-parser: ~0.101.0
   build:
     "@rollup/plugin-commonjs": ^29.0.0
     "@rollup/plugin-node-resolve": ^16.0.3
@@ -82,6 +80,8 @@ catalogs:
     consola: ^3.4.2
     fs-extra: ^11.3.2
     rimraf: ^6.1.2
+  parser:
+    oxc-parser: ~0.101.0
   script:
     esno: ^4.8.0
   server:
