@@ -324,6 +324,9 @@ importers:
       vitest:
         specifier: catalog:test
         version: 4.0.15(@types/node@22.19.1)(jiti@2.6.1)(jsdom@16.7.0)(terser@5.44.1)(tsx@4.21.0)(yaml@2.8.2)
+      vue-tsc:
+        specifier: catalog:tsc
+        version: 3.1.5(typescript@5.9.3)
 
   docs:
     dependencies:
@@ -546,9 +549,6 @@ importers:
       vite-plugin-uni-polyfill:
         specifier: catalog:build
         version: 0.1.0
-      vue-tsc:
-        specifier: catalog:tsc
-        version: 3.1.5(typescript@5.9.3)
 
 packages:
 

@@ -28,7 +28,7 @@
     "clean:lint-cache": "rimraf ./eslintcache ./.stylelintcache",
     "lint": "eslint --cache",
     "lint:fix": "nr lint --fix",
-    "lint:type": "tsc --noEmit",
+    "lint:type": "vue-tsc -b --noEmit",
     "stylelint": "stylelint **/*.{css,scss,html,vue} --cache",
     "stylelint:fix": "nr stylelint --fix",
     "test": "vitest",
@@ -55,7 +55,8 @@
     "stylelint": "catalog:lint",
     "typescript": "catalog:tsc",
     "unbuild": "catalog:build",
-    "vitest": "catalog:test"
+    "vitest": "catalog:test",
+    "vue-tsc": "catalog:tsc"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"

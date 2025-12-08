@@ -11,8 +11,7 @@
     "build:mp-weixin": "unh build mp-weixin",
     "build:mp-alipay": "unh build mp-alipay",
     "clean": "nr clean:dist",
-    "clean:dist": "rimraf ./dist",
-    "lint:type": "vue-tsc --noEmit"
+    "clean:dist": "rimraf ./dist"
   },
   "dependencies": {
     "@dcloudio/uni-app": "catalog:dcloudio",
@@ -61,7 +60,6 @@
     "unplugin-auto-import": "catalog:build",
     "vite": "catalog:build",
     "vite-plugin-inspect": "catalog:build",
-    "vite-plugin-uni-polyfill": "catalog:build",
-    "vue-tsc": "catalog:tsc"
+    "vite-plugin-uni-polyfill": "catalog:build"
   }
 }

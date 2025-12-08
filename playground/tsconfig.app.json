@@ -4,6 +4,7 @@
     "@xiaohe01/tsconfig/tsconfig.vue.json"
   ],
   "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

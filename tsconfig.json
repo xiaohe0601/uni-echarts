@@ -1,7 +1,13 @@
 {
   "references": [
     { "path": "./tsconfig.node.json" },
-    { "path": "./tsconfig.test.json" }
+    { "path": "./tsconfig.test.json" },
+    { "path": "./packages/c2e/tsconfig.json" },
+    { "path": "./packages/core/tsconfig.lib.json" },
+    { "path": "./packages/core/tsconfig.node.json" },
+    { "path": "./packages/server/tsconfig.json" },
+    { "path": "./packages/shared/tsconfig.lib.json" },
+    { "path": "./packages/shared/tsconfig.node.json" }
   ],
   "files": []
 }

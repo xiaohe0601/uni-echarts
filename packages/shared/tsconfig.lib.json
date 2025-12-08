@@ -5,6 +5,7 @@
     "@xiaohe01/tsconfig/tsconfig.lib.json"
   ],
   "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.lib.tsbuildinfo",
     "types": [
       "@dcloudio/types",
       "miniprogram-api-typings",

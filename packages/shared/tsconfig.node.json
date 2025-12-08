@@ -1,6 +1,7 @@
 {
   "extends": "@xiaohe01/tsconfig/tsconfig.basic.json",
   "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "lib": [
       "ES2020"
     ],
