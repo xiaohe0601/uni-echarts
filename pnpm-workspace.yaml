@@ -110,7 +110,7 @@ catalogs:
   xiaohe:
     "@xiaohe01/eslint-config": ^4.0.1
     "@xiaohe01/stylelint-config": ^3.0.1
-    "@xiaohe01/tsconfig": ^3.0.0
+    "@xiaohe01/tsconfig": ^3.1.0
 
 onlyBuiltDependencies:
   - "@parcel/watcher"

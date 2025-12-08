@@ -10,8 +10,7 @@
       "@dcloudio/types",
       "miniprogram-api-typings",
       "@mini-types/alipay"
-    ],
-    "skipLibCheck": true
+    ]
   },
   "include": [
     "src/**/*"
