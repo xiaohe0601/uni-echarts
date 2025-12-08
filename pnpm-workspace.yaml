@@ -117,6 +117,5 @@ onlyBuiltDependencies:
   - "@uni-helper/unocss-preset-uni"
   - core-js
   - esbuild
-  - pncat
   - simple-git-hooks
   - vue-demi
