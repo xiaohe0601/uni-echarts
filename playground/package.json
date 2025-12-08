@@ -1,7 +1,7 @@
 {
   "name": "@uni-echarts/playground",
   "type": "module",
-  "version": "2.2.5",
+  "version": "2.3.0",
   "private": true,
   "scripts": {
     "dev:h5": "unh dev h5 --port 9861",
