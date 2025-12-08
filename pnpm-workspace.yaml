@@ -95,7 +95,7 @@ catalogs:
     vitest: ^4.0.15
   tsc:
     typescript: ~5.9.3
-    vue-tsc: ~3.1.5
+    vue-tsc: ~3.1.7
   types:
     "@mini-types/alipay": ^3.0.14
     "@types/fs-extra": ^11.0.4
@@ -108,8 +108,8 @@ catalogs:
     es-toolkit: ^1.42.0
     magic-string: ^0.30.21
   xiaohe:
-    "@xiaohe01/eslint-config": ^4.0.0
-    "@xiaohe01/stylelint-config": ^3.0.0
+    "@xiaohe01/eslint-config": ^4.0.1
+    "@xiaohe01/stylelint-config": ^3.0.1
     "@xiaohe01/tsconfig": ^3.0.0
 
 onlyBuiltDependencies:
