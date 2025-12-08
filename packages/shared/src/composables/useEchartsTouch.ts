@@ -107,6 +107,8 @@ export function useEchartsTouch({
   function onStart(event: TouchEvent) {
     touching.value = true;
 
+    state.t = Date.now();
+
     const next = () => {
       if (chart.value == null) {
         return;
@@ -116,7 +118,6 @@ export function useEchartsTouch({
 
       state.x = touch.x;
       state.y = touch.y;
-      state.t = Date.now();
 
       const { handler } = chart.value.getZr();
       UniCanvas.dispatch(handler, "mousedown", touch);
@@ -126,19 +127,14 @@ export function useEchartsTouch({
       destroyTimer();
     };
 
-    if (isPc) {
-      querySelect(vueThis, `#${canvasId}`, {
-        rect: true
-      }).then(({ top, left }) => {
-        canvasRect.top = top!;
-        canvasRect.left = left!;
-
-        next();
-      });
-      return;
-    }
-
-    next();
+    querySelect(vueThis, `#${canvasId}`, {
+      rect: true
+    }).then(({ top, left }) => {
+      canvasRect.top = top!;
+      canvasRect.left = left!;
+    }).finally(() => {
+      next();
+    });
   }
 
   function _onMove(event: TouchEvent) {
