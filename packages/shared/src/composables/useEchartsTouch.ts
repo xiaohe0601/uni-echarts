@@ -126,13 +126,12 @@ export function useEchartsTouch({
       destroyTimer();
     };
 
-    // 每次触摸时都更新 Canvas 位置信息，解决滚动后坐标偏移问题
     querySelect(vueThis, `#${canvasId}`, {
       rect: true
     }).then(({ top, left }) => {
       canvasRect.top = top!;
       canvasRect.left = left!;
-
+    }).finally(() => {
       next();
     });
   }

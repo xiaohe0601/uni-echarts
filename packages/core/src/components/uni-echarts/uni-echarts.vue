@@ -180,19 +180,19 @@ function getFirstTouch(touches) {
 }
 
 function getRelativeTouch(event, touches) {
-  let pageX = 0;
-  let pageY = 0;
+  let clientX = 0;
+  let clientY = 0;
 
   const touch = getFirstTouch(touches);
 
   if (touch != null) {
-    pageX = touch.pageX;
-    pageY = touch.pageY;
+    clientX = touch.clientX;
+    clientY = touch.clientY;
   }
 
   return {
-    x: Math.max(0, pageX - canvasRect.left),
-    y: Math.max(0, pageY - canvasRect.top),
+    x: Math.max(0, clientX - canvasRect.left),
+    y: Math.max(0, clientY - canvasRect.top),
     wheelDelta: defaultTo(event.wheelDelta, 0)
   };
 }
