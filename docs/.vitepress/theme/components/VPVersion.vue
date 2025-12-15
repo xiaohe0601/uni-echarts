@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import VPBadge from "vitepress/dist/client/theme-default/components/VPBadge.vue";
+import { VPBadge } from "vitepress/theme";
 import pkg from "../../../../package.json";
 </script>
 
