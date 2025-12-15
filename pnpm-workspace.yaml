@@ -1,5 +1,4 @@
 catalogMode: prefer
-cleanupUnusedCatalogs: true
 shellEmulator: true
 
 packages:
@@ -9,7 +8,7 @@ packages:
   - examples/**
 
 overrides:
-  "@types/node": 22.19.1
+  "@types/node": 22.19.3
   rollup-plugin-dts: 6.2.3
   vue: 3.4.38
 
@@ -20,7 +19,7 @@ catalogs:
     "@rollup/plugin-terser": ^0.4.4
     "@uni-helper/plugin-uni": ^0.1.0
     "@uni-helper/vite-plugin-uni-components": ^0.2.3
-    "@uni-helper/vite-plugin-uni-manifest": ^0.2.11
+    "@uni-helper/vite-plugin-uni-manifest": ^0.2.12
     "@uni-helper/vite-plugin-uni-pages": ^0.3.22
     rollup: ^4.53.3
     unbuild: ^3.6.1
@@ -30,7 +29,7 @@ catalogs:
     vite-plugin-uni-polyfill: ^0.1.0
   cli:
     "@antfu/ni": ^28.0.0
-    "@uni-helper/unh": ^0.2.7
+    "@uni-helper/unh": ^0.2.9
     bumpp: ^10.3.2
     minimist: ^1.2.8
     pncat: ^0.7.7
@@ -70,7 +69,7 @@ catalogs:
   icons:
     "@iconify-json/carbon": ^1.2.15
   lint:
-    eslint: ^9.39.1
+    eslint: ^9.39.2
     lint-staged: ^16.2.7
     simple-git-hooks: ^2.13.1
     stylelint: ^16.26.1
@@ -95,21 +94,21 @@ catalogs:
     vitest: ^4.0.15
   tsc:
     typescript: ~5.9.3
-    vue-tsc: ~3.1.7
+    vue-tsc: ~3.1.8
   types:
     "@mini-types/alipay": ^3.0.14
     "@types/fs-extra": ^11.0.4
     "@types/minimist": ^1.2.5
-    "@types/node": ^22.19.1
+    "@types/node": ^22.19.3
     "@uni-helper/uni-app-types": ~1.0.0-alpha.7
     miniprogram-api-typings: ^4.1.1
   utils:
     "@vueuse/core": ^12.8.2
-    es-toolkit: ^1.42.0
+    es-toolkit: ^1.43.0
     magic-string: ^0.30.21
   xiaohe:
-    "@xiaohe01/eslint-config": ^4.0.1
-    "@xiaohe01/stylelint-config": ^3.0.1
+    "@xiaohe01/eslint-config": ^4.1.0
+    "@xiaohe01/stylelint-config": ^3.1.0
     "@xiaohe01/tsconfig": ^3.1.0
 
 onlyBuiltDependencies:
