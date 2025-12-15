@@ -7,10 +7,10 @@ export default defineConfig({
     }
   },
   ignoreFiles: [
-    "**/node_modules/**",
-    "**/uni_modules/**",
-    "**/public/**",
-    "**/dist/**",
-    "docs/.vitepress/theme/style.css"
+    "./**/node_modules/**",
+    "./**/uni_modules/**",
+    "./**/public/**",
+    "./**/dist/**",
+    "./docs/.vitepress/theme/style.css"
   ]
 });
