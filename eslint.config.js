@@ -10,7 +10,7 @@ export default defineConfig({
     "./playground/src/uni_modules"
   ]
 }, {
-  files: ["docs/**/*.vue"],
+  files: ["./docs/**/*.vue"],
   rules: {
     "vue/component-name-in-template-casing": ["error", "PascalCase"]
   }
