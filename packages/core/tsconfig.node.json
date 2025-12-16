@@ -13,6 +13,6 @@
     "resolver/**/*",
     "scripts/**/*",
     "vite/**/*",
-    "build.config.ts"
+    "tsdown.config.ts"
   ]
 }

@@ -11,6 +11,6 @@
   },
   "include": [
     "src/**/*",
-    "build.config.ts"
+    "tsdown.config.ts"
   ]
 }

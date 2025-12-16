@@ -300,15 +300,15 @@ export class UniCanvas {
   static normalizeColor(context: CanvasContext, color: string): string;
   static normalizeColor(context: CanvasContext, color: object): object;
   static normalizeColor(context: CanvasContext, color: string | object): string | object {
+    // #ifdef MP-TOUTIAO
     if (typeof color === "string") {
-      // #ifdef MP-TOUTIAO
       SHORT_HEX_REGEX.lastIndex = 0;
 
       if (SHORT_HEX_REGEX.test(color)) {
         return color.replace(SHORT_HEX_REGEX, "#$1$1$2$2$3$3");
       }
-      // #endif
     }
+    // #endif
 
     return color;
   }

@@ -14,15 +14,18 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
+    },
+    "./cli": {
+      "import": "./dist/cli.mjs",
+      "require": "./dist/cli.cjs"
     },
     "./*": "./*"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.cts",
   "bin": {
     "uni-echarts-c2e": "./dist/cli.cjs"
   },
@@ -30,7 +33,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
+    "dev": "tsdown --watch",
+    "build": "tsdown",
     "clean": "nr clean:dist",
     "clean:dist": "rimraf ./dist"
   },

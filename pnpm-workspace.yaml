@@ -21,8 +21,9 @@ catalogs:
     "@uni-helper/vite-plugin-uni-components": ^0.2.3
     "@uni-helper/vite-plugin-uni-manifest": ^0.2.12
     "@uni-helper/vite-plugin-uni-pages": ^0.3.22
+    "@uni-ku/unplugin-keep-comments": ^0.1.0
     rollup: ^4.53.3
-    unbuild: ^3.6.1
+    tsdown: ^0.18.0
     unplugin-auto-import: ^20.3.0
     vite: ^5.4.21
     vite-plugin-inspect: ~0.8.9

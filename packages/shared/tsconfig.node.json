@@ -12,6 +12,6 @@
   "include": [
     "plugins/**/*",
     "scripts/**/*",
-    "build.config.ts"
+    "tsdown.config.ts"
   ]
 }
