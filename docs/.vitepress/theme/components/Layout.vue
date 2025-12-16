@@ -1,5 +1,9 @@
 <template>
   <DefaultTheme.Layout>
+    <template #layout-top>
+      <VPNotice></VPNotice>
+    </template>
+
     <template #nav-bar-title-after>
       <VPVersion></VPVersion>
     </template>
@@ -25,6 +29,7 @@ import { computed, nextTick, provide } from "vue";
 import VPFooter from "./VPFooter.vue";
 import VPFriendly from "./VPFriendly.vue";
 import VPIframe from "./VPIframe.vue";
+import VPNotice from "./VPNotice.vue";
 import VPVersion from "./VPVersion.vue";
 
 const route = useRoute();
