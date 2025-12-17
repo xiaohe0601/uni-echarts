@@ -29,12 +29,12 @@
       "import": "./src/index.js"
     },
     "./resolver": {
-      "types": "./dist-resolver/index.d.ts",
+      "types": "./dist-resolver/index.d.mts",
       "import": "./dist-resolver/index.mjs",
       "require": "./dist-resolver/index.cjs"
     },
     "./vite": {
-      "types": "./dist-vite/index.d.ts",
+      "types": "./dist-vite/index.d.mts",
       "import": "./dist-vite/index.mjs",
       "require": "./dist-vite/index.cjs"
     },
@@ -48,7 +48,7 @@
     "src"
   ],
   "scripts": {
-    "build": "nr clean:dist && unbuild && esno scripts/post-build.ts",
+    "build": "nr clean:dist && tsdown && esno scripts/post-build.ts",
     "clean": "nr clean:dist",
     "clean:dist": "rimraf ./dist ./dist-resolver ./dist-vite ./README.md"
   },

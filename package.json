@@ -53,8 +53,8 @@
     "rimraf": "catalog:node",
     "simple-git-hooks": "catalog:lint",
     "stylelint": "catalog:lint",
+    "tsdown": "catalog:build",
     "typescript": "catalog:tsc",
-    "unbuild": "catalog:build",
     "vitest": "catalog:test",
     "vue-tsc": "catalog:tsc"
   },

@@ -5,24 +5,22 @@
   "private": true,
   "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs"
-    },
+    ".": "./dist/index.js",
     "./*": "./*"
   },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "nr clean:dist && unbuild && esno scripts/post-build.ts",
+    "build": "nr clean:dist && tsdown && esno scripts/post-build.ts",
     "clean": "nr clean:dist",
     "clean:dist": "rimraf ./dist '../core/src/shared-core.*' --glob"
   },
   "devDependencies": {
+    "@uni-ku/unplugin-keep-comments": "catalog:build",
     "echarts": "catalog:frontend",
     "vue": "catalog:frontend"
   }

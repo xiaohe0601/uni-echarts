@@ -26,7 +26,8 @@ export type AppPlatform = "android" | "ios" | "harmony" | undefined;
 export const platform = process.env.UNI_PLATFORM as BuiltInPlatform;
 
 export const appPlatform = (function (): AppPlatform {
-  let plat: AppPlatform;
+  // eslint-disable-next-line no-undef-init
+  let plat: AppPlatform = undefined;
 
   // #ifdef APP-ANDROID
   plat = "android";
