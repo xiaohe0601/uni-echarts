@@ -10,7 +10,8 @@
       "@uni-helper/uni-app-types",
       "miniprogram-api-typings",
       "@mini-types/alipay"
-    ]
+    ],
+    "allowJs": true
   },
   "include": [
     "src/**/*",

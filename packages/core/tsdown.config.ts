@@ -8,6 +8,8 @@ export default defineConfig([
     platform: "neutral",
     format: "esm",
     dts: {
+      build: true,
+      dtsInput: true,
       emitDtsOnly: true
     },
     external: [

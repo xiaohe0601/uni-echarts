@@ -9,7 +9,6 @@ packages:
 
 overrides:
   "@types/node": 22.19.3
-  rollup-plugin-dts: 6.2.3
   vue: 3.4.38
 
 catalogs:
