@@ -11,6 +11,27 @@
 - [series-map](https://echarts.apache.org/zh/option.html#series-map)
 - [echarts-gl](https://github.com/ecomfe/echarts-gl)
 
+## Could not resolve "zrender/xxx"
+
+使用 PNPM 安装 `echarts` 时，需要启用 [shamefullyHoist](https://pnpm.io/zh/settings#shamefullyhoist) 选项提升依赖，
+否则会导致 `echarts` 无法正确解析 `zrender` 相关依赖。
+
+```dotenv
+# .npmrc
+
+shamefully-hoist=true
+```
+
+或者：
+
+```yaml
+# pnpm-workspace.yaml
+
+shamefullyHoist: true
+```
+
+Yarn v2 等其他依赖管理工具请自行参考其官方文档配置。
+
 ## 小程序端 class / style 无效
 
 在小程序端 Uni ECharts 通过 [virtualHost](https://uniapp.dcloud.net.cn/tutorial/vue-api.html#其他配置)

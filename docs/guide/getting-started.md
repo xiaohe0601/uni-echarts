@@ -118,11 +118,11 @@ export default defineConfig({
 });
 ```
 
-如果使用 pnpm 管理依赖，请在项目根目录下的 .npmrc 文件中添加如下内容，参见
+如果使用 PNPM 管理依赖，请在项目根目录下的 .npmrc 文件中添加如下内容，参见
 [issue 389](https://github.com/unplugin/unplugin-vue-components/issues/389)。
 
 ```dotenv
-shamefully-hoist=true # or public-hoist-pattern[]=@vue*
+shamefully-hoist=true
 ```
 
 如果使用 TypeScript 可以在 tsconfig.json 中添加如下内容为自动导入的组件提供类型提示（需要
