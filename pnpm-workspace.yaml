@@ -80,7 +80,7 @@ catalogs:
     fs-extra: ^11.3.2
     rimraf: ^6.1.2
   parser:
-    oxc-parser: ~0.101.0
+    oxc-parser: ~0.103.0
   script:
     esno: ^4.8.0
   server:
