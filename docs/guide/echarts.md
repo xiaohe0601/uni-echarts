@@ -61,7 +61,7 @@ import "echarts";
 
    受限于 `echarts.min.js` 的内容，目前转换后的 ESM 产物不支持 Tree-Shaking，无法剔除未使用的代码，并且需要使用默认导入，示例如下：
 
-   ```javascript
+   ```js
    import echarts from "/path/to/echarts.esm.js";
    ```
 
