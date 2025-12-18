@@ -27,6 +27,8 @@ jobs:
               ```
 
               注意，请确保 `uni-echarts` 为最新版本。
+          - label: 🕒 no response
+            content: 由于长时间未收到反馈，此 issue 将被关闭，如果有新的进展可以随时重新打开。
     steps:
       - name: Reply by label
         if: github.event.label.name == matrix.label
