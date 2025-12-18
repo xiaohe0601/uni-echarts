@@ -21,8 +21,8 @@ catalogs:
     "@uni-helper/vite-plugin-uni-manifest": ^0.2.12
     "@uni-helper/vite-plugin-uni-pages": ^0.3.22
     "@uni-ku/unplugin-keep-comments": ^0.1.0
-    rollup: ^4.53.3
-    tsdown: ^0.18.0
+    rollup: ^4.53.5
+    tsdown: ^0.18.1
     unplugin-auto-import: ^20.3.0
     vite: ^5.4.21
     vite-plugin-inspect: ~0.8.9
@@ -91,7 +91,7 @@ catalogs:
     unocss: ~66.0.0
     unocss-applet: ^0.12.2
   test:
-    vitest: ^4.0.15
+    vitest: ^4.0.16
   tsc:
     typescript: ~5.9.3
     vue-tsc: ~3.1.8
@@ -101,7 +101,7 @@ catalogs:
     "@types/minimist": ^1.2.5
     "@types/node": ^22.19.3
     "@uni-helper/uni-app-types": ~1.0.0-alpha.7
-    miniprogram-api-typings: ^4.1.1
+    miniprogram-api-typings: ^4.1.2
   utils:
     "@vueuse/core": ^12.8.2
     es-toolkit: ^1.43.0
