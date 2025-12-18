@@ -1,7 +1,7 @@
 {
   "name": "@uni-echarts/docs",
   "type": "module",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "private": true,
   "scripts": {
     "dev": "vitepress dev --host --port 9862",
