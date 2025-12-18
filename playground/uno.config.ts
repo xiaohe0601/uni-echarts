@@ -1,5 +1,4 @@
-import { presetUni } from "@uni-helper/unocss-preset-uni";
-import { defineConfig, presetIcons, transformerVariantGroup } from "unocss";
+import { defineConfig, presetIcons, presetUni, transformerVariantGroup } from "uni-unocss";
 
 export default defineConfig({
   theme: {
@@ -25,9 +24,7 @@ export default defineConfig({
     }
   },
   presets: [
-    presetUni({
-      attributify: false
-    }),
+    presetUni(),
     presetIcons({
       scale: 1.2,
       warn: true,

@@ -86,10 +86,8 @@ catalogs:
   server:
     nitropack: ^2.12.9
   style:
-    "@uni-helper/unocss-preset-uni": ^0.2.11
     sass: ~1.78.0
-    unocss: ~66.0.0
-    unocss-applet: ^0.12.2
+    uni-unocss: ~1.0.0-beta.2
   test:
     vitest: ^4.0.16
   tsc:
@@ -113,7 +111,6 @@ catalogs:
 
 onlyBuiltDependencies:
   - "@parcel/watcher"
-  - "@uni-helper/unocss-preset-uni"
   - core-js
   - esbuild
   - simple-git-hooks
