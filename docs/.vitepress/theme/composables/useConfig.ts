@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 interface Config {
   themeColor: string;
@@ -17,7 +17,9 @@ export function useConfig() {
     data.value = await res.json();
   }
 
-  void boot();
+  onMounted(() => {
+    void boot();
+  });
 
   return {
     data

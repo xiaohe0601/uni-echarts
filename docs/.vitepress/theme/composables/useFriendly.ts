@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 interface FriendlyItem {
   id: string;
@@ -21,7 +21,9 @@ export function useFriendly() {
     data.value = await res.json();
   }
 
-  void boot();
+  onMounted(() => {
+    void boot();
+  });
 
   return {
     data

@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 interface SponsorItem {
   id: number;
@@ -22,7 +22,9 @@ export function useSponsors() {
     data.value = await res.json();
   }
 
-  void boot();
+  onMounted(() => {
+    void boot();
+  });
 
   return {
     data

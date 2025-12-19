@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 interface NoticeItem {
   id: number;
@@ -21,7 +21,9 @@ export function useNotices() {
     data.value = await res.json();
   }
 
-  void boot();
+  onMounted(() => {
+    void boot();
+  });
 
   return {
     data
