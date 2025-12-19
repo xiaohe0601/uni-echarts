@@ -1,4 +1,4 @@
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
 interface SponsorItem {
   id: number;
@@ -12,7 +12,7 @@ interface SponsorItem {
 const data = ref<SponsorItem[]>();
 
 export function useSponsors() {
-  onMounted(async () => {
+  async function boot() {
     if (data.value) {
       return;
     }
@@ -20,7 +20,9 @@ export function useSponsors() {
     const res = await fetch("https://oss.xiaohe.ink/sponsors/uni-echarts.json");
 
     data.value = await res.json();
-  });
+  }
+
+  void boot();
 
   return {
     data

@@ -1,4 +1,4 @@
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
 interface FriendlyItem {
   id: string;
@@ -11,7 +11,7 @@ interface FriendlyItem {
 const data = ref<FriendlyItem[]>();
 
 export function useFriendly() {
-  onMounted(async () => {
+  async function boot() {
     if (data.value) {
       return;
     }
@@ -19,7 +19,9 @@ export function useFriendly() {
     const res = await fetch("https://oss.xiaohe.ink/friendly/uni-echarts.json");
 
     data.value = await res.json();
-  });
+  }
+
+  void boot();
 
   return {
     data

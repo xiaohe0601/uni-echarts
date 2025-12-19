@@ -1,4 +1,4 @@
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
 interface NoticeItem {
   id: number;
@@ -11,7 +11,7 @@ interface NoticeItem {
 const data = ref<NoticeItem[]>();
 
 export function useNotices() {
-  onMounted(async () => {
+  async function boot() {
     if (data.value) {
       return;
     }
@@ -19,7 +19,9 @@ export function useNotices() {
     const res = await fetch("https://oss.xiaohe.ink/notices/uni-echarts.json");
 
     data.value = await res.json();
-  });
+  }
+
+  void boot();
 
   return {
     data
