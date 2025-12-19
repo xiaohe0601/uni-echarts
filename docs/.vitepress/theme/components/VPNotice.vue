@@ -14,7 +14,7 @@
 
     <VPButton
       theme="alt"
-      text="关闭"
+      :text="notice.dismiss || '关闭'"
       @click="dismiss()"
     ></VPButton>
   </div>

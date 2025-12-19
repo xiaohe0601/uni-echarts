@@ -3,8 +3,9 @@ import { onMounted, ref } from "vue";
 interface NoticeItem {
   id: number;
   text: string;
-  button: string;
-  link: string;
+  button?: string;
+  link?: string;
+  dismiss?: string;
 }
 
 const data = ref<NoticeItem[]>();
