@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@vueuse/core": "catalog:utils",
+    "color": "catalog:frontend",
     "monaco-editor": "catalog:frontend",
     "vue": "catalog:frontend"
   },

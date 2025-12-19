@@ -18,6 +18,8 @@
 
     <template #layout-bottom>
       <VPFooter></VPFooter>
+
+      <VPConfig></VPConfig>
     </template>
   </DefaultTheme.Layout>
 </template>
@@ -26,6 +28,7 @@
 import { useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { computed, nextTick, provide } from "vue";
+import VPConfig from "./VPConfig.vue";
 import VPFooter from "./VPFooter.vue";
 import VPFriendly from "./VPFriendly.vue";
 import VPIframe from "./VPIframe.vue";

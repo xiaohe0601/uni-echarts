@@ -24,6 +24,13 @@ export default defineConfig({
       priority: 1
     },
     {
+      name: "frontend",
+      match: [
+        "color"
+      ],
+      priority: 60
+    },
+    {
       name: "server",
       match: [
         "nitropack"

@@ -140,6 +140,9 @@ catalogs:
       specifier: ^1.9.3
       version: 1.9.3
   frontend:
+    color:
+      specifier: ^5.0.3
+      version: 5.0.3
     echarts:
       specifier: ^6.0.0
       version: 6.0.0
@@ -329,6 +332,9 @@ importers:
       '@vueuse/core':
         specifier: catalog:utils
         version: 12.8.2(typescript@5.9.3)
+      color:
+        specifier: catalog:frontend
+        version: 5.0.3
       monaco-editor:
         specifier: catalog:frontend
         version: 0.54.0
