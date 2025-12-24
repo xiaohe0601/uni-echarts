@@ -7,6 +7,7 @@ export * from "./useEchartsTheme";
 export * from "./useEchartsTouch";
 export * from "./useEchartsUpdateOptions";
 export * from "./useLoading";
+export * from "./usePageVisible";
 export * from "./usePublicApi";
 export * from "./useUid";
 export * from "./useVueThis";

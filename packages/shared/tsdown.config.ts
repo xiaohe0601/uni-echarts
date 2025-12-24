@@ -10,6 +10,7 @@ export default defineConfig({
     build: true
   },
   external: [
+    "@dcloudio/uni-app",
     "echarts",
     "vue"
   ],

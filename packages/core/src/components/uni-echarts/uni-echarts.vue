@@ -92,6 +92,7 @@ import {
   useEchartsTouch,
   useEchartsUpdateOptions,
   useLoading,
+  usePageVisible,
   usePublicApi,
   useUid,
   useVueThis
@@ -110,6 +111,10 @@ defineOptions({
 const props = defineProps({
   customClass: [String, Object, Array],
   customStyle: [String, Object],
+  visible: {
+    type: Boolean,
+    default: undefined
+  },
   option: Object,
   optionKey: String,
   theme: [Object, String],
@@ -155,6 +160,16 @@ const {
 const { innerTheme } = useEchartsTheme(() => props.theme);
 const { innerInitOptions } = useEchartsInitOptions(() => props.initOptions);
 const { innerUpdateOptions } = useEchartsUpdateOptions(() => props.updateOptions);
+
+const { visible: pageVisible } = usePageVisible();
+
+const innerVisible = computed(() => {
+  if (props.visible != null) {
+    return props.visible;
+  }
+
+  return pageVisible.value;
+});
 
 const useCanvas2D = computed(() => {
   if (!canIUseCanvas2d()) {
@@ -266,7 +281,14 @@ async function getContext() {
   };
 }
 
+let deferInit = false;
+
 async function init(option) {
+  if (!innerVisible.value) {
+    deferInit = true;
+    return;
+  }
+
   if (props.initDelay > 0) {
     await sleep(props.initDelay);
   }
@@ -442,6 +464,17 @@ watch([innerTheme, innerInitOptions], () => {
   init();
 }, {
   deep: true
+});
+
+watch(innerVisible, (value) => {
+  if (!value) {
+    return;
+  }
+
+  if (deferInit) {
+    deferInit = false;
+    init();
+  }
 });
 
 watchEffect(() => {

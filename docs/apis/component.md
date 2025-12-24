@@ -6,6 +6,7 @@
 |------------------|------------------------------------------------------------------------------------------------|-----------------|-------------|---------|
 | custom-class     | 自定义 class                                                                                      | any             | -           | -       |
 | custom-style     | 自定义 style                                                                                      | `StyleValue`    | -           | -       |
+| visible `2.4.1`  | 是否可见（默认跟随所在页面的可见性，如果在隐藏状态下触发更新将会推迟到可见时再执行）                                                     | boolean         | -           | -       |
 | option           | [echarts setOption option](https://echarts.apache.org/zh/api.html#echartsInstance.setOption)   | object          | -           | -       |
 | option-key       | [provide option key](../guide/provide)                                                         | string          | -           | -       |
 | theme            | [echarts init theme](https://echarts.apache.org/zh/api.html#echarts.init)                      | string / object | -           | -       |

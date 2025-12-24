@@ -22,6 +22,10 @@ export interface UniEchartsProps {
    */
   customStyle?: StyleValue;
   /**
+   * Whether the chart is visible.
+   */
+  visible?: boolean;
+  /**
    * Same as the option of echarts.
    */
   option?: ChartOption;
