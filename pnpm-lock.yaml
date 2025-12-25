@@ -205,8 +205,8 @@ catalogs:
       specifier: ~1.78.0
       version: 1.78.0
     uni-unocss:
-      specifier: ~1.0.0-beta.2
-      version: 1.0.0-beta.2
+      specifier: ~1.0.0-beta.3
+      version: 1.0.0-beta.3
   test:
     vitest:
       specifier: ^4.0.16
@@ -535,7 +535,7 @@ importers:
         version: 1.78.0
       uni-unocss:
         specifier: catalog:style
-        version: 1.0.0-beta.2(unocss@66.0.0(postcss@8.5.6)(vite@5.4.21(@types/node@22.19.3)(sass@1.78.0)(terser@5.44.1))(vue@3.4.38(typescript@5.9.3)))
+        version: 1.0.0-beta.3(unocss@66.0.0(postcss@8.5.6)(vite@5.4.21(@types/node@22.19.3)(sass@1.78.0)(terser@5.44.1))(vue@3.4.38(typescript@5.9.3)))
       unplugin-auto-import:
         specifier: catalog:build
         version: 20.3.0(@vueuse/core@12.8.2(typescript@5.9.3))
@@ -8440,8 +8440,8 @@ packages:
   unenv@2.0.0-rc.24:
     resolution: {integrity: sha512-i7qRCmY42zmCwnYlh9H2SvLEypEFGye5iRmEMKjcGi7zk9UquigRjFtTLz0TYqr0ZGLZhaMHl/foy1bZR+Cwlw==}
 
-  uni-unocss@1.0.0-beta.2:
-    resolution: {integrity: sha512-bSBA+wdeMNES42eDuVWH5HveWOIHbFEi5m+8Pz2pKe6OoZFiJHR+++APmmQKhZAZnhruu608r/pkxohNGMwO9w==}
+  uni-unocss@1.0.0-beta.3:
+    resolution: {integrity: sha512-R80POlk00DeOwYSIwhxHNyAa4XxCep7oUltIhZrHWPJ9tDHRSaypbYYDF5dDVooIJ2dTBAepaW91WUsXzF89DA==}
     peerDependencies:
       unocss: 66.0.0
 
@@ -18774,7 +18774,7 @@ snapshots:
     dependencies:
       pathe: 2.0.3
 
-  uni-unocss@1.0.0-beta.2(unocss@66.0.0(postcss@8.5.6)(vite@5.4.21(@types/node@22.19.3)(sass@1.78.0)(terser@5.44.1))(vue@3.4.38(typescript@5.9.3))):
+  uni-unocss@1.0.0-beta.3(unocss@66.0.0(postcss@8.5.6)(vite@5.4.21(@types/node@22.19.3)(sass@1.78.0)(terser@5.44.1))(vue@3.4.38(typescript@5.9.3))):
     dependencies:
       '@skiyee/ui-preset': 0.0.8(unocss@66.0.0(postcss@8.5.6)(vite@5.4.21(@types/node@22.19.3)(sass@1.78.0)(terser@5.44.1))(vue@3.4.38(typescript@5.9.3)))
       '@unocss/core': 66.0.0
