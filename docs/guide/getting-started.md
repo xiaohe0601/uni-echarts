@@ -218,7 +218,7 @@ const option = ref({
 });
 </script>
 
-<style scoped>
+<style>
 .chart {
   height: 300px;
 }
@@ -310,7 +310,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style>
 .chart {
   height: 300px;
 }
@@ -448,7 +448,7 @@ const option = ref({
 });
 </script>
 
-<style scoped>
+<style>
 .chart {
   height: 300px;
 }
@@ -536,7 +536,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style>
 .chart {
   height: 300px;
 }

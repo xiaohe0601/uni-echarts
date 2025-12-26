@@ -41,10 +41,12 @@ Yarn v2 等其他依赖管理工具请自行参考其官方文档配置。
 属性来弥补这一缺陷。
 
 - 可以在 manifest.json 的 `mp-weixin` / `mp-alipay` 字段下添加
-[mergeVirtualHostAttributes](https://uniapp.dcloud.net.cn/collocation/manifest.html#mp-weixin) 配置，
-用于合并小程序组件虚拟节点外层属性，这样就可以正常使用 class / style 等属性。
+  [mergeVirtualHostAttributes](https://uniapp.dcloud.net.cn/collocation/manifest.html#mp-weixin) 配置，
+  用于合并小程序组件虚拟节点外层属性，这样就可以正常使用 class / style 等属性。
 
   ```json5
+  // manifest.json
+
   {
     "mp-weixin": {
       // ...
@@ -57,7 +59,22 @@ Yarn v2 等其他依赖管理工具请自行参考其官方文档配置。
   }
   ```
 
-- 也可以将相关样式转移到一个单独不带 `scoped` 标识的 style 块中，使 Uni ECharts 可以共享样式。
+  ```vue
+  <template>
+    <uni-echarts class="chart" :option="option"></uni-echarts>
+  </template>
+  ```
+
+  ```vue
+  <style scoped>
+  .chart {
+    height: 300px;
+  }
+  </style>
+  ```
+
+- 如果不启用 `mergeVirtualHostAttributes` 则需要将相关样式转移到一个单独不带 `scoped` 标识的 style 块中，使 Uni ECharts
+  可以共享样式。
 
   ```vue
   <style>
@@ -71,6 +88,22 @@ Yarn v2 等其他依赖管理工具请自行参考其官方文档配置。
   </style>
   ```
 
+  ```vue
+  <template>
+    <uni-echarts custom-class="chart" :option="option"></uni-echarts>
+  </template>
+  ```
+
+- 也可以直接使用 custom-style 设置样式。
+
+  ```vue
+  <template>
+    <uni-echarts custom-style="height: 300px" :option="option"></uni-echarts>
+
+    <uni-echarts :custom-style="{ height: '300px' }" :option="option"></uni-echarts>
+  </template>
+  ```
+
 - 在自定义组件中如果需要覆盖 Uni ECharts 的内部样式，需要添加 `styleIsolation: "shared"` 选项。
 
   ```vue
@@ -82,6 +115,22 @@ Yarn v2 等其他依赖管理工具请自行参考其官方文档配置。
   });
   </script>
   ```
+
+  ::: details Options API 示例
+
+  ```vue
+  <script>
+  import { defineComponent } from "vue";
+
+  export default defineComponent({
+    options: {
+      styleIsolation: "shared"
+    }
+  });
+  </script>
+  ```
+
+  :::
 
 ## 小程序端 tooltip 文字阴影问题
 
