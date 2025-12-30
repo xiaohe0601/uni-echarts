@@ -4,5 +4,8 @@ export default defineConfig({
   autoGenerate: {
     pages: true,
     manifest: true
+  },
+  devtools: {
+    open: true
   }
 });
