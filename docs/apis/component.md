@@ -42,7 +42,8 @@ type AutoResize = boolean | {
     @click="handleClick"
     @finished.once="handleFinished"
     @zr:click="handleZrClick"
-    @native:tap="handleNativeTap"></uni-echarts>
+    @native:tap="handleNativeTap"
+  ></uni-echarts>
 </template>
 ```
 
