@@ -29,7 +29,7 @@ catalogs:
   cli:
     "@antfu/ni": ^28.1.0
     "@uni-helper/unh": ^0.2.10
-    bumpp: ^10.3.2
+    bumpp: ^10.4.0
     minimist: ^1.2.8
     pncat: ^0.7.8
   dcloudio:
@@ -67,7 +67,7 @@ catalogs:
     vue: ~3.4.38
     wot-design-uni: ^1.14.0
   icons:
-    "@iconify-json/carbon": ^1.2.15
+    "@iconify-json/carbon": ^1.2.16
   lint:
     eslint: ^9.39.2
     lint-staged: ^16.2.7
@@ -80,7 +80,7 @@ catalogs:
     fs-extra: ^11.3.3
     rimraf: ^6.1.2
   parser:
-    oxc-parser: ~0.107.0
+    oxc-parser: ~0.108.0
   script:
     esno: ^4.8.0
   server:
@@ -89,7 +89,7 @@ catalogs:
     sass: ~1.78.0
     uni-unocss: ~1.0.0-beta.3
   test:
-    vitest: ^4.0.16
+    vitest: ^4.0.17
   tsc:
     typescript: ~5.9.3
     vue-tsc: ~3.1.8
@@ -97,7 +97,7 @@ catalogs:
     "@mini-types/alipay": ^3.0.14
     "@types/fs-extra": ^11.0.4
     "@types/minimist": ^1.2.5
-    "@types/node": ^22.19.3
+    "@types/node": ^22.19.6
     "@uni-helper/uni-app-types": ~1.0.0-alpha.7
     miniprogram-api-typings: ^4.1.2
   utils:
@@ -105,8 +105,8 @@ catalogs:
     es-toolkit: ^1.43.0
     magic-string: ^0.30.21
   xiaohe:
-    "@xiaohe01/eslint-config": ^4.2.0
-    "@xiaohe01/stylelint-config": ^3.2.0
+    "@xiaohe01/eslint-config": ^5.0.0
+    "@xiaohe01/stylelint-config": ^3.2.1
     "@xiaohe01/tsconfig": ^3.1.0
 
 onlyBuiltDependencies:
