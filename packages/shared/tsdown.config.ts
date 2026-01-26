@@ -11,7 +11,7 @@ export default defineConfig({
   },
   external: [
     "@dcloudio/uni-app",
-    "echarts",
+    "echarts/core",
     "vue"
   ],
   plugins: [

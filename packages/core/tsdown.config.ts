@@ -13,7 +13,7 @@ export default defineConfig([
       emitDtsOnly: true
     },
     external: [
-      "echarts",
+      "echarts/core",
       "vue"
     ]
   },
