@@ -40,10 +40,10 @@ async function main() {
 
   const input = await prompt(text, {
     message: "Input file",
-    placeholder: "./echarts.min.js",
-    initialValue: argv._[0],
+    placeholder: "Path to input file",
+    initialValue: argv._[0] || "./echarts.min.js",
     validate(value) {
-      if (value.length === 0) {
+      if (value == null || value.length === 0) {
         return new Error("Input file is required.");
       }
       if (!fs.existsSync(value)) {
@@ -57,10 +57,10 @@ async function main() {
 
   const output = await prompt(text, {
     message: "Output file",
-    placeholder: "./echarts.esm.js",
-    initialValue: argv._[1],
+    placeholder: "Path to output file",
+    initialValue: argv._[1] || "./echarts.esm.js",
     validate(value) {
-      if (value.length === 0) {
+      if (value == null || value.length === 0) {
         return new Error("Output file is required.");
       }
     }

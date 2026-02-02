@@ -20,7 +20,7 @@ catalogs:
     "@uni-helper/vite-plugin-uni-manifest": ^0.2.12
     "@uni-helper/vite-plugin-uni-pages": ^0.3.23
     "@uni-ku/unplugin-keep-comments": ^0.1.0
-    rollup: ^4.56.0
+    rollup: ^4.57.1
     tsdown: ^0.20.1
     unplugin-auto-import: ^21.0.0
     vite: ^5.4.21
@@ -31,7 +31,7 @@ catalogs:
     "@uni-helper/unh": ^0.2.10
     bumpp: ^10.4.0
     minimist: ^1.2.8
-    pncat: ^0.7.8
+    pncat: ^0.8.0
   dcloudio:
     "@dcloudio/types": ^3.4.29
     "@dcloudio/uni-app": 3.0.0-4080720251210001
@@ -72,22 +72,22 @@ catalogs:
     eslint: ^9.39.2
     lint-staged: ^16.2.7
     simple-git-hooks: ^2.13.1
-    stylelint: ^17.0.0
+    stylelint: ^17.1.0
   node:
-    "@clack/prompts": ^0.11.0
+    "@clack/prompts": ^1.0.0
     chalk: ^5.6.2
     consola: ^3.4.2
     fs-extra: ^11.3.3
     rimraf: ^6.1.2
   parser:
-    oxc-parser: ~0.110.0
+    oxc-parser: ~0.111.0
   script:
     esno: ^4.8.0
   server:
     nitropack: ^2.13.1
   style:
     sass: ~1.78.0
-    uni-unocss: ~1.0.0-beta.3
+    uni-unocss: ~1.0.0-beta.4
   test:
     vitest: ^4.0.18
   tsc:
