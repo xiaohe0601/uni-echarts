@@ -106,8 +106,7 @@ export default defineConfig({
   },
   optimizeDeps: {
     exclude: [
-      "wot-design-uni",
-      "uni-echarts"
+      "wot-design-uni"
     ]
   }
 });

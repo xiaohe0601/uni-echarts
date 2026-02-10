@@ -21,6 +21,23 @@ export function UniEcharts(options: Options = {}): Plugin {
   return {
     name: "uni-echarts",
     enforce: "pre",
+    config(config) {
+      if (
+        config.optimizeDeps != null
+        && config.optimizeDeps.exclude != null
+        && config.optimizeDeps.exclude.includes("uni-echarts")
+      ) {
+        return;
+      }
+
+      return {
+        optimizeDeps: {
+          exclude: [
+            "uni-echarts"
+          ]
+        }
+      };
+    },
     async transform(code, id) {
       let ms: MagicString | null = null;
 

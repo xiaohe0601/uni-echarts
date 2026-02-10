@@ -40,6 +40,12 @@ npm install echarts uni-echarts
 [依赖预构建](https://cn.vitejs.dev/guide/dep-pre-bundling.html) 导致生成额外的 `echarts` 副本，
 当使用 npm 方式时需要手动配置 Vite 强制排除 `uni-echarts` 的预构建。
 
+::: info 提示
+
+自 `2.5.0` 开始，配置 [Vite 插件](#vite-插件) 可以省略以下配置，插件内部将会自动添加排除。
+
+:::
+
 ```js
 // vite.config.js[ts]
 import { defineConfig } from "vite";
