@@ -13,9 +13,7 @@
     <view class="flex flex-col items-center mt-2">
       <text v-if="surplus > 0" class="text-base text-t3">
         数据将在
-        <text class="text-primary mx-1">
-          {{ surplus }}
-        </text>
+        <text class="text-primary mx-1">{{ surplus }}</text>
         秒后完成加载...
       </text>
 
