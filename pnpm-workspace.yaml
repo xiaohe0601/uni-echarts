@@ -16,12 +16,12 @@ catalogs:
     "@rollup/plugin-node-resolve": ^16.0.3
     "@rollup/plugin-terser": ^0.4.4
     "@uni-helper/plugin-uni": ^0.1.0
-    "@uni-helper/vite-plugin-uni-components": ^0.2.6
+    "@uni-helper/vite-plugin-uni-components": ^0.2.10
     "@uni-helper/vite-plugin-uni-manifest": ^0.2.12
     "@uni-helper/vite-plugin-uni-pages": ^0.3.23
     "@uni-ku/unplugin-keep-comments": ^0.1.0
     rollup: ^4.57.1
-    tsdown: ^0.20.1
+    tsdown: ^0.20.3
     unplugin-auto-import: ^21.0.0
     vite: ^5.4.21
     vite-plugin-inspect: ~0.8.9
@@ -29,9 +29,9 @@ catalogs:
   cli:
     "@antfu/ni": ^28.2.0
     "@uni-helper/unh": ^0.2.10
-    bumpp: ^10.4.0
+    bumpp: ^10.4.1
     minimist: ^1.2.8
-    pncat: ^0.8.0
+    pncat: ^0.9.1
   dcloudio:
     "@dcloudio/types": ^3.4.29
     "@dcloudio/uni-app": 3.0.0-4080720251210001
@@ -58,7 +58,7 @@ catalogs:
   docs:
     vitepress: ^1.6.4
     vitepress-plugin-group-icons: ^1.7.1
-    vitepress-plugin-llms: ^1.10.0
+    vitepress-plugin-llms: ^1.11.0
   frontend:
     color: ^5.0.3
     echarts: ^6.0.0
@@ -72,7 +72,7 @@ catalogs:
     eslint: ^9.39.2
     lint-staged: ^16.2.7
     simple-git-hooks: ^2.13.1
-    stylelint: ^17.1.0
+    stylelint: ^17.1.1
   node:
     "@clack/prompts": ^1.0.0
     chalk: ^5.6.2
@@ -80,7 +80,7 @@ catalogs:
     fs-extra: ^11.3.3
     rimraf: ^6.1.2
   parser:
-    oxc-parser: ~0.111.0
+    oxc-parser: ~0.112.0
   script:
     esno: ^4.8.0
   server:
@@ -97,7 +97,7 @@ catalogs:
     "@mini-types/alipay": ^3.0.14
     "@types/fs-extra": ^11.0.4
     "@types/minimist": ^1.2.5
-    "@types/node": ^22.19.7
+    "@types/node": ^22.19.10
     "@uni-helper/uni-app-types": ~1.0.0-alpha.7
     miniprogram-api-typings: ^5.0.0
   utils:
@@ -105,8 +105,8 @@ catalogs:
     es-toolkit: ^1.44.0
     magic-string: ^0.30.21
   xiaohe:
-    "@xiaohe01/eslint-config": ^5.1.0
-    "@xiaohe01/stylelint-config": ^3.3.0
+    "@xiaohe01/eslint-config": ^5.2.1
+    "@xiaohe01/stylelint-config": ^3.4.0
     "@xiaohe01/tsconfig": ^3.1.0
 
 onlyBuiltDependencies:
