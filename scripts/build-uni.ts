@@ -9,7 +9,7 @@ import pkg from "../packages/core/package.json";
 const uniPkg = {
   id: "xiaohe-echarts",
   name: pkg.name,
-  displayName: "xiaohe-echarts",
+  displayName: "Uni ECharts",
   type: pkg.type,
   version: pkg.version,
   description: "适用于 uni-app 的 ECharts 组件，支持 Web、小程序、APP，支持鸿蒙，支持 TypeScript。与 Vue ECharts 近乎一致的使用体验！",
