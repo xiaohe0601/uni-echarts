@@ -96,9 +96,9 @@ export function useEchartsTouch({
       const item = event.touches[i];
 
       // @ts-expect-error whatever
-      item.offsetX = item.x;
+      item.offsetX = item.x ?? (item.clientX - canvasRect.left);
       // @ts-expect-error whatever
-      item.offsetY = item.y;
+      item.offsetY = item.y ?? (item.clientY - canvasRect.top);
     }
 
     return event;
