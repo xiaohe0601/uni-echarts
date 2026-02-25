@@ -1,7 +1,7 @@
 import type { MaybeRefOrGetter, Reactive, Ref } from "vue";
 import { shallowRef, toValue } from "vue";
 import type { EChartsType, NullableValue } from "../types";
-import { querySelect, UniCanvas } from "../utils";
+import { defaultTo, querySelect, UniCanvas } from "../utils";
 import type { VueThis } from "./useVueThis";
 
 export interface CanvasRect {
@@ -96,9 +96,9 @@ export function useEchartsTouch({
       const item = event.touches[i];
 
       // @ts-expect-error whatever
-      item.offsetX = item.x ?? (item.clientX - canvasRect.left);
+      item.offsetX = defaultTo(item.x, item.clientX - canvasRect.left);
       // @ts-expect-error whatever
-      item.offsetY = item.y ?? (item.clientY - canvasRect.top);
+      item.offsetY = defaultTo(item.y, item.clientY - canvasRect.top);
     }
 
     return event;
