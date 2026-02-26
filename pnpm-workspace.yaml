@@ -1,4 +1,10 @@
 shellEmulator: true
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - "@vitejs/plugin-legacy@5.3.2"
+  - chokidar@4.0.3
+  - "semver@5.7.2 || 6.3.1"
+  - vite@5.4.21
 
 packages:
   - docs
@@ -7,7 +13,6 @@ packages:
   - examples/**
 
 overrides:
-  "@types/node": 22.19.12
   vue: 3.4.38
 
 catalogs:
@@ -96,7 +101,7 @@ catalogs:
     "@mini-types/alipay": ^3.0.14
     "@types/fs-extra": ^11.0.4
     "@types/minimist": ^1.2.5
-    "@types/node": ^22.19.12
+    "@types/node": ^24.10.14
     "@uni-helper/uni-app-types": ~1.0.0-alpha.7
     miniprogram-api-typings: ^5.1.1
   utils:
@@ -105,7 +110,7 @@ catalogs:
     magic-string: ^0.30.21
   xiaohe:
     "@xiaohe01/catalog-rules": ^0.0.3
-    "@xiaohe01/eslint-config": ^5.3.0
+    "@xiaohe01/eslint-config": ^5.4.0
     "@xiaohe01/stylelint-config": ^3.5.0
     "@xiaohe01/tsconfig": ^3.1.0
 
