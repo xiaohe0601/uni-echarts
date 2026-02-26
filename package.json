@@ -3,7 +3,7 @@
   "type": "module",
   "version": "2.5.1",
   "private": true,
-  "packageManager": "pnpm@10.29.2",
+  "packageManager": "pnpm@10.30.2",
   "scripts": {
     "prepare": "simple-git-hooks",
     "postinstall": "nr build",
@@ -39,6 +39,7 @@
     "@antfu/ni": "catalog:cli",
     "@types/fs-extra": "catalog:types",
     "@types/node": "catalog:types",
+    "@xiaohe01/catalog-rules": "catalog:xiaohe",
     "@xiaohe01/eslint-config": "catalog:xiaohe",
     "@xiaohe01/stylelint-config": "catalog:xiaohe",
     "@xiaohe01/tsconfig": "catalog:xiaohe",

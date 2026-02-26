@@ -13,6 +13,6 @@
     "clean:cache": "rimraf ./.nitro"
   },
   "devDependencies": {
-    "nitropack": "catalog:server"
+    "nitropack": "catalog:backend"
   }
 }

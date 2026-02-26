@@ -51,7 +51,7 @@
     "@uni-helper/vite-plugin-uni-components": "catalog:build",
     "@uni-helper/vite-plugin-uni-manifest": "catalog:build",
     "@uni-helper/vite-plugin-uni-pages": "catalog:build",
-    "@vue/runtime-core": "catalog:dev",
+    "@vue/runtime-core": "catalog:frontend",
     "miniprogram-api-typings": "catalog:types",
     "sass": "catalog:style",
     "uni-unocss": "catalog:style",
