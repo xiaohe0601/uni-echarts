@@ -12,10 +12,12 @@ export default defineConfig([
       dtsInput: true,
       emitDtsOnly: true
     },
-    external: [
-      "echarts/core",
-      "vue"
-    ]
+    deps: {
+      neverBundle: [
+        "echarts/core",
+        "vue"
+      ]
+    }
   },
   {
     name: "uni-echarts/resolver",
@@ -29,10 +31,12 @@ export default defineConfig([
     dts: {
       build: true
     },
-    external: [
-      "@uni-helper/vite-plugin-uni-components",
-      "vite"
-    ]
+    deps: {
+      neverBundle: [
+        "@uni-helper/vite-plugin-uni-components",
+        "vite"
+      ]
+    }
   },
   {
     name: "uni-echarts/vite",
@@ -46,9 +50,11 @@ export default defineConfig([
     dts: {
       build: true
     },
-    external: [
-      "vite",
-      "vue"
-    ]
+    deps: {
+      neverBundle: [
+        "vite",
+        "vue"
+      ]
+    }
   }
 ]);

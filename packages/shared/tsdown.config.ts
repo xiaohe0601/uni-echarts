@@ -9,11 +9,13 @@ export default defineConfig({
   dts: {
     build: true
   },
-  external: [
-    "@dcloudio/uni-app",
-    "echarts/core",
-    "vue"
-  ],
+  deps: {
+    neverBundle: [
+      "@dcloudio/uni-app",
+      "echarts/core",
+      "vue"
+    ]
+  },
   plugins: [
     keepComments({
       comments: [
