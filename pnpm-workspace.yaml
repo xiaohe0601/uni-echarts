@@ -110,7 +110,7 @@ catalogs:
     magic-string: ^0.30.21
   xiaohe:
     "@xiaohe01/catalog-rules": ^0.0.3
-    "@xiaohe01/eslint-config": ^5.5.1
+    "@xiaohe01/eslint-config": ^5.5.2
     "@xiaohe01/stylelint-config": ^3.5.0
     "@xiaohe01/tsconfig": ^3.1.0
 

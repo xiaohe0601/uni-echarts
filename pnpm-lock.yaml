@@ -251,8 +251,8 @@ catalogs:
       specifier: ^0.0.3
       version: 0.0.3
     '@xiaohe01/eslint-config':
-      specifier: ^5.5.1
-      version: 5.5.1
+      specifier: ^5.5.2
+      version: 5.5.2
     '@xiaohe01/stylelint-config':
       specifier: ^3.5.0
       version: 3.5.0
@@ -281,7 +281,7 @@ importers:
         version: 0.0.3(pncat@0.10.4)
       '@xiaohe01/eslint-config':
         specifier: catalog:xiaohe
-        version: 5.5.1(@typescript-eslint/rule-tester@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.30)(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.18(@types/node@24.12.0)(jiti@2.6.1)(jsdom@16.7.0(bufferutil@4.1.0))(sass@1.78.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        version: 5.5.2(@typescript-eslint/rule-tester@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.30)(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.18(@types/node@24.12.0)(jiti@2.6.1)(jsdom@16.7.0(bufferutil@4.1.0))(sass@1.78.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       '@xiaohe01/stylelint-config':
         specifier: catalog:xiaohe
         version: 3.5.0(postcss@8.5.8)(stylelint@17.4.0(typescript@5.9.3))
@@ -3727,8 +3727,8 @@ packages:
     peerDependencies:
       pncat: '*'
 
-  '@xiaohe01/eslint-config@5.5.1':
-    resolution: {integrity: sha512-gR9FSvVLMRM8vtWtwvt+vz4IJq1E10ihNzxZCbR+mDHb6Cg/tmggJN2CTcshYRbWjlDsfUywfOlbD400WC9UpA==}
+  '@xiaohe01/eslint-config@5.5.2':
+    resolution: {integrity: sha512-SxAFZ/t6x+Br0rY88HT1wwtYbRA/UcraUnoyLx89BrlJKxRnbOFi9YIJf73WIaLTmk93QKK2j1GlU1yeGL4O4w==}
     peerDependencies:
       eslint: '>=9.5.0'
 
@@ -13137,7 +13137,7 @@ snapshots:
     dependencies:
       pncat: 0.10.4
 
-  '@xiaohe01/eslint-config@5.5.1(@typescript-eslint/rule-tester@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.30)(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.18(@types/node@24.12.0)(jiti@2.6.1)(jsdom@16.7.0(bufferutil@4.1.0))(sass@1.78.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
+  '@xiaohe01/eslint-config@5.5.2(@typescript-eslint/rule-tester@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.30)(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.18(@types/node@24.12.0)(jiti@2.6.1)(jsdom@16.7.0(bufferutil@4.1.0))(sass@1.78.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
       '@antfu/eslint-config': 7.7.0(@typescript-eslint/rule-tester@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.30)(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.18(@types/node@24.12.0)(jiti@2.6.1)(jsdom@16.7.0(bufferutil@4.1.0))(sass@1.78.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       eslint: 9.39.4(jiti@2.6.1)
