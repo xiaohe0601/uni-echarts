@@ -1,3 +1,5 @@
+ignoreWorkspaceRootCheck: true
+shamefullyHoist: true
 shellEmulator: true
 trustPolicy: no-downgrade
 trustPolicyExclude:
@@ -115,8 +117,6 @@ catalogs:
     "@xiaohe01/tsconfig": ^3.1.0
 
 onlyBuiltDependencies:
-  - "@parcel/watcher"
-  - core-js
   - esbuild
   - simple-git-hooks
   - vue-demi
