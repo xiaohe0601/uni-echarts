@@ -1,18 +1,7 @@
 /* eslint-disable ts/no-empty-object-type */
-import type { DefineComponent } from "vue";
-import type { AllowedComponentProps } from "../../shared-core";
-import type { UniEchartsEmits, UniEchartsProps } from "./types";
+import UniEchartsComp from "./uni-echarts.vue";
 
-type UniEcharts = DefineComponent<
-  AllowedComponentProps & UniEchartsProps,
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  UniEchartsEmits
->;
+type UniEcharts = InstanceType<typeof UniEchartsComp>;
 
 declare const _default: UniEcharts;
 
