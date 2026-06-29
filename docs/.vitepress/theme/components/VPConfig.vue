@@ -3,7 +3,6 @@
 </template>
 
 <script lang="ts" setup>
-// eslint-disable-next-line vue/prefer-import-from-vue
 import { stringifyStyle } from "@vue/shared";
 import { useStyleTag } from "@vueuse/core";
 import { useData } from "vitepress";
