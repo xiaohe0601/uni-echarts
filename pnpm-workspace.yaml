@@ -113,7 +113,7 @@ catalogs:
   utils:
     "@vueuse/core": ^12.8.2
     es-toolkit: ^1.50.0
-    magic-string: ^1.1.0
+    magic-string: ^0.30.21
   xiaohe:
     "@xiaohe01/catalog-rules": ^0.0.4
     "@xiaohe01/eslint-config": ^7.2.0

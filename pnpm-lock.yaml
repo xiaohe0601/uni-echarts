@@ -244,8 +244,8 @@ catalogs:
       specifier: ^1.50.0
       version: 1.50.0
     magic-string:
-      specifier: ^1.1.0
-      version: 1.1.0
+      specifier: ^0.30.21
+      version: 0.30.21
   xiaohe:
     '@xiaohe01/catalog-rules':
       specifier: ^0.0.4
@@ -381,7 +381,7 @@ importers:
         version: 6.0.0
       magic-string:
         specifier: catalog:utils
-        version: 1.1.0
+        version: 0.30.21
       minimist:
         specifier: catalog:cli
         version: 1.2.8
