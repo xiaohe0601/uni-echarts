@@ -11,6 +11,7 @@ export default defineConfig({
   },
   markdown: {
     config(md) {
+      // @ts-expect-error whatever
       md.use(GroupIconMd);
     }
   },
