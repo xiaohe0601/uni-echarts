@@ -3,7 +3,7 @@ import { isMpAlipay, isMpToutiao, isMpWeixin } from "./env";
 import { defaultTo } from "./helpers";
 
 export function getDeviceInfo(): UniApp.GetDeviceInfoResult | UniApp.GetSystemInfoResult {
-  if (uni.canIUse("getDeviceInfo") || uni.getDeviceInfo) {
+  if (uni.canIUse("getDeviceInfo")) {
     return uni.getDeviceInfo();
   } else {
     return uni.getSystemInfoSync();
@@ -11,7 +11,7 @@ export function getDeviceInfo(): UniApp.GetDeviceInfoResult | UniApp.GetSystemIn
 }
 
 export function getWindowInfo(): UniApp.GetWindowInfoResult | UniApp.GetSystemInfoResult {
-  if (uni.canIUse("getWindowInfo") || uni.getWindowInfo) {
+  if (uni.canIUse("getWindowInfo")) {
     return uni.getWindowInfo();
   } else {
     return uni.getSystemInfoSync();
@@ -19,7 +19,7 @@ export function getWindowInfo(): UniApp.GetWindowInfoResult | UniApp.GetSystemIn
 }
 
 export function getAppBaseInfo(): UniApp.GetAppBaseInfoResult | UniApp.GetSystemInfoResult {
-  if (uni.canIUse("getAppBaseInfo") || uni.getAppBaseInfo) {
+  if (uni.canIUse("getAppBaseInfo")) {
     return uni.getAppBaseInfo();
   } else {
     return uni.getSystemInfoSync();
