@@ -8,6 +8,10 @@
       <VPVersion></VPVersion>
     </template>
 
+    <template #home-hero-after>
+      <SpecialSponsors tier="platinum"></SpecialSponsors>
+    </template>
+
     <template #home-features-after>
       <VPFriendly></VPFriendly>
     </template>
@@ -28,6 +32,7 @@
 import { useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { computed, nextTick, provide } from "vue";
+import SpecialSponsors from "./SpecialSponsors.vue";
 import VPConfig from "./VPConfig.vue";
 import VPFooter from "./VPFooter.vue";
 import VPFriendly from "./VPFriendly.vue";
