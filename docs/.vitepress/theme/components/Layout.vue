@@ -20,6 +20,10 @@
       <VPIframe v-if="iframeVisible"></VPIframe>
     </template>
 
+    <template #aside-outline-after>
+      <SpecialSponsors tier="platinum"></SpecialSponsors>
+    </template>
+
     <template #layout-bottom>
       <VPFooter></VPFooter>
 

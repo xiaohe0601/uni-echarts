@@ -104,6 +104,7 @@ const features = computed(() => {
 
       .box {
         align-items: center;
+        text-align: center;
       }
 
       &::before {
@@ -186,6 +187,20 @@ const features = computed(() => {
         &:hover {
           border-color: rgba(226, 232, 240, 0.72);
         }
+      }
+    }
+  }
+}
+
+.VPDocAside {
+  .SpecialSponsors {
+    margin-top: 10px;
+
+    .VPFeatures {
+      padding: 6px;
+
+      .box {
+        padding: 12px 20px;
       }
     }
   }
