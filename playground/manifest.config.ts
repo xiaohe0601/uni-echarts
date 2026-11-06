@@ -64,7 +64,7 @@ export default defineManifestConfig({
     }
   },
   "mp-weixin": {
-    appid: "",
+    appid: "wx1fc2ba0c3ebc07e9",
     setting: {
       es6: false,
       swc: true,
