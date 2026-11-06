@@ -8,9 +8,11 @@ export default defineConfig([
     platform: "neutral",
     format: "esm",
     dts: {
-      build: true,
       dtsInput: true,
-      emitDtsOnly: true
+      emitDtsOnly: true,
+      tsc: {
+        build: true
+      }
     },
     deps: {
       neverBundle: [
@@ -29,7 +31,9 @@ export default defineConfig([
       "cjs"
     ],
     dts: {
-      build: true
+      tsc: {
+        build: true
+      }
     },
     deps: {
       neverBundle: [
@@ -48,7 +52,9 @@ export default defineConfig([
       "cjs"
     ],
     dts: {
-      build: true
+      tsc: {
+        build: true
+      }
     },
     deps: {
       neverBundle: [

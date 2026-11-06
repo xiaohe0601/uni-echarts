@@ -7,7 +7,9 @@ export default defineConfig({
   platform: "neutral",
   format: "esm",
   dts: {
-    build: true
+    tsc: {
+      build: true
+    }
   },
   deps: {
     neverBundle: [
