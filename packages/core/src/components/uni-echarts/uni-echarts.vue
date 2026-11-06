@@ -295,7 +295,7 @@ async function getContext() {
 
 let deferInit = false;
 
-async function init(option) {
+async function _init(option) {
   if (!innerVisible.value) {
     deferInit = true;
     return;
@@ -385,6 +385,20 @@ async function init(option) {
   // #ifndef WEB
   _commit();
   // #endif
+}
+
+let initTask = null;
+
+function init(option) {
+  if (initTask != null) {
+    return initTask;
+  }
+
+  initTask = _init(option).finally(() => {
+    initTask = null;
+  });
+
+  return initTask;
 }
 
 function setOption(option, updateOptions) {
