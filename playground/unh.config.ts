@@ -4,10 +4,6 @@ export default defineConfig({
   env: {
     dts: false
   },
-  autoGenerate: {
-    pages: true,
-    manifest: true
-  },
   devtools: {
     open: true
   }
