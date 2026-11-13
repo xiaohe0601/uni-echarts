@@ -2,6 +2,11 @@
 
 Uni ECharts 提供了 [npm](#npm-方式) 和 [uni-modules](#uni-modules-方式) 两种使用方式，任选其一即可。
 
+::: tip uni-app x
+如果你使用的是 uni-app x Vapor，请先阅读 [uni-app x 兼容版本](./uni-app-x)。
+当前 `uni-echarts-x` 仍是实验版本 `0.0.0`，未发布 npm 或插件市场版本。
+:::
+
 ::: info 前置条件
 
 - NodeJS >= 20.19.0 || >= 22.12.0 || >= 24.0.0
