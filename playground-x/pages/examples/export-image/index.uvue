@@ -1,0 +1,226 @@
+<template>
+  <scroll-view class="page" direction="vertical">
+    <uni-echarts-x
+      ref="chartEl"
+      :width="chartWidth"
+      :height="312"
+      autoresize
+      :custom-style="CHART_STYLE_75"
+      :option="option"
+      :disable-scroll="true"
+    />
+
+    <view class="toolbar">
+      <view class="save-button" @click="saveAsImage">
+        <text class="save-text">保存为图片</text>
+      </view>
+    </view>
+
+    <text v-if="statusText.length > 0" class="status">
+      {{ statusText }}
+    </text>
+
+    <view v-if="previewVisible" class="preview-mask" @click="closePreview">
+      <image
+        class="preview-image"
+        :src="previewSrc"
+        mode="aspectFit"
+        @click.stop="noop"
+      />
+      <view class="preview-close" @click="closePreview">
+        <text class="preview-close-text">×</text>
+      </view>
+    </view>
+  </scroll-view>
+</template>
+
+<script setup lang="ts">
+import * as echarts from "echarts/core"
+import { LineChart } from "echarts/charts"
+import { PolarComponent } from "echarts/components"
+import { CanvasRenderer } from "echarts/renderers"
+import {
+  CHART_STYLE_75,
+  GLOBAL_OPTION,
+  getWindowWidth,
+} from "../../../shared/demo"
+
+echarts.use([
+  PolarComponent,
+  LineChart,
+  CanvasRenderer,
+])
+
+const chartEl = ref<any>(null)
+const chartWidth = getWindowWidth()
+const statusText = ref("")
+const previewVisible = ref(false)
+const previewSrc = ref("")
+
+const option = ref<Record<string, any>>({
+  ...GLOBAL_OPTION,
+  backgroundColor: "#ffffff",
+  polar: {},
+  angleAxis: {
+    type: "value",
+    startAngle: 0,
+  },
+  radiusAxis: {},
+  series: [
+    {
+      type: "line",
+      coordinateSystem: "polar",
+      data: getData(),
+    },
+  ],
+})
+
+function getData(): number[][] {
+  const data: number[][] = []
+
+  for (let i = 0; i <= 100; i += 1) {
+    const theta = (i / 100) * 360
+    const r = 5 * (1 + Math.sin((theta / 180) * Math.PI))
+
+    data.push([r, theta])
+  }
+
+  return data
+}
+
+function isDevtools(): boolean {
+  try {
+    const wxApi = (globalThis as any)?.wx
+    const info = typeof wxApi?.getSystemInfoSync === "function"
+      ? wxApi.getSystemInfoSync()
+      : uni.getSystemInfoSync()
+    return info?.platform === "devtools"
+  }
+  catch {
+    return false
+  }
+}
+
+async function saveAsImage() {
+  if (chartEl.value == null) {
+    return
+  }
+
+  statusText.value = ""
+
+  try {
+    const result = await chartEl.value.toTempFilePath()
+    const path = String(result.tempFilePath ?? "")
+
+    if (path.length === 0) {
+      statusText.value = "导出失败：空文件路径"
+      return
+    }
+
+    // #ifdef H5
+    previewSrc.value = path
+    previewVisible.value = true
+    // #endif
+
+    // #ifndef H5
+    if (isDevtools()) {
+      previewSrc.value = path
+      previewVisible.value = true
+      return
+    }
+
+    uni.previewImage({
+      urls: [path],
+      fail: (error) => {
+        previewSrc.value = path
+        previewVisible.value = true
+        statusText.value = `预览失败，已切换页内预览：${String(error)}`
+      },
+    })
+    // #endif
+  }
+  catch (error) {
+    statusText.value = `导出失败：${String(error)}`
+  }
+}
+
+function closePreview() {
+  previewVisible.value = false
+}
+
+function noop() {}
+</script>
+
+<style>
+.page {
+  flex: 1;
+  background-color: #ffffff;
+}
+
+.toolbar {
+  width: 100%;
+  margin-top: 16rpx;
+  align-items: center;
+}
+
+.save-button {
+  align-items: center;
+  justify-content: center;
+  width: 86px;
+  height: 28px;
+  background-color: #ffffff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #299764;
+  border-radius: 999px;
+  box-sizing: border-box;
+}
+
+.save-text {
+  color: #299764;
+  font-size: 12px;
+  line-height: 26px;
+}
+
+.status {
+  margin: 10px 16px 20px;
+  color: #909399;
+  font-size: 11px;
+  line-height: 16px;
+  word-break: break-all;
+}
+
+.preview-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 100;
+}
+
+.preview-image {
+  width: 92%;
+  height: 70%;
+}
+
+.preview-close {
+  position: absolute;
+  top: 48px;
+  right: 20px;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+}
+
+.preview-close-text {
+  color: #ffffff;
+  font-size: 24px;
+}
+</style>

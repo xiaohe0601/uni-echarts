@@ -1,0 +1,87 @@
+<template>
+  <scroll-view class="page" direction="vertical">
+    <uni-echarts-x
+      :width="chartWidth"
+      :height="312"
+      autoresize
+      :custom-style="CHART_STYLE_75"
+      :option="option"
+      :disable-scroll="true"
+    />
+  </scroll-view>
+</template>
+
+<script setup lang="ts">
+import * as echarts from "echarts/core"
+import { PieChart } from "echarts/charts"
+import {
+  DatasetComponent,
+  LegendComponent,
+  TooltipComponent,
+} from "echarts/components"
+import { CanvasRenderer } from "echarts/renderers"
+import {
+  CHART_STYLE_75,
+  GLOBAL_OPTION,
+  getWindowWidth,
+} from "../../../shared/demo"
+
+echarts.use([
+  LegendComponent,
+  TooltipComponent,
+  DatasetComponent,
+  PieChart,
+  CanvasRenderer,
+])
+
+const chartWidth = getWindowWidth()
+
+const option = ref<Record<string, any>>({
+  ...GLOBAL_OPTION,
+  legend: {
+    top: 10,
+    left: "center",
+  },
+  tooltip: {
+    trigger: "item",
+  },
+  series: [
+    {
+      type: "pie",
+      radius: ["30%", "52%"],
+      label: {
+        show: false,
+        position: "center",
+      },
+      itemStyle: {
+        borderWidth: 2,
+        borderColor: "#ffffff",
+        borderRadius: 10,
+      },
+      emphasis: {
+        label: {
+          show: true,
+          fontSize: 20,
+        },
+      },
+    },
+  ],
+  dataset: {
+    dimensions: ["来源", "数量"],
+    source: [
+      ["Search Engine", 1048],
+      ["Direct", 735],
+      ["Email", 580],
+      ["Union Ads", 484],
+      ["Video Ads", 300],
+    ],
+  },
+})
+</script>
+
+<style>
+.page {
+  flex: 1;
+  background-color: #ffffff;
+}
+</style>

@@ -1,0 +1,1317 @@
+<template>
+  <view
+    :id="rootId"
+    class="uni-echarts-x"
+    :class="props.customClass"
+    :style="rootStyle"
+  >
+    <canvas
+      :id="canvasId"
+      class="uni-echarts-x__canvas"
+      :disable-scroll="props.disableScroll"
+      @ready="onCanvasReady"
+      @touchstart="onTouchStart"
+      @touchmove="onTouchMove"
+      @touchend="onTouchEnd"
+      @touchcancel="onTouchCancel"
+    />
+    <slot />
+  </view>
+</template>
+
+<script setup lang="ts">
+import * as echarts from "echarts/core"
+import type { EChartsType } from "echarts/core"
+import {
+  createEChartsCanvasHost,
+  flushCanvas,
+  getBrowserCanvasDataURL,
+  getNativeCanvasDataURL,
+  installEChartsPlatformAPI,
+  releaseEChartsPlatformContext,
+  resolveCanvasPixelRatio,
+  shouldRecreateForPixelRatio,
+} from "../../adapters/canvas"
+import type { EChartsCanvasHost } from "../../adapters/canvas"
+import {
+  createTouchBridge,
+} from "../../adapters/touch"
+import type {
+  CanvasRectLike,
+  TouchEventLike,
+} from "../../adapters/touch"
+import {
+  ECHARTS_CHART_EVENTS,
+  ZRENDER_CHART_EVENTS,
+} from "../../runtime/events"
+import {
+  normalizeEChartsEnvironment,
+} from "../../runtime/environment"
+import {
+  isOptionEmpty,
+  normalizeVaporOption,
+} from "../../runtime/options"
+
+type InitState = "idle" | "pending" | "ready" | "disposed"
+
+defineOptions({
+  name: "UniEchartsX",
+  styleIsolation: "isolated",
+})
+
+const props = withDefaults(defineProps<{
+  width?: number
+  height?: number
+  autoresize?: boolean
+  option?: Record<string, any>
+  theme?: Record<string, any> | string | null
+  initOptions?: Record<string, any>
+  updateOptions?: Record<string, any>
+  group?: string
+  manualUpdate?: boolean
+  loading?: boolean
+  loadingOptions?: Record<string, any>
+  visible?: boolean
+  disableScroll?: boolean
+  customClass?: string
+  customStyle?: string
+  initDelay?: number
+}>(), {
+  width: 300,
+  height: 200,
+  autoresize: false,
+  option: () => ({}),
+  theme: null,
+  initOptions: () => ({}),
+  updateOptions: () => ({}),
+  group: "",
+  manualUpdate: false,
+  loading: false,
+  loadingOptions: () => ({}),
+  visible: true,
+  disableScroll: false,
+  customClass: "",
+  customStyle: "",
+  initDelay: 0,
+})
+
+const emit = defineEmits([
+  "inited",
+  "error",
+  "rendered",
+  "finished",
+  "click",
+  "dblclick",
+  "mouseout",
+  "mouseover",
+  "mouseup",
+  "mousedown",
+  "mousemove",
+  "contextmenu",
+  "globalout",
+  "highlight",
+  "downplay",
+  "selectchanged",
+  "legendselectchanged",
+  "legendselected",
+  "legendunselected",
+  "legendselectall",
+  "legendinverseselect",
+  "legendscroll",
+  "datazoom",
+  "datarangeselected",
+  "graphroam",
+  "georoam",
+  "treeroam",
+  "timelinechanged",
+  "timelineplaychanged",
+  "restore",
+  "dataviewchanged",
+  "magictypechanged",
+  "geoselectchanged",
+  "geoselected",
+  "geounselected",
+  "axisareaselected",
+  "brush",
+  "brushEnd",
+  "brushselected",
+  "globalcursortaken",
+  "showtip",
+  "hidetip",
+  "zr:click",
+  "zr:dblclick",
+  "zr:mouseout",
+  "zr:mouseover",
+  "zr:mouseup",
+  "zr:mousedown",
+  "zr:mousemove",
+  "zr:contextmenu",
+  "zr:mousewheel",
+  "zr:globalout",
+  "native:touchstart",
+  "native:touchmove",
+  "native:touchend",
+  "native:touchcancel",
+])
+
+const instanceId = `uni-echarts-x-${Date.now()}-${Math.floor(Math.random() * 1000000)}`
+const rootId = `${instanceId}-root`
+const canvasId = `${instanceId}-canvas`
+const instance = getCurrentInstance()?.proxy
+const chart = shallowRef<EChartsType | null>(null)
+const host = shallowRef<EChartsCanvasHost | null>(null)
+
+const canvasRect: CanvasRectLike = {
+  left: 0,
+  top: 0,
+  width: 0,
+  height: 0,
+}
+
+let renderingContext: CanvasRenderingContext2D | null = null
+let nativeCanvas: UniCanvasElement | null = null
+let mounted = false
+let destroyed = false
+let initState: InitState = "idle"
+let initAttempt = 0
+let initAttemptId = 0
+let retryTimer = 0
+let attemptTimer = 0
+let initDelayTimer = 0
+let visibilityRefreshTimer = 0
+let contextRequestPending = false
+let pendingOption: Record<string, any> | null = null
+let deferredOption: Record<string, any> | null = null
+let deferredUpdateOptions: Record<string, any> | undefined
+let optionRefreshPending = false
+let pendingRecreate = false
+let pageVisible = true
+let appVisible = true
+let chartPixelRatio = 0
+let autoResizeObserver: UniResizeObserver | null = null
+let autoResizeTimer = 0
+let autoResizePollTimer = 0
+let autoResizeWidth = 0
+let autoResizeHeight = 0
+let renderedFlushTimer = 0
+
+const INIT_RETRY_DELAY = 50
+const INIT_RETRY_LIMIT = 20
+const INIT_ATTEMPT_TIMEOUT = 1000
+const AUTO_RESIZE_DELAY = 50
+const AUTO_RESIZE_POLL_INTERVAL = 100
+const RENDERED_FLUSH_DELAY = 50
+
+const rootStyle = computed(() => {
+  const width = props.autoresize ? "100%" : `${props.width}px`
+
+  return `width:${width};height:${props.height}px;${props.customStyle}`
+})
+
+const innerOption = computed(() => {
+  return pendingOption ?? props.option
+})
+
+const touchBridge = createTouchBridge({
+  getHandler: () => {
+    const current = chart.value
+    return current == null ? null : current.getZr().handler as any
+  },
+  getRect: () => canvasRect,
+})
+
+function emitDynamic(name: string, payload: any) {
+  (emit as any)(name, payload)
+}
+
+function fail(stage: string, error: any) {
+  console.error(`[uni-echarts-x] ${stage}`, error)
+  emit("error", {
+    stage,
+    error,
+  })
+}
+
+function clearInitTimers() {
+  if (retryTimer !== 0) {
+    clearTimeout(retryTimer)
+    retryTimer = 0
+  }
+
+  if (attemptTimer !== 0) {
+    clearTimeout(attemptTimer)
+    attemptTimer = 0
+  }
+
+  if (initDelayTimer !== 0) {
+    clearTimeout(initDelayTimer)
+    initDelayTimer = 0
+  }
+}
+
+function clearVisibilityRefreshTimer() {
+  if (visibilityRefreshTimer !== 0) {
+    clearTimeout(visibilityRefreshTimer)
+    visibilityRefreshTimer = 0
+  }
+}
+
+function canInit(): boolean {
+  return mounted
+    && !destroyed
+    && props.visible
+    && pageVisible
+    && appVisible
+}
+
+function scheduleInit(delay = 0) {
+  if (
+    !canInit()
+    || initState === "pending"
+    || initState === "disposed"
+    || chart.value != null
+  ) {
+    return
+  }
+
+  if (initAttempt >= INIT_RETRY_LIMIT) {
+    initState = "idle"
+    fail("createCanvasContextAsync", new Error("Canvas context initialization retry limit reached."))
+    return
+  }
+
+  clearInitTimers()
+  retryTimer = setTimeout(() => {
+    retryTimer = 0
+
+    if (!canInit()) {
+      initState = "idle"
+      return
+    }
+
+    if (renderingContext != null && nativeCanvas != null) {
+      setupChart()
+      return
+    }
+
+    requestContext()
+  }, delay)
+}
+
+function retryAfterFailure(error: any) {
+  initAttempt += 1
+  initState = "idle"
+  contextRequestPending = false
+  clearInitTimers()
+
+  if (initAttempt < INIT_RETRY_LIMIT && canInit()) {
+    scheduleInit(INIT_RETRY_DELAY)
+    return
+  }
+
+  fail("createCanvasContextAsync", error)
+}
+
+function requestContext() {
+  if (!canInit() || contextRequestPending || renderingContext != null) {
+    return
+  }
+
+  contextRequestPending = true
+  initState = "pending"
+  const attemptId = ++initAttemptId
+
+  attemptTimer = setTimeout(() => {
+    if (attemptId !== initAttemptId || initState !== "pending") {
+      return
+    }
+
+    retryAfterFailure(new Error("createCanvasContextAsync timed out."))
+  }, INIT_ATTEMPT_TIMEOUT)
+
+  uni.createCanvasContextAsync({
+    id: canvasId,
+    component: instance,
+    success: (context: CanvasContext) => {
+      if (attemptId !== initAttemptId || destroyed) {
+        return
+      }
+
+      clearInitTimers()
+      contextRequestPending = false
+
+      const nextContext = context.getContext("2d")
+      if (nextContext == null) {
+        retryAfterFailure(new Error("CanvasContext.getContext('2d') returned null."))
+        return
+      }
+
+      renderingContext = nextContext
+      nativeCanvas = nextContext.canvas
+      initAttempt = 0
+      measureCanvas()
+
+      if (!canInit()) {
+        initState = "idle"
+        return
+      }
+
+      if (props.initDelay > 0) {
+        initDelayTimer = setTimeout(() => {
+          initDelayTimer = 0
+
+          if (canInit() && renderingContext != null && nativeCanvas != null) {
+            setupChart()
+          } else {
+            initState = "idle"
+          }
+        }, props.initDelay)
+      } else {
+        setupChart()
+      }
+    },
+    fail: (error) => {
+      if (attemptId !== initAttemptId || destroyed) {
+        return
+      }
+
+      retryAfterFailure(error)
+    },
+  })
+}
+
+function readDevicePixelRatio(): number {
+  const deviceInfo = uni.getDeviceInfo()
+  const windowInfo = uni.getWindowInfo()
+  const deviceRatio = deviceInfo.devicePixelRatio
+  const windowRatio = windowInfo.pixelRatio
+
+  if (typeof deviceRatio === "number" && Number.isFinite(deviceRatio) && deviceRatio > 0) {
+    return deviceRatio
+  }
+
+  if (typeof windowRatio === "number" && Number.isFinite(windowRatio) && windowRatio > 0) {
+    return windowRatio
+  }
+
+  return 1
+}
+
+function measureCanvas() {
+  if (nativeCanvas == null) {
+    return
+  }
+
+  const rect = nativeCanvas.getBoundingClientRect()
+  canvasRect.left = rect.left
+  canvasRect.top = rect.top
+  canvasRect.width = rect.width > 0 ? rect.width : props.width
+  canvasRect.height = rect.height > 0 ? rect.height : props.height
+}
+
+function currentRenderDpr(): number {
+  if (nativeCanvas == null) {
+    return 1
+  }
+
+  const layoutWidth = chart.value?.getWidth() ?? canvasRect.width
+
+  return resolveCanvasPixelRatio(
+    nativeCanvas.width,
+    layoutWidth,
+    readDevicePixelRatio(),
+  )
+}
+
+function resolveLayoutWidth(): number {
+  if (canvasRect.width > 0) {
+    return canvasRect.width
+  }
+
+  return props.width > 0 ? props.width : 1
+}
+
+function resolveLayoutHeight(): number {
+  if (canvasRect.height > 0) {
+    return canvasRect.height
+  }
+
+  return props.height > 0 ? props.height : 1
+}
+
+function syncNativeCanvasSize(width: number, height: number): void {
+  if (nativeCanvas == null || width <= 0 || height <= 0) {
+    return
+  }
+
+  const dpr = readDevicePixelRatio()
+  const pixelWidth = Math.round(width * dpr)
+  const pixelHeight = Math.round(height * dpr)
+
+  if (nativeCanvas.width !== pixelWidth) {
+    nativeCanvas.width = pixelWidth
+  }
+
+  if (nativeCanvas.height !== pixelHeight) {
+    nativeCanvas.height = pixelHeight
+  }
+}
+
+function bindChartEvents(instance: EChartsType) {
+  for (const name of ECHARTS_CHART_EVENTS) {
+    instance.on(name, (payload: any) => {
+      emitDynamic(name, payload)
+    })
+  }
+
+  const zr = instance.getZr()
+
+  for (const name of ZRENDER_CHART_EVENTS) {
+    zr.on(name, (payload: any) => {
+      emitDynamic(`zr:${name}`, payload)
+    })
+  }
+}
+
+function bindInternalRendered(instance: EChartsType) {
+  instance.on("rendered", (payload: any) => {
+    if (!destroyed && renderingContext != null) {
+      flushCanvas(renderingContext)
+
+      clearTimeout(renderedFlushTimer)
+      renderedFlushTimer = setTimeout(() => {
+        renderedFlushTimer = 0
+
+        if (!destroyed && renderingContext != null) {
+          flushCanvas(renderingContext)
+        }
+      }, RENDERED_FLUSH_DELAY)
+    }
+
+    emit("rendered", payload)
+  })
+}
+
+function applyLoading() {
+  const instance = chart.value
+
+  if (instance == null || instance.isDisposed()) {
+    return
+  }
+
+  if (props.loading) {
+    instance.showLoading(props.loadingOptions)
+  } else {
+    instance.hideLoading()
+  }
+}
+
+function setupChart() {
+  if (
+    renderingContext == null
+    || nativeCanvas == null
+    || !canInit()
+    || initState === "disposed"
+  ) {
+    return
+  }
+
+  const current = chart.value
+  if (current != null && !current.isDisposed()) {
+    return
+  }
+
+  clearInitTimers()
+
+  try {
+    measureCanvas()
+    const width = canvasRect.width > 0 ? canvasRect.width : props.width
+    const height = canvasRect.height > 0 ? canvasRect.height : props.height
+    syncNativeCanvasSize(width, height)
+    const dpr = currentRenderDpr()
+    chartPixelRatio = dpr
+    const nextHost = createEChartsCanvasHost(
+      renderingContext,
+      nativeCanvas,
+      width,
+      height,
+      dpr,
+    )
+
+    host.value = nextHost
+    normalizeEChartsEnvironment()
+    installEChartsPlatformAPI(echarts, renderingContext)
+
+    const initOptions = Object.assign({}, props.initOptions, {
+      renderer: "canvas",
+      width,
+      height,
+      devicePixelRatio: dpr,
+      useDirtyRect: false,
+    })
+    const nextChart = echarts.init(
+      nextHost as unknown as HTMLElement,
+      props.theme,
+      initOptions,
+    )
+
+    chart.value = nextChart
+    initState = "ready"
+
+    if (props.group.length > 0) {
+      nextChart.group = props.group
+    }
+
+    bindInternalRendered(nextChart)
+    bindChartEvents(nextChart)
+
+    const pending = deferredOption
+    const option = normalizeVaporOption(pending ?? innerOption.value)
+    const updateOptions = pending == null
+      ? props.updateOptions
+      : (deferredUpdateOptions ?? props.updateOptions)
+    deferredOption = null
+    deferredUpdateOptions = undefined
+    optionRefreshPending = false
+    pendingRecreate = false
+
+    if (!isOptionEmpty(option)) {
+      nextChart.setOption(option, updateOptions)
+    }
+
+    applyLoading()
+    setupAutoResizeObserver()
+    emitDynamic("inited", {
+      width,
+      height,
+      dpr,
+      canvasWidth: nativeCanvas.width,
+      canvasHeight: nativeCanvas.height,
+      renderDpr: currentRenderDpr(),
+    })
+
+  }
+  catch (error) {
+    if (renderingContext != null) {
+      releaseEChartsPlatformContext(renderingContext)
+    }
+
+    chart.value = null
+    host.value = null
+    chartPixelRatio = 0
+    initState = "idle"
+    fail("echarts.init", error)
+  }
+}
+
+function teardownChart() {
+  disconnectAutoResizeObserver()
+
+  const instance = chart.value
+  chart.value = null
+  host.value = null
+
+  if (instance != null && !instance.isDisposed()) {
+    instance.dispose()
+  }
+
+  if (renderingContext != null) {
+    releaseEChartsPlatformContext(renderingContext)
+  }
+}
+
+function recreateChart() {
+  if (renderingContext == null || destroyed || initState === "disposed") {
+    return
+  }
+
+  if (!canInit()) {
+    pendingRecreate = true
+    return
+  }
+
+  pendingRecreate = false
+  teardownChart()
+  initState = "idle"
+  setupChart()
+}
+
+function setOption(option: Record<string, any>, updateOptions?: Record<string, any>) {
+  if (props.manualUpdate) {
+    pendingOption = option
+  }
+
+  if (chart.value == null || chart.value.isDisposed()) {
+    deferredOption = option
+    deferredUpdateOptions = updateOptions
+
+    if (initState === "disposed") {
+      initState = "idle"
+    }
+
+    if (renderingContext != null && canInit()) {
+      setupChart()
+    } else {
+      scheduleInit()
+    }
+    return
+  }
+
+  chart.value.setOption(
+    normalizeVaporOption(option),
+    updateOptions ?? props.updateOptions,
+  )
+}
+
+function resize(options?: { width?: number; height?: number }) {
+  const instance = chart.value
+
+  if (instance == null || instance.isDisposed()) {
+    return
+  }
+
+  measureCanvas()
+  const width = options?.width ?? resolveLayoutWidth()
+  const height = options?.height ?? resolveLayoutHeight()
+
+  if (width <= 0 || height <= 0) {
+    return
+  }
+
+  instance.resize({
+    width,
+    height,
+  })
+
+  if (renderingContext != null) {
+    flushCanvas(renderingContext)
+  }
+}
+
+function refreshChartLayout() {
+  if (!canInit() || renderingContext == null || destroyed) {
+    return
+  }
+
+  measureCanvas()
+  const width = resolveLayoutWidth()
+  const height = resolveLayoutHeight()
+  const instance = chart.value
+
+  if (instance != null && !instance.isDisposed()) {
+    if (shouldRecreateForPixelRatio(chartPixelRatio, readDevicePixelRatio())) {
+      recreateChart()
+      return
+    }
+
+    if (instance.getWidth() !== width || instance.getHeight() !== height) {
+      instance.resize({
+        width,
+        height,
+      })
+    }
+  }
+
+  flushCanvas(renderingContext)
+}
+
+function clearAutoResizeTimer() {
+  if (autoResizeTimer === 0) {
+    return
+  }
+
+  clearTimeout(autoResizeTimer)
+  autoResizeTimer = 0
+}
+
+function stopAutoResizePolling() {
+  if (autoResizePollTimer === 0) {
+    return
+  }
+
+  clearInterval(autoResizePollTimer)
+  autoResizePollTimer = 0
+}
+
+function startAutoResizePolling() {
+  // #ifdef APP-IOS
+  if (autoResizePollTimer !== 0) {
+    return
+  }
+
+  autoResizePollTimer = setInterval(() => {
+    if (
+      !props.autoresize
+      || destroyed
+      || nativeCanvas == null
+      || !canInit()
+    ) {
+      return
+    }
+
+    const rect = nativeCanvas.getBoundingClientRect()
+    const width = rect.width
+    const height = rect.height
+
+    if (width <= 0 || height <= 0) {
+      return
+    }
+
+    if (
+      Math.abs(width - autoResizeWidth) < 0.5
+      && Math.abs(height - autoResizeHeight) < 0.5
+    ) {
+      return
+    }
+
+    scheduleAutoResize()
+  }, AUTO_RESIZE_POLL_INTERVAL)
+  // #endif
+}
+
+function disconnectAutoResizeObserver() {
+  if (autoResizeObserver != null) {
+    autoResizeObserver.disconnect()
+    autoResizeObserver = null
+  }
+
+  stopAutoResizePolling()
+  clearAutoResizeTimer()
+}
+
+function rememberAutoResizeSize(width: number, height: number) {
+  autoResizeWidth = width
+  autoResizeHeight = height
+}
+
+function scheduleAutoResize() {
+  if (!props.autoresize || destroyed) {
+    return
+  }
+
+  clearAutoResizeTimer()
+  autoResizeTimer = setTimeout(() => {
+    autoResizeTimer = 0
+
+    if (
+      !props.autoresize
+      || destroyed
+      || nativeCanvas == null
+      || !canInit()
+    ) {
+      return
+    }
+
+    const rect = nativeCanvas.getBoundingClientRect()
+    const width = rect.width
+    const height = rect.height
+
+    if (width <= 0 || height <= 0) {
+      return
+    }
+
+    if (
+      Math.abs(width - autoResizeWidth) < 0.5
+      && Math.abs(height - autoResizeHeight) < 0.5
+    ) {
+      return
+    }
+
+    rememberAutoResizeSize(width, height)
+    resize({
+      width,
+      height,
+    })
+  }, AUTO_RESIZE_DELAY)
+}
+
+function setupAutoResizeObserver() {
+  disconnectAutoResizeObserver()
+
+  if (!props.autoresize || nativeCanvas == null || destroyed) {
+    return
+  }
+
+  const resizeTargets: UniElement[] = []
+  const rootElement = uni.getElementById(rootId)
+
+  if (rootElement != null) {
+    resizeTargets.push(rootElement)
+  }
+
+  resizeTargets.push(nativeCanvas)
+
+  const globalObject = globalThis as any
+  const ResizeObserverConstructor = globalObject?.UniResizeObserver
+    ?? globalObject?.ResizeObserver
+
+  startAutoResizePolling()
+
+  if (typeof ResizeObserverConstructor !== "function") {
+    return
+  }
+
+  const rect = nativeCanvas.getBoundingClientRect()
+  rememberAutoResizeSize(rect.width, rect.height)
+
+  const observer = new ResizeObserverConstructor(() => {
+    scheduleAutoResize()
+  })
+
+  for (const target of resizeTargets) {
+    observer.observe(target)
+  }
+
+  autoResizeObserver = observer
+}
+
+function refreshAfterVisibilityChange() {
+  if (!canInit()) {
+    return
+  }
+
+  clearVisibilityRefreshTimer()
+  visibilityRefreshTimer = setTimeout(() => {
+    visibilityRefreshTimer = 0
+
+    if (!canInit()) {
+      return
+    }
+
+    if (renderingContext == null) {
+      scheduleInit()
+      return
+    }
+
+    if (chart.value == null && initState === "idle") {
+      scheduleInit()
+      return
+    }
+
+    nextTick(() => {
+      if (pendingRecreate) {
+        recreateChart()
+        return
+      }
+
+      if (
+        optionRefreshPending
+        && !props.manualUpdate
+        && chart.value != null
+        && !chart.value.isDisposed()
+        && !isOptionEmpty(props.option)
+      ) {
+        optionRefreshPending = false
+        chart.value.setOption(normalizeVaporOption(props.option), {
+          notMerge: true,
+          ...props.updateOptions,
+        })
+      }
+
+      applyLoading()
+      refreshChartLayout()
+    })
+  }, 0)
+}
+
+function dispose() {
+  initAttemptId += 1
+  contextRequestPending = false
+  clearInitTimers()
+  clearVisibilityRefreshTimer()
+  disconnectAutoResizeObserver()
+  clearTimeout(renderedFlushTimer)
+  renderedFlushTimer = 0
+  touchBridge.cleanup()
+  teardownChart()
+  initState = "disposed"
+  chartPixelRatio = 0
+  optionRefreshPending = false
+  pendingRecreate = false
+  pendingOption = null
+  deferredOption = null
+  deferredUpdateOptions = undefined
+}
+
+function clear() {
+  chart.value?.clear()
+}
+
+function getWidth(): number {
+  return chart.value?.getWidth() ?? 0
+}
+
+function getHeight(): number {
+  return chart.value?.getHeight() ?? 0
+}
+
+function getDom(): EChartsCanvasHost | null {
+  return host.value
+}
+
+function getMetrics() {
+  measureCanvas()
+  const width = chart.value?.getWidth() ?? canvasRect.width
+  const height = chart.value?.getHeight() ?? canvasRect.height
+
+  return {
+    width,
+    height,
+    canvasWidth: nativeCanvas?.width ?? 0,
+    canvasHeight: nativeCanvas?.height ?? 0,
+    dpr: readDevicePixelRatio(),
+    renderDpr: currentRenderDpr(),
+  }
+}
+
+function getOption(): any {
+  return chart.value?.getOption() ?? null
+}
+
+function dispatchAction(payload: Record<string, any>) {
+  chart.value?.dispatchAction(payload)
+}
+
+function getDataURL(options?: Record<string, any>): string {
+  try {
+    if (renderingContext != null) {
+      flushCanvas(renderingContext)
+    }
+
+    const browserDataURL = getBrowserCanvasDataURL(canvasId, options)
+
+    if (browserDataURL != null) {
+      return browserDataURL
+    }
+
+    return getNativeCanvasDataURL(nativeCanvas, options)
+  }
+  catch (error) {
+    console.warn("[uni-echarts-x] getDataURL failed", error)
+  }
+
+  return ""
+}
+
+function decodeBase64DataURL(dataURL: string): string {
+  const marker = "base64,"
+  const index = dataURL.indexOf(marker)
+
+  return index >= 0 ? dataURL.substring(index + marker.length) : dataURL
+}
+
+function writeDataURLToTempFilePath(options?: Record<string, any>): Promise<{ tempFilePath: string }> {
+  const browser = globalThis as any
+  const dataURL = getDataURL(Object.assign({
+    type: "png",
+  }, options ?? {}))
+
+  if (dataURL.length === 0) {
+    return Promise.reject(new Error("[uni-echarts-x] Canvas export returned an empty data URL."))
+  }
+
+  const fileManager = typeof uni.getFileSystemManager === "function"
+    ? uni.getFileSystemManager()
+    : (browser?.wx != null && typeof browser.wx.getFileSystemManager === "function"
+      ? browser.wx.getFileSystemManager()
+      : null)
+  const userDataPath = typeof uni.env?.USER_DATA_PATH === "string"
+    ? uni.env.USER_DATA_PATH
+    : ""
+
+  if (fileManager == null || userDataPath.length === 0) {
+    if (browser?.document != null) {
+      return Promise.resolve({
+        tempFilePath: dataURL,
+      })
+    }
+
+    return Promise.reject(new Error("[uni-echarts-x] File system is not available for canvas export."))
+  }
+
+  const filePath = `${userDataPath}/uni-echarts-x-${Date.now()}.png`
+
+  return new Promise((resolve, reject) => {
+    fileManager.writeFile({
+      filePath,
+      data: decodeBase64DataURL(dataURL),
+      encoding: "base64",
+      success: () => {
+        resolve({
+          tempFilePath: filePath,
+        })
+      },
+      fail: (error) => {
+        reject(error)
+      },
+    })
+  })
+}
+
+function exportWithMiniProgramCanvas(
+  options?: Record<string, any>
+): Promise<{ tempFilePath: string }> | null {
+  const browser = globalThis as any
+  const wxApi = browser?.wx
+
+  if (
+    wxApi == null
+    || typeof wxApi.canvasToTempFilePath !== "function"
+    || typeof wxApi.createSelectorQuery !== "function"
+  ) {
+    return null
+  }
+
+  return new Promise((resolve, reject) => {
+    const query = wxApi.createSelectorQuery()
+    const scopedQuery = instance == null ? query : query.in(instance)
+
+    scopedQuery.select(`#${canvasId}`).fields({
+      node: true,
+    }, (result: any) => {
+      const canvas = result?.node
+
+      if (canvas == null) {
+        reject(new Error("[uni-echarts-x] Canvas node is unavailable for export."))
+        return
+      }
+
+      if (renderingContext != null) {
+        flushCanvas(renderingContext)
+      }
+
+      const type = typeof options?.type === "string" ? options.type : "png"
+      const fileType = type === "jpg" || type === "jpeg" ? "jpg" : "png"
+      const quality = typeof options?.quality === "number" ? options.quality : 1
+
+      wxApi.canvasToTempFilePath({
+        canvas,
+        fileType,
+        quality,
+        success: (exportResult: { tempFilePath?: string }) => {
+          const filePath = String(exportResult?.tempFilePath ?? "")
+
+          if (filePath.length === 0) {
+            reject(new Error("[uni-echarts-x] Canvas export returned an empty temp file path."))
+            return
+          }
+
+          resolve({
+            tempFilePath: filePath,
+          })
+        },
+        fail: reject,
+      }, instance)
+    }).exec()
+  })
+}
+
+function toTempFilePath(options?: Record<string, any>): Promise<{ tempFilePath: string }> {
+  const miniProgramExport = exportWithMiniProgramCanvas(options)
+
+  if (miniProgramExport != null) {
+    return miniProgramExport.catch(() => writeDataURLToTempFilePath(options))
+  }
+
+  return writeDataURLToTempFilePath(options)
+}
+
+function onCanvasReady() {
+  scheduleInit()
+}
+
+function onTouchStart(event: TouchEvent) {
+  measureCanvas()
+  touchBridge.onStart(event as unknown as TouchEventLike)
+  emit("native:touchstart", event)
+}
+
+function onTouchMove(event: TouchEvent) {
+  touchBridge.onMove(event as unknown as TouchEventLike)
+  emit("native:touchmove", event)
+}
+
+function onTouchEnd(event: TouchEvent) {
+  touchBridge.onEnd(event as unknown as TouchEventLike)
+  emit("native:touchend", event)
+}
+
+function onTouchCancel(event: TouchEvent) {
+  touchBridge.onCancel(event as unknown as TouchEventLike)
+  emit("native:touchcancel", event)
+}
+
+watch(
+  () => props.option,
+  (value) => {
+    if (props.manualUpdate || value == null || isOptionEmpty(value)) {
+      return
+    }
+
+    if (!canInit()) {
+      optionRefreshPending = true
+      return
+    }
+
+    if (chart.value == null || chart.value.isDisposed()) {
+      return
+    }
+
+    chart.value.setOption(normalizeVaporOption(value), {
+      notMerge: true,
+      ...props.updateOptions,
+    })
+  },
+  {
+    deep: true,
+  },
+)
+
+watch(
+  [() => props.loading, () => props.loadingOptions],
+  () => {
+    if (canInit()) {
+      applyLoading()
+    }
+  },
+  {
+    deep: true,
+  },
+)
+
+watch(
+  () => props.manualUpdate,
+  (manual) => {
+    if (manual) {
+      return
+    }
+
+    pendingOption = null
+    optionRefreshPending = true
+    refreshAfterVisibilityChange()
+  },
+)
+
+watch(
+  () => props.visible,
+  (value) => {
+    if (!value) {
+      return
+    }
+
+    refreshAfterVisibilityChange()
+  },
+)
+
+watch(
+  [() => props.theme, () => props.initOptions],
+  () => {
+    recreateChart()
+  },
+  {
+    deep: true,
+  },
+)
+
+watch(
+  [() => props.width, () => props.height],
+  () => {
+    nextTick(() => {
+      if (destroyed || renderingContext == null) {
+        return
+      }
+
+      refreshChartLayout()
+    })
+  },
+)
+
+watch(
+  () => props.autoresize,
+  (enabled) => {
+    nextTick(() => {
+      if (destroyed) {
+        return
+      }
+
+      if (enabled) {
+        setupAutoResizeObserver()
+      } else {
+        disconnectAutoResizeObserver()
+      }
+
+      refreshChartLayout()
+    })
+  },
+)
+
+watch(
+  () => props.group,
+  (value) => {
+    const current = chart.value
+
+    if (current != null && !current.isDisposed()) {
+      current.group = value
+    }
+  },
+)
+
+onPageShow(() => {
+  pageVisible = true
+  refreshAfterVisibilityChange()
+})
+
+onPageHide(() => {
+  pageVisible = false
+})
+
+onAppShow(() => {
+  appVisible = true
+  refreshAfterVisibilityChange()
+})
+
+onAppHide(() => {
+  appVisible = false
+})
+
+onMounted(() => {
+  mounted = true
+  scheduleInit()
+})
+
+onUnmounted(() => {
+  destroyed = true
+  dispose()
+  initState = "disposed"
+  renderingContext = null
+  nativeCanvas = null
+})
+
+defineExpose({
+  canvasId,
+  chart,
+  setOption,
+  resize,
+  dispose,
+  clear,
+  getWidth,
+  getHeight,
+  getDom,
+  getMetrics,
+  getOption,
+  dispatchAction,
+  getDataURL,
+  toTempFilePath,
+})
+</script>
+
+<style>
+.uni-echarts-x {
+  position: relative;
+}
+
+.uni-echarts-x__canvas {
+  width: 100%;
+  height: 100%;
+}
+</style>

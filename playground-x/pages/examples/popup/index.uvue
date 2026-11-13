@@ -1,0 +1,205 @@
+<template>
+  <scroll-view class="page" direction="vertical">
+    <view class="cell-wrap">
+      <view class="cell" @click="open()">
+        <text class="cell-title">打开弹窗</text>
+        <text class="cell-arrow">❯</text>
+      </view>
+    </view>
+
+    <view
+      class="popup-mask"
+      :class="{ 'popup-mask--hidden': !visible }"
+      @click="close"
+    >
+      <view
+        class="popup"
+        :class="{ 'popup--hidden': !visible }"
+        @click.stop="noop"
+      >
+        <view class="popup-body" :style="popupBodyStyle">
+          <uni-echarts-x
+            v-if="render"
+            ref="chartEl"
+            :width="popupSize"
+            :height="popupSize"
+            autoresize
+            :option="option"
+            :disable-scroll="true"
+          />
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</template>
+
+<script setup lang="ts">
+import * as echarts from "echarts/core"
+import { PieChart } from "echarts/charts"
+import {
+  DatasetComponent,
+  LegendComponent,
+  TooltipComponent,
+} from "echarts/components"
+import { CanvasRenderer } from "echarts/renderers"
+import {
+  GLOBAL_OPTION,
+  getLegacyHeight,
+} from "../../../shared/demo"
+
+echarts.use([
+  LegendComponent,
+  TooltipComponent,
+  DatasetComponent,
+  PieChart,
+  CanvasRenderer,
+])
+
+const visible = ref(false)
+const render = ref(false)
+const popupSize = getLegacyHeight(20)
+const popupBodyStyle = `width:${popupSize}px;height:${popupSize}px`
+let closeTimer = 0
+
+const option = ref<Record<string, any>>({
+  ...GLOBAL_OPTION,
+  legend: {
+    top: 10,
+    left: "center",
+  },
+  tooltip: {
+    trigger: "item",
+  },
+  series: [
+    {
+      type: "pie",
+      radius: ["30%", "52%"],
+      label: {
+        show: false,
+        position: "center",
+      },
+      itemStyle: {
+        borderWidth: 2,
+        borderColor: "#ffffff",
+        borderRadius: 10,
+      },
+      emphasis: {
+        label: {
+          show: true,
+          fontSize: 20,
+        },
+      },
+    },
+  ],
+  dataset: {
+    dimensions: ["来源", "数量"],
+    source: [
+      ["Search Engine", 1048],
+      ["Direct", 735],
+      ["Email", 580],
+      ["Union Ads", 484],
+      ["Video Ads", 300],
+    ],
+  },
+})
+
+function clearCloseTimer() {
+  if (closeTimer === 0) {
+    return
+  }
+
+  clearTimeout(closeTimer)
+  closeTimer = 0
+}
+
+function open() {
+  clearCloseTimer()
+  visible.value = true
+
+  closeTimer = setTimeout(() => {
+    closeTimer = 0
+    render.value = true
+  }, 220)
+}
+
+function close() {
+  clearCloseTimer()
+  visible.value = false
+}
+
+function noop() {}
+
+onUnload(() => {
+  clearCloseTimer()
+})
+</script>
+
+<style>
+.page {
+  flex: 1;
+  background-color: #ffffff;
+}
+
+.cell-wrap {
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.cell {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 44px;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.cell-title {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.cell-arrow {
+  width: 18px;
+  margin-left: 8px;
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.popup-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 100;
+}
+
+.popup-mask--hidden {
+  opacity: 0;
+  z-index: -1;
+}
+
+.popup {
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+  border-radius: 12rpx;
+}
+
+.popup--hidden {
+  display: none;
+}
+
+.popup-body {
+  overflow: hidden;
+  background-color: #ffffff;
+}
+</style>

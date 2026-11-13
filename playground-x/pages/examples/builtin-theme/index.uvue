@@ -1,0 +1,241 @@
+<template>
+  <scroll-view class="page" direction="vertical">
+    <uni-echarts-x
+      :width="chartWidth"
+      :height="312"
+      autoresize
+      :option="option"
+      :theme="themeName"
+      :loading="loading"
+      :loading-options="loadingOptions"
+      :custom-style="chartStyle"
+      :disable-scroll="true"
+    />
+
+    <view class="panel">
+      <view class="row row--theme">
+        <text class="label">主题</text>
+        <view class="segment">
+          <view
+            class="segment-item segment-item--first"
+            :class="{ 'segment-item--active': themeName === 'light' }"
+            @click="setTheme('light')"
+          >
+            <text
+              class="segment-text"
+              :class="{ 'segment-text--active': themeName === 'light' }"
+            >
+              Light
+            </text>
+          </view>
+          <view
+            class="segment-item"
+            :class="{ 'segment-item--active': themeName === 'dark' }"
+            @click="setTheme('dark')"
+          >
+            <text
+              class="segment-text"
+              :class="{ 'segment-text--active': themeName === 'dark' }"
+            >
+              Dark
+            </text>
+          </view>
+        </view>
+      </view>
+
+      <view class="row row--switch">
+        <text class="label">加载状态</text>
+        <demo-switch
+          :checked="loading"
+          @change="onLoadingChange"
+        />
+      </view>
+    </view>
+  </scroll-view>
+</template>
+
+<script setup lang="ts">
+import * as echarts from "echarts/core"
+import { LineChart } from "echarts/charts"
+import {
+  DatasetComponent,
+  LegendComponent,
+  PolarComponent,
+  TooltipComponent,
+} from "echarts/components"
+import { CanvasRenderer } from "echarts/renderers"
+import {
+  CHART_STYLE_75,
+  GLOBAL_OPTION,
+  getWindowWidth,
+} from "../../../shared/demo"
+import DemoSwitch from "../../../components/demo-switch/demo-switch.uvue"
+
+echarts.use([
+  LegendComponent,
+  TooltipComponent,
+  PolarComponent,
+  DatasetComponent,
+  LineChart,
+  CanvasRenderer,
+])
+
+const chartWidth = getWindowWidth()
+const themeName = ref("dark")
+const loading = ref(false)
+
+const option = ref<Record<string, any>>({
+  ...GLOBAL_OPTION,
+  legend: {
+    top: 10,
+    left: "center",
+  },
+  tooltip: {
+    trigger: "axis",
+    axisPointer: {
+      type: "cross",
+    },
+  },
+  polar: {
+    radius: "60%",
+    center: ["50%", "56%"],
+  },
+  angleAxis: {
+    type: "value",
+    startAngle: 0,
+  },
+  radiusAxis: {
+    min: 0,
+  },
+  series: [
+    {
+      type: "line",
+      coordinateSystem: "polar",
+      showSymbol: false,
+    },
+  ],
+  dataset: {
+    dimensions: ["数值"],
+    source: getData(),
+  },
+})
+
+const loadingOptions = computed(() => {
+  const value: Record<string, any> = {
+    text: "请稍候...",
+  }
+
+  if (themeName.value === "dark") {
+    value.color = "#ffffff"
+    value.textColor = "#ffffff"
+    value.maskColor = "rgba(0, 0, 0, 0.7)"
+  }
+
+  return value
+})
+
+const chartStyle = computed(() => {
+  if (themeName.value === "dark") {
+    return loading.value
+      ? `${CHART_STYLE_75}background-color:#05040d;`
+      : `${CHART_STYLE_75}background-color:#100c2a;`
+  }
+
+  return CHART_STYLE_75
+})
+
+function getData(): number[][] {
+  const data: number[][] = []
+
+  for (let i = 0; i <= 360; i += 1) {
+    const t = (i / 180) * Math.PI
+    const r = Math.sin(2 * t) * Math.cos(2 * t)
+
+    data.push([r, i])
+  }
+
+  return data
+}
+
+function setTheme(value: string) {
+  themeName.value = value
+}
+
+function onLoadingChange(event: any) {
+  loading.value = Boolean(event.detail.value)
+}
+</script>
+
+<style>
+.page {
+  flex: 1;
+  background-color: #ffffff;
+}
+
+.panel {
+  width: 100%;
+  margin-top: 16rpx;
+  background-color: #ffffff;
+}
+
+.row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.row--theme {
+  height: 52px;
+}
+
+.row--switch {
+  height: 59px;
+}
+
+.label {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.segment {
+  flex-direction: row;
+  align-items: center;
+}
+
+.segment-item {
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  margin-left: 10px;
+  padding: 0 15px;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-width: 1px;
+  border-style: solid;
+  border-color: #f5f5f5;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+.segment-item--first {
+  margin-left: 0;
+}
+
+.segment-item--active {
+  background-color: #ffffff;
+  border-color: #299764;
+}
+
+.segment-text {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.segment-text--active {
+  color: #299764;
+}
+</style>

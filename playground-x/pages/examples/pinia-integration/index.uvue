@@ -1,0 +1,253 @@
+<template>
+  <scroll-view class="page" direction="vertical">
+    <uni-echarts-x
+      :width="chartWidth"
+      :height="312"
+      autoresize
+      :custom-style="CHART_STYLE_75"
+      :option="option"
+      :disable-scroll="true"
+    />
+
+    <view class="panel">
+      <picker
+        mode="selector"
+        :range="metricLabels"
+        :value="metricIndex"
+        @change="onMetricChange"
+      >
+        <view class="row row--picker">
+          <text class="label">对象</text>
+          <view class="picker-value">
+            <text class="value-text">{{ metricLabels[metricIndex] }}</text>
+            <text class="chevron">❯</text>
+          </view>
+        </view>
+      </picker>
+
+      <view class="row row--control">
+        <text class="label">控制</text>
+        <view class="control-group">
+          <view
+            class="control-button control-button--danger control-button--first"
+            :class="{ 'control-button--disabled': isMin(metricIndex) }"
+            @click="increase(metricIndex, -1)"
+          >
+            <text class="control-text control-text--danger">减少</text>
+          </view>
+          <view
+            class="control-button control-button--success"
+            :class="{ 'control-button--disabled': isMax(metricIndex) }"
+            @click="increase(metricIndex, 1)"
+          >
+            <text class="control-text control-text--success">增加</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</template>
+
+<script setup lang="ts">
+import { RadarChart } from "echarts/charts"
+import * as echarts from "echarts/core"
+import { CanvasRenderer } from "echarts/renderers"
+import {
+  CHART_STYLE_75,
+  GLOBAL_OPTION,
+  getWindowWidth,
+} from "../../../shared/demo"
+
+echarts.use([
+  RadarChart,
+  CanvasRenderer,
+])
+
+type Score = {
+  name: string
+  max: number
+  value: number
+}
+
+const chartWidth = getWindowWidth()
+const metricIndex = ref(0)
+
+const scores = ref<Score[]>([
+  { name: "Attack", max: 20, value: 19 },
+  { name: "Defense", max: 20, value: 9 },
+  { name: "Speed", max: 20, value: 18 },
+  { name: "Strength", max: 20, value: 16 },
+  { name: "Endurance", max: 20, value: 16 },
+  { name: "Agility", max: 20, value: 20 },
+])
+
+const metricLabels = computed(() => {
+  return scores.value.map((item) => item.name)
+})
+
+const option = computed(() => {
+  return createOption(metricIndex.value)
+})
+
+function createOption(activeIndex: number): Record<string, any> {
+  return {
+    ...GLOBAL_OPTION,
+    radar: {
+      indicator: scores.value.map((item, index) => {
+        return {
+          name: item.name,
+          max: item.max,
+          color: index === activeIndex ? "goldenrod" : undefined,
+        }
+      }),
+      splitNumber: 4,
+    },
+    series: [
+      {
+        type: "radar",
+        data: [
+          {
+            value: scores.value.map((item) => item.value),
+          },
+        ],
+      },
+    ],
+  }
+}
+
+function isMax(index: number): boolean {
+  const score = scores.value[index]
+
+  return score != null && score.value >= score.max
+}
+
+function isMin(index: number): boolean {
+  const score = scores.value[index]
+
+  return score == null || score.value <= 0
+}
+
+function increase(index: number, delta: number) {
+  const current = scores.value[index]
+
+  if (current == null) {
+    return
+  }
+
+  const next = scores.value.slice()
+  next[index] = {
+    name: current.name,
+    max: current.max,
+    value: Math.max(0, Math.min(current.max, current.value + delta)),
+  }
+  scores.value = next
+}
+
+function onMetricChange(event: any) {
+  metricIndex.value = Number(event.detail.value)
+}
+</script>
+
+<style>
+.page {
+  flex: 1;
+  background-color: #ffffff;
+}
+
+.panel {
+  width: 100%;
+  margin-top: 16rpx;
+  background-color: #ffffff;
+}
+
+.row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.row--picker {
+  height: 44px;
+}
+
+.row--control {
+  height: 55px;
+}
+
+.label {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.picker-value {
+  flex-direction: row;
+  align-items: center;
+}
+
+.value-text {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.chevron {
+  width: 16px;
+  margin-left: 8px;
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 13px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.control-group {
+  flex-direction: row;
+  align-items: center;
+}
+
+.control-button {
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 28px;
+  background-color: #ffffff;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 999px;
+  box-sizing: border-box;
+}
+
+.control-button--first {
+  margin-right: 8px;
+}
+
+.control-button--danger {
+  border-color: #f56c6c;
+  color: #f56c6c;
+}
+
+.control-button--success {
+  border-color: #67c23a;
+  color: #67c23a;
+}
+
+.control-button--disabled {
+  opacity: 0.6;
+}
+
+.control-text {
+  font-size: 12px;
+  line-height: 26px;
+}
+
+.control-text--danger {
+  color: #f56c6c;
+}
+
+.control-text--success {
+  color: #67c23a;
+}
+</style>
