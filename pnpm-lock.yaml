@@ -405,6 +405,18 @@ importers:
         specifier: 3.4.38
         version: 3.4.38(typescript@5.9.3)
 
+  packages/core-x:
+    dependencies:
+      echarts:
+        specifier: '>=6.1.0'
+        version: 6.1.0
+      vue:
+        specifier: 3.4.38
+        version: 3.4.38(typescript@5.9.3)
+      zrender:
+        specifier: '>=6.1.0'
+        version: 6.1.0
+
   packages/server:
     devDependencies:
       nitropack:
@@ -555,6 +567,12 @@ importers:
       vite-plugin-uni-polyfill:
         specifier: catalog:build
         version: 0.1.0
+
+  playground-x:
+    dependencies:
+      echarts:
+        specifier: catalog:frontend
+        version: 6.1.0
 
 packages:
 
