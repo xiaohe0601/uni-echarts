@@ -1,0 +1,127 @@
+<template>
+  <scroll-view class="page" direction="vertical">
+    <uni-echarts-x
+      ref="chartEl"
+      :width="chartWidth"
+      :height="312"
+      autoresize
+      manual-update
+      :custom-style="CHART_STYLE_75"
+      :disable-scroll="true"
+      @inited="applyOption"
+    />
+  </scroll-view>
+</template>
+
+<script setup lang="ts">
+import * as echarts from "echarts/core"
+import { LineChart } from "echarts/charts"
+import {
+  DataZoomComponent,
+  GridComponent,
+  ToolboxComponent,
+  TooltipComponent,
+} from "echarts/components"
+import { CanvasRenderer } from "echarts/renderers"
+import {
+  CHART_STYLE_75,
+  GLOBAL_OPTION,
+  getWindowWidth,
+} from "../../../shared/demo"
+
+echarts.use([
+  TooltipComponent,
+  ToolboxComponent,
+  GridComponent,
+  DataZoomComponent,
+  LineChart,
+  CanvasRenderer,
+])
+
+const chartEl = ref<any>(null)
+const chartWidth = getWindowWidth()
+
+function getData(): number[][] {
+  let base = new Date(1988, 9, 3).getTime()
+  const day = 24 * 3600 * 1000
+  const data: number[][] = [
+    [base, Math.random() * 300],
+  ]
+
+  for (let i = 1; i < 20000; i += 1) {
+    base += day
+    data.push([
+      base,
+      Math.round((Math.random() - 0.5) * 20 + data[i - 1][1]),
+    ])
+  }
+
+  return data
+}
+
+function applyOption() {
+  const instance = chartEl.value
+
+  if (instance == null) {
+    return
+  }
+
+  const data = getData()
+
+  instance.setOption({
+    ...GLOBAL_OPTION,
+    grid: {
+      top: 40,
+      right: 16,
+      bottom: 56,
+      left: 10,
+      outerBoundsMode: "same",
+      outerBoundsContain: "axisLabel",
+    },
+    tooltip: {
+      trigger: "axis",
+      position(point: number[]) {
+        return [point[0], "10%"]
+      },
+    },
+    toolbox: {
+      top: 0,
+      right: 10,
+      feature: {
+        dataZoom: {
+          yAxisIndex: "none",
+        },
+        restore: {},
+      },
+    },
+    xAxis: {
+      type: "time",
+    },
+    yAxis: {
+      type: "value",
+      boundaryGap: [0, "100%"],
+    },
+    dataZoom: [
+      { type: "inside", start: 0, end: 20 },
+      { type: "slider", start: 0, end: 20 },
+    ],
+    series: [
+      {
+        type: "line",
+        name: "Fake Data",
+        smooth: true,
+        symbol: "none",
+        areaStyle: {},
+        data,
+      },
+    ],
+  })
+}
+</script>
+
+<style>
+.page {
+  flex: 1;
+  background-color: #ffffff;
+}
+</style>

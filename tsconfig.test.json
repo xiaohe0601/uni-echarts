@@ -3,7 +3,8 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo",
     "lib": [
-      "ES2020"
+      "ES2020",
+      "DOM"
     ],
     "types": [
       "node"

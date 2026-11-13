@@ -57,3 +57,22 @@ jobs:
         run: nr build
       - name: Test
         run: nr test
+
+  uni-x:
+    if: "!startsWith(github.event.head_commit.message, 'chore: release')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+      - name: Setup
+        run: npm i -g @antfu/ni
+      - name: Install
+        run: nci
+      - name: Build, test and verify uni-app x
+        run: pnpm check:uni-x

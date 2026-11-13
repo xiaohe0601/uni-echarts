@@ -7,7 +7,9 @@ export default defineConfig({
     "./packages/core/dist-vite",
     "./packages/core/src/shared-core.*",
     "./packages/server/.nitro",
-    "./playground/src/uni_modules"
+    "./playground/src/uni_modules",
+    "./playground-x/uni_modules",
+    "./playground-x/unpackage"
   ]
 }, {
   files: ["./docs/**/*.vue"],

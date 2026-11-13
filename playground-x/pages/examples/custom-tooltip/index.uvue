@@ -1,0 +1,150 @@
+<template>
+  <scroll-view class="page" direction="vertical">
+    <uni-echarts-x
+      ref="chartEl"
+      :width="chartWidth"
+      :height="312"
+      autoresize
+      :custom-style="CHART_STYLE_75"
+      :option="option"
+      :disable-scroll="true"
+      @showtip="onShowTip"
+      @hidetip="onHideTip"
+    >
+      <view
+        v-if="tooltipVisible"
+        class="tooltip-layer"
+        :style="tooltipStyle"
+      >
+        <view class="tooltip-card">
+          <text class="tooltip-text">{{ tooltipText }}</text>
+        </view>
+      </view>
+    </uni-echarts-x>
+  </scroll-view>
+</template>
+
+<script setup lang="ts">
+import * as echarts from "echarts/core"
+import { PieChart } from "echarts/charts"
+import {
+  DatasetComponent,
+  TooltipComponent,
+} from "echarts/components"
+import { CanvasRenderer } from "echarts/renderers"
+import {
+  CHART_STYLE_75,
+  GLOBAL_OPTION,
+  getWindowWidth,
+} from "../../../shared/demo"
+
+echarts.use([
+  TooltipComponent,
+  DatasetComponent,
+  PieChart,
+  CanvasRenderer,
+])
+
+const chartWidth = getWindowWidth()
+const chartHeight = 312
+const tooltipVisible = ref(false)
+const tooltipX = ref(0)
+const tooltipY = ref(0)
+const tooltipText = ref("")
+
+const tooltipStyle = computed(() => {
+  const left = Math.max(0, Math.min(tooltipX.value, chartWidth - 200))
+  const top = Math.max(0, Math.min(tooltipY.value, chartHeight - 48))
+
+  return `left:${left}px;top:${top}px;`
+})
+
+const option = ref<Record<string, any>>({
+  ...GLOBAL_OPTION,
+  tooltip: {
+    trigger: "item",
+    position(point: number[], params: any) {
+      tooltipX.value = point[0]
+      tooltipY.value = point[1]
+      updateTooltip(params)
+
+      return point
+    },
+    formatter() {
+      return ""
+    },
+  },
+  series: [
+    {
+      type: "pie",
+      radius: ["30%", "52%"],
+      label: {
+        show: false,
+        position: "center",
+      },
+      itemStyle: {
+        borderWidth: 2,
+        borderColor: "#ffffff",
+        borderRadius: 10,
+      },
+      emphasis: {
+        label: {
+          show: true,
+          fontSize: 20,
+        },
+      },
+    },
+  ],
+  dataset: {
+    dimensions: ["来源", "数量"],
+    source: [
+      ["Search Engine", 1048],
+      ["Direct", 735],
+      ["Email", 580],
+      ["Union Ads", 484],
+      ["Video Ads", 300],
+    ],
+  },
+})
+
+function updateTooltip(params: any) {
+  const value = params?.value
+
+  if (value != null && value.length >= 2) {
+    tooltipText.value = `${value[0]}：${value[1]}`
+  }
+}
+
+function onShowTip() {
+  tooltipVisible.value = true
+}
+
+function onHideTip() {
+  tooltipVisible.value = false
+}
+</script>
+
+<style>
+.page {
+  flex: 1;
+  background-color: #ffffff;
+}
+
+.tooltip-layer {
+  position: absolute;
+  z-index: 10;
+}
+
+.tooltip-card {
+  padding: 16rpx;
+  background-color: #ffffff;
+  border-radius: 12rpx;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip-text {
+  color: #000000;
+  font-size: 32rpx;
+  line-height: 48rpx;
+}
+</style>

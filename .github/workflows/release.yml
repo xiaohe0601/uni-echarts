@@ -36,4 +36,4 @@ jobs:
       - name: Build
         run: nr build
       - name: Publish
-        run: pnpm -r publish --access public --no-git-checks
+        run: pnpm -r --filter '!uni-echarts-x' publish --access public --no-git-checks

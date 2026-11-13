@@ -1,0 +1,138 @@
+<template>
+  <scroll-view class="page" direction="vertical">
+    <view class="nav-spacer" :style="navSpacerStyle"></view>
+
+    <view class="hero">
+      <image class="logo" src="/static/uni-echarts.png" mode="aspectFit" />
+      <text class="title">Uni ECharts</text>
+      <text class="subtitle">适用于 uni-app 的 Apache ECharts 组件</text>
+    </view>
+
+    <view class="menu-wrap">
+      <view class="menu">
+        <view
+          v-for="(item, index) in demos"
+          :key="item.path"
+          class="menu-row"
+          :class="{ 'menu-row--last': index === demos.length - 1 }"
+          @click="open(item.path)"
+        >
+          <text class="menu-title">{{ item.title }}</text>
+          <text class="menu-arrow">❯</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</template>
+
+<script setup lang="ts">
+const demos = [
+  { title: "基础用法", path: "/pages/examples/basic/index" },
+  { title: "异步数据", path: "/pages/examples/async-data/index" },
+  { title: "动作调度", path: "/pages/examples/action-dispatch/index" },
+  { title: "内置主题", path: "/pages/examples/builtin-theme/index" },
+  { title: "颜色渐变", path: "/pages/examples/gradient/index" },
+  { title: "弹窗内使用", path: "/pages/examples/popup/index" },
+  { title: "Pinia 集成", path: "/pages/examples/pinia-integration/index" },
+  { title: "图表联动", path: "/pages/examples/connectable/index" },
+  { title: "手动更新", path: "/pages/examples/manual-update/index" },
+  { title: "自定义 Tooltip", path: "/pages/examples/custom-tooltip/index" },
+  { title: "保存为图片", path: "/pages/examples/export-image/index" },
+]
+
+const statusBarHeight = Number(uni.getWindowInfo().statusBarHeight || 0)
+const navSpacerStyle = `height:${statusBarHeight + 44}px`
+
+function open(path: string) {
+  uni.navigateTo({
+    url: path,
+  })
+}
+</script>
+
+<style>
+.page {
+  flex: 1;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.nav-spacer {
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.hero {
+  width: 100%;
+  align-items: center;
+  padding: 64rpx 32rpx;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.logo {
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.title {
+  margin-top: 40rpx;
+  color: #303133;
+  font-size: 48rpx;
+  line-height: 64rpx;
+}
+
+.subtitle {
+  margin-top: 24rpx;
+  color: #909399;
+  font-size: 32rpx;
+  line-height: 48rpx;
+}
+
+.menu-wrap {
+  width: 100%;
+  padding: 48rpx 32rpx;
+  background-color: #ffffff;
+  border-top-left-radius: 48rpx;
+  border-top-right-radius: 48rpx;
+  box-sizing: border-box;
+}
+
+.menu {
+  width: 100%;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.menu-row {
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: 0 15px;
+  border-bottom-width: 0.5px;
+  border-bottom-style: solid;
+  border-bottom-color: #ebeef5;
+  box-sizing: border-box;
+}
+
+.menu-row--last {
+  border-bottom-width: 0;
+}
+
+.menu-title {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.menu-arrow {
+  width: 18px;
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}
+</style>

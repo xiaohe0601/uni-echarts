@@ -1,0 +1,47 @@
+{
+  "name": "Uni ECharts x",
+  "appid": "__UNI__F1A2807",
+  "description": "uni-app x Vapor compatibility playground",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "uni-app-x": {
+    "vapor": true,
+    "styleIsolationVersion": "2",
+    "vapor-render-target": "bytecode",
+    "vapor-default-script-lang": "ts"
+  },
+  "vueVersion": "3",
+  "app": {
+    "distribute": {
+      "icons": {
+        "android": {
+          "hdpi": "",
+          "xhdpi": "",
+          "xxhdpi": "",
+          "xxxhdpi": ""
+        }
+      }
+    }
+  },
+  "app-android": {
+    "distribute": {
+      "modules": {},
+      "icons": {
+        "hdpi": "",
+        "xhdpi": "",
+        "xxhdpi": "",
+        "xxxhdpi": ""
+      },
+      "splashScreens": {
+        "default": {}
+      }
+    }
+  },
+  "app-ios": {
+    "distribute": {
+      "modules": {},
+      "icons": {},
+      "splashScreens": {}
+    }
+  }
+}

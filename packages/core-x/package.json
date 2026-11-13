@@ -1,0 +1,28 @@
+{
+  "name": "uni-echarts-x",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "description": "uni-app x Vapor adapters for Apache ECharts",
+  "author": "xiaohe0601 <xiaohe0601@outlook.com>",
+  "license": "MIT",
+  "homepage": "https://uni-echarts.xiaohe.ink",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaohe0601/uni-echarts.git"
+  },
+  "bugs": "https://github.com/xiaohe0601/uni-echarts/issues",
+  "exports": {
+    ".": "./src/components/uni-echarts-x/uni-echarts-x.uvue",
+    "./adapters/*": "./src/adapters/*.ts",
+    "./runtime/*": "./src/runtime/*.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "peerDependencies": {
+    "echarts": ">=6.1.0",
+    "vue": ">=3.3.0",
+    "zrender": ">=6.1.0"
+  }
+}

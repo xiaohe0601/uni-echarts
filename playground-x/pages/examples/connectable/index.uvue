@@ -1,0 +1,200 @@
+<template>
+  <scroll-view class="page" direction="vertical">
+    <uni-echarts-x
+      :width="chartWidth"
+      :height="250"
+      autoresize
+      :custom-style="CHART_STYLE_60"
+      :option="option1"
+      group="radiance"
+      :disable-scroll="true"
+      @inited="ensureConnected"
+    />
+
+    <uni-echarts-x
+      :width="chartWidth"
+      :height="250"
+      autoresize
+      :custom-style="CHART_STYLE_60"
+      :option="option2"
+      group="radiance"
+      :disable-scroll="true"
+      @inited="ensureConnected"
+    />
+
+    <view class="panel">
+      <view class="row">
+        <text class="label">联动</text>
+        <demo-switch
+          :checked="connected"
+          @change="onConnectedChange"
+        />
+      </view>
+    </view>
+  </scroll-view>
+</template>
+
+<script setup lang="ts">
+import * as echarts from "echarts/core"
+import { ScatterChart } from "echarts/charts"
+import {
+  GridComponent,
+  LegendComponent,
+  TooltipComponent,
+  VisualMapComponent,
+} from "echarts/components"
+import { CanvasRenderer } from "echarts/renderers"
+import {
+  CHART_STYLE_60,
+  GLOBAL_OPTION,
+  getWindowWidth,
+} from "../../../shared/demo"
+import DemoSwitch from "../../../components/demo-switch/demo-switch.uvue"
+
+echarts.use([
+  LegendComponent,
+  GridComponent,
+  TooltipComponent,
+  VisualMapComponent,
+  ScatterChart,
+  CanvasRenderer,
+])
+
+const chartWidth = getWindowWidth()
+const connected = ref(true)
+const baseOption = createOption()
+const option1 = ref<Record<string, any>>(baseOption)
+const option2 = ref<Record<string, any>>(
+  JSON.parse(JSON.stringify(baseOption)),
+)
+
+function getData(): number[][] {
+  const data: number[][] = []
+
+  for (let i = 0; i < 16; i += 1) {
+    data.push([
+      Math.random() * 5,
+      Math.random() * 4,
+      Math.random() * 12,
+      Math.round(Math.random() * 5),
+    ])
+  }
+
+  return data
+}
+
+function createOption(): Record<string, any> {
+  return {
+    ...GLOBAL_OPTION,
+    legend: {
+      top: 10,
+      left: "center",
+      data: ["Scatter"],
+    },
+    grid: {
+      top: 60,
+      right: 70,
+      bottom: 10,
+      left: 10,
+      outerBoundsMode: "same",
+      outerBoundsContain: "axisLabel",
+    },
+    tooltip: {
+      formatter: "{c}",
+    },
+    xAxis: {
+      type: "value",
+      splitLine: {
+        show: false,
+      },
+    },
+    yAxis: {
+      type: "value",
+      splitLine: {
+        show: false,
+      },
+    },
+    visualMap: [
+      {
+        realtime: false,
+        right: 10,
+        bottom: 10,
+        selectedMode: "multiple",
+        dimension: 2,
+        selected: {},
+        min: 0,
+        max: 18,
+        precision: 0,
+        splitNumber: 0,
+        calculable: true,
+      },
+    ],
+    series: [
+      {
+        type: "scatter",
+        name: "Scatter",
+        symbolSize: 30,
+        data: getData(),
+      },
+    ],
+  }
+}
+
+function ensureConnected() {
+  if (!connected.value) {
+    return
+  }
+
+  echarts.connect("radiance")
+}
+
+function applyConnection() {
+  if (connected.value) {
+    echarts.connect("radiance")
+  } else {
+    echarts.disconnect("radiance")
+  }
+}
+
+function onConnectedChange(event: any) {
+  connected.value = Boolean(event.detail.value)
+  applyConnection()
+}
+
+onReady(() => {
+  ensureConnected()
+})
+
+onUnload(() => {
+  echarts.disconnect("radiance")
+})
+</script>
+
+<style>
+.page {
+  flex: 1;
+  background-color: #ffffff;
+}
+
+.panel {
+  width: 100%;
+  margin-top: 16rpx;
+  background-color: #ffffff;
+}
+
+.row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 59px;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.label {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  line-height: 24px;
+}
+</style>

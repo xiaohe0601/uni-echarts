@@ -1,0 +1,89 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "Uni ECharts"
+      }
+    },
+    {
+      "path": "pages/examples/basic/index",
+      "style": {
+        "navigationBarTitleText": "基础用法"
+      }
+    },
+    {
+      "path": "pages/examples/async-data/index",
+      "style": {
+        "navigationBarTitleText": "异步数据"
+      }
+    },
+    {
+      "path": "pages/examples/action-dispatch/index",
+      "style": {
+        "navigationBarTitleText": "动作调度"
+      }
+    },
+    {
+      "path": "pages/examples/builtin-theme/index",
+      "style": {
+        "navigationBarTitleText": "内置主题"
+      }
+    },
+    {
+      "path": "pages/examples/gradient/index",
+      "style": {
+        "navigationBarTitleText": "颜色渐变"
+      }
+    },
+    {
+      "path": "pages/examples/popup/index",
+      "style": {
+        "navigationBarTitleText": "弹窗内使用"
+      }
+    },
+    {
+      "path": "pages/examples/pinia-integration/index",
+      "style": {
+        "navigationBarTitleText": "Pinia 集成"
+      }
+    },
+    {
+      "path": "pages/examples/connectable/index",
+      "style": {
+        "navigationBarTitleText": "图表联动"
+      }
+    },
+    {
+      "path": "pages/examples/manual-update/index",
+      "style": {
+        "navigationBarTitleText": "手动更新"
+      }
+    },
+    {
+      "path": "pages/examples/custom-tooltip/index",
+      "style": {
+        "navigationBarTitleText": "自定义 Tooltip"
+      }
+    },
+    {
+      "path": "pages/examples/export-image/index",
+      "style": {
+        "navigationBarTitleText": "保存为图片"
+      }
+    },
+    {
+      "path": "pages/regression/index",
+      "style": {
+        "navigationBarTitleText": "Canvas 兼容回归"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Uni ECharts",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#ffffff"
+  }
+}

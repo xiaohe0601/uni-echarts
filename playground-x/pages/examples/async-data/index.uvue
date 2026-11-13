@@ -1,0 +1,207 @@
+<template>
+  <scroll-view class="page" direction="vertical">
+    <uni-echarts-x
+      :width="chartWidth"
+      :height="250"
+      autoresize
+      :custom-style="CHART_STYLE_60"
+      :option="option"
+      theme="ovilia-green"
+      :loading="loading"
+      :loading-options="loadingOptions"
+      :disable-scroll="true"
+    />
+
+    <view v-if="surplus > 0" class="toolbar">
+      <text class="hint">数据将在</text>
+      <text class="countdown">{{ surplus }}</text>
+      <text class="hint">秒后完成加载...</text>
+    </view>
+    <view v-else class="toolbar">
+      <view class="refresh-button" @click="refresh">
+        <text class="refresh-text">更新数据</text>
+      </view>
+    </view>
+  </scroll-view>
+</template>
+
+<script setup lang="ts">
+import * as echarts from "echarts/core"
+import { BarChart } from "echarts/charts"
+import {
+  DatasetComponent,
+  GridComponent,
+} from "echarts/components"
+import { CanvasRenderer } from "echarts/renderers"
+import {
+  CHART_STYLE_60,
+  GLOBAL_OPTION,
+  getWindowWidth,
+} from "../../../shared/demo"
+import theme from "./theme"
+
+echarts.use([
+  GridComponent,
+  DatasetComponent,
+  BarChart,
+  CanvasRenderer,
+])
+
+echarts.registerTheme("ovilia-green", theme)
+
+const chartWidth = getWindowWidth()
+const loading = ref(false)
+const surplus = ref(0)
+
+const loadingOptions = {
+  text: "请稍候...",
+  color: "#4ea397",
+  maskColor: "rgba(255, 255, 255, 0.8)",
+}
+
+const option = ref<Record<string, any>>({
+  ...GLOBAL_OPTION,
+  grid: {
+    top: 20,
+    right: 10,
+    bottom: 10,
+    left: 10,
+    outerBoundsMode: "same",
+    outerBoundsContain: "axisLabel",
+  },
+  xAxis: {
+    type: "category",
+  },
+  yAxis: {},
+  series: [
+    { type: "bar" },
+    { type: "bar" },
+    { type: "bar" },
+  ],
+  dataset: {
+    dimensions: ["Product", "2023", "2024", "2025"],
+    source: getData(),
+  },
+})
+
+let timer = 0
+
+function random(): number {
+  return Math.round(300 + Math.random() * 700) / 10
+}
+
+function getData(): Record<string, any>[] {
+  return [
+    {
+      Product: "Matcha Latte",
+      2023: random(),
+      2024: random(),
+      2025: random(),
+    },
+    {
+      Product: "Milk Tea",
+      2023: random(),
+      2024: random(),
+      2025: random(),
+    },
+    {
+      Product: "Cheese Cocoa",
+      2023: random(),
+      2024: random(),
+      2025: random(),
+    },
+    {
+      Product: "Walnut Brownie",
+      2023: random(),
+      2024: random(),
+      2025: random(),
+    },
+  ]
+}
+
+function destroyTimer() {
+  if (timer === 0) {
+    return
+  }
+
+  clearInterval(timer)
+  timer = 0
+}
+
+function tick() {
+  surplus.value -= 1
+
+  if (surplus.value > 0) {
+    return
+  }
+
+  destroyTimer()
+  const current = option.value
+
+  option.value = {
+    ...current,
+    dataset: {
+      ...current.dataset,
+      source: getData(),
+    },
+  }
+  loading.value = false
+}
+
+function refresh() {
+  destroyTimer()
+  loading.value = true
+  surplus.value = 3
+  timer = setInterval(tick, 1000)
+}
+
+onUnload(() => {
+  destroyTimer()
+})
+</script>
+
+<style>
+.page {
+  flex: 1;
+  background-color: #ffffff;
+}
+
+.toolbar {
+  margin-top: 16rpx;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.hint {
+  color: #909399;
+  font-size: 32rpx;
+  line-height: 48rpx;
+}
+
+.countdown {
+  margin: 0 4px;
+  color: #299764;
+  font-size: 32rpx;
+  line-height: 48rpx;
+}
+
+.refresh-button {
+  align-items: center;
+  justify-content: center;
+  width: 74px;
+  height: 28px;
+  background-color: #ffffff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #299764;
+  border-radius: 999px;
+  box-sizing: border-box;
+}
+
+.refresh-text {
+  color: #299764;
+  font-size: 12px;
+  line-height: 26px;
+}
+</style>

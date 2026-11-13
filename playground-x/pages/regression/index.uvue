@@ -1,0 +1,747 @@
+<template>
+  <scroll-view class="page" direction="vertical" @scroll="onPageScroll">
+    <text class="title">uni-echarts x</text>
+    <text class="subtitle">Canvas 2D + ECharts · Vapor / VDOM 兼容回归</text>
+
+    <view class="chart-shell" :style="chartShellStyle">
+      <uni-echarts-x
+        v-if="chartMounted"
+        ref="chartRef"
+        :width="chartWidth"
+        :height="chartHeight"
+        autoresize
+        :option="option"
+        :loading="loading"
+        :manual-update="manualUpdate"
+        @inited="onInited"
+        @rendered="onRendered"
+        @finished="onFinished"
+        @error="onError"
+        @zr:click="onZrClick"
+        @native:touchstart="onNativeTouch"
+        @native:touchend="onNativeTouch"
+      />
+    </view>
+
+    <text class="section">图表类型</text>
+    <view class="actions">
+      <button class="action" size="mini" @click="setMode('line')">折线</button>
+      <button class="action" size="mini" @click="setMode('bar')">柱状</button>
+      <button class="action" size="mini" @click="setMode('pie')">饼图</button>
+    </view>
+
+    <text class="section">基础操作</text>
+    <view class="actions">
+      <button class="action" size="mini" @click="updateChart">更新数据</button>
+      <button class="action" size="mini" @click="toggleSize">尺寸</button>
+      <button class="action" size="mini" @click="toggleContainerWidth">容器宽度</button>
+      <button class="action" size="mini" @click="resizeChart">Resize</button>
+      <button class="action" size="mini" @click="disposeChart">销毁</button>
+      <button class="action" size="mini" @click="reinitChart">重建</button>
+      <button class="action" size="mini" @click="toggleMounted">{{ chartMounted ? "卸载" : "挂载" }}</button>
+    </view>
+
+    <text class="section">扩展能力</text>
+    <view class="actions">
+      <button class="action" size="mini" @click="showTooltip">Tooltip</button>
+      <button class="action" size="mini" @click="hideTooltip">隐藏 Tip</button>
+      <button class="action" size="mini" @click="toggleLoading">{{ loading ? "停止 Loading" : "Loading" }}</button>
+      <button class="action" size="mini" @click="exportChart">导出</button>
+      <button class="action" size="mini" @click="toggleManual">{{ manualUpdate ? "自动更新" : "手动更新" }}</button>
+      <button class="action" size="mini" @click="applyManual">应用手动</button>
+    </view>
+
+    <text class="section">第二实例</text>
+    <view class="chart-shell chart-shell--secondary">
+      <uni-echarts-x
+        ref="secondChartRef"
+        :width="240"
+        :height="160"
+        :option="secondOption"
+        @rendered="onSecondRendered"
+        @error="onSecondError"
+      />
+    </view>
+    <view class="actions">
+      <button class="action" size="mini" @click="updateSecondChart">更新第二图</button>
+      <button class="action" size="mini" @click="updateAllCharts">更新全部</button>
+    </view>
+
+    <text class="status">{{ statusText }}</text>
+    <text class="metrics">{{ metricsText }}</text>
+  </scroll-view>
+</template>
+
+<script setup lang="ts">
+import * as echarts from "echarts/core"
+import { BarChart, LineChart, PieChart } from "echarts/charts"
+import {
+  AxisPointerComponent,
+  GridComponent,
+  LegendComponent,
+  TitleComponent,
+  TooltipComponent,
+} from "echarts/components"
+import { CanvasRenderer } from "echarts/renderers"
+
+echarts.use([
+  LineChart,
+  BarChart,
+  PieChart,
+  GridComponent,
+  TitleComponent,
+  TooltipComponent,
+  AxisPointerComponent,
+  LegendComponent,
+  CanvasRenderer,
+])
+
+type InitedPayload = {
+  width: number
+  height: number
+  dpr: number
+  canvasWidth: number
+  canvasHeight: number
+  renderDpr: number
+}
+
+type RenderedPayload = {
+  elapsedTime: number
+}
+
+type ChartMetrics = {
+  width: number
+  height: number
+  canvasWidth: number
+  canvasHeight: number
+  dpr: number
+  renderDpr: number
+}
+
+const chartRef = ref<ComponentPublicInstance | null>(null)
+const secondChartRef = ref<ComponentPublicInstance | null>(null)
+const statusText = ref("等待组件初始化")
+const metricsText = ref("")
+const chartMounted = ref(true)
+const loading = ref(false)
+const manualUpdate = ref(false)
+const chartWidth = ref(300)
+const chartHeight = ref(200)
+const containerWidth = ref(300)
+const mode = ref("line")
+const updateCount = ref(0)
+const renderedCount = ref(0)
+const secondRenderedCount = ref(0)
+const RENDER_STATUS_INTERVAL = 500
+const MAX_METRICS_LENGTH = 1200
+let renderedFrames = 0
+let secondRenderedFrames = 0
+let lastRenderedUiAt = 0
+let lastSecondRenderedUiAt = 0
+let lastRenderedElapsed = 0
+let lastSecondRenderedElapsed = 0
+let scrollRefreshTimer = 0
+
+const chartShellStyle = computed(() => {
+  return `width:${containerWidth.value}px;height:${chartHeight.value}px`
+})
+
+function lineOption(update = 0): Record<string, any> {
+  return {
+    animation: false,
+    title: {
+      text: "uni-app x Vapor",
+      left: 12,
+      top: 8,
+      textStyle: {
+        color: "#222222",
+        fontSize: 14,
+      },
+    },
+    tooltip: {
+      trigger: "axis",
+    },
+    legend: {
+      right: 12,
+      top: 8,
+      data: ["A", "B"],
+      itemWidth: 12,
+      itemHeight: 8,
+      textStyle: {
+        color: "#555555",
+        fontSize: 10,
+      },
+    },
+    grid: {
+      left: 42,
+      right: 18,
+      top: 42,
+      bottom: 30,
+    },
+    xAxis: {
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      axisLabel: {
+        color: "#666666",
+        fontSize: 10,
+      },
+    },
+    yAxis: {
+      type: "value",
+      axisLabel: {
+        color: "#666666",
+        fontSize: 10,
+      },
+    },
+    series: [
+      {
+        name: "A",
+        type: "line",
+        smooth: false,
+        symbolSize: 5,
+        data: [
+          120 + update * 10,
+          200,
+          150,
+          80,
+          70,
+          110,
+          130,
+        ],
+        lineStyle: {
+          width: 2,
+        },
+      },
+      {
+        name: "B",
+        type: "line",
+        smooth: false,
+        symbolSize: 4,
+        data: [
+          60,
+          90,
+          120,
+          105,
+          130,
+          150,
+          145 + update * 5,
+        ],
+        lineStyle: {
+          width: 2,
+        },
+      },
+    ],
+  }
+}
+
+function barOption(update = 0): Record<string, any> {
+  return {
+    animation: false,
+    title: {
+      text: "Bar",
+      left: 12,
+      top: 8,
+      textStyle: {
+        color: "#222222",
+        fontSize: 14,
+      },
+    },
+    tooltip: {
+      trigger: "axis",
+    },
+    grid: {
+      left: 42,
+      right: 18,
+      top: 42,
+      bottom: 30,
+    },
+    xAxis: {
+      type: "category",
+      data: ["A", "B", "C", "D", "E"],
+      axisLabel: {
+        color: "#666666",
+        fontSize: 10,
+      },
+    },
+    yAxis: {
+      type: "value",
+      axisLabel: {
+        color: "#666666",
+        fontSize: 10,
+      },
+    },
+    series: [
+      {
+        type: "bar",
+        barWidth: 18,
+        data: [
+          50 + update * 8,
+          90,
+          70,
+          120,
+          100,
+        ],
+        itemStyle: {
+          color: "#5470c6",
+          borderRadius: [3, 3, 0, 0],
+        },
+      },
+    ],
+  }
+}
+
+function pieOption(update = 0): Record<string, any> {
+  return {
+    animation: false,
+    title: {
+      text: "Pie",
+      left: 12,
+      top: 8,
+      textStyle: {
+        color: "#222222",
+        fontSize: 14,
+      },
+    },
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      bottom: 4,
+      left: "center",
+      itemWidth: 12,
+      itemHeight: 8,
+      textStyle: {
+        color: "#555555",
+        fontSize: 10,
+      },
+    },
+    series: [
+      {
+        type: "pie",
+        radius: ["35%", "62%"],
+        center: ["50%", "48%"],
+        data: [
+          { value: 40 + update, name: "A" },
+          { value: 25, name: "B" },
+          { value: 20, name: "C" },
+          { value: 15, name: "D" },
+        ],
+        label: {
+          color: "#444444",
+          fontSize: 10,
+        },
+      },
+    ],
+  }
+}
+
+function createOption(update = 0): Record<string, any> {
+  if (mode.value === "bar") {
+    return barOption(update)
+  }
+
+  if (mode.value === "pie") {
+    return pieOption(update)
+  }
+
+  return lineOption(update)
+}
+
+function createSecondOption(update = 0): Record<string, any> {
+  return {
+    animation: false,
+    title: {
+      text: "Second",
+      left: 10,
+      top: 6,
+      textStyle: {
+        color: "#222222",
+        fontSize: 12,
+      },
+    },
+    grid: {
+      left: 36,
+      right: 12,
+      top: 34,
+      bottom: 24,
+    },
+    xAxis: {
+      type: "category",
+      data: ["1", "2", "3", "4"],
+      axisLabel: {
+        color: "#666666",
+        fontSize: 9,
+      },
+    },
+    yAxis: {
+      type: "value",
+      axisLabel: {
+        color: "#666666",
+        fontSize: 9,
+      },
+    },
+    series: [
+      {
+        type: "bar",
+        barWidth: 14,
+        data: [20 + update * 5, 45, 30, 55],
+        itemStyle: {
+          color: "#91cc75",
+        },
+      },
+    ],
+  }
+}
+
+const option = ref<Record<string, any>>(createOption())
+const secondOption = ref<Record<string, any>>(createSecondOption())
+
+function appendMetric(line: string) {
+  let next = metricsText.value.length === 0
+    ? line
+    : `${metricsText.value}\n${line}`
+
+  if (next.length > MAX_METRICS_LENGTH) {
+    next = next.slice(next.length - MAX_METRICS_LENGTH)
+  }
+
+  metricsText.value = next
+  console.log(`[uni-echarts-x] ${line}`)
+}
+
+function onInited(payload: InitedPayload) {
+  statusText.value = "组件初始化成功"
+  appendMetric(`inited: ${payload.width}x${payload.height}`)
+  appendMetric(`canvas: ${payload.canvasWidth}x${payload.canvasHeight}`)
+  appendMetric(`dpr: ${payload.dpr} / render: ${payload.renderDpr}`)
+}
+
+function onRendered(payload: RenderedPayload) {
+  renderedFrames += 1
+  lastRenderedElapsed = payload.elapsedTime
+  const now = Date.now()
+
+  if (now - lastRenderedUiAt < RENDER_STATUS_INTERVAL) {
+    return
+  }
+
+  lastRenderedUiAt = now
+  renderedCount.value = renderedFrames
+  statusText.value = `主图已渲染 #${renderedCount.value}`
+  appendMetric(`rendered #${renderedCount.value}: ${lastRenderedElapsed.toFixed(2)}ms`)
+}
+
+function onSecondRendered(payload: RenderedPayload) {
+  secondRenderedFrames += 1
+  lastSecondRenderedElapsed = payload.elapsedTime
+  const now = Date.now()
+
+  if (now - lastSecondRenderedUiAt < RENDER_STATUS_INTERVAL) {
+    return
+  }
+
+  lastSecondRenderedUiAt = now
+  secondRenderedCount.value = secondRenderedFrames
+  appendMetric(
+    `second rendered #${secondRenderedCount.value}: ${lastSecondRenderedElapsed.toFixed(2)}ms`,
+  )
+}
+
+function onFinished() {
+  renderedCount.value = renderedFrames
+  statusText.value = `主图已渲染 #${renderedCount.value}`
+  appendMetric(`finished #${renderedCount.value}`)
+}
+
+function onError(payload: { stage: string, error: any }) {
+  statusText.value = `失败：${payload.stage}`
+  appendMetric(`error: ${payload.stage} ${String(payload.error)}`)
+}
+
+function onSecondError(payload: { stage: string, error: any }) {
+  appendMetric(`second error: ${payload.stage} ${String(payload.error)}`)
+}
+
+function onZrClick(payload: any) {
+  statusText.value = `zrender click: ${String(payload?.target?.type ?? "blank")}`
+  appendMetric("zr:click")
+}
+
+function onNativeTouch(payload: any) {
+  const type = String(payload?.type ?? "")
+
+  if (type === "touchstart" || type === "touchmove" || type === "touchend" || type === "touchcancel") {
+    appendMetric(`native: ${type}`)
+  }
+}
+
+function callChart(method: string, ...args: any[]) {
+  const instance = chartRef.value as any
+  if (instance == null || typeof instance[method] !== "function") {
+    statusText.value = `调用失败：${method} 不存在`
+    return null
+  }
+
+  return instance[method](...args)
+}
+
+function callSecondChart(method: string, ...args: any[]) {
+  const instance = secondChartRef.value as any
+  if (instance == null || typeof instance[method] !== "function") {
+    return null
+  }
+
+  return instance[method](...args)
+}
+
+function setMode(value: string) {
+  console.log(`[uni-echarts-x] action setMode ${value}`)
+  mode.value = value
+  updateCount.value = 0
+  option.value = createOption()
+  statusText.value = `切换到 ${value}`
+}
+
+function updateChart() {
+  console.log("[uni-echarts-x] action updateChart")
+  updateCount.value += 1
+  option.value = createOption(updateCount.value)
+  statusText.value = manualUpdate.value
+    ? `已更新 props #${updateCount.value}，等待手动应用`
+    : `更新 option #${updateCount.value}`
+}
+
+function updateSecondChart() {
+  console.log("[uni-echarts-x] action updateSecondChart")
+  secondOption.value = createSecondOption(updateCount.value + 1)
+  statusText.value = "已更新第二实例"
+}
+
+function updateAllCharts() {
+  console.log("[uni-echarts-x] action updateAllCharts")
+  updateCount.value += 1
+  option.value = createOption(updateCount.value)
+  secondOption.value = createSecondOption(updateCount.value)
+  statusText.value = "已更新全部实例"
+}
+
+function reportMetrics(stage: string) {
+  const metrics = callChart("getMetrics") as ChartMetrics | null
+
+  if (metrics == null) {
+    appendMetric(`metrics(${stage}): unavailable`)
+    return
+  }
+
+  appendMetric(
+    `metrics(${stage}): ${metrics.width}x${metrics.height}, `
+    + `canvas ${metrics.canvasWidth}x${metrics.canvasHeight}, `
+    + `dpr ${metrics.dpr}/${metrics.renderDpr}`,
+  )
+}
+
+function toggleSize() {
+  console.log("[uni-echarts-x] action toggleSize")
+  if (chartWidth.value === 300) {
+    chartWidth.value = 240
+    chartHeight.value = 160
+  } else {
+    chartWidth.value = 300
+    chartHeight.value = 200
+  }
+
+  containerWidth.value = chartWidth.value
+  statusText.value = `尺寸 ${chartWidth.value}x${chartHeight.value}`
+  setTimeout(() => {
+    reportMetrics("resize")
+  }, 200)
+}
+
+function toggleContainerWidth() {
+  console.log("[uni-echarts-x] action toggleContainerWidth")
+  containerWidth.value = containerWidth.value === 300 ? 240 : 300
+  statusText.value = `容器宽度 ${containerWidth.value}px`
+  setTimeout(() => {
+    reportMetrics("autoresize")
+  }, 200)
+}
+
+function resizeChart() {
+  console.log("[uni-echarts-x] action resizeChart")
+  callChart("resize", {
+    width: chartWidth.value,
+    height: chartHeight.value,
+  })
+  statusText.value = "已请求 resize"
+  setTimeout(() => {
+    reportMetrics("explicit")
+  }, 200)
+}
+
+function onPageScroll() {
+  if (scrollRefreshTimer !== 0) {
+    clearTimeout(scrollRefreshTimer)
+  }
+
+  scrollRefreshTimer = setTimeout(() => {
+    scrollRefreshTimer = 0
+    console.log("[uni-echarts-x] regression scroll refresh")
+    callChart("resize", {
+      width: chartWidth.value,
+      height: chartHeight.value,
+    })
+    callSecondChart("resize", {
+      width: 240,
+      height: 160,
+    })
+  }, 120)
+}
+
+onUnload(() => {
+  if (scrollRefreshTimer !== 0) {
+    clearTimeout(scrollRefreshTimer)
+    scrollRefreshTimer = 0
+  }
+})
+
+function disposeChart() {
+  console.log("[uni-echarts-x] action dispose")
+  callChart("dispose")
+  statusText.value = "已销毁"
+}
+
+function reinitChart() {
+  console.log("[uni-echarts-x] action reinit")
+  if (!chartMounted.value) {
+    chartMounted.value = true
+    return
+  }
+
+  callChart("setOption", option.value)
+  statusText.value = "请求重新初始化"
+}
+
+function toggleMounted() {
+  console.log("[uni-echarts-x] action toggleMounted")
+  chartMounted.value = !chartMounted.value
+  statusText.value = chartMounted.value ? "已重新挂载" : "已卸载"
+}
+
+function showTooltip() {
+  console.log("[uni-echarts-x] action showTip")
+  callChart("dispatchAction", {
+    type: "showTip",
+    seriesIndex: 0,
+    dataIndex: 2,
+  })
+  statusText.value = "showTip"
+}
+
+function hideTooltip() {
+  console.log("[uni-echarts-x] action hideTip")
+  callChart("dispatchAction", {
+    type: "hideTip",
+  })
+  statusText.value = "hideTip"
+}
+
+function toggleLoading() {
+  loading.value = !loading.value
+  statusText.value = loading.value ? "Loading 开启" : "Loading 关闭"
+}
+
+function exportChart() {
+  console.log("[uni-echarts-x] action getDataURL")
+  try {
+    const data = callChart("getDataURL", {
+      type: "png",
+      pixelRatio: 1,
+      backgroundColor: "#ffffff",
+    })
+    const text = String(data ?? "")
+    statusText.value = "getDataURL 完成"
+    appendMetric(`dataURL: ${text.length} ${text.slice(0, 22)}`)
+  }
+  catch (error) {
+    statusText.value = "getDataURL 失败"
+    appendMetric(`dataURL error: ${String(error)}`)
+  }
+}
+
+function toggleManual() {
+  console.log("[uni-echarts-x] action toggleManual")
+  manualUpdate.value = !manualUpdate.value
+  statusText.value = manualUpdate.value ? "手动更新模式" : "自动更新模式"
+}
+
+function applyManual() {
+  console.log("[uni-echarts-x] action applyManual")
+  callChart("setOption", option.value, {
+    notMerge: true,
+  })
+  statusText.value = "已手动应用"
+}
+</script>
+
+<style>
+.page {
+  flex: 1;
+  padding: 16px;
+  background-color: #f5f5f5;
+}
+
+.title {
+  color: #222222;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.subtitle {
+  margin-top: 4px;
+  color: #666666;
+  font-size: 13px;
+}
+
+.chart-shell {
+  margin-top: 16px;
+  width: 300px;
+  height: 200px;
+  background-color: #ffffff;
+}
+
+.chart-shell--secondary {
+  width: 240px;
+  height: 160px;
+}
+
+.section {
+  margin-top: 14px;
+  color: #444444;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.actions {
+  margin-top: 8px;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.action {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.status {
+  margin-top: 8px;
+  color: #1f6feb;
+  font-size: 13px;
+}
+
+.metrics {
+  margin-top: 8px;
+  color: #333333;
+  font-size: 11px;
+  line-height: 18px;
+}
+</style>
