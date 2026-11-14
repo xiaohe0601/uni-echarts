@@ -161,7 +161,14 @@ path. Use a user action before exporting. The uni-app x H5 runtime currently has
 - The ECharts host intentionally has no `nodeName`, so zrender uses the single-canvas path.
 - Logical size and native backing size are tracked separately. Native backing dimensions are
   synchronized from the platform DPR.
-- The host context is retained and `draw()` is called after zrender renders.
+- The native canvas component flushes its 2D context at a suitable time, so no extra `draw()`
+  flush is needed after zrender renders. Scheduling one there adds redundant Android repaints
+  during zrender animations.
+- Android enables zrender's dirty-rectangle calculation through a compatible painter. zrender's
+  outer repaint clip is omitted because the native Canvas does not apply it reliably. Repaint
+  rects are merged and expanded to whole intersecting elements, then painted in one pass.
+  Unchanged regions such as the legend are therefore neither cleared nor redrawn during pie,
+  tooltip, or emphasis updates. Other targets keep the full-canvas path.
 - Tooltip `renderMode` is forced to `richText` for both top-level and series-level tooltips.
 - Native touch events are normalized into zrender mouse events. A click is synthesized when
   the release point is within 10px of the press point on both axes; press duration is not

@@ -23,6 +23,14 @@ export interface EChartsCanvasHost {
   toDataURL?: (type?: string, quality?: any) => string;
 }
 
+export interface CanvasPainterLike {
+  _opts?: {
+    useDirtyRect?: boolean;
+  };
+  _paintPerCursor?: (...args: any[]) => boolean;
+  _paintPerCursorInRect?: (...args: any[]) => void;
+}
+
 const measureContexts: CanvasRenderingContext2D[] = [];
 
 function normalizeDataURLType(options?: Record<string, any>): string {
@@ -125,6 +133,106 @@ export function flushCanvas(context: CanvasRenderingContext2D): boolean {
   }
 
   drawable.draw();
+  return true;
+}
+
+export function enableEChartsDirtyRectPainter(
+  painter: CanvasPainterLike | null | undefined
+): boolean {
+  if (
+    painter == null
+    || painter._opts == null
+    || typeof painter._paintPerCursor !== "function"
+    || typeof painter._paintPerCursorInRect !== "function"
+  ) {
+    return false;
+  }
+
+  painter._paintPerCursor = function (
+    this: CanvasPainterLike,
+    layer: any,
+    cursor: any,
+    list: any[],
+    repaintRects: any[] | null | undefined,
+    contentRetained: boolean
+  ) {
+    const context = layer.ctx;
+
+    if (repaintRects == null) {
+      context.save();
+      this._paintPerCursorInRect!(layer, cursor, list, null, contentRetained);
+      context.restore();
+    } else if (repaintRects.length === 0) {
+      cursor.drawIdx = cursor.endIdx;
+    } else {
+      let minX = repaintRects[0].x;
+      let minY = repaintRects[0].y;
+      let maxX = minX + repaintRects[0].width;
+      let maxY = minY + repaintRects[0].height;
+
+      for (let i = 1; i < repaintRects.length; i++) {
+        const rect = repaintRects[i];
+
+        minX = Math.min(minX, rect.x);
+        minY = Math.min(minY, rect.y);
+        maxX = Math.max(maxX, rect.x + rect.width);
+        maxY = Math.max(maxY, rect.y + rect.height);
+      }
+
+      const paintRect = {
+        x: minX,
+        y: minY,
+        width: maxX - minX,
+        height: maxY - minY
+      };
+      let expanded = true;
+
+      // The native canvas does not apply zrender's outer repaint clip correctly.
+      // Expand the paint region until every intersecting element is fully inside it,
+      // so painting whole elements cannot cover content outside the dirty area.
+      while (expanded) {
+        expanded = false;
+
+        for (let i = cursor.drawIdx; i < cursor.endIdx; i++) {
+          const el = list[i];
+          const rect = el?.getPaintRect?.();
+          if (rect == null || !rect.intersect(paintRect)) {
+            continue;
+          }
+
+          const maxPaintX = paintRect.x + paintRect.width;
+          const maxPaintY = paintRect.y + paintRect.height;
+          const maxRectX = rect.x + rect.width;
+          const maxRectY = rect.y + rect.height;
+
+          if (
+            rect.x < paintRect.x
+            || rect.y < paintRect.y
+            || maxRectX > maxPaintX
+            || maxRectY > maxPaintY
+          ) {
+            const nextX = Math.min(paintRect.x, rect.x);
+            const nextY = Math.min(paintRect.y, rect.y);
+
+            paintRect.width = Math.max(maxPaintX, maxRectX) - nextX;
+            paintRect.height = Math.max(maxPaintY, maxRectY) - nextY;
+            paintRect.x = nextX;
+            paintRect.y = nextY;
+            expanded = true;
+          }
+        }
+      }
+
+      context.save();
+      this._paintPerCursorInRect!(layer, cursor, list, paintRect, contentRetained);
+      context.restore();
+    }
+
+    return cursor.drawIdx >= cursor.endIdx;
+  };
+
+  painter._opts.useDirtyRect = true;
+
   return true;
 }
 

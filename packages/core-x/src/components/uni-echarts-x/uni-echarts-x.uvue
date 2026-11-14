@@ -24,6 +24,7 @@ import * as echarts from "echarts/core"
 import type { EChartsType } from "echarts/core"
 import {
   createEChartsCanvasHost,
+  enableEChartsDirtyRectPainter,
   flushCanvas,
   getBrowserCanvasDataURL,
   getNativeCanvasDataURL,
@@ -193,14 +194,17 @@ let autoResizeTimer = 0
 let autoResizePollTimer = 0
 let autoResizeWidth = 0
 let autoResizeHeight = 0
-let renderedFlushTimer = 0
+let useNativeDirtyRect = false
+
+// #ifdef APP-ANDROID
+useNativeDirtyRect = true
+// #endif
 
 const INIT_RETRY_DELAY = 50
 const INIT_RETRY_LIMIT = 20
 const INIT_ATTEMPT_TIMEOUT = 1000
 const AUTO_RESIZE_DELAY = 50
 const AUTO_RESIZE_POLL_INTERVAL = 100
-const RENDERED_FLUSH_DELAY = 50
 
 const rootStyle = computed(() => {
   const width = props.autoresize ? "100%" : `${props.width}px`
@@ -475,19 +479,6 @@ function bindChartEvents(instance: EChartsType) {
 
 function bindInternalRendered(instance: EChartsType) {
   instance.on("rendered", (payload: any) => {
-    if (!destroyed && renderingContext != null) {
-      flushCanvas(renderingContext)
-
-      clearTimeout(renderedFlushTimer)
-      renderedFlushTimer = setTimeout(() => {
-        renderedFlushTimer = 0
-
-        if (!destroyed && renderingContext != null) {
-          flushCanvas(renderingContext)
-        }
-      }, RENDERED_FLUSH_DELAY)
-    }
-
     emit("rendered", payload)
   })
 }
@@ -557,6 +548,9 @@ function setupChart() {
 
     chart.value = nextChart
     initState = "ready"
+    if (useNativeDirtyRect) {
+      enableEChartsDirtyRectPainter(nextChart.getZr().painter)
+    }
 
     if (props.group.length > 0) {
       nextChart.group = props.group
@@ -920,8 +914,6 @@ function dispose() {
   clearInitTimers()
   clearVisibilityRefreshTimer()
   disconnectAutoResizeObserver()
-  clearTimeout(renderedFlushTimer)
-  renderedFlushTimer = 0
   touchBridge.cleanup()
   teardownChart()
   initState = "disposed"
