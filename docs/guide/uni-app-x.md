@@ -34,12 +34,12 @@ HBuilderX/HBuilderV SDK 版本为准。本轮验收基线为 `5.33.2026102115-al
 
 | 目标 | 模式 | 本轮基线 | 状态 |
 | --- | --- | --- | --- |
-| Android App | Vapor / bytecode | Android 14 AVD | Debug 完整 Demo 通过 |
+| Android App | Vapor / bytecode | Android 14 AVD | 2026-11-15 release APK 安装运行、11 个示例通过；历史 Debug 完整 Demo 也通过 |
 | iOS App | Vapor / bytecode | iPhone 15 Pro / iOS 17.2 | Debug 完整 Demo 通过；iOS 17.4 受上游 GCanvas 阻塞 |
 | HarmonyOS App | Vapor / bytecode | HarmonyOS API 20 | Debug 完整 Demo 通过 |
 | H5 | VDOM | HBuilderX production | 13 条路由通过；不是 Vapor |
-| 微信小程序 x | 小程序运行时 | 微信开发者工具 `2.02.2609250` | 主链路通过；仍使用 `touristappid` |
-| Release | Android APK | 签名 APK | 构建/验签通过，尚未安装运行；IPA/HAP 和正式发布未验证 |
+| 微信小程序 x | 小程序运行时 | 微信开发者工具 Stable `1.06.2504030` / SDK `3.17.6` | 13 页面通过；仍使用 `touristappid` |
+| Release | Android APK | 签名 APK | v1/v2、zipalign、arm64/armv7 校验和安装运行通过；真机、IPA/HAP 和正式发布未验证 |
 
 ## 获取方式
 

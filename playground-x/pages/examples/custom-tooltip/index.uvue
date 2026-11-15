@@ -50,10 +50,11 @@ const chartHeight = 312
 const tooltipVisible = ref(false)
 const tooltipX = ref(0)
 const tooltipY = ref(0)
+const tooltipViewWidth = ref(chartWidth)
 const tooltipText = ref("")
 
 const tooltipStyle = computed(() => {
-  const left = Math.max(0, Math.min(tooltipX.value, chartWidth - 200))
+  const left = Math.max(0, Math.min(tooltipX.value, tooltipViewWidth.value - 200))
   const top = Math.max(0, Math.min(tooltipY.value, chartHeight - 48))
 
   return `left:${left}px;top:${top}px;`
@@ -63,9 +64,13 @@ const option = ref<Record<string, any>>({
   ...GLOBAL_OPTION,
   tooltip: {
     trigger: "item",
-    position(point: number[], params: any) {
+    position(point: number[], params: any, _dom: any, _rect: any, size: { viewSize: number[] }) {
       tooltipX.value = point[0]
       tooltipY.value = point[1]
+      const viewWidth = Number(size?.viewSize?.[0])
+      if (Number.isFinite(viewWidth) && viewWidth > 0) {
+        tooltipViewWidth.value = viewWidth
+      }
       updateTooltip(params)
 
       return point

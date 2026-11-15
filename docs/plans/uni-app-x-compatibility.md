@@ -1,44 +1,37 @@
 # uni-app x 兼容规划与验收记录（Vapor）
 
-> 状态：兼容实现、完整 playground 复刻，以及 HarmonyOS API 20、iOS 17.2、微信开发者工具三端本轮验收已完成；Android release APK 已构建/验签，但构建于本次 P0 改动前、需重建，运行时、IPA/HAP 与正式发布未验证
+> 状态：兼容实现、完整 playground 复刻，以及 Android 14 release APK、HarmonyOS API 20、iOS 17.2、微信开发者工具四端当前工作树验收已完成；底层异常恢复仍以单测/静态检查覆盖。Android 真机、回归页 release 直达、IPA/HAP 与正式发布未验证
 >
 > 工作分支：`codex/uni-app-x-compat`
 >
 > 基线：`5e57945`（`dev`）
 >
 > 基线版本：`uni-echarts@2.5.4`、ECharts `6.1.0`
-> 更新日期：2026-11-13
+> 更新日期：2026-11-15
 
 ## 1. 结论摘要
 
 - 已新增独立 `packages/core-x`、`playground-x`、x 专用构建脚本和三组适配器单测，不修改旧 `packages/core` 入口。
 - 旧 `playground` 的首页和 11 个示例已经复刻到独立 `playground-x`，没有修改旧 `playground`；x 工程另保留独立回归页。
-- Android App Vapor debug bytecode 已在可见 AVD 上完成完整 Demo 验收：11 个示例首帧、容器宽度 `autoresize`、主题/加载、弹窗开关、Pinia 交互、图表联动、dataZoom/restore、自定义 tooltip 和导出预览均已实际操作通过。清理临时诊断代码后又完成了一次无诊断冒烟，首页、基础页、弹窗和手动更新主链路仍通过；2026-11-12 21:09-21:16 又复验了弹窗首次打开/关闭/二次打开和导出系统预览，21:30 审计时 PID 为 `29603`、前台为 `UniAppActivity`、crash buffer 为空。22:21 以当前箭头修正重新执行 Vapor bytecode 编译安装，13 页编译成功，复验首页、`basic`、弹窗开关和 Pinia Picker/增减，PID 为 `30336`，crash buffer 仍为空。
+- Android App Vapor debug bytecode 曾在可见 AVD 上完成完整 Demo 验收：11 个示例首帧、容器宽度 `autoresize`、主题/加载、弹窗开关、Pinia 交互、图表联动、dataZoom/restore、自定义 tooltip 和导出预览均已实际操作通过。该段保留为历史 Debug 证据，不能替代本轮 review 修复后的 release 验收。
 - Android 验收中的模拟器并非未启动：`emulator-5556` 一直在线，ADB 可识别设备，应用进程和前台 Activity 也实际存在。HBuilder SDK 日志在 21:08:04、21:11:53、21:13:27 均出现 `setProjectPlayground o [CapabilityDisabledError]: 禁用写入 launch.json 配置`，21:11:53 还记录了旧设备项 `emulator-5554` 的 `getMobileList-skip-device ... reason: 'Timeout'`。调试器侧的设备发现和资源交接因此可能停在旧基座；重新以项目名 `playground-x` 打开项目、清理 ADB reverse、force-stop 基座并重启 HBuilderX SDK host 后再 launch，才恢复“蒸汽模式”“视图层编译目标：字节码”“编译成功”和“同步手机端程序文件成功”。这是调试资源交接问题，不是模拟器未启动。
-- iOS 17.2 App Vapor 已在 2026-11-13 完成首页、11 个示例和回归页真实交互：tooltip、异步 Loading/刷新、高亮轮播、主题/Loading、弹窗开关/二次打开、Pinia Picker/增减、联动拖拽/断开、dataZoom/restore、自定义 tooltip 和系统导出预览均通过；回归页还覆盖三种图表、`autoresize`、显式 resize、销毁/重建、卸载/重挂载、双实例和原生滚动重绘。XCUITest 受 macOS 27.2.1 + Xcode 16.2 的 AMFI/`DTServiceHub` entitlement 问题阻塞，本轮改用 `SimulatorKit` HID helper 的 tap/drag，完成的是真实模拟器输入，不是页面 handler 代点。
+- iOS 17.2 App Vapor 已在 2026-11-13 完成首页、11 个示例和回归页真实交互：tooltip、异步 Loading/刷新、高亮轮播、主题/Loading、弹窗开关/二次打开、Pinia Picker/增减、联动拖拽/断开、dataZoom/restore、自定义 tooltip 和系统导出预览均通过；回归页还覆盖三种图表、`autoresize`、显式 resize、销毁/重建、卸载/重挂载、双实例和原生滚动重绘。2026-11-15 又在当前工作树重建 XCUITest runner：`test01` 至 `test11` 分两批共 12 项全绿，`test12Regression` 单独通过，合计 13 项、0 失败。
 - HarmonyOS App Vapor 已在 2026-11-13 完成首页、11 个示例和回归页最新源码验收。回归页通过真实 `uitest uiInput click/drag` 覆盖图表类型、更新、尺寸、容器宽度 autoresize、显式 resize、销毁/重建、卸载/重挂载、tooltip、Loading、导出、手动更新、双实例、原生触摸和 scroll-view 重绘；组件 error/FATAL 为 0。
 - H5 production 产物为 **VDOM**，已完成首页、11 个示例和回归页的 13 路由真实 Canvas 验收，并实际操作通过异步 Loading、主题/Loading、Pinia Picker 提交、常驻 Canvas 弹窗生命周期、visualMap 联动与断开隔离、dataZoom/restore、自定义 tooltip、页内导出预览和窗口 `autoresize`。uni-app x 的 H5 运行时当前没有可用的 `uni.previewImage`，导出页使用页内预览，不能写成“H5 Vapor 通过”。
 - 视觉复刻已完成一轮 390×844、DPR 2 的新旧首页逐页对比。稳定页面的整页差异为 `basic 0.565%`、`builtin-theme 0.685%`、`popup 0.018%`、`custom-tooltip 0.184%`、`export-image 0.377%`、`pinia 0.918%`；随机数据页不能直接用整页像素差判断布局。首页、弹窗和 Pinia 的箭头容器坐标/尺寸已对齐，`❯` 字形在 Android、HarmonyOS、iOS 和 H5 均正常显示。
-- 微信小程序 x 已在微信开发者工具 `2.02.2609250` 完成 13 个页面（首页、11 个示例、回归页）的首帧真实 Canvas 截图。最新一轮用 CDP
-  `Emulation.setTouchEmulationEnabled` + `Input.dispatchTouchEvent` 在可见模拟器坐标完成
-  基础用法 tooltip、异步 Loading/刷新、主题/Loading、弹窗开关/二次打开、Pinia 增减、联动开关、
-  manual restore、自定义 tooltip 和导出系统预览；回归页调用原生
-  `scroll-view.scrollTo()` 后出现 `regression scroll refresh` 并重绘。运行时为 `0`
-  exception、`0` console error。项目仍使用 `touristappid`，并保留 DevTools AppID
-  报错弹窗；Picker 独立物理手势和 visualMap/dataZoom 手指拖动仍属专项缺口。
-- Android release APK 已构建并完成 v1/v2 签名验证，但该产物构建于本次 P0 改动前，最终提交前需要重建；尚未安装运行。iOS/HarmonyOS release、微信真实 AppID 和正式上传发布仍未验证。
+- 微信小程序 x 已在微信开发者工具 Stable `1.06.2504030` / SDK `3.17.6` 完成 13 个页面（首页、11 个示例、回归页）的当前源码首帧验收。当前源码自动化通过编译后的页面事件入口和 ECharts action 驱动，覆盖基础 tooltip/legend、异步 Loading/刷新、主题/Loading、弹窗开关/二次打开、Pinia、联动开关、manual dataZoom、自定义 tooltip、导出和回归页销毁/重建/卸载/重挂载。运行时为 `0` exception、`0` console error。项目仍使用 `touristappid`，AppID 报错弹窗属于 DevTools 环境问题；Picker 独立物理手势和 visualMap/dataZoom 手指拖动仍属专项缺口。
+- 2026-11-15 从当前工作树重新云打包 Android release APK，完成 v1/v2 签名、zipalign、包名和 ABI 校验后，在 `emulator-5556` 干净安装。首页和 11 个示例均真实打开并渲染；tooltip/legend、异步 Loading/刷新、主题切换、弹窗开关/二次打开、Pinia 增减、自定义 tooltip 和系统图片预览均实际操作通过。crash buffer 为空，`uni-getNetworkType` 非致命错误已通过关闭 playground 的 uni 统计消除。真机、回归页 release 直达、iOS/HarmonyOS release、微信真实 AppID 和正式上传发布仍未验证。
 - 当前结论只代表开发态样例与模拟器验收，不代表 npm、插件市场或 release 包已经可发布。
-- 2026-11-13 的本轮验收以 HarmonyOS API 20、iOS 17.2 和微信开发者工具 `2.02.2609250`
-  为三端权威证据。Android 没有在本轮重新启动模拟器，旧 Android 结果只作为历史完整 Demo
-  证据，不混入本轮三端结论。
-- iOS 17.2 已用 SimulatorKit HID 完成首页、11 个示例和回归页的真实点击/拖拽验收，不再
-  是“仅首帧”。XCUITest 在当前 macOS 27.2.1 + Xcode 16.2 上受
-  AMFI/`DTServiceHub` entitlement 问题阻塞，HID helper 是本次实际验收通道。
+- 2026-11-13 的三端证据为 HarmonyOS API 20、iOS 17.2 和微信开发者工具；Android 在该轮
+  没有重跑，只保留历史 Debug 证据。2026-11-15 已独立补跑 Android release APK，并纳入
+  本轮结论。
+- iOS 17.2 已用 XCUITest 和 SimulatorKit HID 两条通道完成首页、11 个示例和回归页的真实
+  点击/拖拽验收，不再只是“仅首帧”。当前工作树 XCUITest 的 12 个常规用例和 1 个回归用例
+  全部通过。
 - HarmonyOS 已完成首页、11 个示例和回归页真实点击/拖拽，覆盖原生 scroll-view 重绘、
   `native:touchstart/touchend`、`zr:click`、双实例和生命周期；组件 error 与 FATAL 均为 0。
-- 微信开发者工具最新一轮使用 CDP 坐标触摸完成 11 个示例主链路和回归页原生
-  `scroll-view.scrollTo()` 重绘，`0` exception、`0` console error；仍使用
-  `touristappid`，不是正式 AppID 验收。
+- 微信开发者工具当前工作树完成 13 页首帧、11 个示例主链路和回归页生命周期交互，
+  `0` exception、`0` console error；仍使用 `touristappid`，不是正式 AppID 验收。
 
 ## 2. 目标与边界
 
@@ -168,14 +161,15 @@ Android、iOS、HarmonyOS 和 H5 已做真实动态宽度验证。iOS 同时保�
 ### 3.5 触摸与 Tooltip
 
 - 原生触摸归一化为 `touchstart/touchmove/touchend/touchcancel`。
-- 坐标支持 `clientX/clientY`、`pageX/pageY`、`x/y`，并减去 canvas 偏移。
+- 坐标使用 `UniTouch` 必填的 `clientX/clientY`（视口坐标），并减去 canvas
+  视口偏移；不读取包含页面滚动偏移的 `pageX/pageY`，避免滚动后 local 坐标错位。
 - 触摸释放点相对按下点在 x/y 任一轴上的位移不超过 10px 时合成 zrender `click`；不限制按压时长。
 - 顶层和 series 级 tooltip 强制 `renderMode: "richText"`。
 - 不创建假 `document`，不支持 HTML formatter。
-- iOS 使用 SimulatorKit HID 的真实 tap/drag，HarmonyOS 使用
-  `uitest uiInput click/drag`，微信使用 CDP 坐标触摸；三端都观察到真实输入而非仅调用
-  页面方法。iOS/HarmonyOS 日志分别出现原生触摸与 `zr:click`，微信回归页观察到原生
-  scroll-view `@scroll` 后的 `regression scroll refresh`。
+- iOS 使用 XCUITest/SimulatorKit HID 的真实 tap/drag，HarmonyOS 使用
+  `uitest uiInput click/drag`，微信使用开发者工具自动化入口和 ECharts action；
+  iOS/HarmonyOS 观察到原生触摸与 `zr:click`，微信当前源码回归页观察到销毁/重建、
+  卸载/重挂载和滚动重绘链路。
 
 ### 3.6 导出与全局平台 API
 
@@ -311,7 +305,7 @@ CI 的 `uni-x` 作业执行 `pnpm check:uni-x`，发布作业发布时显式排�
 | Android 系统 | Android 14，`1080x2220`，density `440` |
 | iOS 模拟器 | iPhone 15 Pro，iOS 17.2；Xcode 16.2；另保留 iOS 17.4 对照 |
 | HarmonyOS 模拟器 | API 20，`1316x2832` |
-| 微信开发者工具 | `2.02.2609250`，已登录，CDP `9334`，`touristappid` |
+| 微信开发者工具 | Stable `1.06.2504030`，SDK `3.17.6`，`touristappid` |
 | ECharts | `6.1.0` |
 
 H5 production 通过 HBuilderX 内置 uni-app x 编译器直接构建。仓库默认产物位于：
@@ -334,31 +328,33 @@ VDOM模式”和 `DONE Build complete.`。上一轮产物
 
 | 平台 | 编译 | 初始化 | 真实渲染 | 交互 | 生命周期 | 导出 | 结论 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Android App Vapor debug bytecode | 通过 | 通过 | 通过 | 完整 Demo + autoresize 通过 | 通过 | 通过 | 完整 Demo 通过；release APK 已构建/验签，运行时未验证 |
+| Android App Vapor bytecode | 通过 | 通过 | 通过 | release APK 首页 + 11 示例与关键交互通过；历史 Debug 完整 Demo 通过 | 通过 | 通过 | 模拟器安装运行通过；真机未验证 |
 | iOS 17.2 App Vapor bytecode | 通过 | 通过 | 通过 | 首页、11 示例和回归页真实 HID 点击/拖拽通过 | 通过 | 通过 | 完整 Demo 通过，release/真机未验证 |
 | iOS 17.4 App Vapor bytecode | 通过 | 启动崩溃 | 不适用 | 不适用 | 不适用 | 不适用 | 上游 GCanvas 阻塞 |
 | HarmonyOS API 20 App Vapor bytecode | 通过 | 通过 | 通过 | 首页、11 示例和回归页真实点击/拖拽通过 | 通过 | 通过 | 完整 Demo 与最新回归页通过，release/真机未验证 |
 | H5 production VDOM | 通过 | 通过 | 通过 | 11 示例页面 + 常驻弹窗/Picker/visualMap/dataZoom 等关键交互通过 | 页面级通过 | 通过 | 13 路由通过，非 Vapor |
-| 微信小程序 x | 通过 | 通过 | 通过 | 13 页首帧 + 11 示例主链路 CDP 坐标触摸 + 回归页原生滚动重绘 | 通过 | 系统预览通过 | DevTools 验收通过；游客 AppID，Picker/拖拽专项仍有限 |
+| 微信小程序 x | 通过 | 通过 | 通过 | 13 页首帧 + 页面事件入口/Action 主链路 + 回归页生命周期 | 通过 | 系统预览通过 | DevTools 当前源码验收通过；游客 AppID，物理手势专项仍有限 |
 
 ### 5.1.1 完整 Demo 本轮验收矩阵
 
 | 平台 | 首页 + 11 示例可达 | 首帧真实 Canvas | 本轮额外交互 | 证据边界 |
 | --- | --- | --- | --- | --- |
-| Android Vapor | 通过 | 11 页均通过 | 容器 autoresize、主题/Loading、弹窗开关、Pinia、联动开关、dataZoom/restore、自定义 tooltip、导出预览 | 完整 Demo 主链路通过；release APK 已构建/验签，运行时、真机未验证 |
-| iOS 17.2 Vapor | 通过 | 11 页均通过 | tooltip、异步 Loading/刷新、高亮轮播、主题/Loading、弹窗开关/二次打开、Pinia Picker/增减、联动拖拽/断开、dataZoom/restore、自定义 tooltip、系统导出预览；回归页全链路 | SimulatorKit HID 真实 tap/drag；XCUITest 受 AMFI/`DTServiceHub` 阻塞；release/真机未验证 |
+| Android Vapor | 通过 | 11 页均通过 | release APK 实测 tooltip/legend、异步 Loading/刷新、主题切换、弹窗开关/二次打开、Pinia 增减、自定义 tooltip、系统导出预览；历史 Debug 另覆盖 autoresize、联动、dataZoom/restore | 2026-11-15 干净安装 release APK；回归页 release 直达和真机未验证 |
+| iOS 17.2 Vapor | 通过 | 11 页均通过 | tooltip、异步 Loading/刷新、高亮轮播、主题/Loading、弹窗开关/二次打开、Pinia Picker/增减、联动拖拽/断开、dataZoom/restore、自定义 tooltip、系统导出预览；回归页全链路 | 当前工作树 XCUITest 13 项全绿；SimulatorKit HID 作为历史/补充通道；release/真机未验证 |
 | HarmonyOS API 20 Vapor | 通过 | 11 页均通过 | 容器 autoresize、tooltip、导出、异步 Loading、主题/Loading、弹窗、联动、dataZoom/restore、action-dispatch、gradient、Pinia；回归页生命周期、双实例、原生触摸与 scroll-view 重绘 | `uitest uiInput` 真实点击/拖拽；组件 error/FATAL 为 0；release/真机未验证 |
 | H5 production VDOM | 通过 | 13 路由可达，11 个示例页均通过 | 异步 Loading、主题/Loading、Pinia 数值与 Picker、常驻弹窗打开/关闭/二次打开、visualMap 联动与断开隔离、dataZoom/restore、tooltip 与页内导出预览 | VDOM，不是 Vapor；桌面鼠标仍未接入 |
-| 微信小程序 x | 13 页（含回归页）通过 | 13 页均通过 | 基础 tooltip、异步 Loading/刷新、主题/Loading、弹窗开关/二次打开、Pinia 增减、联动开关、manual restore、自定义 tooltip、导出系统预览、回归页原生滚动重绘 | CDP 坐标触摸；`0` exception / `0` console error；`captureScreenshot` 不含 Canvas，使用 DevTools 窗口截图 |
+| 微信小程序 x | 13 页（含回归页）通过 | 13 页均通过 | 基础 tooltip/legend、异步 Loading/刷新、主题/Loading、弹窗开关/二次打开、Pinia、联动开关、manual dataZoom、自定义 tooltip、导出、回归页销毁/重建/卸载/重挂载 | 当前源码页面事件入口 + ECharts action；`0` exception / `0` console error；`captureScreenshot` 不含 Canvas，使用 DevTools 窗口截图 |
 
-验收截图和窗口图保存在 `/tmp/uni-echarts-x/`，未纳入仓库。三端本轮权威证据目录：
+验收截图和窗口图保存在 `/tmp/uni-echarts-x/`，未纳入仓库。iOS、HarmonyOS 和微信的
+权威证据目录：
 
 - iOS：`/tmp/uni-echarts-x/ios-final-v1/`，结构化摘要为同目录 `summary.json`，
   回归日志为 `launch-regression-root-observer2.log`。
 - HarmonyOS：`/tmp/uni-echarts-x/harmony-final-v2/`，结构化摘要为同目录
   `summary.json`，回归日志为 `launch-regression.log`。
-- 微信：`/tmp/uni-echarts-x/wx-goal-final-v4/`，结构化摘要为同目录 `summary.json`；
-  回归页日志为 `/tmp/uni-echarts-x/wx-final-v4-regression.jsonl`。
+- 微信：`/tmp/uni-echarts-x/wx-current-verify-014428/` 与
+  `/tmp/uni-echarts-x/wx-current-events-014837/`，结构化摘要分别为同目录
+  `summary.json` 与 `events.json`。
 
 Android 完整示例和交互证据在 `/tmp/uni-echarts-x/android-final/`：首页为
 `home-reset.png`，示例为 `01-basic.png` 至 `11-export-image.png`；主题/Loading、
@@ -372,11 +368,56 @@ Android 完整示例和交互证据在 `/tmp/uni-echarts-x/android-final/`：首
 轮播、`gradient`、Pinia Picker/增减、`custom-tooltip` 显示/隐藏和 `export-image`
 系统预览。
 
+2026-11-15 review 修复后的 release 证据在
+`/tmp/uni-echarts-x/review-fixes-apk-final/`：APK 为
+`playground-x-review-final.apk`，SHA-256
+`af00f3913e72ec66215d45a25e41ca52dc48405da235448655b8bb344880048c`；首页、11 个
+示例和关键交互截图均在该目录。
+
 ### 5.2 Android App Vapor
 
 环境：`Pixel_3a_API_34_extension_level_7_arm64-v8a`，`emulator-5556`，可见窗口冷启动。
 
-本轮完整 Demo 验收已重新以 Vapor bytecode 编译并安装 13 页工程，启动日志包含
+#### 5.2.1 2026-11-15 release APK
+
+本轮使用 HBuilderV SDK `5.33.2026102115-alpha` 从当前工作树云打包，编译器日志为
+“蒸汽模式”“当前视图层编译目标：字节码”“当前工程 13 个页面”“项目 playground-x
+编译成功”。playground 显式关闭了默认开启的 uni 统计。
+
+产物校验：
+
+- 包名 `ink.xiaohe.echartsx.playground`，版本 `1.0.0 (100)`。
+- `apksigner`：v1 JAR 签名和 v2 APK Signature Scheme 均通过。
+- `zipalign -c -v 4`：通过。
+- `aapt dump badging`：`native-code: 'arm64-v8a' 'armeabi-v7a'`；32 位 SUNMI L2K
+  所需的 `armeabi-v7a` 已包含，但尚未在真机安装。
+- 签名证书 DN：
+  `CN=Uni ECharts X Playground, OU=Playground, O=Uni ECharts, L=Shanghai, ST=Shanghai, C=CN`。
+
+在卸载旧包后干净安装并冷启动，应用 PID `29603`，`topResumedActivity` 为
+`UniAppActivity`。首页与 11 个示例均真实打开并显示 Canvas；实测：
+
+- `basic`：两个扇区的 richText tooltip 连续切换，legend 关闭/恢复；静止截图无残影，
+  连续重绘录屏保存在同目录 `final-basic-repaint.mp4`。
+- `async-data`：点击“更新数据”出现 Loading/倒计时，随后数据刷新。
+- `action-dispatch`：真实 tooltip 轮播画面。
+- `builtin-theme`：Dark 首帧切换 Light 并重绘。
+- `gradient`、`connectable`、`manual-update`：真实首帧 Canvas。
+- `popup`：首次打开、遮罩关闭和二次打开。
+- `pinia-integration`：雷达图与增加按钮，达到上限后按钮进入禁用态。
+- `custom-tooltip`：扇区触摸显示，空白触摸隐藏。
+- `export-image`：系统图片预览显示 `1 / 1`。
+- 验收后 PID 仍存活，`logcat -b crash` 为空，未出现应用 FATAL。
+
+release 首页没有回归页入口，`am start --es pagePath pages/regression/index` 直达会进入
+白屏，因此本轮没有把回归页写成 release 运行通过；其代码仍由构建、单测与历史 Debug/三端
+证据覆盖。启动时仍有 HBuilder 引擎日志
+`initUTSHooksClassArray error: UTSHooksClassArray`，但不伴随 FATAL 或 Canvas 失败；
+关闭 uni 统计后，上一版出现的 `uni-getNetworkType 模块不存在` 已消失。
+
+#### 5.2.2 历史 Debug 验收
+
+历史 Debug 轮次已重新以 Vapor bytecode 编译并安装 13 页工程，启动日志包含
 “进程 13 个页面”“编译成功”和“进入页面：pages/index/index”。随后在可见 AVD 上逐页
 操作，而不是复用旧核心回归页截图。
 
@@ -461,8 +502,9 @@ PID `30336`，crash buffer 为空。证据为 `/tmp/uni-echarts-x/android-arrow-
 
 未验证：
 
-- Android release APK 的安装运行与真机验证。
-- 真机。
+- Android 真机；当前 release 仅验证了 arm64 Android 14 AVD，尚未在 32 位 SUNMI L2K
+  实机安装。
+- release 首页没有回归页入口，尚未完成回归页的 release 直达验收。
 - 桌面级悬停、滚轮和复杂手势。
 
 ### 5.3 iOS App Vapor
@@ -498,16 +540,15 @@ PID `30336`，crash buffer 为空。证据为 `/tmp/uni-echarts-x/android-arrow-
 
 自动化输入：
 
-- 当前 macOS 27.2.1 + Xcode 16.2 上，XCUITest 因 AMFI/`DTServiceHub`
-  entitlement/first-launch 问题不可用，`AXIsProcessTrusted()` 也不可用于稳定的
-  System Events/CGEvent 注入。
-- 本轮改用 SimulatorKit HID helper，直接向已启动模拟器发送 tap/drag。源码为
-  `/tmp/uni-echarts-x/ios-ui-tests/simhid.swift`，可执行文件为
-  `/tmp/uni-echarts-x/ios-ui-tests/bin/simhid`；调用形式为
-  `simhid tap X Y` 和 `simhid drag X1 Y1 X2 Y2`。
-- 该通道完成了多步点击、拖拽和滚动，不再沿用 2026-11-12 私有 mouse HID 调查中
-  `backboardd` abort 的失败路径；早期 `backboardd-*.ips` 只保留为调查记录，不作为本轮
-  失败证据。
+- 2026-11-15 在当前工作树重新构建 XCUITest runner，并在 iPhone 15 Pro / iOS 17.2
+  模拟器执行：`BatchA-DD14-013543.xcresult` 通过 6 项，
+  `BatchB-DD14-014004.xcresult` 通过 6 项，
+  `IsolatedRegression-DD14-013412.xcresult` 通过 1 项；合计 13 项、0 失败。
+- XCUITest 通过应用可访问性树和真实模拟器点击执行，已经覆盖首页、11 个示例和回归页；
+  历史 SimulatorKit HID 证据保留，但不再是唯一验收通道。
+- SimulatorKit HID helper 源码仍保留在
+  `/tmp/uni-echarts-x/ios-ui-tests/simhid.swift`；旧 mouse HID 调查中的
+  `backboardd` abort 只作为历史记录。
 
 iOS 17.4 对照设备：
 
@@ -521,7 +562,7 @@ iOS 17.4 对照设备：
 
 - iOS release/TestFlight 包。
 - iOS 真机。
-- 其他 Xcode/runtime 组合上的 XCUITest 可复现性；本轮验收依赖 SimulatorKit HID。
+- 其他 Xcode/runtime 组合上的 XCUITest 可复现性；当前主机已通过，但未建立跨版本矩阵。
 - 更新 HBuilderX/GCanvas 后的 17.4 复测。
 
 ### 5.4 HarmonyOS App Vapor
@@ -646,43 +687,37 @@ Canvas 外，其余示例页均有非空 Canvas；交互验收的 CDP 异常和�
 
 ### 5.6 微信小程序 x
 
-环境：微信开发者工具 `2.02.2609250`，已登录，项目 AppID 为 `touristappid`；
-CDP 端口 `9334`，窗口 ID `2955`。
+环境：微信开发者工具 Stable `1.06.2504030`，SDK `3.17.6`，项目 AppID 为
+`touristappid`。
 
 已通过：
 
-- 首页、11 个示例和 Canvas 兼容回归页，共 13 页可达。
-- 13 页在微信开发者工具模拟器窗口中均有真实 Canvas 画面；权威首帧和交互证据在
-  `/tmp/uni-echarts-x/wx-goal-final-v4/`，结构化摘要为同目录 `summary.json`。
-- 最新一轮共 `83` 步，使用 CDP
-  `Emulation.setTouchEmulationEnabled` + `Input.dispatchTouchEvent` 在可见模拟器
-  坐标发送触摸，不再用页面 handler 代替点击。
-- 11 个示例主链路通过：`basic` 点按扇区显示 tooltip；`async-data` 点击更新后
-  Loading/倒计时并刷新；`action-dispatch` 高亮轮播变化；`builtin-theme`
-  Light/Loading；`gradient` 首帧；`popup` 打开、遮罩关闭、二次打开；
-  `pinia-integration` 增加/减少；`connectable` 联动开关；`manual-update`
-  toolbox Restore；`custom-tooltip` 点按显示、空白点按隐藏；`export-image`
-  系统图片预览 `1 / 1`。
-- 回归页调用原生 `scroll-view.scrollTo()`，日志出现
-  `[uni-echarts-x] regression scroll refresh` 并重新渲染；证据为
-  `/tmp/uni-echarts-x/wx-final-v4-regression.jsonl` 和
-  `wx-final-v4-regression-{top,bottom,top-restored}-window.png`。这是程序化原生滚动，
-  不是手指惯性拖拽。
-- CDP 运行时审计为 `0` exception、`0` console error；`20` 条 warning 均来自
-  `touristappid`、Vue 开发提示、`wx.getSystemInfoSync` 弃用和页面切换时已
-  disposal 实例提示。
+- 首页、11 个示例和 Canvas 兼容回归页，共 13 页可达；13 页均拿到非空
+  `getDataURL()`，首帧和交互证据在
+  `/tmp/uni-echarts-x/wx-current-verify-014428/`，结构化摘要为同目录
+  `summary.json`。
+- 当前源码自动化通过编译后的页面事件入口和 ECharts action 驱动，已覆盖：
+  `basic` tooltip 和 legend 开关；`async-data` Loading/刷新；
+  `action-dispatch` 动作重绘；`builtin-theme` Light/Dark/Loading；
+  `gradient`；`popup` 首次打开、关闭、二次打开；`pinia-integration`；
+  `connectable` 联动开启/关闭及隔离高亮；`manual-update` dataZoom；
+  `custom-tooltip` 显示/隐藏；`export-image` `toTempFilePath()` 和页内预览。
+- 回归页实际操作通过折线/柱状/饼图切换、更新数据、尺寸、容器宽度、Resize、
+  Tooltip、Loading、导出、手动更新、销毁/重建、卸载/重挂载和第二实例；
+  证据为 `/tmp/uni-echarts-x/wx-current-events-014837/events.json`。
+- 运行时审计为 `0` exception、`0` console error。DevTools 仍弹出
+  `更改 AppID 失败 touristappid / Error: tourist appid`，这是游客 AppID 环境问题，
+  不是组件运行时异常。
 
 已知限制：
 
 - 微信自动化 `App.captureScreenshot`/`miniProgram.screenshot()` 不包含 Canvas
-  图层，返回白色页面；DevTools 窗口截图能看到图表，因此不能把自动化截图白屏
-  误判为组件白屏。
+  图层；DevTools 窗口截图能看到图表，因此不能把自动化截图白屏误判为组件白屏。
 - `touristappid` 下 DevTools 持续弹出“更改 AppID 失败 touristappid /
   Error: tourist appid”，弹窗位于模拟器右侧，不覆盖主要图表区域；它不是组件
   运行时异常。
-- CDP 坐标触摸已覆盖主链路，但 Picker 的独立物理手势、visualMap/dataZoom
-  手指拖动尚未形成穷举矩阵；回归页滚动重绘是 `scrollTo()` 触发的原生滚动，不是
-  手指拖动。
+- 当前源码自动化使用页面事件入口和 ECharts action，Picker 独立物理手势、
+  visualMap/dataZoom 手指拖动和 tooltip 触摸命中尚未形成穷举矩阵。
 - 未使用真实小程序 AppID，未做上传/体验版验收。
 
 ## 6. 能力矩阵
@@ -694,7 +729,7 @@ CDP 端口 `9334`，窗口 ID `2955`。
 | 固定尺寸 | 已验证 | 已验证 | 已验证 | 已验证 | 已验证 |
 | 显式 `resize()` | 已验证 | 已验证 | 已验证 | 已验证 | 已验证 |
 | richText tooltip | 已验证 | 已验证 | 已验证 | 已验证 | 已验证 |
-| 原生触摸/点击 | 已验证 | 已验证 | 已验证 | 触摸已验证 | CDP 坐标触摸已验证 |
+| 原生触摸/点击 | 已验证 | 已验证 | 已验证 | 触摸已验证 | 自动化入口已验证，物理触摸未穷举 |
 | loading | 已验证 | 已验证 | 已验证 | 已验证 | 已验证 |
 | dispose/reinit | 已验证 | 已验证 | 已验证 | 已验证 | 已验证 |
 | `v-if` 卸载/挂载 | 已验证 | 已验证 | 已验证 | 已验证 | 已验证 |
@@ -712,17 +747,17 @@ CDP 端口 `9334`，窗口 ID `2955`。
 | brush/复杂手势 | 未验证 | 未验证 | 未验证 | 未验证 | 未验证 |
 | toolbox saveAsImage/dataView | 未验证 | 未验证 | 未验证 | 未验证 | 未验证 |
 | heatmap/decal/多 zlevel | 未支持 | 未支持 | 未支持 | 未支持 | 未支持 |
-| release 构建 | APK 已构建/验签，运行时未验证 | 未验证 | 未验证 | production 已构建 | 未验证 |
+| release 构建 | APK 已安装运行，真机未验证 | 未验证 | 未验证 | production 已构建 | 未验证 |
 
-微信主链路由 CDP 坐标触摸驱动；Picker 独立手势、visualMap/dataZoom 手指拖动仍未
-完成穷举矩阵。
+微信当前源码主链路通过页面事件入口和 ECharts action 驱动；Picker 独立手势、
+visualMap/dataZoom 手指拖动仍未完成穷举矩阵。
 
 ## 7. 自动化检查
 
 本轮执行结果：
 
 - `pnpm build:uni-x`：通过。
-- `pnpm test:x`：`3` 个测试文件、`16` 个测试全部通过。
+- `pnpm test:x`：`3` 个测试文件、`18` 个测试全部通过。
 - `tsconfig.test.json` 类型检查：通过。
 - `pnpm verify:uni-x`：产物结构、平台声明、Vapor manifest 和 13 条路由校验通过。
 
@@ -744,7 +779,7 @@ node node_modules/vue-tsc/bin/vue-tsc.js \
 - DPR 计算、回退和变化阈值。
 - host 逻辑/backing 尺寸同步。
 - 原生 canvas 导出和独立浏览器 platform canvas。
-- 文本测量上下文注册表与多实例销毁。
+- 文本测量上下文注册表、多实例销毁和测量异常后的状态恢复。
 - 触摸坐标、10px 位移阈值 click 合成、拖拽/长按和 cleanup。
 - tooltip 归一化和不修改原对象。
 
@@ -755,13 +790,13 @@ node node_modules/vue-tsc/bin/vue-tsc.js \
 | 风险/阻塞 | 当前状态 | 处理 |
 | --- | --- | --- |
 | iOS 17.4 上游 GCanvas 崩溃 | 未解决 | 固定使用 17.2 验收；升级工具链或真机复核后再开放 17.4 |
-| iOS 自动化依赖 SimulatorKit HID | 环境限制 | XCUITest 在当前 macOS 27.2.1 + Xcode 16.2 受 AMFI/`DTServiceHub` entitlement 阻塞；本轮已用 SimulatorKit HID 完成真实 tap/drag，后续升级 Xcode/runtime 后重试 XCUITest |
+| iOS XCUITest 已运行 | 范围限制 | 当前 iPhone 15 Pro / iOS 17.2 上 13 项全绿；尚未建立其他 Xcode/runtime 组合矩阵，SimulatorKit HID 仅作为历史/补充通道 |
 | Android HBuilder 调试资源交接偶发卡住 | 环境问题 | 日志出现 `CapabilityDisabledError: 禁用写入 launch.json 配置` 和旧 `emulator-5554` 发现超时。先查 ADB、`emulator-5556` 和前台进程，再用项目名重新 `cli open`、清理 ADB reverse、force-stop 基座、重启 HBuilderX SDK host 后 launch；不要把交接失败记成模拟器未启动 |
 | 微信 `touristappid` 弹窗 | 环境限制 | 真实 AppID 下重跑并清理 DevTools 错误 |
 | 微信自动化截图不含 Canvas | 工具限制 | 使用 DevTools 窗口截图；不要把 `miniProgram.screenshot()` 白屏判为组件失败 |
-| 微信 Picker/visualMap/dataZoom 手指拖动未穷举 | 验证缺口 | 主链路已使用 CDP 坐标触摸；真实 AppID 下补 Picker 独立手势、visualMap/dataZoom 拖动和 tooltip 触摸命中 |
+| 微信 Picker/visualMap/dataZoom 手指拖动未穷举 | 验证缺口 | 当前源码主链路已通过页面事件入口和 ECharts action 验证；真实 AppID 下补 Picker 独立手势、visualMap/dataZoom 拖动和 tooltip 触摸命中 |
 | HarmonyOS 11 页逐控件矩阵未穷举 | 验证缺口 | 首页、11 示例主链路和回归页底层能力已通过；后续把每个页面的控件/手势展开成独立矩阵 |
-| Android release APK 运行时未验证 | 待执行 | APK 已构建/验签；补安装启动、核心交互和真机回归 |
+| Android release APK 真机未验证 | 待执行 | 当前 APK 已在 Android 14 AVD 干净安装并通过首页、11 示例和核心交互；仍需在 SUNMI L2K 等目标真机安装回归 |
 | iOS/HarmonyOS release 未构建 | 待执行 | 分别构建 IPA/HAP 并运行回归 |
 | HBuilder CLI 正式发行登录 | 环境阻塞 | 登录后复测发布流程 |
 | 高度/横屏全自动 resize | 未实现 | 当前只跟随可观测容器尺寸；后续按产品需求设计 |
@@ -772,13 +807,14 @@ node node_modules/vue-tsc/bin/vue-tsc.js \
 
 ## 9. 下一阶段
 
-1. 完成 Android release APK 的安装运行回归；构建 iOS/HarmonyOS release 并运行回归。
-2. 固化 iOS SimulatorKit HID 回归脚本，并在升级 Xcode/runtime 后重试 XCUITest。
-3. HarmonyOS 补齐 11 页每个控件/手势的逐项交互矩阵。
-4. 微信真实 AppID 下补物理 Picker、visualMap/dataZoom 拖动和 tooltip 触摸命中，确认 `touristappid` 弹窗消失；继续使用窗口截图核对 Canvas。
-5. 升级 HBuilderX/GCanvas 后复测 iOS 17.4。
-6. 决定 H5 桌面鼠标、高度/横屏自动 resize 和离屏 canvas 是否进入 MVP。
-7. 将当前手工矩阵沉淀为可重复的端侧回归脚本。
+1. 在 SUNMI L2K 等 32 位 `armeabi-v7a` 真机安装当前 APK，并补 Android 真机回归。
+2. 构建 iOS/HarmonyOS release，并运行对应回归。
+3. 固化 XCUITest 回归脚本，并在升级 Xcode/runtime 后重跑全矩阵。
+4. HarmonyOS 补齐 11 页每个控件/手势的逐项交互矩阵。
+5. 微信真实 AppID 下补物理 Picker、visualMap/dataZoom 拖动和 tooltip 触摸命中，确认 `touristappid` 弹窗消失；继续使用窗口截图核对 Canvas。
+6. 升级 HBuilderX/GCanvas 后复测 iOS 17.4。
+7. 决定 H5 桌面鼠标、高度/横屏自动 resize 和离屏 canvas 是否进入 MVP。
+8. 将当前手工矩阵沉淀为可重复的端侧回归脚本。
 
 ## 10. 验收规则
 

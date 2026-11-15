@@ -118,6 +118,11 @@ type ChartMetrics = {
   renderDpr: number
 }
 
+type ChartCallResult = {
+  ok: boolean
+  value: any
+}
+
 const chartRef = ref<ComponentPublicInstance | null>(null)
 const secondChartRef = ref<ComponentPublicInstance | null>(null)
 const statusText = ref("等待组件初始化")
@@ -130,6 +135,7 @@ const chartHeight = ref(200)
 const containerWidth = ref(300)
 const mode = ref("line")
 const updateCount = ref(0)
+const secondUpdateCount = ref(0)
 const renderedCount = ref(0)
 const secondRenderedCount = ref(0)
 const RENDER_STATUS_INTERVAL = 500
@@ -475,23 +481,34 @@ function onNativeTouch(payload: any) {
   }
 }
 
-function callChart(method: string, ...args: any[]) {
+function callChart(method: string, ...args: any[]): ChartCallResult {
   const instance = chartRef.value as any
   if (instance == null || typeof instance[method] !== "function") {
     statusText.value = `调用失败：${method} 不存在`
-    return null
+    return { ok: false, value: null }
   }
 
-  return instance[method](...args)
+  try {
+    return { ok: true, value: instance[method](...args) }
+  } catch (error) {
+    statusText.value = `调用失败：${method}`
+    appendMetric(`call error: ${method} ${String(error)}`)
+    return { ok: false, value: null }
+  }
 }
 
-function callSecondChart(method: string, ...args: any[]) {
+function callSecondChart(method: string, ...args: any[]): ChartCallResult {
   const instance = secondChartRef.value as any
   if (instance == null || typeof instance[method] !== "function") {
-    return null
+    return { ok: false, value: null }
   }
 
-  return instance[method](...args)
+  try {
+    return { ok: true, value: instance[method](...args) }
+  } catch (error) {
+    appendMetric(`second call error: ${method} ${String(error)}`)
+    return { ok: false, value: null }
+  }
 }
 
 function setMode(value: string) {
@@ -513,25 +530,29 @@ function updateChart() {
 
 function updateSecondChart() {
   console.log("[uni-echarts-x] action updateSecondChart")
-  secondOption.value = createSecondOption(updateCount.value + 1)
-  statusText.value = "已更新第二实例"
+  secondUpdateCount.value += 1
+  secondOption.value = createSecondOption(secondUpdateCount.value)
+  statusText.value = `已更新第二实例 #${secondUpdateCount.value}`
 }
 
 function updateAllCharts() {
   console.log("[uni-echarts-x] action updateAllCharts")
   updateCount.value += 1
+  secondUpdateCount.value += 1
   option.value = createOption(updateCount.value)
-  secondOption.value = createSecondOption(updateCount.value)
+  secondOption.value = createSecondOption(secondUpdateCount.value)
   statusText.value = "已更新全部实例"
 }
 
 function reportMetrics(stage: string) {
-  const metrics = callChart("getMetrics") as ChartMetrics | null
+  const result = callChart("getMetrics")
 
-  if (metrics == null) {
+  if (!result.ok || result.value == null) {
     appendMetric(`metrics(${stage}): unavailable`)
     return
   }
+
+  const metrics = result.value as ChartMetrics
 
   appendMetric(
     `metrics(${stage}): ${metrics.width}x${metrics.height}, `
@@ -568,11 +589,13 @@ function toggleContainerWidth() {
 
 function resizeChart() {
   console.log("[uni-echarts-x] action resizeChart")
-  callChart("resize", {
+  const result = callChart("resize", {
     width: chartWidth.value,
     height: chartHeight.value,
   })
-  statusText.value = "已请求 resize"
+  if (result.ok) {
+    statusText.value = "已请求 resize"
+  }
   setTimeout(() => {
     reportMetrics("explicit")
   }, 200)
@@ -586,14 +609,8 @@ function onPageScroll() {
   scrollRefreshTimer = setTimeout(() => {
     scrollRefreshTimer = 0
     console.log("[uni-echarts-x] regression scroll refresh")
-    callChart("resize", {
-      width: chartWidth.value,
-      height: chartHeight.value,
-    })
-    callSecondChart("resize", {
-      width: 240,
-      height: 160,
-    })
+    callChart("resize")
+    callSecondChart("resize")
   }, 120)
 }
 
@@ -606,8 +623,10 @@ onUnload(() => {
 
 function disposeChart() {
   console.log("[uni-echarts-x] action dispose")
-  callChart("dispose")
-  statusText.value = "已销毁"
+  const result = callChart("dispose")
+  if (result.ok) {
+    statusText.value = "已销毁"
+  }
 }
 
 function reinitChart() {
@@ -617,8 +636,10 @@ function reinitChart() {
     return
   }
 
-  callChart("setOption", option.value)
-  statusText.value = "请求重新初始化"
+  const result = callChart("setOption", option.value)
+  if (result.ok) {
+    statusText.value = "请求重新初始化"
+  }
 }
 
 function toggleMounted() {
@@ -629,20 +650,24 @@ function toggleMounted() {
 
 function showTooltip() {
   console.log("[uni-echarts-x] action showTip")
-  callChart("dispatchAction", {
+  const result = callChart("dispatchAction", {
     type: "showTip",
     seriesIndex: 0,
     dataIndex: 2,
   })
-  statusText.value = "showTip"
+  if (result.ok) {
+    statusText.value = "showTip"
+  }
 }
 
 function hideTooltip() {
   console.log("[uni-echarts-x] action hideTip")
-  callChart("dispatchAction", {
+  const result = callChart("dispatchAction", {
     type: "hideTip",
   })
-  statusText.value = "hideTip"
+  if (result.ok) {
+    statusText.value = "hideTip"
+  }
 }
 
 function toggleLoading() {
@@ -653,12 +678,22 @@ function toggleLoading() {
 function exportChart() {
   console.log("[uni-echarts-x] action getDataURL")
   try {
-    const data = callChart("getDataURL", {
+    const result = callChart("getDataURL", {
       type: "png",
       pixelRatio: 1,
       backgroundColor: "#ffffff",
     })
-    const text = String(data ?? "")
+    if (!result.ok) {
+      return
+    }
+
+    const text = String(result.value ?? "")
+    if (!text.startsWith("data:image/")) {
+      statusText.value = "getDataURL 失败"
+      appendMetric("dataURL error: empty or invalid data URL")
+      return
+    }
+
     statusText.value = "getDataURL 完成"
     appendMetric(`dataURL: ${text.length} ${text.slice(0, 22)}`)
   }
@@ -676,10 +711,12 @@ function toggleManual() {
 
 function applyManual() {
   console.log("[uni-echarts-x] action applyManual")
-  callChart("setOption", option.value, {
+  const result = callChart("setOption", option.value, {
     notMerge: true,
   })
-  statusText.value = "已手动应用"
+  if (result.ok) {
+    statusText.value = "已手动应用"
+  }
 }
 </script>
 

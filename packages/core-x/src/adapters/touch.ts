@@ -8,8 +8,6 @@ export interface CanvasRectLike {
 export interface TouchPointLike {
   clientX?: number;
   clientY?: number;
-  pageX?: number;
-  pageY?: number;
   x?: number;
   y?: number;
 }
@@ -68,13 +66,6 @@ export function normalizeTouchPoint(
     return {
       x: Math.max(0, touch.clientX - rect.left),
       y: Math.max(0, touch.clientY - rect.top)
-    };
-  }
-
-  if (hasNumber(touch.pageX) && hasNumber(touch.pageY)) {
-    return {
-      x: Math.max(0, touch.pageX - rect.left),
-      y: Math.max(0, touch.pageY - rect.top)
     };
   }
 

@@ -2,7 +2,6 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   createEChartsCanvasHost,
   createPlatformCanvas,
-  enableEChartsDirtyRectPainter,
   getNativeCanvasDataURL,
   installEChartsPlatformAPI,
   releaseEChartsPlatformContext,
@@ -100,145 +99,6 @@ describe("core-x canvas adapter", () => {
     })).toBe("");
   });
 
-  it("patches dirty-rect painting without the native outer clip", () => {
-    const context = {
-      restore: vi.fn(),
-      save: vi.fn()
-    };
-    const paintInRect = vi.fn((_layer: any, cursor: any) => {
-      cursor.drawIdx = cursor.endIdx;
-    });
-    const painter = {
-      _opts: {
-        useDirtyRect: false
-      },
-      _paintPerCursor: vi.fn(),
-      _paintPerCursorInRect: paintInRect
-    };
-    const layer = {
-      ctx: context
-    };
-    const cursor = {
-      drawIdx: 0,
-      endIdx: 2
-    };
-    const repaintRects = [{ x: 0, y: 0, width: 20, height: 20 }];
-
-    expect(enableEChartsDirtyRectPainter(painter)).toBe(true);
-    expect(painter._opts.useDirtyRect).toBe(true);
-    expect(painter._paintPerCursor(layer, cursor, [], repaintRects, true)).toBe(true);
-    expect(paintInRect).toHaveBeenCalledWith(layer, cursor, [], repaintRects[0], true);
-    expect(context.save).toHaveBeenCalledOnce();
-    expect(context.restore).toHaveBeenCalledOnce();
-  });
-
-  it("paints merged dirty rects in one pass", () => {
-    const context = {
-      restore: vi.fn(),
-      save: vi.fn()
-    };
-    const paintInRect = vi.fn((_layer: any, cursor: any) => {
-      cursor.drawIdx = cursor.endIdx;
-    });
-    const painter = {
-      _opts: {
-        useDirtyRect: false
-      },
-      _paintPerCursor: vi.fn(),
-      _paintPerCursorInRect: paintInRect
-    };
-    const layer = {
-      ctx: context
-    };
-    const cursor = {
-      drawIdx: 0,
-      endIdx: 4
-    };
-    const repaintRects = [
-      { x: 0, y: 0, width: 20, height: 20 },
-      { x: 40, y: 40, width: 10, height: 10 }
-    ];
-
-    expect(enableEChartsDirtyRectPainter(painter)).toBe(true);
-    expect(painter._paintPerCursor(layer, cursor, [], repaintRects, false)).toBe(true);
-    expect(paintInRect).toHaveBeenCalledOnce();
-    expect(paintInRect).toHaveBeenCalledWith(layer, cursor, [], {
-      x: 0,
-      y: 0,
-      width: 50,
-      height: 50
-    }, false);
-    expect(cursor.drawIdx).toBe(4);
-    expect(context.save).toHaveBeenCalledOnce();
-    expect(context.restore).toHaveBeenCalledOnce();
-  });
-
-  it("expands the paint rect around elements that cross its boundary", () => {
-    const context = {
-      restore: vi.fn(),
-      save: vi.fn()
-    };
-    const paintInRect = vi.fn((_layer: any, cursor: any) => {
-      cursor.drawIdx = cursor.endIdx;
-    });
-    const painter = {
-      _opts: {
-        useDirtyRect: false
-      },
-      _paintPerCursor: vi.fn(),
-      _paintPerCursorInRect: paintInRect
-    };
-    const layer = {
-      ctx: context
-    };
-    const cursor = {
-      drawIdx: 0,
-      endIdx: 3
-    };
-    const repaintRects = [{ x: 10, y: 10, width: 20, height: 20 }];
-    const intersects = (a: any, b: any) => (
-      a.x < b.x + b.width
-      && b.x < a.x + a.width
-      && a.y < b.y + b.height
-      && b.y < a.y + a.height
-    );
-    const element = (x: number, y: number, width: number, height: number) => ({
-      getPaintRect: () => ({
-        x,
-        y,
-        width,
-        height,
-        intersect: (rect: any) => intersects({ x, y, width, height }, rect)
-      })
-    });
-    const list = [
-      element(15, 15, 40, 40),
-      element(50, 50, 30, 30),
-      element(200, 200, 10, 10)
-    ];
-
-    expect(enableEChartsDirtyRectPainter(painter)).toBe(true);
-    expect(painter._paintPerCursor(layer, cursor, list, repaintRects, false)).toBe(true);
-    expect(paintInRect).toHaveBeenCalledWith(layer, cursor, list, {
-      x: 10,
-      y: 10,
-      width: 70,
-      height: 70
-    }, false);
-  });
-
-  it("leaves dirty rects disabled when the painter is incompatible", () => {
-    const painter = {
-      _opts: {
-        useDirtyRect: false
-      }
-    };
-
-    expect(enableEChartsDirtyRectPainter(painter)).toBe(false);
-    expect(painter._opts.useDirtyRect).toBe(false);
-    expect(enableEChartsDirtyRectPainter(null)).toBe(false);
-  });
-
   it("creates independent browser canvases for ECharts platform use", () => {
     expect(createPlatformCanvas()).toBeNull();
 
@@ -278,6 +138,34 @@ describe("core-x canvas adapter", () => {
 
     releaseEChartsPlatformContext(context);
 
+    expect(platformAPI.measureText("fallback")).toEqual({
+      width: expect.any(Number)
+    });
+  });
+
+  it("restores text measurement state when measurement throws", () => {
+    const context = {
+      font: "",
+      measureText: vi.fn(() => {
+        throw new Error("measure failed");
+      }),
+      restore: vi.fn(),
+      save: vi.fn()
+    } as unknown as CanvasRenderingContext2D;
+    let platformAPI: Record<string, any> = {};
+    const echarts = {
+      setPlatformAPI(value: Record<string, any>) {
+        platformAPI = value;
+      }
+    };
+
+    installEChartsPlatformAPI(echarts as any, context);
+
+    expect(platformAPI.measureText("chart", "16px sans-serif")).toEqual({
+      width: expect.any(Number)
+    });
+    expect(context.save).toHaveBeenCalledOnce();
+    expect(context.restore).toHaveBeenCalledOnce();
     expect(platformAPI.measureText("fallback")).toEqual({
       width: expect.any(Number)
     });

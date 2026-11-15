@@ -17,14 +17,10 @@ afterEach(() => {
 });
 
 describe("core-x touch adapter", () => {
-  it("normalizes client, page and local coordinates", () => {
+  it("normalizes viewport and local coordinates", () => {
     expect(normalizeTouchPoint({ clientX: 30, clientY: 50 }, rect)).toEqual({
       x: 20,
       y: 30
-    });
-    expect(normalizeTouchPoint({ pageX: 40, pageY: 70 }, rect)).toEqual({
-      x: 30,
-      y: 50
     });
     expect(normalizeTouchPoint({ x: 12, y: 14 }, rect)).toEqual({
       x: 12,
@@ -35,6 +31,23 @@ describe("core-x touch adapter", () => {
       y: 0
     });
     expect(normalizeTouchPoint({}, rect)).toBeNull();
+  });
+
+  it("keeps viewport coordinates stable after the page scrolls", () => {
+    const scrolledRect = {
+      left: 10,
+      top: 100,
+      width: 100,
+      height: 80
+    };
+
+    expect(normalizeTouchPoint({
+      clientX: 30,
+      clientY: 120
+    }, scrolledRect)).toEqual({
+      x: 20,
+      y: 20
+    });
   });
 
   it("dispatches zrender pointer payloads", () => {

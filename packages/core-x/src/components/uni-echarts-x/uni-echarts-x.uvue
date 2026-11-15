@@ -24,7 +24,6 @@ import * as echarts from "echarts/core"
 import type { EChartsType } from "echarts/core"
 import {
   createEChartsCanvasHost,
-  enableEChartsDirtyRectPainter,
   flushCanvas,
   getBrowserCanvasDataURL,
   getNativeCanvasDataURL,
@@ -181,7 +180,7 @@ let attemptTimer = 0
 let initDelayTimer = 0
 let visibilityRefreshTimer = 0
 let contextRequestPending = false
-let pendingOption: Record<string, any> | null = null
+const pendingOption = shallowRef<Record<string, any> | null>(null)
 let deferredOption: Record<string, any> | null = null
 let deferredUpdateOptions: Record<string, any> | undefined
 let optionRefreshPending = false
@@ -194,12 +193,6 @@ let autoResizeTimer = 0
 let autoResizePollTimer = 0
 let autoResizeWidth = 0
 let autoResizeHeight = 0
-let useNativeDirtyRect = false
-
-// #ifdef APP-ANDROID
-useNativeDirtyRect = true
-// #endif
-
 const INIT_RETRY_DELAY = 50
 const INIT_RETRY_LIMIT = 20
 const INIT_ATTEMPT_TIMEOUT = 1000
@@ -213,7 +206,7 @@ const rootStyle = computed(() => {
 })
 
 const innerOption = computed(() => {
-  return pendingOption ?? props.option
+  return pendingOption.value ?? props.option
 })
 
 const touchBridge = createTouchBridge({
@@ -548,9 +541,6 @@ function setupChart() {
 
     chart.value = nextChart
     initState = "ready"
-    if (useNativeDirtyRect) {
-      enableEChartsDirtyRectPainter(nextChart.getZr().painter)
-    }
 
     if (props.group.length > 0) {
       nextChart.group = props.group
@@ -586,12 +576,24 @@ function setupChart() {
 
   }
   catch (error) {
+    disconnectAutoResizeObserver()
+
+    const failed = chart.value
+    chart.value = null
+    host.value = null
+
+    if (failed != null && !failed.isDisposed()) {
+      try {
+        failed.dispose()
+      } catch (disposeError) {
+        console.warn("[uni-echarts-x] failed chart cleanup", disposeError)
+      }
+    }
+
     if (renderingContext != null) {
       releaseEChartsPlatformContext(renderingContext)
     }
 
-    chart.value = null
-    host.value = null
     chartPixelRatio = 0
     initState = "idle"
     fail("echarts.init", error)
@@ -632,7 +634,7 @@ function recreateChart() {
 
 function setOption(option: Record<string, any>, updateOptions?: Record<string, any>) {
   if (props.manualUpdate) {
-    pendingOption = option
+    pendingOption.value = option
   }
 
   if (chart.value == null || chart.value.isDisposed()) {
@@ -920,7 +922,7 @@ function dispose() {
   chartPixelRatio = 0
   optionRefreshPending = false
   pendingRecreate = false
-  pendingOption = null
+  pendingOption.value = null
   deferredOption = null
   deferredUpdateOptions = undefined
 }
@@ -1146,6 +1148,9 @@ watch(
     }
 
     if (chart.value == null || chart.value.isDisposed()) {
+      if (canInit() && initState !== "disposed") {
+        scheduleInit()
+      }
       return
     }
 
@@ -1178,7 +1183,7 @@ watch(
       return
     }
 
-    pendingOption = null
+    pendingOption.value = null
     optionRefreshPending = true
     refreshAfterVisibilityChange()
   },
