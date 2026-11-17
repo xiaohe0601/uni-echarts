@@ -561,20 +561,17 @@ function setupChart() {
     optionRefreshPending = false
     pendingRecreate = false
 
-    if (queuedUpdates.length > 0) {
-      for (const update of queuedUpdates) {
-        const queuedOption = normalizeVaporOption(update.option)
+    const baseOption = normalizeVaporOption(innerOption.value)
 
-        if (!isOptionEmpty(queuedOption)) {
-          nextChart.setOption(queuedOption, update.updateOptions ?? props.updateOptions)
-        }
-      }
+    if ((!props.manualUpdate || queuedUpdates.length === 0) && !isOptionEmpty(baseOption)) {
+      nextChart.setOption(baseOption, props.updateOptions)
     }
-    else {
-      const option = normalizeVaporOption(innerOption.value)
 
-      if (!isOptionEmpty(option)) {
-        nextChart.setOption(option, props.updateOptions)
+    for (const update of queuedUpdates) {
+      const queuedOption = normalizeVaporOption(update.option)
+
+      if (!isOptionEmpty(queuedOption)) {
+        nextChart.setOption(queuedOption, update.updateOptions ?? props.updateOptions)
       }
     }
 
@@ -660,8 +657,10 @@ function setOption(option: Record<string, any>, updateOptions?: Record<string, a
 
   if (chart.value == null || chart.value.isDisposed()) {
     deferredOptionUpdates.push({
-      option,
-      updateOptions,
+      option: echarts.util.clone(option),
+      updateOptions: updateOptions == null
+        ? undefined
+        : echarts.util.clone(updateOptions),
     })
 
     if (initState === "disposed") {
