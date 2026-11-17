@@ -4,7 +4,7 @@
     <text class="subtitle">Canvas 2D + ECharts · Vapor / VDOM 兼容回归</text>
 
     <view class="chart-shell" :style="chartShellStyle">
-      <uni-echarts-x
+      <uni-echarts
         v-if="chartMounted"
         ref="chartRef"
         :width="chartWidth"
@@ -53,7 +53,7 @@
 
     <text class="section">第二实例</text>
     <view class="chart-shell chart-shell--secondary">
-      <uni-echarts-x
+      <uni-echarts
         ref="secondChartRef"
         :width="240"
         :height="160"

@@ -4,6 +4,10 @@ Apache ECharts adapter for uni-app x. It provides a Canvas 2D chart component fo
 H5 VDOM, and mini program x without rewriting ECharts in UTS or injecting a fake DOM. Height
 stays explicit; width can follow the parent through `autoresize`.
 
+The package keeps its `uni-echarts-x` npm name and `xiaohe-echarts-x` uni_modules ID, while the
+component tag remains `<uni-echarts>`. Do not install `xiaohe-echarts` and `xiaohe-echarts-x` in
+the same project: both expose the same easycom component name.
+
 The package is still under compatibility verification. A successful compile or `echarts.init()`
 call is not, by itself, a platform support claim.
 
@@ -55,7 +59,7 @@ that sends tap and drag events directly to the booted simulator. The helper sour
 
 ```vue
 <template>
-  <uni-echarts-x
+  <uni-echarts
     ref="chartRef"
     :width="300"
     :height="200"

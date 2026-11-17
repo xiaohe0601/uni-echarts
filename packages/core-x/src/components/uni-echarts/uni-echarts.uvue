@@ -1,13 +1,13 @@
 <template>
   <view
     :id="rootId"
-    class="uni-echarts-x"
+    class="uni-echarts"
     :class="props.customClass"
     :style="rootStyle"
   >
     <canvas
       :id="canvasId"
-      class="uni-echarts-x__canvas"
+      class="uni-echarts__canvas"
       :disable-scroll="props.disableScroll"
       @ready="onCanvasReady"
       @touchstart="onTouchStart"
@@ -1303,11 +1303,11 @@ defineExpose({
 </script>
 
 <style>
-.uni-echarts-x {
+.uni-echarts {
   position: relative;
 }
 
-.uni-echarts-x__canvas {
+.uni-echarts__canvas {
   width: 100%;
   height: 100%;
 }

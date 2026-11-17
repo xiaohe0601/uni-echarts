@@ -1,6 +1,6 @@
 <template>
   <scroll-view class="page" direction="vertical">
-    <uni-echarts-x
+    <uni-echarts
       ref="chartEl"
       :width="chartWidth"
       :height="312"
@@ -20,7 +20,7 @@
           <text class="tooltip-text">{{ tooltipText }}</text>
         </view>
       </view>
-    </uni-echarts-x>
+    </uni-echarts>
   </scroll-view>
 </template>
 

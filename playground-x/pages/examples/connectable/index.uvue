@@ -1,6 +1,6 @@
 <template>
   <scroll-view class="page" direction="vertical">
-    <uni-echarts-x
+    <uni-echarts
       :width="chartWidth"
       :height="250"
       autoresize
@@ -11,7 +11,7 @@
       @inited="ensureConnected"
     />
 
-    <uni-echarts-x
+    <uni-echarts
       :width="chartWidth"
       :height="250"
       autoresize

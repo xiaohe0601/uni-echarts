@@ -56,9 +56,10 @@ async function verify() {
   const playgroundDir = r("playground-x");
   const artifactDir = r(playgroundDir, "uni_modules", "xiaohe-echarts-x");
   const artifactPackagePath = r(artifactDir, "package.json");
-  const artifactComponentPath = r(artifactDir, "components", "uni-echarts-x", "uni-echarts-x.uvue");
+  const artifactComponentPath = r(artifactDir, "components", "uni-echarts", "uni-echarts.uvue");
   const manifestPath = r(playgroundDir, "manifest.json");
   const pagesPath = r(playgroundDir, "pages.json");
+  const sourceComponentPath = r("packages", "core-x", "src", "components", "uni-echarts", "uni-echarts.uvue");
   const sourcePackagePath = r("packages", "core-x", "package.json");
 
   consola.info(chalk.cyan("Verifying uni-app x uni_modules artifact"));
@@ -67,6 +68,7 @@ async function verify() {
   await assertPath(artifactComponentPath, "Generated component");
   await assertPath(manifestPath, "playground manifest.json");
   await assertPath(pagesPath, "playground pages.json");
+  await assertPath(sourceComponentPath, "Source component");
 
   const artifactPackage = await readJson(artifactPackagePath) as any;
   const sourcePackage = await readJson(sourcePackagePath) as any;
@@ -77,6 +79,11 @@ async function verify() {
   assertEqual(artifactPackage.name, sourcePackage.name, "artifact package name");
   assertEqual(artifactPackage.version, sourcePackage.version, "artifact version");
   assertEqual(artifactPackage.dcloudext?.type, "component-vue", "dcloudext type");
+  assertEqual(
+    sourcePackage.exports?.["."],
+    "./src/components/uni-echarts/uni-echarts.uvue",
+    "source component export"
+  );
   assertPlatforms(artifactPackage.uni_modules?.platforms?.client?.["uni-app-x"]);
 
   assertEqual(manifest?.["uni-app-x"]?.vapor, true, "manifest vapor");

@@ -56,7 +56,7 @@
 ```text
 packages/core-x/
   src/
-    components/uni-echarts-x/uni-echarts-x.uvue
+    components/uni-echarts/uni-echarts.uvue
     adapters/
       canvas.ts
       touch.ts

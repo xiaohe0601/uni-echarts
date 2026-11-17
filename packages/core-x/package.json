@@ -13,7 +13,7 @@
   },
   "bugs": "https://github.com/xiaohe0601/uni-echarts/issues",
   "exports": {
-    ".": "./src/components/uni-echarts-x/uni-echarts-x.uvue",
+    ".": "./src/components/uni-echarts/uni-echarts.uvue",
     "./adapters/*": "./src/adapters/*.ts",
     "./runtime/*": "./src/runtime/*.ts"
   },

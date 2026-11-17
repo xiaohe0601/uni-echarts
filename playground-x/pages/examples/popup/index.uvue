@@ -18,7 +18,7 @@
         @click.stop="noop"
       >
         <view class="popup-body" :style="popupBodyStyle">
-          <uni-echarts-x
+          <uni-echarts
             v-if="render"
             ref="chartEl"
             :width="popupSize"

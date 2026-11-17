@@ -16,6 +16,16 @@
 uni-app x 没有脱离 HBuilderX/HBuilderV 的独立运行版本号；x 编译器和 Vapor 能力以
 HBuilderX/HBuilderV SDK 版本为准。本轮验收基线为 `5.33.2026102115-alpha`。
 
+## 包名与组件名
+
+- npm 包名：`uni-echarts-x`
+- uni_modules 插件 ID：`xiaohe-echarts-x`
+- 组件标签：`<uni-echarts>`
+
+组件标签保持与旧版一致，迁移时只需改用 x 的安装包，不必修改页面模板。不要在同一工程中
+同时安装 `xiaohe-echarts` 和 `xiaohe-echarts-x`，两者都会通过 easycom 暴露
+`<uni-echarts>`。
+
 ## 版本矩阵
 
 | 项目 | 当前基线 | 说明 |
