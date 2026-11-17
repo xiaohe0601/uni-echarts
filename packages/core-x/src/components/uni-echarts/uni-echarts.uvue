@@ -54,6 +54,11 @@ import {
 
 type InitState = "idle" | "pending" | "ready" | "disposed"
 
+interface DeferredOptionUpdate {
+  option: Record<string, any>
+  updateOptions?: Record<string, any>
+}
+
 defineOptions({
   name: "UniEchartsX",
   styleIsolation: "isolated",
@@ -181,8 +186,7 @@ let initDelayTimer = 0
 let visibilityRefreshTimer = 0
 let contextRequestPending = false
 const pendingOption = shallowRef<Record<string, any> | null>(null)
-let deferredOption: Record<string, any> | null = null
-let deferredUpdateOptions: Record<string, any> | undefined
+const deferredOptionUpdates: DeferredOptionUpdate[] = []
 let optionRefreshPending = false
 let pendingRecreate = false
 let pageVisible = true
@@ -261,7 +265,11 @@ function canInit(): boolean {
     && appVisible
 }
 
-function scheduleInit(delay = 0) {
+function scheduleInit(delay = 0, resetAttempt = true) {
+  if (resetAttempt && initAttempt >= INIT_RETRY_LIMIT) {
+    initAttempt = 0
+  }
+
   if (
     !canInit()
     || initState === "pending"
@@ -302,7 +310,7 @@ function retryAfterFailure(error: any) {
   clearInitTimers()
 
   if (initAttempt < INIT_RETRY_LIMIT && canInit()) {
-    scheduleInit(INIT_RETRY_DELAY)
+    scheduleInit(INIT_RETRY_DELAY, false)
     return
   }
 
@@ -549,18 +557,25 @@ function setupChart() {
     bindInternalRendered(nextChart)
     bindChartEvents(nextChart)
 
-    const pending = deferredOption
-    const option = normalizeVaporOption(pending ?? innerOption.value)
-    const updateOptions = pending == null
-      ? props.updateOptions
-      : (deferredUpdateOptions ?? props.updateOptions)
-    deferredOption = null
-    deferredUpdateOptions = undefined
+    const queuedUpdates = deferredOptionUpdates.splice(0, deferredOptionUpdates.length)
     optionRefreshPending = false
     pendingRecreate = false
 
-    if (!isOptionEmpty(option)) {
-      nextChart.setOption(option, updateOptions)
+    if (queuedUpdates.length > 0) {
+      for (const update of queuedUpdates) {
+        const queuedOption = normalizeVaporOption(update.option)
+
+        if (!isOptionEmpty(queuedOption)) {
+          nextChart.setOption(queuedOption, update.updateOptions ?? props.updateOptions)
+        }
+      }
+    }
+    else {
+      const option = normalizeVaporOption(innerOption.value)
+
+      if (!isOptionEmpty(option)) {
+        nextChart.setOption(option, props.updateOptions)
+      }
     }
 
     applyLoading()
@@ -627,6 +642,12 @@ function recreateChart() {
   }
 
   pendingRecreate = false
+  const current = chart.value
+
+  if (props.manualUpdate && current != null && !current.isDisposed()) {
+    pendingOption.value = current.getOption()
+  }
+
   teardownChart()
   initState = "idle"
   setupChart()
@@ -638,8 +659,10 @@ function setOption(option: Record<string, any>, updateOptions?: Record<string, a
   }
 
   if (chart.value == null || chart.value.isDisposed()) {
-    deferredOption = option
-    deferredUpdateOptions = updateOptions
+    deferredOptionUpdates.push({
+      option,
+      updateOptions,
+    })
 
     if (initState === "disposed") {
       initState = "idle"
@@ -923,8 +946,7 @@ function dispose() {
   optionRefreshPending = false
   pendingRecreate = false
   pendingOption.value = null
-  deferredOption = null
-  deferredUpdateOptions = undefined
+  deferredOptionUpdates.splice(0, deferredOptionUpdates.length)
 }
 
 function clear() {
@@ -1184,6 +1206,7 @@ watch(
     }
 
     pendingOption.value = null
+    deferredOptionUpdates.splice(0, deferredOptionUpdates.length)
     optionRefreshPending = true
     refreshAfterVisibilityChange()
   },

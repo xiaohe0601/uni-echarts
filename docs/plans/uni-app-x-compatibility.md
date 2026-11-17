@@ -333,7 +333,7 @@ VDOM模式”和 `DONE Build complete.`。上一轮产物
 | iOS 17.4 App Vapor bytecode | 通过 | 启动崩溃 | 不适用 | 不适用 | 不适用 | 不适用 | 上游 GCanvas 阻塞 |
 | HarmonyOS API 20 App Vapor bytecode | 通过 | 通过 | 通过 | 首页、11 示例和回归页真实点击/拖拽通过 | 通过 | 通过 | 完整 Demo 与最新回归页通过，release/真机未验证 |
 | H5 production VDOM | 通过 | 通过 | 通过 | 11 示例页面 + 常驻弹窗/Picker/visualMap/dataZoom 等关键交互通过 | 页面级通过 | 通过 | 13 路由通过，非 Vapor |
-| 微信小程序 x | 通过 | 通过 | 通过 | 13 页首帧 + 页面事件入口/Action 主链路 + 回归页生命周期 | 通过 | 系统预览通过 | DevTools 当前源码验收通过；游客 AppID，物理手势专项仍有限 |
+| 微信小程序 x | 通过 | 通过 | 通过 | 13 页首帧 + 页面事件入口/Action 主链路 + 回归页生命周期 | 通过 | 页内预览通过 | DevTools 当前源码验收通过；游客 AppID，物理手势专项仍有限 |
 
 ### 5.1.1 完整 Demo 本轮验收矩阵
 
