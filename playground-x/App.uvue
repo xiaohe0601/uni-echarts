@@ -1,0 +1,12 @@
+<script setup lang="ts">
+onLaunch(() => {
+  console.log("[uni-echarts-x] app launch")
+})
+</script>
+
+<style>
+page {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, "Segoe UI", Arial, Roboto, "PingFang SC", MiSans, miui, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+  background-color: #ffffff;
+}
+</style>

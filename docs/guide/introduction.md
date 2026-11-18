@@ -13,6 +13,7 @@ Uni ECharts 是适用于 uni-app 的 Apache ECharts 组件，无需繁琐的步�
 ## 🔗 链接
 
 - [快速开始](./getting-started)
+- [uni-app x 兼容版本](./uni-app-x)
 - [API 参考](../apis/component)
 - [常见问题](./faq)
 - [更新日志](./changelog)

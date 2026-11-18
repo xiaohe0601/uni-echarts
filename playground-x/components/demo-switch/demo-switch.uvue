@@ -1,0 +1,65 @@
+<template>
+  <view
+    class="switch"
+    :class="{ 'switch--checked': props.checked }"
+    @click="toggle"
+  >
+    <view
+      class="switch__thumb"
+      :class="{ 'switch__thumb--checked': props.checked }"
+    />
+  </view>
+</template>
+
+<script setup lang="ts">
+const props = withDefaults(defineProps<{
+  checked?: boolean
+}>(), {
+  checked: false,
+})
+
+const emit = defineEmits<{
+  change: [event: { detail: { value: boolean } }]
+}>()
+
+function toggle() {
+  emit("change", {
+    detail: {
+      value: !props.checked,
+    },
+  })
+}
+</script>
+
+<style>
+.switch {
+  position: relative;
+  width: 54px;
+  height: 32px;
+  background-color: #eaeaea;
+  border-radius: 16px;
+}
+
+.switch--checked {
+  background-color: #299764;
+}
+
+.switch__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 28px;
+  height: 28px;
+  background-color: #ffffff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e5e5e5;
+  border-radius: 14px;
+  box-shadow: 0 2px 4px rgba(155, 155, 155, 0.5);
+  box-sizing: border-box;
+}
+
+.switch__thumb--checked {
+  left: 24px;
+}
+</style>

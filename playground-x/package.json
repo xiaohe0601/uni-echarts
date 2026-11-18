@@ -1,0 +1,9 @@
+{
+  "name": "@uni-echarts/playground-x",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "echarts": "catalog:frontend"
+  }
+}

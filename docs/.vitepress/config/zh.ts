@@ -61,6 +61,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       base: "/guide",
       items: [
         { text: "介绍", link: "/introduction" },
+        { text: "uni-app x 兼容版本（实验）", link: "/uni-app-x" },
         { text: "快速开始", link: "/getting-started" },
         { text: "关于 ECharts", link: "/echarts" },
         { text: "依赖注入", link: "/provide" },
