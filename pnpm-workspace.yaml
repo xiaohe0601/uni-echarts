@@ -41,20 +41,20 @@ catalogs:
     "@rollup/plugin-commonjs": ^29.0.3
     "@rollup/plugin-node-resolve": ^16.0.3
     "@rollup/plugin-terser": ^1.0.2
-    "@uni-helper/plugin-uni": ^0.1.0
-    "@uni-helper/vite-plugin-uni-components": ^0.4.0
+    "@uni-helper/plugin-uni": ^0.1.2
+    "@uni-helper/vite-plugin-uni-components": ^0.4.1
     "@uni-helper/vite-plugin-uni-manifest": ^0.7.0
-    "@uni-helper/vite-plugin-uni-pages": ~0.6.1
+    "@uni-helper/vite-plugin-uni-pages": ~0.6.3
     "@uni-ku/unplugin-keep-comments": ^0.1.0
-    rollup: ^4.67.5
-    tsdown: ^0.23.5
+    rollup: ^4.68.7
+    tsdown: ^0.23.7
     unplugin-auto-import: ^21.1.0
     vite: ^5.4.21
     vite-plugin-inspect: ~0.8.9
     vite-plugin-uni-polyfill: ^0.1.0
   cli:
     "@antfu/ni": ^30.6.0
-    "@uni-helper/unh": ^0.5.0
+    "@uni-helper/unh": ^0.5.2
     bumpp: ^12.3.0
     minimist: ^1.2.8
     pncat: ^0.13.4
@@ -81,31 +81,31 @@ catalogs:
     "@dcloudio/vite-plugin-uni": 3.0.0-5030420261029002
   docs:
     vitepress: ^1.6.4
-    vitepress-plugin-group-icons: ^1.8.1
-    vitepress-plugin-llms: ^1.14.0
+    vitepress-plugin-group-icons: ^1.8.2
+    vitepress-plugin-llms: ^1.15.0
   frontend:
     "@vue/runtime-core": ~3.4.38
-    colord: ^2.10.0
+    colord: ^2.14.0
     echarts: ^6.1.0
     monaco-editor: ~0.54.0
     pinia: 2.2.4
     vue: ~3.4.38
     wot-design-uni: ^1.14.0
   icons:
-    "@iconify-json/carbon": ^1.2.29
+    "@iconify-json/carbon": ^1.2.30
   lint:
-    eslint: ^10.14.0
-    lint-staged: ^17.6.0
+    eslint: ^10.15.0
+    lint-staged: ^17.6.1
     simple-git-hooks: ^2.14.0
-    stylelint: ^17.16.0
+    stylelint: ^18.0.0
   node:
-    "@clack/prompts": ^1.8.1
+    "@clack/prompts": ^1.9.0
     chalk: ^6.0.1
     consola: ^3.4.2
     fs-extra: ^11.4.1
     rimraf: ^6.1.4
   parser:
-    oxc-parser: ~0.157.0
+    oxc-parser: ~0.159.0
   script:
     esno: ^4.8.0
   style:
@@ -121,11 +121,11 @@ catalogs:
     "@types/fs-extra": ^11.0.4
     "@types/minimist": ^1.2.5
     "@types/node": ^24.19.2
-    "@uni-helper/uni-app-types": ~1.4.2
-    miniprogram-api-typings: ^5.2.3
+    "@uni-helper/uni-app-types": ~1.5.0
+    miniprogram-api-typings: ^5.3.1
   utils:
     "@vueuse/core": ^12.8.2
-    es-toolkit: ^1.53.1
+    es-toolkit: ^1.53.2
     magic-string: ^0.30.21
   xiaohe:
     "@xiaohe01/catalog-rules": ^0.0.4
